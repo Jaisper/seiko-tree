@@ -130,7 +130,7 @@ const canvas=document.getElementById('canvas'),svg=document.getElementById('edge
 let tx=0,ty=0,scale=.52,dragging=false,startX=0,startY=0,hovered=null,filter='all';
 
 function applyTransform(){canvas.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;slider.value=Math.round(scale*100);zoomVal.textContent=Math.round(scale*100)+'%';}
-function fitView(){const cw=wrap.clientWidth,ch=wrap.clientHeight;scale=Math.min(cw/1200,ch/1900)*.95;tx=(cw-1200*scale)/2;ty=(ch-1900*scale)/2+20;applyTransform();}
+function fitView(){const cw=wrap.clientWidth;scale=(cw/1200)*.95;tx=(cw-1200*scale)/2;ty=10;applyTransform();}
 function view100(){const cw=wrap.clientWidth;scale=1;tx=(cw-1200)/2;ty=0;applyTransform();}
 
 sections.forEach(s=>{const d=document.createElement('div');d.className='section-bg'+(s.sub?' sub':'');d.style.cssText=`left:${s.x}px;top:${s.y}px;width:${s.w}px;height:${s.h}px;border:1px solid ${s.c}${s.sub?'15':'0c'};background:${s.c}${s.sub?'06':'04'}`;d.innerHTML=`<div class="label" style="color:${s.c}99">${s.l}</div>`;canvas.appendChild(d);});
