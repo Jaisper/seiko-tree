@@ -81,6 +81,9 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   <div class="spacer"></div>
   <div class="filters" id="filters"></div>
 </div>
+<div id="intro" style="padding:8px 20px;border-bottom:1px solid var(--rule);background:var(--paper);z-index:20;flex-shrink:0">
+  <p style="font-family:'Cormorant Garamond',serif;font-size:12.5px;color:var(--muted);line-height:1.6;max-width:1100px;margin:0">This interactive diagram maps the complete mechanical watch lineage of Seiko from 1960 to 2025, covering both the Suwa and Kameido/Daini factory systems, Grand Seiko, King Seiko, and all major modern collections. Lines are grouped by factory origin <span style="font-size:11px;opacity:.7">(left)</span> and modern commercial family <span style="font-size:11px;opacity:.7">(right)</span>, with edges showing direct lineage <span style="display:inline-block;width:18px;height:0;border-top:2px solid #aaa;vertical-align:middle;margin:0 2px"></span>, platform continuation <span style="display:inline-block;width:18px;height:0;border-top:1px solid #aaa;vertical-align:middle;margin:0 2px"></span>, and stylistic succession <span style="display:inline-block;width:18px;height:0;border-top:1px dashed #aaa;vertical-align:middle;margin:0 2px"></span>. Spring Drive is included as mechanical. Filter by family, hover to trace connections, or double-click to zoom in.</p>
+</div>
 <div id="toolbar">
   <label>Zoom</label>
   <input type="range" id="zoom-slider" min="15" max="120" value="40">
