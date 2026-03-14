@@ -97,7 +97,41 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 </div>
 <script>
 const C={suwa:"#1e3a5f",kameido:"#7a2332",diver:"#0d6651",chrono:"#9e6b00",bell:"#6d3a7a",world:"#2d7a53",seiko5:"#3d6d1e",gs:"#1a4a6a",ks:"#5a2a4a",modern:"#4a3a1e",prospex:"#0a5a4a",presage:"#3a2a5e",highlight:"#b8942e",collection:"#2d8a3e"};
-const inCollection=new Set(["champion","silverwave","selfdater_mas","seikomatic","business_a","weekdater_6218","presmatic","45ks","45ks_hb","56ks","61_skyliner","6139_pogue","56gs_s","bell_4006","6105_willard","wt_6117","6139_first","s5_first","s5_speed","bell_4005","lord_matic_56","6309","6139_helmet","6139_aqua","62mas","skx","px_mm","prospex","px_1965"]);
+const inCollection=new Set([
+  // Vintage (verified against owner list 2025)
+  "silverwave",       // Seikomatic Silverwave J12082 1961 Cal 603
+  "selfdater_mas",    // Seikomatic Selfdater J13059 MAS SD 1963 Cal 6217
+  "champion",         // Champion Calendar 860 1964
+  "seikomatic",       // Seikomatic 15007D 1966 Cal 603
+  "weekdater_6218",   // Seikomatic 6218-8010 1967 Cal 6218
+  "business_a",       // Business-A 8346-8030 1967 Cal 8346
+  "presmatic",        // Seikomatic-P 5106-7030 1968 Cal 5106
+  "45ks",             // King Seiko 45-7000 1968 Cal 45 (manual hi-beat)
+  "45ks_hb",          // King Seiko 45-8000 1969 Cal 4502 (manual hi-beat)
+  "56ks",             // King Seiko 5625-7120 1971 Cal 5625
+  "61_skyliner",      // Skyliner 6102-8000 1970 Cal 6102
+  "6105_willard",     // Willard 6105-8110 1971 Cal 6105
+  "56gs_s",           // Grand Seiko 5646-7010 1971 Cal 5646
+  "bell_4006",        // Bell-Matic 4006-7002 1971 + 4006-6031 1972 Cal 4006A
+  "bell_4006_70",     // Bell-Matic 4006-6021 1975 Cal 4006A (late variant)
+  "6139_pogue",       // Pogue 6139-6002 1971 Cal 6139
+  "wt_6117",          // World Time 6117-6400 1972 Cal 6117
+  "s5_speed",         // Speedtimer PVD 6139-8010 1972 Cal 6139
+  "6139_first",       // Hexagon 6139-7080 1974 Cal 6139
+  "s5_first",         // Seiko 5 6119-5460 1974 Cal 6119
+  "lord_matic_56",    // Lord Matic 5606-8031 1975 Cal 5606
+  "6139_aqua",        // Aquatimer 6139-7070 1976 Cal 6139
+  "6309",             // Diver 6309-8080 1976 + 6309 mod 1986 + 6309 Scubapro 1987
+  "6139_helmet",      // Helmet "Darth Vader" 6139-7101 1977
+  // Modern (verified against owner list 2025)
+  "skx",              // SKX009 2004 Cal 7S26
+  "px_mm",            // Marinemaster SBDX001 2011 Cal 8L35
+  "prospex",          // Shogun 2014 + Blumo 2015 + Spring Drive GMT 2017 + King Turtle 2019 + Samurai
+  "px_1965",          // PADI MAS SPB071 2018 + SPB253 62MAS reissue 2022
+  "s5_modern",        // Black Ninja SRPC49K1 2017 Cal 4R36
+  // NOT in collection: 62mas (vintage) — owner has reissues only, not original 62MAS
+  // NOT in collection: bell_4005 — owner's Bell-Matics are all Cal 4006A, not Cal 4005
+]);
 const techMap={lord_marvel_36k:"hibeat","61gs":"hibeat","61gs_vfa":"hibeat","61gs_sp":"hibeat",lord_matic_sp:"hibeat","45ks":"hibeat","45ks_hb":"hibeat","45gs":"hibeat","45gs_vfa":"hibeat",gs_hibeat:"hibeat",gs_9s5:"hibeat",gs_sd_04:"springdrive",gs_9r:"springdrive",gs_9ra:"springdrive",gs_ufa:"springdrive",gs_sport:"springdrive",gs_quartz_88:"quartz"};
 const sdEdges=new Set(["gs_sd_04→gs_independence","gs_sd_04→gs_9r","gs_9r→gs_9ra","gs_9ra→gs_ufa","gs_9ra→gs_evo9","gs_ufa→gs_evo9"]);
 const NW=124,NH=42,CW=2800,CH=2100;
