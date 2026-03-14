@@ -121,7 +121,8 @@ const inCollection=new Set([
   "s5_first",         // Seiko 5 6119-5460 1974 Cal 6119
   "lord_matic_56",    // Lord Matic 5606-8031 1975 Cal 5606
   "6139_aqua",        // Aquatimer 6139-7070 1976 Cal 6139
-  "6309",             // Diver 6309-8080 1976 + 6309 mod 1986 + 6309 Scubapro 1987
+  "6309_sports",      // 6309-8080 Sports Auto 1976 (NOT the 150m Turtle diver)
+  "6309_mod",         // 6309 diver mods: 6105 mod 1986 + Scubapro mod 1987
   "6139_helmet",      // Helmet "Darth Vader" 6139-7101 1977
   // Modern (verified against owner list 2025)
   "skx",              // SKX009 2004 Cal 7S26
@@ -143,8 +144,9 @@ const nodes=[
 ["seikomatic","Seikomatic\n(603) 1961",210,470,C.suwa,0],["seikomatic_sd","Seikomatic\nSelf Dater",370,470,C.suwa,0],["seikomatic_slim","Seikomatic\nSlimdate",530,470,C.suwa,0],["weekdater_6206","Weekdater\n6206 — 1965",210,535,C.suwa,0],["weekdater_6218","Weekdater\n6218 — 1967",370,535,C.suwa,0],["seikomatic_r","Seikomatic-R\n1965",530,535,C.suwa,0],["sea_lion","Sea Lion\n1966",690,535,C.suwa,0],["presmatic","Presmatic\n(5106) 1967",690,470,C.suwa,0],["business_a","Business-A\n(8305) 1967",850,470,C.suwa,0],
 ["super","Super\n1960",70,620,C.suwa,0],["sportsman","Sportsman\n1961",210,620,C.suwa,0],["sportsmatic","Sportsmatic\n(6619) 1961",370,620,C.suwa,0],["sportsmatic5","Sportsmatic 5\n1963",530,620,C.suwa,0],
 ["s5_first","Seiko 5\n(6619) 1963",530,695,C.seiko5,1],["s5_sports","5 Sports\n1968",690,695,C.seiko5,0],["s5_speed","5 Speed Timer\n(6139) 1969",850,695,C.seiko5,1],["s5_actus","5 Actus\n(7019) 1970",690,760,C.seiko5,0],["s5_dx","5 DX\n1970",850,760,C.seiko5,0],
+["6309_sports","6309-8080\nSports Auto 1976",1010,695,C.seiko5,0],
 ["silverwave","Seikomatic\nSilverwave\n(603) ~1961",70,860,C.diver,1],["selfdater_mas","Seikomatic\nSelfdater MAS\n(6217) 1963",210,860,C.diver,1],
-["62mas","62MAS\n(6217) 1965",70,940,C.diver,1],["62mas_2","62MAS\n8001 — 1967",210,940,C.diver,0],["6105_8000","6105-8000\n150m 1968",370,940,C.diver,1],["6105_willard","6105-8110\n'Willard' 1970",530,940,C.diver,1],["6105_last","6105-8009\n1973",530,1005,C.diver,0],["6309","6309\n150m ~1976",690,940,C.diver,0],["7002_node","7002\n150m ~1988",850,940,C.diver,0],["skx","SKX007/009\n1996–2019",1010,940,C.diver,1],["6159_pro","6159-7000\nPro 300m 1968",370,1005,C.diver,1],["6159_tuna","6159 Tuna\n600m 1975",530,1075,C.diver,1],
+["62mas","62MAS\n(6217) 1965",70,940,C.diver,1],["62mas_2","62MAS\n8001 — 1967",210,940,C.diver,0],["6105_8000","6105-8000\n150m 1968",370,940,C.diver,1],["6105_willard","6105-8110\n'Willard' 1970",530,940,C.diver,1],["6105_last","6105-8009\n1973",530,1005,C.diver,0],["6309","6309 Turtle\nDiver 150m ~1976",690,940,C.diver,0],["6309_mod","6309 Mods\n(diver builds)\n1986–87",690,1005,C.diver,0],["7002_node","7002\n150m ~1988",850,940,C.diver,0],["skx","SKX007/009\n1996–2019",1010,940,C.diver,1],["6159_pro","6159-7000\nPro 300m 1968",370,1005,C.diver,1],["6159_tuna","6159 Tuna\n600m 1975",530,1075,C.diver,1],
 ["6139_first","6139-6000\n1st Auto Chrono\n1969",70,1170,C.chrono,1],["6139_pogue","6139 'Pogue'\n1971",210,1170,C.chrono,1],["6138_yacht","6138 Yachtman\n1970",370,1170,C.chrono,0],["6138_kakume","6138 'Kakume'\n1972",530,1170,C.chrono,1],["6138_bull","6138 'Bullhead'\n1971",530,1240,C.chrono,1],["6138_panda","6138 'Panda'\n1971",370,1240,C.chrono,0],["6139_aqua","Aquatimer\n6139-7070 1976",690,1170,C.chrono,0],["6139_helmet","Helmet\n'Darth Vader'\n6139-7101 1977",850,1170,C.chrono,0],
 ["bell_4005","Bell-Matic\n(4005) 1966",70,1330,C.bell,0],["bell_4006","Bell-Matic\n(4006) 1967",210,1330,C.bell,1],["bell_4006_70","Bell-Matic\n4006-70xx 1970",370,1330,C.bell,0],
 ["wt_6217","World Time\n(6217) 1964",690,1330,C.world,1],["wt_6117","World Time\n(6117) 1968",850,1330,C.world,0],["nav_timer","Navigator\nTimer 1970",1010,1330,C.world,0],
@@ -169,8 +171,9 @@ const edges=[
 ["seikomatic","seikomatic_sd","strong"],["seikomatic","seikomatic_slim","strong"],["seikomatic_sd","weekdater_6206","strong"],["weekdater_6206","weekdater_6218","strong"],["seikomatic","seikomatic_r","medium"],["seikomatic_r","sea_lion","strong"],["weekdater_6218","presmatic","medium"],["sea_lion","presmatic","medium"],["presmatic","business_a","strong"],["lord_matic","presmatic","weak"],["sportsmatic","seikomatic","medium"],
 ["super","sportsman","strong"],["sportsman","sportsmatic","strong"],["sportsmatic","sportsmatic5","strong"],["sportsmatic5","s5_first","strong"],
 ["s5_first","s5_sports","strong"],["s5_sports","s5_speed","strong"],["s5_first","s5_actus","medium"],["s5_actus","s5_dx","medium"],
+["s5_sports","6309_sports","medium"],["6309","6309_sports","weak"],
 ["silverwave","62mas","strong"],["selfdater_mas","62mas","strong"],["silverwave","selfdater_mas","medium"],["sportsmatic","silverwave","weak"],
-["62mas","62mas_2","strong"],["62mas_2","6105_8000","strong"],["6105_8000","6105_willard","strong"],["6105_willard","6105_last","medium"],["6105_willard","6309","strong"],["6309","7002_node","strong"],["7002_node","skx","strong"],
+["62mas","62mas_2","strong"],["62mas_2","6105_8000","strong"],["6105_8000","6105_willard","strong"],["6105_willard","6105_last","medium"],["6105_willard","6309","strong"],["6309","6309_mod","medium"],["6309","7002_node","strong"],["7002_node","skx","strong"],
 ["6105_8000","6159_pro","strong"],["6159_pro","6159_tuna","strong"],
 ["6139_first","6139_pogue","strong"],["6139_first","6138_yacht","strong"],["6138_yacht","6138_kakume","strong"],["6138_yacht","6138_panda","medium"],["6138_kakume","6138_bull","medium"],["6139_pogue","6139_aqua","strong"],["6139_aqua","6139_helmet","strong"],["s5_speed","6139_first","strong"],
 ["bell_4005","bell_4006","strong"],["bell_4006","bell_4006_70","strong"],
