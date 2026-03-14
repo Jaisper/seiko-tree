@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seiko Mechanical Family Tree 1960–1980</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0c0c0e; overflow: hidden; font-family: 'DM Mono', monospace; }
+  
+  #app { width: 100vw; height: 100vh; position: relative; }
+  
+  /* Top bar */
+  #topbar {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+    background: linear-gradient(180deg, #0c0c0eee 70%, transparent);
+    padding: 10px 14px 20px;
+  }
+  #topbar .title-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  #topbar .eyebrow { font-size: 9px; letter-spacing: 3px; color: #666; }
+  #topbar h1 { font-family: 'Instrument Serif', serif; font-size: 20px; color: #e8e4dc; font-weight: 400; margin: 0; }
+  #topbar .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+  #topbar button {
+    font-family: 'DM Mono', monospace; font-size: 10px; padding: 4px 10px;
+    background: transparent; color: #888; border: 1px solid #333;
+    border-radius: 3px; cursor: pointer; letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+  #topbar button.active { background: #e8e4dc; color: #0c0c0e; border-color: #e8e4dc; }
+  #topbar button:hover:not(.active) { border-color: #666; color: #ccc; }
+
+  /* Legend */
+  #legend {
+    position: absolute; bottom: 10px; left: 10px; z-index: 10;
+    background: #181818ee; border-radius: 4px; padding: 6px 10px;
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  }
+  #legend .item { display: flex; align-items: center; gap: 4px; }
+  #legend .dot { width: 8px; height: 8px; border-radius: 1px; }
+  #legend span { font-size: 9px; color: #999; }
+
+  /* Zoom info */
+  #zoominfo {
+    position: absolute; bottom: 10px; right: 10px; z-index: 10;
+    font-size: 9px; color: #555; background: #181818ee;
+    border-radius: 4px; padding: 4px 8px;
+  }
+
+  /* Canvas */
+  #canvas-wrap {
+    width: 100%; height: 100%; cursor: grab; touch-action: none;
+    overflow: hidden; position: relative;
+  }
+  #canvas-wrap.dragging { cursor: grabbing; }
+  #canvas {
+    position: absolute; transform-origin: 0 0;
+    width: 1200px; height: 1900px;
+  }
+
+  /* Sections */
+  .section-bg {
+    position: absolute; border-radius: 6px; pointer-events: none;
+  }
+  .section-bg .label {
+    position: absolute; top: 4px; left: 12px;
+    font-size: 11px; letter-spacing: 2px; font-weight: 500;
+    background: #0c0c0e; padding: 0 6px;
+  }
+  .section-bg.sub .label { font-size: 9px; letter-spacing: 1px; top: -1px; left: 8px; }
+
+  /* Nodes */
+  .node {
+    position: absolute; width: 128px; min-height: 48px;
+    background: #111114; border-radius: 4px; padding: 6px 8px;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; cursor: default;
+    transition: opacity 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .node .text {
+    font-size: 10px; color: #ccc; line-height: 1.3;
+    text-align: center; white-space: pre-line;
+  }
+  .node.icon { border-width: 2px; }
+  .node.icon .text { font-weight: 500; }
+  .node .bar {
+    width: 100%; height: 2px; margin-top: 3px;
+    border-radius: 1px; opacity: 0.5;
+  }
+  .node .star-badge {
+    position: absolute; top: -1px; right: 6px;
+    background: #c8a94e; color: #0c0c0e;
+    font-size: 7px; padding: 0 4px; border-radius: 0 0 2px 2px;
+    font-weight: 500; letter-spacing: 0.5px;
+  }
+  .node:hover { background: #1a1a1e; }
+  .node:hover .text { color: #fff; }
+  .node:hover .bar { opacity: 1; }
+  .node.dimmed { opacity: 0.15; }
+  .node.hidden-filter { opacity: 0.08; pointer-events: none; }
+  .node.highlighted { box-shadow: 0 0 16px #c8a94e40; }
+
+  /* Collection badge */
+  .node .coll-badge {
+    position: absolute; top: -1px; left: 6px;
+    background: #4a9e3a; color: #fff;
+    font-size: 7px; padding: 0 4px; border-radius: 0 0 2px 2px;
+    font-weight: 500; letter-spacing: 0.5px;
+  }
+
+  /* SVG */
+  #edges-svg {
+    position: absolute; top: 0; left: 0; pointer-events: none;
+    width: 1200px; height: 1900px;
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="topbar">
+    <div class="title-row">
+      <div>
+        <div class="eyebrow">精工 MECHANICAL 1960–1980</div>
+        <h1>Seiko Family Tree — Visual Diagram</h1>
+      </div>
+      <div class="filters" id="filters"></div>
+    </div>
+  </div>
+
+  <div id="legend"></div>
+  <div id="zoominfo">Scroll: zoom · Træk: panor · Hover: forbindelser</div>
+
+  <div id="canvas-wrap">
+    <div id="canvas">
+      <svg id="edges-svg"></svg>
+    </div>
+  </div>
+</div>
+
+<script>
+const C = {
+  suwa: "#1a3a5c", kameido: "#6b1a2a", diver: "#0a5e4f", chrono: "#8b5e00",
+  bell: "#6b3a6b", world: "#2a6b4f", highlight: "#c8a94e", seiko5: "#3a5c1a",
+  collection: "#4a9e3a"
+};
+
+// Models in John's collection (matched by family tree node IDs)
+const inCollection = new Set([
+  // Verified from collection spreadsheet + watchout.onlinewebshop.net
+  "silverwave",     // Seikomatic Silverwave J12082 Cal 603 — Seiko's first diver!
+  "selfdater_mas",  // Seikomatic Selfdater J13059 MAS SD Cal 6217 1963
+  "champion",       // Champion 1964 (row 41)
+  "62mas",          // Selfdater Cal 6217 1964 (row 46) + 62MAS reissues
+  "sportsmatic",    // Seikomatic Cal 603 1966 (row 49)
+  "business_a",     // Business-A 8346 1967 (row 50)
+  "presmatic",      // Seikomatic-P Cal 5106 1968 (row 73)
+  "45ks",           // KS 4500 Cal 45 1968 (row 82)
+  "45ks_hb",        // KS 45-8000 Cal 4502 1969 (row 84)
+  "56ks",           // King Seiko Cal 5625 1970/71 (row 85)
+  "61_skyliner",    // Skyliner 6102-8000 1970 (row 86)
+  "6139_pogue",     // Pogue 6139-6002 1971 (row 87)
+  "56gs_s",         // Grand Seiko 5646-7010 1971 (row 95)
+  "bell_4006",      // Bell-Matic 4006 1971+72+75 (rows 96, 117)
+  "6105_willard",   // Willard 6105-8110 1971 (row 97)
+  "wt_6117",        // World Time 6117-6400 1972 (row 106)
+  "6139_first",     // Hexagon 6139-7080 + Aquatimer 6139-7070 (rows 107, etc)
+  "6139_aqua",      // Aquatimer 6139-7070 1976
+  "6139_helmet",    // Helmet "Darth Vader" 6139-7101 1977
+  "6309",           // 6309-8080 1976
+  "s5_first",       // Seiko 5 Cal 6119 1974 (row 113)
+  "s5_speed",       // Speedtimer 6139-8010 1974 (row 115)
+  "bell_4005",      // Bell-Matic Cal 4002 1975 (row 117 — earlier caliber)
+  "lord_matic_56",  // Lord Matic 5606-8031 1975 (row 118)
+]);
+
+const NW = 128, NH = 48;
+
+// ── NODES ── [id, label, x, y, color, isIcon]
+const nodes = [
+  // === SUWA MARVEL ===
+  ["marvel","Marvel\n(SS) 1956",80,55,C.suwa,0],
+  ["gyro_marvel","Gyro Marvel\n(Auto) 1959",80,120,C.suwa,0],
+  ["lord_marvel","Lord Marvel\n(5740) 1960",240,55,C.suwa,0],
+  ["lord_marvel_36k","Lord Marvel\n36000 — 1967",410,55,C.suwa,1],
+
+  // === CROWN → GRAND SEIKO ===
+  ["crown","Crown\n(560) 1958",80,200,C.suwa,0],
+  ["crown_sd","Crown\nSelf Dater",80,270,C.suwa,0],
+  ["crown_sp","Crown\nSpecial",240,270,C.suwa,0],
+  ["gs_1st","Grand Seiko\n(3180) 1960",240,200,C.suwa,1],
+  ["gs_sd","GS Self\nDater 1963",400,200,C.suwa,0],
+  ["57gs_cal","57 GS\nCalendar",400,270,C.suwa,0],
+  ["62gs","62 GS Auto\n(6245) 1963",560,200,C.suwa,1],
+  ["61gs","61 GS\nHi-Beat 1968",720,200,C.suwa,1],
+  ["61gs_vfa","61 GS VFA\n1969",880,200,C.suwa,1],
+  ["61gs_sp","61 GS\nSpecial 1970",880,270,C.suwa,0],
+  ["56gs_s","56 GS\n(5645) 1970",1040,200,C.suwa,0],
+
+  // === LINER / SKYLINER ===
+  ["liner","Liner\n(6200) 1960",240,350,C.suwa,0],
+  ["liner_chr","Liner\nChronometer",400,350,C.suwa,0],
+  ["laurel","Laurel\n1959",240,420,C.suwa,0],
+  ["skyliner","Skyliner\n(6220) 1960",400,420,C.suwa,0],
+  ["61_skyliner","61 Skyliner\n1968",560,420,C.suwa,0],
+  ["sky_cal","Skyliner\nCalendar",560,350,C.suwa,0],
+
+  // === LORD MATIC ===
+  ["lord_matic","Lord Matic\n(5601) 1968",720,350,C.suwa,0],
+  ["lord_matic_sp","Lord Matic\nSpecial (5206)",880,350,C.suwa,1],
+  ["lord_matic_56","Lord Matic\n56 — 1972",1040,350,C.suwa,0],
+
+  // === SPORTSMAN → SPORTSMATIC ===
+  ["super","Super\n1960",80,500,C.suwa,0],
+  ["sportsman","Sportsman\n1961",240,500,C.suwa,0],
+  ["sportsmatic","Sportsmatic\n(6619) 1961",400,500,C.suwa,0],
+  ["sportsmatic5","Sportsmatic 5\n1963",560,500,C.suwa,0],
+
+  // === SEIKO 5 ===
+  ["s5_first","Seiko 5\n(6619) 1963",560,580,C.seiko5,1],
+  ["s5_sports","5 Sports\n1968",720,580,C.seiko5,0],
+  ["s5_speed","5 Speed Timer\n(6139) 1969",880,580,C.seiko5,1],
+  ["s5_actus","5 Actus\n(7019) 1970",720,650,C.seiko5,0],
+  ["s5_dx","5 DX\n1970",880,650,C.seiko5,0],
+
+  // === PRESMATIC ===
+  ["presmatic","Presmatic\n(5106) 1967",720,420,C.suwa,0],
+  ["business_a","Business-A\n(8305) 1967",880,420,C.suwa,0],
+
+  // === SUWA DIVERS (incl. precursors) ===
+  ["silverwave","Seikomatic\nSilverwave\n(603) 1960's",80,680,C.diver,1],
+  ["selfdater_mas","Seikomatic\nSelfdater MAS\n(6217) 1963",240,680,C.diver,1],
+  ["62mas","62MAS\n(6217) 1965",80,750,C.diver,1],
+  ["62mas_2","62MAS\n8001 — 1967",240,750,C.diver,0],
+  ["6105_8000","6105-8000\n150m 1968",400,750,C.diver,1],
+  ["6105_willard","6105-8110\n'Willard' 1970",560,750,C.diver,1],
+  ["6105_last","6105-8009\n1973",560,820,C.diver,0],
+  ["7002","7002\n150m 1976",720,750,C.diver,0],
+  ["6309","6309-8080\n1976",720,820,C.diver,0],
+  ["6159_pro","6159-7000\nPro 300m 1968",400,820,C.diver,1],
+  ["6159_tuna","6159 Tuna\n600m 1975",560,890,C.diver,1],
+
+  // === SUWA CHRONOGRAPHS ===
+  ["6139_first","6139-6000\n1st Auto Chrono\n1969",80,980,C.chrono,1],
+  ["6139_pogue","6139 'Pogue'\n1971",240,980,C.chrono,1],
+  ["6138_yacht","6138 Yachtman\n1970",400,980,C.chrono,0],
+  ["6138_kakume","6138 'Kakume'\n1972",560,980,C.chrono,1],
+  ["6138_bull","6138 'Bullhead'\n1971",560,1050,C.chrono,1],
+  ["6138_panda","6138 'Panda'\n1971",400,1050,C.chrono,0],
+  ["6139_aqua","Aquatimer\n6139-7070\n1976",720,980,C.chrono,0],
+  ["6139_helmet","Helmet\n'Darth Vader'\n6139-7101 1977",880,980,C.chrono,0],
+
+  // === BELL-MATIC ===
+  ["bell_4005","Bell-Matic\n(4005) 1966",80,1140,C.bell,0],
+  ["bell_4006","Bell-Matic\n(4006) 1967",240,1140,C.bell,1],
+  ["bell_4006_70","Bell-Matic\n4006-70xx 1970",400,1140,C.bell,0],
+
+  // === WORLD TIME ===
+  ["wt_6217","World Time\n(6217) 1964",720,1140,C.world,1],
+  ["wt_6117","World Time\n(6117) 1968",880,1140,C.world,0],
+  ["nav_timer","Navigator\nTimer 1970",1040,1140,C.world,0],
+
+  // === KAMEIDO: CRONOS → KING SEIKO ===
+  ["cronos","Cronos\n(54) 1958",80,1310,C.kameido,0],
+  ["cronos_sp","Cronos\nSpecial",80,1380,C.kameido,0],
+  ["cronos_sd","Cronos\nSelf Dater",80,1450,C.kameido,0],
+  ["ks_1st","King Seiko\n1961",240,1310,C.kameido,1],
+  ["ks_hack","KS w/\nhacking 1963",400,1310,C.kameido,0],
+  ["ks_chrono","KS\nChronometer",560,1310,C.kameido,1],
+  ["44ks","44 KS\n'Grammar of\nDesign' 1964",560,1390,C.kameido,1],
+  ["44ks_sp","44 KS\nSpecial 1966",720,1390,C.kameido,0],
+  ["45ks","45 KS Auto\n1968",720,1310,C.kameido,0],
+  ["45ks_hb","45 KS\nHi-Beat 1969",880,1310,C.kameido,1],
+  ["56ks","56 KS\n(5621) 1971",1040,1310,C.kameido,0],
+  ["56ks_vanac","56 KS\nVanac 1972",1040,1390,C.kameido,0],
+
+  // === KAMEIDO GRAND SEIKO ===
+  ["44gs","44 Grand\nSeiko 1964",400,1480,C.kameido,1],
+  ["45gs","45 GS Auto\n1968",560,1480,C.kameido,1],
+  ["45gs_vfa","45 GS VFA\n1969",720,1480,C.kameido,1],
+  ["56gs_k","56 GS\n(Kameido) 1971",880,1480,C.kameido,0],
+
+  // === GOLDFEATHER ===
+  ["goldfeather","Goldfeather\n1960",240,1480,C.kameido,1],
+
+  // === CHAMPION ===
+  ["unique","Unique\n1960",80,1580,C.kameido,0],
+  ["champion","Champion\n(860) 1960",240,1580,C.kameido,0],
+  ["champion_cal","Champion\nCalendar",400,1580,C.kameido,0],
+  ["fairway","Fairway\n1962",240,1650,C.kameido,0],
+  ["champ_850","Champion\n850 — 1965",400,1650,C.kameido,0],
+  ["76_five","76 Seiko 5\n(Kameido)",560,1580,C.kameido,0],
+
+  // === ADVAN / VANAC ===
+  ["advan","Advan\n(7019) 1971",720,1580,C.kameido,0],
+  ["vanac","Vanac\n(5626) 1972",880,1580,C.kameido,1],
+  ["vanac_sp","Vanac\nSpecial 1973",1040,1580,C.kameido,0],
+
+  // === KAMEIDO CHRONOGRAPHS ===
+  ["k7015","7015\nChrono 1972",720,1720,C.chrono,0],
+  ["k7017","7017 Flyback\nChrono 1972",880,1720,C.chrono,0],
+  ["k7018","7018 5-reg\nChrono 1971",560,1720,C.chrono,1],
+];
+
+const edges = [
+  ["marvel","gyro_marvel","strong"],["marvel","lord_marvel","strong"],
+  ["lord_marvel","lord_marvel_36k","strong"],["gyro_marvel","lord_marvel","medium"],
+  ["crown","crown_sd","medium"],["crown","crown_sp","medium"],
+  ["crown","gs_1st","strong"],["gs_1st","gs_sd","strong"],
+  ["gs_sd","57gs_cal","medium"],["gs_1st","62gs","strong"],
+  ["62gs","61gs","strong"],["61gs","61gs_vfa","strong"],
+  ["61gs","61gs_sp","medium"],["61gs_vfa","56gs_s","strong"],
+  ["liner","liner_chr","strong"],["laurel","skyliner","strong"],
+  ["skyliner","61_skyliner","strong"],["skyliner","sky_cal","medium"],
+  ["liner","sky_cal","weak"],
+  ["lord_matic","lord_matic_sp","strong"],["lord_matic_sp","lord_matic_56","strong"],
+  ["61gs","lord_matic","weak"],
+  ["super","sportsman","strong"],["sportsman","sportsmatic","strong"],
+  ["sportsmatic","sportsmatic5","strong"],["sportsmatic5","s5_first","strong"],
+  ["s5_first","s5_sports","strong"],["s5_sports","s5_speed","strong"],
+  ["s5_first","s5_actus","medium"],["s5_actus","s5_dx","medium"],
+  ["presmatic","business_a","strong"],["lord_matic","presmatic","weak"],
+  ["silverwave","62mas","strong"],["selfdater_mas","62mas","strong"],
+  ["silverwave","selfdater_mas","medium"],
+  ["62mas","62mas_2","strong"],["62mas_2","6105_8000","strong"],
+  ["6105_8000","6105_willard","strong"],["6105_willard","6105_last","medium"],
+  ["6105_willard","7002","strong"],["6105_8000","6159_pro","strong"],
+  ["6159_pro","6159_tuna","strong"],
+  ["6139_first","6139_pogue","strong"],["6139_first","6138_yacht","strong"],
+  ["6138_yacht","6138_kakume","strong"],["6138_yacht","6138_panda","medium"],
+  ["6138_kakume","6138_bull","medium"],
+  ["6139_pogue","6139_aqua","strong"],["6139_aqua","6139_helmet","strong"],
+  ["7002","6309","strong"],
+  ["bell_4005","bell_4006","strong"],["bell_4006","bell_4006_70","strong"],
+  ["wt_6217","wt_6117","strong"],["wt_6117","nav_timer","strong"],
+  ["cronos","cronos_sp","medium"],["cronos","cronos_sd","medium"],
+  ["cronos","ks_1st","strong"],["ks_1st","ks_hack","strong"],
+  ["ks_hack","ks_chrono","strong"],["ks_chrono","44ks","strong"],
+  ["44ks","44ks_sp","medium"],["44ks_sp","45ks","strong"],
+  ["45ks","45ks_hb","strong"],["45ks_hb","56ks","strong"],
+  ["56ks","56ks_vanac","medium"],
+  ["ks_chrono","44gs","strong"],["44gs","45gs","strong"],
+  ["45gs","45gs_vfa","strong"],["45gs_vfa","56gs_k","strong"],
+  ["goldfeather","44gs","weak"],["goldfeather","45gs","weak"],
+  ["unique","champion","medium"],["champion","champion_cal","strong"],
+  ["champion","fairway","medium"],["fairway","champ_850","strong"],
+  ["champion_cal","76_five","medium"],["champ_850","76_five","medium"],
+  ["advan","vanac","strong"],["vanac","vanac_sp","medium"],
+  ["56ks_vanac","vanac","weak"],
+  ["k7018","k7015","medium"],["k7015","k7017","strong"],
+  ["s5_speed","6139_first","strong"],["ks_1st","gs_1st","weak"],
+  ["sportsmatic","silverwave","medium"],
+];
+
+const sections = [
+  {l:"SUWA SEIKOSHA 諏訪精工舎",x:10,y:18,w:1160,h:1200,c:C.suwa},
+  {l:"KAMEIDO / DAINI SEIKOSHA 第二精工舎",x:10,y:1250,w:1160,h:540,c:C.kameido},
+  {l:"⚓ DYKKERURE (inkl. forgængere)",x:20,y:645,w:820,h:295,c:C.diver,sub:1},
+  {l:"⏱ KRONOGRAFER (SUWA)",x:20,y:940,w:1010,h:170,c:C.chrono,sub:1},
+  {l:"🔔 BELL-MATIC",x:20,y:1110,w:510,h:70,c:C.bell,sub:1},
+  {l:"🌍 WORLD TIME",x:660,y:1110,w:450,h:70,c:C.world,sub:1},
+  {l:"⏱ KAMEIDO KRONOGRAFER",x:500,y:1680,w:460,h:90,c:C.chrono,sub:1},
+];
+
+// Build lookup
+const nodeMap = {};
+nodes.forEach(n => nodeMap[n[0]] = n);
+
+// ── RENDERING ──
+const canvas = document.getElementById('canvas');
+const svg = document.getElementById('edges-svg');
+const wrap = document.getElementById('canvas-wrap');
+
+let tx = 0, ty = 0, scale = 0.5;
+let dragging = false, startX = 0, startY = 0;
+let hovered = null;
+let filter = 'all';
+
+function applyTransform() {
+  canvas.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
+}
+
+function resetView() {
+  const cw = wrap.clientWidth;
+  scale = Math.min(0.55, cw / 1200);
+  tx = (cw - 1200 * scale) / 2;
+  ty = 60;
+  applyTransform();
+}
+
+// Sections
+sections.forEach(s => {
+  const d = document.createElement('div');
+  d.className = 'section-bg' + (s.sub ? ' sub' : '');
+  d.style.cssText = `left:${s.x}px;top:${s.y}px;width:${s.w}px;height:${s.h}px;border:1px solid ${s.c}${s.sub?'30':'20'};background:${s.c}${s.sub?'08':'06'}`;
+  d.innerHTML = `<div class="label" style="color:${s.c}88">${s.l}</div>`;
+  canvas.appendChild(d);
+});
+
+// Nodes
+const nodeEls = {};
+nodes.forEach(n => {
+  const [id, label, x, y, color, isIcon] = n;
+  const d = document.createElement('div');
+  d.className = 'node' + (isIcon ? ' icon' : '');
+  d.style.cssText = `left:${x}px;top:${y}px;border:${isIcon?2:1}px solid ${isIcon?C.highlight+'aa':color+'66'}`;
+  d.dataset.id = id;
+  
+  let inner = '';
+  if (isIcon) inner += `<div class="star-badge">★</div>`;
+  if (inCollection.has(id)) inner += `<div class="coll-badge">I SAMLING</div>`;
+  inner += `<div class="text">${label}</div>`;
+  inner += `<div class="bar" style="background:linear-gradient(90deg,transparent,${color},transparent)"></div>`;
+  d.innerHTML = inner;
+  
+  d.addEventListener('mouseenter', () => { hovered = id; updateHighlights(); });
+  d.addEventListener('mouseleave', () => { hovered = null; updateHighlights(); });
+  
+  canvas.appendChild(d);
+  nodeEls[id] = d;
+});
+
+// Edges SVG
+function getEdgePath(fn, tn) {
+  const fx1 = fn[2], fy1 = fn[3], tx1 = tn[2], ty1 = tn[3];
+  const fcx = fx1 + NW/2, fcy = fy1 + NH/2;
+  const tcx = tx1 + NW/2, tcy = ty1 + NH/2;
+  const dx = tcx - fcx, dy = tcy - fcy;
+  
+  let sx, sy, ex, ey;
+  if (Math.abs(dx) > Math.abs(dy)) {
+    sx = dx > 0 ? fx1 + NW : fx1;
+    sy = fcy;
+    ex = dx > 0 ? tx1 : tx1 + NW;
+    ey = tcy;
+  } else {
+    sx = fcx; sy = dy > 0 ? fy1 + NH : fy1;
+    ex = tcx; ey = dy > 0 ? ty1 : ty1 + NH;
+  }
+  
+  if (Math.abs(dx) > 20 && Math.abs(dy) > 20) {
+    const mx = (sx+ex)/2;
+    return `M${sx},${sy} C${mx},${sy} ${mx},${ey} ${ex},${ey}`;
+  }
+  return `M${sx},${sy} L${ex},${ey}`;
+}
+
+function renderEdges() {
+  let html = `<defs>
+    <marker id="arr" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="6" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="#555"/></marker>
+    <marker id="arr-hi" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="6" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="${C.highlight}"/></marker>
+  </defs>`;
+  
+  edges.forEach(([fid, tid, type]) => {
+    const fn = nodeMap[fid], tn = nodeMap[tid];
+    if (!fn || !tn) return;
+    const path = getEdgePath(fn, tn);
+    const sw = type === 'strong' ? 2 : 1;
+    const da = type === 'weak' ? '4,4' : '0';
+    const op = type === 'weak' ? 0.4 : 0.6;
+    html += `<path data-from="${fid}" data-to="${tid}" d="${path}" fill="none" stroke="#555" stroke-width="${sw}" stroke-dasharray="${da}" opacity="${op}" marker-end="url(#arr)"/>`;
+  });
+  
+  svg.innerHTML = html;
+}
+
+function isVisible(n) {
+  if (filter === 'all') return true;
+  const col = n[4];
+  if (filter === 'suwa') return col === C.suwa || col === C.seiko5;
+  if (filter === 'kameido') return col === C.kameido;
+  if (filter === 'diver') return col === C.diver;
+  if (filter === 'chrono') return col === C.chrono;
+  if (filter === 'special') return col === C.bell || col === C.world;
+  if (filter === 'collection') return inCollection.has(n[0]);
+  return true;
+}
+
+function updateHighlights() {
+  const connected = new Set();
+  if (hovered) {
+    edges.forEach(([f,t]) => {
+      if (f === hovered) connected.add(t);
+      if (t === hovered) connected.add(f);
+    });
+  }
+  
+  nodes.forEach(n => {
+    const el = nodeEls[n[0]];
+    const vis = isVisible(n);
+    el.classList.toggle('hidden-filter', !vis);
+    
+    if (hovered && vis) {
+      const isH = n[0] === hovered;
+      const isC = connected.has(n[0]);
+      el.classList.toggle('dimmed', !isH && !isC);
+      el.classList.toggle('highlighted', isH);
+      if (isH) {
+        el.style.borderColor = C.highlight;
+        el.style.boxShadow = `0 0 16px ${C.highlight}40`;
+      } else {
+        el.style.borderColor = n[5] ? C.highlight+'aa' : n[4]+'66';
+        el.style.boxShadow = n[5] ? `0 0 8px ${C.highlight}15` : 'none';
+      }
+    } else if (vis) {
+      el.classList.remove('dimmed','highlighted');
+      el.style.borderColor = n[5] ? C.highlight+'aa' : n[4]+'66';
+      el.style.boxShadow = n[5] ? `0 0 8px ${C.highlight}15` : 'none';
+    }
+  });
+  
+  // Update edge highlights
+  svg.querySelectorAll('path[data-from]').forEach(p => {
+    const f = p.dataset.from, t = p.dataset.to;
+    if (hovered && (f === hovered || t === hovered)) {
+      p.setAttribute('stroke', C.highlight);
+      p.setAttribute('opacity', '1');
+      p.setAttribute('marker-end', 'url(#arr-hi)');
+    } else if (hovered) {
+      p.setAttribute('stroke', '#555');
+      p.setAttribute('opacity', '0.1');
+      p.setAttribute('marker-end', 'url(#arr)');
+    } else {
+      const type = edges.find(e => e[0]===f && e[1]===t);
+      p.setAttribute('stroke', '#555');
+      p.setAttribute('opacity', type && type[2]==='weak' ? '0.4' : '0.6');
+      p.setAttribute('marker-end', 'url(#arr)');
+    }
+  });
+}
+
+// Filters
+const filterDefs = [
+  ['all','Alle'],['suwa','Suwa'],['kameido','Kameido'],
+  ['diver','⚓ Dykker'],['chrono','⏱ Krono'],['special','Speciel'],
+  ['collection','🟢 Min samling']
+];
+const filtersEl = document.getElementById('filters');
+filterDefs.forEach(([k,l]) => {
+  const btn = document.createElement('button');
+  btn.textContent = l;
+  btn.className = k === 'all' ? 'active' : '';
+  btn.onclick = () => {
+    filter = k;
+    filtersEl.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateHighlights();
+  };
+  filtersEl.appendChild(btn);
+});
+
+// Reset button
+const resetBtn = document.createElement('button');
+resetBtn.textContent = 'Reset Zoom';
+resetBtn.onclick = resetView;
+filtersEl.appendChild(resetBtn);
+
+// Legend
+const legendDefs = [
+  [C.suwa,'Suwa'],[C.kameido,'Kameido'],[C.diver,'⚓ Dykker'],
+  [C.chrono,'⏱ Kronograf'],[C.bell,'🔔 Bell-Matic'],[C.world,'🌍 World Time'],
+  [C.seiko5,'Seiko 5'],[C.highlight,'★ Ikon'],[C.collection,'🟢 I samling'],
+];
+const legendEl = document.getElementById('legend');
+legendDefs.forEach(([c,l]) => {
+  const d = document.createElement('div');
+  d.className = 'item';
+  d.innerHTML = `<div class="dot" style="background:${c}"></div><span>${l}</span>`;
+  legendEl.appendChild(d);
+});
+
+// Pan & Zoom
+wrap.addEventListener('pointerdown', e => {
+  if (e.target.closest('.node')) return;
+  dragging = true;
+  startX = e.clientX - tx;
+  startY = e.clientY - ty;
+  wrap.classList.add('dragging');
+  wrap.setPointerCapture(e.pointerId);
+});
+wrap.addEventListener('pointermove', e => {
+  if (!dragging) return;
+  tx = e.clientX - startX;
+  ty = e.clientY - startY;
+  applyTransform();
+});
+wrap.addEventListener('pointerup', () => {
+  dragging = false;
+  wrap.classList.remove('dragging');
+});
+
+wrap.addEventListener('wheel', e => {
+  e.preventDefault();
+  const d = e.deltaY > 0 ? 0.92 : 1.08;
+  const ns = Math.max(0.18, Math.min(1.5, scale * d));
+  const rect = wrap.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  tx = mx - (mx - tx) * (ns / scale);
+  ty = my - (my - ty) * (ns / scale);
+  scale = ns;
+  applyTransform();
+}, { passive: false });
+
+// Touch pinch zoom
+let lastDist = 0;
+wrap.addEventListener('touchstart', e => {
+  if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    lastDist = Math.sqrt(dx*dx + dy*dy);
+  }
+});
+wrap.addEventListener('touchmove', e => {
+  if (e.touches.length === 2) {
+    e.preventDefault();
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const d = dist / lastDist;
+    scale = Math.max(0.18, Math.min(1.5, scale * d));
+    lastDist = dist;
+    applyTransform();
+  }
+}, { passive: false });
+
+// Init
+renderEdges();
+resetView();
+</script>
+</body>
+</html>
