@@ -67,6 +67,29 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #minimap .viewport{position:absolute;border:1.5px solid var(--icon);background:rgba(184,148,46,.08);border-radius:1px;pointer-events:none}
 /* Feature 4: Spring Drive edge animation */
 /* Spring Drive edges use same styling as other edges - SD badges on nodes are sufficient */
+/* Feature 5: Image popup on hover */
+#watch-popup{
+  position:fixed;z-index:50;pointer-events:none;
+  background:var(--paper);border:1px solid var(--rule);border-radius:4px;
+  box-shadow:0 4px 20px rgba(0,0,0,.12);padding:8px;
+  opacity:0;transition:opacity .2s;max-width:220px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+#watch-popup.visible{opacity:1}
+#watch-popup img{
+  width:200px;height:auto;max-height:200px;object-fit:contain;
+  border-radius:2px;background:#f5f4f1;
+  display:block;
+}
+#watch-popup .popup-label{
+  font-family:'Cormorant Garamond',serif;font-size:11px;
+  color:var(--ink);text-align:center;line-height:1.3;
+  font-weight:600;
+}
+#watch-popup .popup-sub{
+  font-size:8px;color:var(--muted);text-align:center;
+  letter-spacing:.3px;
+}
 #edges-svg{position:absolute;top:0;left:0;pointer-events:none}
 </style>
 </head>
@@ -93,6 +116,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 </div>
 <div id="legend"></div>
 <div id="minimap"><canvas id="minimap-canvas"></canvas><div class="viewport" id="mm-viewport"></div></div>
+<div id="watch-popup"><img id="popup-img" src="" alt=""><div class="popup-label" id="popup-label"></div><div class="popup-sub" id="popup-sub"></div></div>
 <div id="canvas-wrap"><div id="canvas"><svg id="edges-svg"></svg></div></div>
 </div>
 <script>
@@ -106,6 +130,84 @@ const inCollection=new Set([
   "skx","px_mm","prospex","px_1965","s5_modern"
 ]);
 const techMap={lord_marvel_36k:"hibeat","61gs":"hibeat","61gs_vfa":"hibeat","61gs_sp":"hibeat",lord_matic_sp:"hibeat","45ks":"hibeat","45ks_hb":"hibeat","45gs":"hibeat","45gs_vfa":"hibeat",gs_hibeat:"hibeat",gs_9s5:"hibeat",gs_sd_04:"springdrive",gs_9r:"springdrive",gs_9ra:"springdrive",gs_ufa:"springdrive",gs_sport:"springdrive",gs_quartz_88:"quartz"};
+/* ═══ Feature 5: Watch image popup data ═══ */
+const imageMap={
+  // Vintage Suwa
+  marvel:["https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Seiko_Marvel_J14049.jpg/220px-Seiko_Marvel_J14049.jpg","Marvel — Suwa's first premium line"],
+  lord_marvel_36k:["https://www.watchuseek.com/attachments/seiko-lord-marvel-36000-5740-8000-hi-beat-jpg.16615483/","Lord Marvel 36000 Hi-Beat"],
+  gs_1st:["https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Grand_Seiko_VFA_6186-8009.jpg/180px-Grand_Seiko_VFA_6186-8009.jpg","First Grand Seiko (3180) 1960"],
+  "62gs":["https://www.grand-seiko.com/jp-ja/special/history/img/1967_62gs.jpg","62GS — first automatic Grand Seiko"],
+  "61gs":["https://www.grand-seiko.com/jp-ja/special/history/img/1968_61gs.jpg","61GS Hi-Beat 36000"],
+  "61gs_vfa":["https://www.grand-seiko.com/jp-ja/special/history/img/1969_61gs_vfa.jpg","61GS VFA — Very Fine Adjusted"],
+  // Divers
+  silverwave:["https://www.thetokeiclub.jp/cdn/shop/files/IMG_7858.jpg?v=1730689003&width=600","Seikomatic Silverwave — Seiko's first diver"],
+  "62mas":["https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Seiko_62MAS.jpg/220px-Seiko_62MAS.jpg","62MAS — first true Seiko professional diver"],
+  "6105_8000":["https://www.watchuseek.com/attachments/seiko-6105-8000-jpg.5395506/","6105-8000 — 150m asymmetric diver"],
+  "6105_willard":["https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Seiko6105-8110.jpg/220px-Seiko6105-8110.jpg","6105-8110 Captain Willard — Apocalypse Now"],
+  "6159_tuna":["https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Seiko_6159-7010.jpg/220px-Seiko_6159-7010.jpg","Tuna Can 600m — external shroud"],
+  skx:["https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Seiko_SKX007.jpg/220px-Seiko_SKX007.jpg","SKX007 — 23 years of icon status"],
+  // Chronographs
+  "6139_first":["https://www.grand-seiko.com/jp-ja/special/history/img/1969_6139.jpg","6139-6000 — world's first auto chronograph 1969"],
+  "6139_pogue":["https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Seiko_6139_Pogue.jpg/200px-Seiko_6139_Pogue.jpg","6139 Pogue — first auto chrono in space"],
+  "6138_kakume":["https://www.watchuseek.com/attachments/6138-kakume-jpg.16587367/","6138 Kakume — square-eye chrono"],
+  "6138_bull":["https://www.watchuseek.com/attachments/bullhead-jpg.16587371/","6138 Bullhead — pushers on top"],
+  // Bell-Matic / World Time
+  bell_4006:["https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Seiko_Bell-Matic_4006.jpg/200px-Seiko_Bell-Matic_4006.jpg","Bell-Matic — mechanical alarm"],
+  wt_6217:["https://www.seikoworldtime.com/images/series2/4/set_silver.webp","World Time 6217 — Tokyo Olympics 1964"],
+  // King Seiko / Kameido
+  "44ks":["https://www.grand-seiko.com/jp-ja/special/history/img/1965_44gs.jpg","44KS Grammar of Design — Taro Tanaka"],
+  "45ks_hb":["https://www.beyondthedial.com/images/post/collector-guide-king-seiko-part-2/ks-4502-7010-pair.jpg","45KS Hi-Beat Chronometer"],
+  vanac:["https://www.watchuseek.com/attachments/vanac-jpg.16587383/","Vanac — asymmetric 70s design"],
+  goldfeather:["https://www.watchuseek.com/attachments/goldfeather-jpg.16587379/","Goldfeather — ultra-thin prestige"],
+  "44gs":["https://www.grand-seiko.com/jp-ja/special/history/img/1967_44gs.jpg","44GS — Grammar of Design origin"],
+  "45gs_vfa":["https://www.grand-seiko.com/jp-ja/special/history/img/1969_45gs_vfa.jpg","45GS VFA — peak Kameido precision"],
+  // Grand Seiko Modern
+  gs_mech_98:["https://www.grand-seiko.com/jp-ja/special/history/img/1998_gs9s.jpg","GS 9S Mechanical Revival 1998"],
+  gs_sd_04:["https://www.grand-seiko.com/jp-ja/special/history/img/2004_springdrive.jpg","Grand Seiko Spring Drive 2004"],
+  gs_9s5:["https://www.grand-seiko.com/jp-ja/special/history/img/2020_9sa5.jpg","9SA5 — next-gen hi-beat mechanical"],
+  gs_ufa:["https://www.grand-seiko.com/us-en/collections/slgb001g/img/main.webp","Spring Drive U.F.A. 9RB2 — ±20 sec/year"],
+  gs_evo9:["https://www.grand-seiko.com/us-en/collections/slga021g/img/main.webp","Evolution 9 — White Birch"],
+  // King Seiko Modern
+  ks_revival:["https://www.seikowatches.com/us-en/products/kingseiko/special/img/kv01.webp","King Seiko Revival 2022"],
+  ks_vanac_25:["https://www.seikowatches.com/us-en/products/kingseiko/special/vanac/img/kv01.webp","King Seiko VANAC 2025"],
+  // Prospex Modern
+  prospex:["https://www.seikowatches.com/us-en/products/prospex/special/img/kv01.webp","Prospex — Sea, Land, Air, Ice"],
+  px_mm:["https://www.seikowatches.com/us-en/products/prospex/special/marinemaster/img/kv01.webp","Marinemaster Professional"],
+  px_alpinist:["https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Seiko_Alpinist_SARB017.jpg/200px-Seiko_Alpinist_SARB017.jpg","Alpinist — the mountaineer's Seiko"],
+  // Presage
+  presage_node:["https://www.seikowatches.com/us-en/products/presage/special/img/kv01.webp","Presage — Japanese mechanical dress"],
+  prsg_cocktail:["https://www.seikowatches.com/us-en/products/presage/special/cocktailtime/img/kv01.webp","Cocktail Time"],
+  prsg_sharp:["https://www.seikowatches.com/us-en/products/presage/special/sharp_edged_series/img/kv01.webp","Sharp Edged — Asanoha pattern"],
+  prsg_style60:["https://www.seikowatches.com/us-en/products/presage/special/style60s/img/kv01.webp","Style60s — Crown Chronograph heritage"],
+  // Seiko 5 Sports
+  s5_modern:["https://www.seikowatches.com/us-en/products/5sports/special/img/kv01.webp","Seiko 5 Sports — 2019 reboot"],
+};
+
+const popup=document.getElementById('watch-popup');
+const popupImg=document.getElementById('popup-img');
+const popupLabel=document.getElementById('popup-label');
+const popupSub=document.getElementById('popup-sub');
+let popupTimer=null;
+
+function showPopup(nodeId,e){
+  const img=imageMap[nodeId];
+  if(!img||scale<0.35)return; // No popup if no image or zoomed too far out
+  clearTimeout(popupTimer);
+  popupImg.onerror=()=>{popup.classList.remove('visible');};
+  popupImg.onload=()=>{popup.classList.add('visible');};
+  popupImg.src=img[0];
+  popupLabel.textContent=img[1]||'';
+  popupSub.textContent=nodeId;
+  // Position near cursor but stay on screen
+  const px=Math.min(e.clientX+15,window.innerWidth-240);
+  const py=Math.min(e.clientY-100,window.innerHeight-260);
+  popup.style.left=px+'px';
+  popup.style.top=Math.max(10,py)+'px';
+}
+function hidePopup(){
+  popupTimer=setTimeout(()=>{popup.classList.remove('visible');popupImg.src='';},120);
+}
+
 const NW=124,NH=42,CW=2800,CH=2200;
 const nodes=[
 ["marvel","Marvel\n1956–62",70,50,C.suwa,0],["gyro_marvel","Gyro Marvel\n1959–63",70,110,C.suwa,0],["lord_marvel","Lord Marvel\n1960–75",210,50,C.suwa,0],["lord_marvel_36k","Lord Marvel\n36000 1967–75",370,50,C.suwa,1],
@@ -208,7 +310,7 @@ function view100(){scale=1;tx=0;ty=0;applyTransform();}
 sections.forEach(s=>{const d=document.createElement('div');d.className='section-bg'+(s.sub?' sub':'');d.style.cssText=`left:${s.x}px;top:${s.y}px;width:${s.w}px;height:${s.h}px;border:1px solid ${s.c}${s.sub?'18':'0e'};background:${s.c}${s.sub?'06':'04'}`;d.innerHTML=`<div class="label" style="color:${s.c}99">${s.l}</div>`;canvas.appendChild(d);});
 
 const nodeEls={};
-nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElement('div');d.className='node'+(isIcon?' icon':'');d.style.cssText=`left:${x}px;top:${y}px;border:${isIcon?2:1}px solid ${isIcon?C.highlight+'88':color+'30'}`;d.dataset.id=id;let inner='';if(isIcon)inner+=`<div class="star-badge">★</div>`;if(inCollection.has(id))inner+=`<div class="coll-badge">In Collection</div>`;const tech=techMap[id];if(tech){const lb={hibeat:'HB',springdrive:'SD',quartz:'Q'};inner+=`<div class="tech-badge ${tech}" title="${tech==='hibeat'?'Hi-Beat 36000 bph':tech==='springdrive'?'Spring Drive':'Quartz'}">${lb[tech]}</div>`;}inner+=`<div class="text">${label}</div><div class="bar" style="background:linear-gradient(90deg,transparent,${color},transparent)"></div>`;d.innerHTML=inner;d.addEventListener('mouseenter',()=>{hovered=id;updateHL();});d.addEventListener('mouseleave',()=>{hovered=null;updateHL();});canvas.appendChild(d);nodeEls[id]=d;});
+nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElement('div');d.className='node'+(isIcon?' icon':'');d.style.cssText=`left:${x}px;top:${y}px;border:${isIcon?2:1}px solid ${isIcon?C.highlight+'88':color+'30'}`;d.dataset.id=id;let inner='';if(isIcon)inner+=`<div class="star-badge">★</div>`;if(inCollection.has(id))inner+=`<div class="coll-badge">In Collection</div>`;const tech=techMap[id];if(tech){const lb={hibeat:'HB',springdrive:'SD',quartz:'Q'};inner+=`<div class="tech-badge ${tech}" title="${tech==='hibeat'?'Hi-Beat 36000 bph':tech==='springdrive'?'Spring Drive':'Quartz'}">${lb[tech]}</div>`;}inner+=`<div class="text">${label}</div><div class="bar" style="background:linear-gradient(90deg,transparent,${color},transparent)"></div>`;d.innerHTML=inner;d.addEventListener('mouseenter',(e)=>{hovered=id;updateHL();showPopup(id,e);});d.addEventListener('mousemove',(e)=>{if(imageMap[id]&&popup.classList.contains('visible')){popup.style.left=Math.min(e.clientX+15,window.innerWidth-240)+'px';popup.style.top=Math.max(10,Math.min(e.clientY-100,window.innerHeight-260))+'px';}});d.addEventListener('mouseleave',()=>{hovered=null;updateHL();hidePopup();});canvas.appendChild(d);nodeEls[id]=d;});
 
 function getPath(fn,tn){const fcx=fn[2]+NW/2,fcy=fn[3]+NH/2,tcx=tn[2]+NW/2,tcy=tn[3]+NH/2,dx=tcx-fcx,dy=tcy-fcy;let sx,sy,ex,ey;if(Math.abs(dx)>Math.abs(dy)){sx=dx>0?fn[2]+NW:fn[2];sy=fcy;ex=dx>0?tn[2]:tn[2]+NW;ey=tcy;}else{sx=fcx;sy=dy>0?fn[3]+NH:fn[3];ex=tcx;ey=dy>0?tn[3]:tn[3]+NH;}const mx=(sx+ex)/2,my=(sy+ey)/2;if(Math.abs(dx)>Math.abs(dy)){return`M${sx},${sy} C${mx},${sy} ${mx},${ey} ${ex},${ey}`;}return`M${sx},${sy} C${sx},${my} ${ex},${my} ${ex},${ey}`;}
 
