@@ -151,7 +151,7 @@ const inCollection=new Set([
   "business_a","presmatic","45ks","56ks","61_skyliner",
   "6105_willard","56gs_s","bell_4006","bell_4006_70","6139_pogue",
   "wt_6117","s5_speed","6139_hex","s5_first","lord_matic_56",
-  "6139_aqua","6309_sports","6309_mod","6139_helmet",
+  "6139_aqua","6309_sports","6139_helmet",
   "skx","px_mm","prospex","px_1965","s5_modern"
 ]);
 const techMap={lord_marvel_36k:"hibeat","61gs":"hibeat","61gs_vfa":"hibeat","61gs_sp":"hibeat",lord_matic_sp:"hibeat","45ks":"hibeat","45gs":"hibeat","45gs_vfa":"hibeat",gs_hibeat:"hibeat",gs_9s5:"hibeat","19gs":"hibeat",gs_sd_04:"springdrive",gs_9r:"springdrive",gs_9ra:"springdrive",gs_ufa:"springdrive",gs_sport:"springdrive",gs_9r01:"springdrive",gs_sd_chrono:"springdrive",sd_7r88:"springdrive",sd_7r68:"springdrive",sd_concept:"springdrive",gs_quartz_88:"quartz"};
@@ -295,7 +295,7 @@ const nodes=[
 ["s5_first","Seiko 5\n1963-",530,695,C.seiko5,0],["s5_sports","5 Sports\n1968-85",690,695,C.seiko5,0],["s5_speed","5 Speed Timer\n1969-75",850,695,C.seiko5,1],["s5_actus","5 Actus\n1970-78",690,760,C.seiko5,0],["s5_dx","5 DX\n1970-78",850,760,C.seiko5,0],
 ["6309_sports","6309-8080\nSports 1976-88",1010,695,C.seiko5,0],
 ["silverwave","Seikomatic\nSilverwave\n1961-64",70,860,C.diver,1],["selfdater_mas","Seikomatic\nSelfdater MAS\n1963-65",210,860,C.diver,1],
-["62mas","62MAS\n1965-68",70,940,C.diver,1],["62mas_2","62MAS 8001\n1967-68",210,940,C.diver,0],["6215_pro","6215-7000\nPro 300m 1967-68",210,1005,C.diver,0],["6105_8000","6105-8000\n150m 1968-70",370,940,C.diver,1],["6105_willard","6105-8110\nWillard 1970-77",530,940,C.diver,1],["6105_last","6105-8009\n1973-77",530,1005,C.diver,0],["6309","6309 Turtle\n150m 1976-88",690,940,C.diver,0],["6309_mod","6309 Mods\n(diver builds)\n1986-87",690,1005,C.diver,0],["7002_node","7002\n150m 1988-96",850,940,C.diver,0],["6306_sd","SilverWave\nSurface Diver\n6306 1976-78",850,1005,C.diver,0],["skx","SKX007/009\n1996-2019",1010,940,C.diver,1],["6159_pro","6159-7000\nPro 300m 1968-75",370,1005,C.diver,1],["6159_tuna","6159 Tuna\n600m 1975-78",530,1075,C.diver,1],
+["62mas","62MAS\n1965-68",70,940,C.diver,1],["62mas_2","62MAS 8001\n1967-68",210,940,C.diver,0],["6215_pro","6215-7000\nPro 300m 1967-68",210,1005,C.diver,0],["6105_8000","6105-8000\n150m 1968-70",370,940,C.diver,1],["6105_willard","6105-8110\nWillard 1970-77",530,940,C.diver,1],["6105_last","6105-8009\n1973-77",530,1005,C.diver,0],["6309","6309 Turtle\n150m 1976-88",690,940,C.diver,0],["7002_node","7002\n150m 1988-96",850,940,C.diver,0],["6306_sd","SilverWave\nSurface Diver\n6306 1976-78",850,1005,C.diver,0],["skx","SKX007/009\n1996-2019",1010,940,C.diver,1],["6159_pro","6159-7000\nPro 300m 1968-75",370,1005,C.diver,1],["6159_tuna","6159 Tuna\n600m 1975-78",530,1075,C.diver,1],
 ["6139_first","6139-6000\n1st Auto Chrono\n1969-72",70,1170,C.chrono,1],["6139_pogue","6139 Pogue\n1971-78",210,1170,C.chrono,1],["6138_yacht","6138 Yachtman\n1970-75",370,1170,C.chrono,0],["6138_kakume","6138 Kakume\n1972-77",530,1170,C.chrono,1],["6138_bull","6138 Bullhead\n1971-75",530,1240,C.chrono,1],["6138_panda","6138 Panda\n1971-75",370,1240,C.chrono,0],["6139_aqua","Aquatimer\n6139-7070 1976-79",690,1170,C.chrono,0],["6139_helmet","Helmet DV\n6139-7101\n1977-80",850,1170,C.chrono,0],["6139_hex","Hexagon\n6139-7080 1974-78",690,1240,C.chrono,0],
 ["bell_4005","Bell-Matic\n(4005) 1966-67",70,1370,C.bell,0],["bell_4006","Bell-Matic\n(4006) 1967-78",210,1370,C.bell,1],["bell_4006_70","Bell-Matic\n4006-70xx 1970-78",370,1370,C.bell,0],
 ["wt_6217","World Time\n(6217) 1964-69",690,1370,C.world,1],["wt_6117","World Time\n(6117) 1969-76",850,1370,C.world,0],["nav_timer","Navigator\nTimer 1970-76",1010,1370,C.world,0],
@@ -323,7 +323,7 @@ const edges=[
 ["s5_first","s5_sports","strong"],["s5_sports","s5_speed","strong"],["s5_first","s5_actus","medium"],["s5_actus","s5_dx","medium"],
 ["s5_sports","6309_sports","medium"],["6309","6309_sports","weak"],
 ["silverwave","62mas","strong"],["selfdater_mas","62mas","strong"],["silverwave","selfdater_mas","medium"],["sportsmatic","silverwave","weak"],
-["62mas","62mas_2","strong"],["62mas_2","6105_8000","strong"],["62mas_2","6215_pro","medium"],["6215_pro","6159_pro","strong"],["6105_8000","6105_willard","strong"],["6105_willard","6105_last","medium"],["6105_willard","6309","strong"],["6309","6309_mod","medium"],["6309","7002_node","strong"],["6309","6306_sd","medium"],["7002_node","skx","strong"],
+["62mas","62mas_2","strong"],["62mas_2","6105_8000","strong"],["62mas_2","6215_pro","medium"],["6215_pro","6159_pro","strong"],["6105_8000","6105_willard","strong"],["6105_willard","6105_last","medium"],["6105_willard","6309","strong"],["6309","7002_node","strong"],["6309","6306_sd","medium"],["7002_node","skx","strong"],
 ["6105_8000","6159_pro","strong"],["6159_pro","6159_tuna","strong"],
 ["s5_speed","6139_first","strong"],
 ["bell_4005","bell_4006","strong"],["bell_4006","bell_4006_70","strong"],
