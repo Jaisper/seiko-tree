@@ -154,7 +154,7 @@ const inCollection=new Set([
   "6139_aqua","6309_sports","6309_mod","6139_helmet",
   "skx","px_mm","prospex","px_1965","s5_modern"
 ]);
-const techMap={lord_marvel_36k:"hibeat","61gs":"hibeat","61gs_vfa":"hibeat","61gs_sp":"hibeat",lord_matic_sp:"hibeat","45ks":"hibeat","45gs":"hibeat","45gs_vfa":"hibeat",gs_hibeat:"hibeat",gs_9s5:"hibeat","19gs":"hibeat",gs_sd_04:"springdrive",gs_9r:"springdrive",gs_9ra:"springdrive",gs_ufa:"springdrive",gs_sport:"springdrive",gs_quartz_88:"quartz"};
+const techMap={lord_marvel_36k:"hibeat","61gs":"hibeat","61gs_vfa":"hibeat","61gs_sp":"hibeat",lord_matic_sp:"hibeat","45ks":"hibeat","45gs":"hibeat","45gs_vfa":"hibeat",gs_hibeat:"hibeat",gs_9s5:"hibeat","19gs":"hibeat",gs_sd_04:"springdrive",gs_9r:"springdrive",gs_9ra:"springdrive",gs_ufa:"springdrive",gs_sport:"springdrive",gs_9r01:"springdrive",gs_sd_chrono:"springdrive",sd_7r88:"springdrive",sd_7r68:"springdrive",sd_concept:"springdrive",gs_quartz_88:"quartz"};
 /* ═══ Feature 5: Popup data — local images from ./img/ ═══
    Only specific models get images (hasImg:true).
    Broad families/collections do NOT get images.
@@ -218,6 +218,11 @@ const popupData={
   // ── GRAND SEIKO MODERN ──
   gs_9s5:{n:"Caliber 9SA5",era:"2020-",d:"Next-gen hi-beat mechanical. Dual impulse escapement. 80h power reserve.",tags:["icon","gs","hb"],hasImg:1},
   gs_ufa:{n:"Spring Drive U.F.A. 9RB2",era:"2025-",d:"Ultra Fine Accuracy. ±20 sec/year. Most accurate mainspring-powered watch.",tags:["icon","gs","sd"],hasImg:1},
+  sd_concept:{n:"Spring Drive Concept",era:"1978-1997",d:"Yoshikazu Akahane's vision: mainspring power with quartz-level accuracy. 20 years of R&D, 600+ patents. Tri-synchro regulator concept.",tags:["sd"]},
+  sd_7r68:{n:"7R68 Spring Drive",era:"1999",d:"First production Spring Drive. Manual-winding, sold in limited quantities. Seiko-branded, not yet Grand Seiko.",tags:["sd"]},
+  sd_7r88:{n:"7R88 Credor Spring Drive",era:"2002",d:"Spring Drive in premium Credor brand. Automatic winding. Bridge to Grand Seiko adoption.",tags:["sd"]},
+  gs_sd_chrono:{n:"GS Spring Drive Chronograph",era:"2007-",d:"Cal. 9R86. First Spring Drive chronograph. 30-min and 12-hr registers with glide motion seconds.",tags:["gs","sd"]},
+  gs_9r01:{n:"GS Spring Drive 8 Days",era:"2016-",d:"Cal. 9R01. Micro Artist Studio. Three mainspring barrels for 192-hour power reserve. Platinum case.",tags:["gs","sd"]},
   gs_sd_04:{n:"Grand Seiko Spring Drive",era:"2004-",d:"9R caliber. Tri-synchro regulator. The glide motion seconds hand.",tags:["gs","sd"]},
   // ── KING SEIKO MODERN ──
   ks_revival:{n:"King Seiko Revival",era:"2022-",d:"Revived under the modern King Seiko banner, drawing especially on the 1960s Daini design language.",tags:["ks"]},
@@ -299,9 +304,9 @@ const nodes=[
 ["unique","Unique\n1960-64",70,1775,C.kameido,0],["champion","Champion\n1960-68",210,1775,C.kameido,0],["champion_cal","Champion Cal.\n1962-68",370,1775,C.kameido,0],["fairway","Fairway\n1962-66",210,1840,C.kameido,0],["champ_850","Champion 850\n1965-70",370,1840,C.kameido,0],["76_five","76 Seiko 5\nKameido 1966-75",530,1775,C.kameido,0],
 ["advan","Advan\n1971-78",690,1775,C.kameido,0],["vanac","Vanac\n1972-75",850,1775,C.ks,1],["vanac_sp","Vanac Special\n1973-75",1010,1775,C.kameido,0],
 ["k7016","7016 Flyback\n1970-75",690,1980,C.chrono,0],["k7015","7015 Chrono\n1972-75",690,1915,C.chrono,0],["k7017","7017 Flyback\n1972-75",850,1915,C.chrono,0],["k7018","7018 5-reg\n1971-75",530,1915,C.chrono,1],
-["gs_cont","GS Mechanical\nDormant ~1978-88",1250,100,C.gs,0],["gs_quartz_88","GS 9F Quartz\n1988-",1410,100,C.gs,0],["gs_mech_98","GS 9S Mech.\nRevival 1998-",1570,100,C.gs,0],["gs_sd_04","GS Spring Drive\n9R 2004-",1730,100,C.gs,0],["gs_hibeat","GS 9S Hi-Beat\n36000 2009-",1570,170,C.gs,0],["gs_independence","Grand Seiko\nIndep. Brand\n2017-",1890,100,C.gs,0],
+["gs_cont","GS Mechanical\nDormant ~1978-88",1250,100,C.gs,0],["gs_quartz_88","GS 9F Quartz\n1988-",1410,100,C.gs,0],["gs_mech_98","GS 9S Mech.\nRevival 1998-",1250,180,C.gs,0],["gs_sd_04","GS Spring Drive\n9R65 2004-",1730,270,C.gs,0],["gs_hibeat","GS 9S Hi-Beat\n36000 2009-",1570,180,C.gs,0],["sd_concept","Spring Drive\nconcept/patents\n1978-1997",1250,270,C.gs,0],["sd_7r68","7R68 manual\nSpring Drive\n1999",1410,270,C.gs,0],["sd_7r88","7R88 Credor\nSpring Drive\n2002",1570,270,C.gs,0],["gs_sd_chrono","GS Spring Drive\nChrono 9R86\n2007-",2050,180,C.gs,0],["gs_9r01","GS Spring Drive\n9R01 8 Days\n2016-",2190,180,C.gs,0],["gs_independence","Grand Seiko\nIndep. Brand\n2017-",1890,100,C.gs,0],
 ["gs_heritage","Heritage\nColl. 2018-",2050,50,C.gs,0],["gs_elegance","Elegance\nColl. 2018-",2190,50,C.gs,0],["gs_sport","Sport Coll.\n2018-",2330,50,C.gs,0],["gs_evo9","Evolution 9\n2021-",2470,50,C.gs,0],["gs_masterpiece","Masterpiece\n2020-",2610,50,C.gs,0],
-["gs_9s","9S Caliber\nFamily 1998-",1570,250,C.gs,0],["gs_9s5","9SA5 Hi-Beat\nNext-Gen\n2020-",1730,250,C.gs,1],["gs_9r","9R Spring Drive\n2004-",1890,250,C.gs,0],["gs_9ra","9RA/9RB\nAdv. SD 2020-",2050,250,C.gs,1],["gs_ufa","Spring Drive\nU.F.A. 9RB2\n2025-",2190,250,C.gs,1],
+["gs_9s","9S Caliber\nFamily 1998-",1410,180,C.gs,0],["gs_9s5","9SA5 Hi-Beat\nNext-Gen\n2020-",1730,180,C.gs,1],["gs_9r","9R Spring Drive\n2004-",1890,270,C.gs,0],["gs_9ra","9RA/9RB\nAdv. SD 2020-",2050,270,C.gs,1],["gs_ufa","Spring Drive\nU.F.A. 9RB2\n2025-",2190,270,C.gs,1],
 ["ks_dormant","King Seiko\nDormant\n~1975-2022",1250,400,C.ks,0],["ks_revival","King Seiko\nRevival 2022-",1570,400,C.ks,0],["ks_sje","KS Modern\nSJE 2022-",1730,400,C.ks,0],["ks_vanac_25","King Seiko\nVANAC 2025-",1890,400,C.ks,1],
 ["prospex","Prospex\n2012-",1250,560,C.prospex,0],["px_mm","Marinemaster\nmodern line",1410,560,C.prospex,0],["px_1965","1965 Heritage\nDiver 2017-",1410,630,C.prospex,0],["px_1968_diver","1968 Heritage\nDiver 2018-",1570,630,C.prospex,0],["px_1968_gmt","1968 Heritage\nGMT 2020-",1730,630,C.prospex,0],["px_1970","1970 Diver\nWillard 2020-",1890,630,C.prospex,0],["px_alpinist","Alpinist\n1959 heritage\n/ modern Prospex",1410,700,C.prospex,0],["px_speedtimer","Prospex Speedtimer\nMechanical\n2021-",1570,700,C.chrono,0],["px_land","Land Mech.\n2019-",1730,700,C.prospex,0],
 ["presage_node","Presage\n2016-",1250,830,C.presage,0],["prsg_cocktail","Cocktail Time\n2016-",1410,830,C.presage,0],["prsg_sharp","Sharp Edged\n2020-",1570,830,C.presage,0],["prsg_style60","Style60s\n2021-",1730,830,C.presage,0],["prsg_classic","Classic Series\n2024-",1410,900,C.presage,0],["prsg_craft","Craftsmanship\n2018-",1570,900,C.presage,0],["prsg_garden","Japanese\nGarden 2022-",1730,900,C.presage,0],["prsg_starbar","Star Bar\n2018-",1890,830,C.presage,0],
@@ -342,7 +347,7 @@ const edges=[
 ["presage_node","prsg_cocktail","strong"],["presage_node","prsg_sharp","strong"],["presage_node","prsg_style60","strong"],["presage_node","prsg_classic","strong"],["presage_node","prsg_craft","strong"],["presage_node","prsg_starbar","medium"],["prsg_classic","prsg_garden","strong"],["crown","prsg_style60","weak"],
 ["s5_first","s5_modern","weak"],["skx","s5_skx_mod","weak"],
 ["s5_modern","s5_skx_mod","strong"],["s5_modern","s5_field_mod","strong"],["s5_modern","s5_street","strong"],
-["marvel","crown","strong"],["marvel","laurel","medium"],["marvel","sportsman","medium"],["sky_cal","61_skyliner_cal","medium"],["6159_pro","px_1968_diver","weak"],["6159_pro","px_1968_gmt","weak"],["gs_cont","gs_quartz_88","medium"],["gs_cont","gs_mech_98","medium"],["gs_cont","gs_sd_04","medium"],["gs_cont","gs_independence","medium"],["s5_modern","s5_snxs","strong"],
+["marvel","crown","strong"],["marvel","laurel","medium"],["marvel","sportsman","medium"],["sky_cal","61_skyliner_cal","medium"],["6159_pro","px_1968_diver","weak"],["6159_pro","px_1968_gmt","weak"],["gs_cont","gs_quartz_88","medium"],["gs_cont","gs_mech_98","medium"],["gs_cont","sd_concept","weak"],["sd_concept","sd_7r68","medium"],["sd_7r68","sd_7r88","medium"],["sd_7r88","gs_sd_04","strong"],["gs_sd_04","gs_sd_chrono","medium"],["gs_sd_04","gs_9r01","medium"],["gs_cont","gs_independence","medium"],["s5_modern","s5_snxs","strong"],
 ];
 const sections=[
 {l:"SUWA SEIKOSHA · EARLY MECHANICAL ERA 諏訪精工舎",x:8,y:15,w:1150,h:810,c:C.suwa},
