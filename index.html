@@ -152,9 +152,9 @@ const inCollection=new Set([
   "6105_willard","56gs_s","bell_4006","bell_4006_70","6139_pogue",
   "wt_6117","s5_speed","6139_hex","s5_first","lord_matic_56",
   "6139_aqua","6309_sports","6139_helmet",
-  "skx","px_mm","prospex","px_1965","s5_modern"
+  "skx","px_mm","prospex","px_1965","px_sd_diver","s5_modern"
 ]);
-const techMap={lord_marvel_36k:"hibeat","61gs":"hibeat","61gs_vfa":"hibeat","61gs_sp":"hibeat",lord_matic_sp:"hibeat","45ks":"hibeat","45gs":"hibeat","45gs_vfa":"hibeat",gs_hibeat:"hibeat",gs_9s5:"hibeat","19gs":"hibeat",gs_sd_04:"springdrive",gs_9r:"springdrive",gs_9ra:"springdrive",gs_ufa:"springdrive",gs_sport:"springdrive",gs_9r01:"springdrive",gs_sd_chrono:"springdrive",sd_7r88:"springdrive",sd_7r68:"springdrive",sd_concept:"springdrive",gs_quartz_88:"quartz"};
+const techMap={lord_marvel_36k:"hibeat","61gs":"hibeat","61gs_vfa":"hibeat","61gs_sp":"hibeat",lord_matic_sp:"hibeat","45ks":"hibeat","45gs":"hibeat","45gs_vfa":"hibeat",gs_hibeat:"hibeat",gs_9s5:"hibeat","19gs":"hibeat",gs_sd_04:"springdrive",gs_9r:"springdrive",gs_9ra:"springdrive",gs_ufa:"springdrive",gs_sport:"springdrive",px_hb_8l55:"hibeat",px_lx:"springdrive",px_sd_diver:"springdrive",gs_9r01:"springdrive",gs_sd_chrono:"springdrive",sd_7r88:"springdrive",sd_7r68:"springdrive",sd_concept:"springdrive",gs_quartz_88:"quartz"};
 /* ═══ Feature 5: Popup data — local images from ./img/ ═══
    Only specific models get images (hasImg:true).
    Broad families/collections do NOT get images.
@@ -229,6 +229,9 @@ const popupData={
   ks_vanac_25:{n:"King Seiko VANAC",era:"2025-",d:"Revival of the 1972 asymmetric design. Medium link to vintage Vanac.",tags:["ks"],hasImg:1},
   // ── PROSPEX ──
   px_mm:{n:"Marinemaster",era:"modern era",d:"Modern professional diver family drawing on Seiko's high-end diver heritage, especially the 6159 line.",tags:["diver"],hasImg:1},
+  px_sd_diver:{n:"Prospex Spring Drive GMT / Diver",era:"2005-",d:"Spring Drive professional divers and GMT models. Cal. 5R66/5R65. Parallel SD technology branch under Prospex, independent of Grand Seiko SD lineage.",tags:["diver","sd"],hasImg:0},
+  px_lx:{n:"LX Line",era:"2019-",d:"Flagship Prospex Spring Drive divers. Titanium, ceramic. The pinnacle of Seiko diver technology.",tags:["diver","sd"]},
+  px_hb_8l55:{n:"Hi-Beat Professional Diver",era:"2015-",d:"Cal. 8L55. 36,000 bph mechanical professional diver. Combines hi-beat precision with 300m+ water resistance.",tags:["diver","hb"]},
   px_alpinist:{n:"Alpinist",era:"1959 heritage / modern",d:"Heritage traces to 1959 Laurel Alpine; first concrete Alpinist model 1962. Inner compass bezel. Modern Prospex revival with green dial icon.",tags:["icon"],hasImg:1},
   // ── PRESAGE ──
   prsg_cocktail:{n:"Cocktail Time",era:"2016-",d:"Textured dials inspired by Japanese cocktail culture.",tags:[],hasImg:1},
@@ -308,7 +311,7 @@ const nodes=[
 ["gs_heritage","Heritage\nColl. 2018-",2050,50,C.gs,0],["gs_elegance","Elegance\nColl. 2018-",2190,50,C.gs,0],["gs_sport","Sport Coll.\n2018-",2330,50,C.gs,0],["gs_evo9","Evolution 9\n2021-",2470,50,C.gs,0],["gs_masterpiece","Masterpiece\n2020-",2610,50,C.gs,0],
 ["gs_9s","9S Caliber\nFamily 1998-",1410,180,C.gs,0],["gs_9s5","9SA5 Hi-Beat\nNext-Gen\n2020-",1730,180,C.gs,1],["gs_9r","9R Spring Drive\n2004-",1890,270,C.gs,0],["gs_9ra","9RA/9RB\nAdv. SD 2020-",2050,270,C.gs,1],["gs_ufa","Spring Drive\nU.F.A. 9RB2\n2025-",2190,270,C.gs,1],
 ["ks_dormant","King Seiko\nDormant\n~1975-2022",1250,400,C.ks,0],["ks_revival","King Seiko\nRevival 2022-",1570,400,C.ks,0],["ks_sje","KS Modern\nSJE 2022-",1730,400,C.ks,0],["ks_vanac_25","King Seiko\nVANAC 2025-",1890,400,C.ks,1],
-["prospex","Prospex\n2012-",1250,560,C.prospex,0],["px_mm","Marinemaster\nmodern line",1410,560,C.prospex,0],["px_1965","1965 Heritage\nDiver 2017-",1410,630,C.prospex,0],["px_1968_diver","1968 Heritage\nDiver 2018-",1570,630,C.prospex,0],["px_1968_gmt","1968 Heritage\nGMT 2020-",1730,630,C.prospex,0],["px_1970","1970 Diver\nWillard 2020-",1890,630,C.prospex,0],["px_alpinist","Alpinist\n1959 heritage\n/ modern Prospex",1410,700,C.prospex,0],["px_speedtimer","Prospex Speedtimer\nMechanical\n2021-",1570,700,C.chrono,0],["px_land","Land Mech.\n2019-",1730,700,C.prospex,0],
+["prospex","Prospex\n2012-",1250,560,C.prospex,0],["px_mm","Marinemaster\nmodern line",1410,560,C.prospex,0],["px_1965","1965 Heritage\nDiver 2017-",1410,630,C.prospex,0],["px_1968_diver","1968 Heritage\nDiver 2018-",1570,630,C.prospex,0],["px_1968_gmt","1968 Heritage\nGMT 2020-",1730,630,C.prospex,0],["px_1970","1970 Diver\nWillard 2020-",1890,630,C.prospex,0],["px_alpinist","Alpinist\n1959 heritage\n/ modern Prospex",1410,700,C.prospex,0],["px_speedtimer","Prospex Speedtimer\nMechanical\n2021-",1570,700,C.chrono,0],["px_land","Land Mech.\n2019-",1730,700,C.prospex,0],["px_sd_diver","Prospex SD\nGMT / Diver\n2005-",2050,630,C.prospex,0],["px_lx","LX Line\nSpring Drive\n2019-",2210,630,C.prospex,0],["px_hb_8l55","Hi-Beat Diver\n8L55 2015-",2050,700,C.prospex,0],
 ["presage_node","Presage\n2016-",1250,830,C.presage,0],["prsg_cocktail","Cocktail Time\n2016-",1410,830,C.presage,0],["prsg_sharp","Sharp Edged\n2020-",1570,830,C.presage,0],["prsg_style60","Style60s\n2021-",1730,830,C.presage,0],["prsg_classic","Classic Series\n2024-",1410,900,C.presage,0],["prsg_craft","Craftsmanship\n2018-",1570,900,C.presage,0],["prsg_garden","Japanese\nGarden 2022-",1730,900,C.presage,0],["prsg_starbar","Star Bar\n2018-",1890,830,C.presage,0],
 ["s5_modern","Seiko 5 Sports\n2019-",1250,1020,C.seiko5,0],["s5_skx_mod","SKX Heritage\n2019-",1410,1020,C.seiko5,0],["s5_field_mod","Field Series\n2019-",1570,1020,C.seiko5,0],["s5_street","Street Series\n2019-",1730,1020,C.seiko5,0],
 ["s5_snxs","SNXS Series\n2024-",1890,1020,C.seiko5,0],
@@ -340,7 +343,7 @@ const edges=[
 ["gs_9s5","gs_evo9","medium"],["gs_9ra","gs_evo9","medium"],["gs_ufa","gs_evo9","medium"],
 ["56ks","ks_dormant","strong"],["52ks","ks_dormant","medium"],["vanac","ks_dormant","medium"],["56ks_vanac","ks_dormant","medium"],
 ["ks_dormant","ks_revival","weak"],["ks_revival","ks_sje","strong"],["ks_revival","ks_vanac_25","medium"],["vanac","ks_vanac_25","weak"],["44ks","ks_revival","weak"],
-["skx","prospex","medium"],["6159_tuna","px_mm","weak"],["62mas","px_1965","weak"],["6105_willard","px_1970","weak"],
+["skx","prospex","medium"],["6159_tuna","px_mm","weak"],["prospex","px_sd_diver","medium"],["px_sd_diver","px_lx","medium"],["prospex","px_hb_8l55","medium"],["62mas","px_1965","weak"],["6105_willard","px_1970","weak"],
 ["prospex","px_mm","strong"],["prospex","px_1965","strong"],["prospex","px_1968_diver","strong"],["prospex","px_1968_gmt","strong"],["prospex","px_1970","strong"],["prospex","px_alpinist","strong"],["prospex","px_speedtimer","strong"],["prospex","px_land","medium"],["px_1968_diver","px_1968_gmt","medium"],
 ["6139_first","px_speedtimer","weak"],["6139_first","6139_pogue","medium"],["6139_first","6138_yacht","medium"],["6139_first","6138_kakume","medium"],["6139_first","6138_bull","medium"],["6139_first","6138_panda","medium"],["6139_first","6139_hex","medium"],["6139_first","6139_aqua","medium"],["6139_first","6139_helmet","medium"],
 ["business_a","presage_node","weak"],["presmatic","presage_node","weak"],
@@ -360,7 +363,7 @@ const sections=[
 {l:"⏱ KAMEIDO CHRONOGRAPHS",x:470,y:1880,w:520,h:150,c:C.chrono,sub:1},
 {l:"GRAND SEIKO 1960-2025",x:1190,y:35,w:1550,h:290,c:C.gs},
 {l:"KING SEIKO 1961-2025",x:1190,y:360,w:850,h:105,c:C.ks},
-{l:"PROSPEX · MECHANICAL SPORT 2012-2025",x:1190,y:510,w:860,h:235,c:C.prospex},
+{l:"PROSPEX · MECHANICAL SPORT 2012-2025",x:1190,y:510,w:1160,h:235,c:C.prospex},
 {l:"PRESAGE · MECHANICAL DRESS 2016-2025",x:1190,y:785,w:860,h:170,c:C.presage},
 {l:"SEIKO 5 SPORTS · MODERN 2019-2025",x:1190,y:975,w:850,h:95,c:C.seiko5},
 ];
