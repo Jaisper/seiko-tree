@@ -27,10 +27,12 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #toolbar .sep{width:1px;height:14px;background:var(--rule)}
 .tbtn{font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 7px;background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:2px;cursor:pointer}
 .tbtn:hover{border-color:var(--ink);color:var(--ink)}
-#legend{position:absolute;bottom:6px;left:10px;z-index:15;background:var(--paper);border:1px solid var(--rule);border-radius:3px;padding:5px 10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;box-shadow:0 1px 6px rgba(0,0,0,.05);max-width:calc(100vw - 200px)}
-#legend .item{display:flex;align-items:center;gap:3px}
+#legend{background:var(--paper);border-top:1px solid var(--rule);padding:8px 16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;flex-shrink:0}
+#legend .item{display:flex;align-items:center;gap:3px;cursor:pointer;padding:2px 4px;border-radius:3px;transition:background .15s}
+#legend .item:hover{background:rgba(0,0,0,.05)}
+#legend .item.active{background:rgba(184,148,46,.12);outline:1px solid var(--icon)}
 #legend .dot{width:7px;height:7px;border-radius:1px}
-#legend span{font-size:7px;color:var(--muted);letter-spacing:.3px}
+#legend span{font-size:7px;color:var(--muted);letter-spacing:.3px;user-select:none}
 #legend .sep{width:1px;height:10px;background:var(--rule);margin:0 2px}
 #canvas-wrap{flex:1;overflow:hidden;position:relative;cursor:grab;touch-action:none;background:var(--bg);background-image:radial-gradient(circle,#d8d5ce .4px,transparent .4px);background-size:20px 20px}
 #canvas-wrap.dragging{cursor:grabbing}
@@ -131,7 +133,6 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   <div class="sep"></div>
   <span style="font-size:8px;color:var(--muted)">Scroll to zoom · Drag to pan · Dbl-click to zoom in · Hover for connections</span>
 </div>
-<div id="legend"></div>
 <div id="minimap"><canvas id="minimap-canvas"></canvas><div class="viewport" id="mm-viewport"></div></div>
 <div id="watch-popup">
   <img id="popup-img" src="" alt="">
@@ -143,6 +144,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   </div>
 </div>
 <div id="canvas-wrap"><div id="canvas"><svg id="edges-svg"></svg></div></div>
+<div id="legend"></div>
 </div>
 <script>
 const C={suwa:"#1e3a5f",kameido:"#7a2332",diver:"#0d6651",chrono:"#9e6b00",bell:"#6d3a7a",world:"#2d7a53",seiko5:"#3d6d1e",gs:"#1a4a6a",ks:"#5a2a4a",modern:"#4a3a1e",prospex:"#0a5a4a",presage:"#3a2a5e",highlight:"#b8942e",collection:"#2d8a3e"};
@@ -390,12 +392,57 @@ function isVis(n){if(filter==='all')return true;const c=n[4],id=n[0];if(filter==
 
 function updateHL(){const conn=new Set();if(hovered)edges.forEach(([f,t])=>{if(f===hovered)conn.add(t);if(t===hovered)conn.add(f);});nodes.forEach(n=>{const el=nodeEls[n[0]],vis=isVis(n);el.classList.toggle('hidden-filter',!vis);if(hovered&&vis){const isH=n[0]===hovered,isC=conn.has(n[0]);el.classList.toggle('dimmed',!isH&&!isC);el.style.borderColor=isH?C.highlight:(n[5]?C.highlight+'88':n[4]+'30');el.style.boxShadow=isH?`0 4px 16px ${C.highlight}30`:'';}else if(vis){el.classList.remove('dimmed');el.style.borderColor=n[5]?C.highlight+'88':n[4]+'30';el.style.boxShadow='';}});svg.querySelectorAll('path[data-from]').forEach(p=>{const f=p.dataset.from,t=p.dataset.to,type=p.dataset.type;if(hovered&&(f===hovered||t===hovered)){p.setAttribute('stroke',C.highlight);p.setAttribute('opacity','.85');p.setAttribute('stroke-width','2.5');p.setAttribute('marker-end','url(#ah)');}else if(hovered){p.setAttribute('stroke','#aaa');p.setAttribute('opacity','.04');p.setAttribute('stroke-width','.5');p.setAttribute('marker-end','url(#a)');}else{p.setAttribute('stroke','#aaa');p.setAttribute('opacity',type==='weak'?'.25':'.45');p.setAttribute('stroke-width',type==='strong'?'1.5':'.8');p.setAttribute('marker-end','url(#a)');}});}
 
-[['all','All'],['diver','⚓ Diver'],['chrono','⏱ Chrono'],['gs','Grand Seiko'],['ks','King Seiko'],['collection','● My Collection'],['iconic','★ Iconic']].forEach(([k,l])=>{const b=document.createElement('button');b.textContent=l;b.className=k==='all'?'active':'';b.onclick=()=>{filter=k;document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');updateHL();};document.getElementById('filters').appendChild(b);});
+[['all','All'],['diver','⚓ Diver'],['chrono','⏱ Chrono'],['gs','Grand Seiko'],['ks','King Seiko'],['collection','● My Collection'],['iconic','★ Iconic']].forEach(([k,l])=>{const b=document.createElement('button');b.textContent=l;b.className=k==='all'?'active':'';b.onclick=()=>{filter=k;legendFilter=null;const le=document.getElementById('legend');if(le)le.querySelectorAll('.item').forEach(i=>i.classList.remove('active'));document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');updateHL();};document.getElementById('filters').appendChild(b);});
 
 const legendEl=document.getElementById('legend');
-[[C.suwa,'Vintage Suwa/Kameido'],[C.diver,'⚓ Diver'],[C.chrono,'⏱ Chrono'],[C.bell,'Bell-Matic'],[C.world,'World Time'],[C.seiko5,'Seiko 5'],[C.gs,'Grand Seiko'],[C.ks,'King Seiko'],[C.prospex,'Prospex'],[C.presage,'Presage'],[C.highlight,'★ Icon'],[C.collection,'● In Collection']].forEach(([c,l])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="dot" style="background:${c}"></div><span>${l}</span>`;legendEl.appendChild(d);});
-legendEl.innerHTML+=`<div class="sep"></div>`;
-[['var(--hibeat)','HB','Hi-Beat 36k'],['var(--springdrive)','SD','Spring Drive'],['var(--quartz)','Q','Quartz']].forEach(([bg,ab,tip])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="dot" style="background:${bg};border-radius:50%;width:8px;height:8px;font-size:5px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700">${ab}</div><span>${tip}</span>`;legendEl.appendChild(d);});
+let legendFilter=null;
+
+function setLegendFilter(color,el){
+  // Toggle: click same = deselect
+  if(legendFilter===color){legendFilter=null;el.classList.remove('active');}
+  else{
+    legendFilter=color;
+    legendEl.querySelectorAll('.item').forEach(i=>i.classList.remove('active'));
+    el.classList.add('active');
+  }
+  // Reset top filter to All
+  filter='all';
+  document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));
+  document.querySelector('.filters button').classList.add('active');
+  updateHL();
+}
+
+// Override isVis to also check legendFilter
+const _origIsVis=isVis;
+isVis=function(n){
+  if(legendFilter){
+    const c=n[4],id=n[0];
+    if(legendFilter==='icon') return n[5]===1;
+    if(legendFilter==='coll') return inCollection.has(id);
+    if(legendFilter==='hibeat') return techMap[id]==='hibeat';
+    if(legendFilter==='springdrive') return techMap[id]==='springdrive';
+    if(legendFilter==='quartz') return techMap[id]==='quartz';
+    return c===legendFilter;
+  }
+  return _origIsVis(n);
+};
+
+// Also clear legend when top filter is clicked
+const origFilterBtns=document.querySelectorAll('.filters button');
+
+[[C.suwa,'Vintage Suwa/Kameido'],[C.kameido,'Kameido/Daini'],[C.diver,'⚓ Diver'],[C.chrono,'⏱ Chrono'],[C.bell,'Bell-Matic'],[C.world,'World Time'],[C.seiko5,'Seiko 5'],[C.gs,'Grand Seiko'],[C.ks,'King Seiko'],[C.prospex,'Prospex'],[C.presage,'Presage'],[C.highlight,'★ Icon','icon'],[C.collection,'● In Collection','coll']].forEach(([c,l,key])=>{
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML=`<div class="dot" style="background:${c}"></div><span>${l}</span>`;
+  d.onclick=()=>setLegendFilter(key||c,d);
+  legendEl.appendChild(d);
+});
+const sepEl=document.createElement('div');sepEl.className='sep';legendEl.appendChild(sepEl);
+[['var(--hibeat)','HB','Hi-Beat 36k','hibeat'],['var(--springdrive)','SD','Spring Drive','springdrive'],['var(--quartz)','Q','Quartz','quartz']].forEach(([bg,ab,tip,key])=>{
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML=`<div class="dot" style="background:${bg};border-radius:50%;width:8px;height:8px;font-size:5px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700">${ab}</div><span>${tip}</span>`;
+  d.onclick=()=>setLegendFilter(key,d);
+  legendEl.appendChild(d);
+});
 
 /* ═══ MINIMAP ═══ */
 const mmCanvas=document.getElementById('minimap-canvas'),mmCtx=mmCanvas.getContext('2d'),mmView=document.getElementById('mm-viewport'),mmC=document.getElementById('minimap');
