@@ -116,7 +116,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   <div>
     <div class="eyebrow">精工 · Mechanical Heritage · 1960–2025 · Line/family level · Spring Drive included</div>
     <h1>The Complete Seiko Mechanical Family Tree</h1>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--muted);line-height:1.55;max-width:1000px;margin:6px 0 0">This diagram combines historical lineage, factory-era influence, and modern collection structure to map Seiko&#8217;s mechanical watch families from 1960 to 2025 &#8212; covering Suwa and Kameido/Daini factory systems, Grand Seiko, King Seiko, and all major modern collections. Spring Drive is included as mechanical. Lines are grouped by factory origin <span style="font-size:10px;opacity:.7">(left)</span> and modern commercial family <span style="font-size:10px;opacity:.7">(right)</span>, with edges showing direct lineage <span style="display:inline-block;width:16px;height:0;border-top:2px solid #aaa;vertical-align:middle;margin:0 2px"></span>, platform continuation <span style="display:inline-block;width:16px;height:0;border-top:1px solid #aaa;vertical-align:middle;margin:0 2px"></span>, and stylistic succession <span style="display:inline-block;width:16px;height:0;border-top:1px dashed #aaa;vertical-align:middle;margin:0 2px"></span>.</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--muted);line-height:1.55;max-width:1000px;margin:6px 0 0">This diagram combines historical lineage, factory-era influence, and modern collection structure. Vintage sections are organized by factory origin; modern sections by brand and collection to map Seiko&#8217;s mechanical watch families from 1960 to 2025 &#8212; covering Suwa and Kameido/Daini factory systems, Grand Seiko, King Seiko, and all major modern collections. Spring Drive is included as mechanical. Lines are grouped by factory origin <span style="font-size:10px;opacity:.7">(left)</span> and modern commercial family <span style="font-size:10px;opacity:.7">(right)</span>, with edges showing direct lineage <span style="display:inline-block;width:16px;height:0;border-top:2px solid #aaa;vertical-align:middle;margin:0 2px"></span>, platform continuation <span style="display:inline-block;width:16px;height:0;border-top:1px solid #aaa;vertical-align:middle;margin:0 2px"></span>, and stylistic succession <span style="display:inline-block;width:16px;height:0;border-top:1px dashed #aaa;vertical-align:middle;margin:0 2px"></span>.</p>
   </div>
   <div class="spacer"></div>
   <div class="filters" id="filters"></div>
@@ -294,7 +294,7 @@ function hidePopup(){
   popupTimer=setTimeout(()=>{popup.classList.remove('visible');popupImg.classList.remove('loaded');},100);
 }
 
-const NW=124,NH=42,CW=2800,CH=2350;
+const NW=124,NH=42,CW=2800,CH=2150;
 const nodes=[
 ["marvel","Marvel\n1956-62",70,50,C.suwa,0],["gyro_marvel","Gyro Marvel\n1959-63",70,110,C.suwa,0],["lord_marvel","Lord Marvel\nlate 1950s-75",210,50,C.suwa,0],["lord_marvel_36k","Lord Marvel\n36000 1967-late 70s",370,50,C.suwa,1],
 ["crown","Crown\n1958-65",70,190,C.suwa,0],["crown_sd","Crown\nSelf Dater 1960-65",70,250,C.suwa,0],["crown_sp","Crown\nSpecial 1960-65",210,250,C.suwa,0],["gs_1st","Grand Seiko\n(3180) 1960-63",210,190,C.gs,1],["gs_sd","GS Self\nDater 1963-67",370,190,C.gs,0],["57gs_cal","57 GS\nCalendar 1964-67",370,250,C.gs,0],["62gs","62 GS Auto\n1967-68",530,190,C.gs,1],["61gs","61 GS Hi-Beat\n1968-74",690,190,C.gs,1],["61gs_vfa","61 GS VFA\n1969-74",850,190,C.gs,1],["61gs_sp","61 GS Special\n1970-74",850,250,C.gs,0],["56gs_s","56 GS\n1970-78",1010,190,C.gs,0],
@@ -302,48 +302,48 @@ const nodes=[
 ["61_skyliner_cal","61 Skyliner\nCalendar\nlate 1960s",690,395,C.suwa,0],
 ["lord_matic","Lord Matic\n1968-75",690,330,C.suwa,0],["lord_matic_sp","Lord Matic Sp.\n(HB) 1970-75",850,330,C.suwa,1],["lord_matic_56","Lord Matic 56\n1972-78",1010,330,C.suwa,0],
 ["seikomatic","Seikomatic\n1961-68",210,470,C.suwa,0],["seikomatic_sd","Seikomatic\nSelf Dater 1962-68",370,470,C.suwa,0],["seikomatic_slim","Seikomatic\nSlimdate 1963-68",530,470,C.suwa,0],["weekdater_6206","Weekdater\n400/6206 1965-67",210,535,C.suwa,0],["weekdater_6218","Weekdater\n6216/6218 1967-70",370,535,C.suwa,0],["seikomatic_r","Seikomatic-R\n1965-68",530,535,C.suwa,0],["seikomatic_p","Seikomatic-P\n5106 1967-68",690,535,C.suwa,0],["seikomatic_chr","Seikomatic\n6245 Chronometer\n1966-67",690,600,C.suwa,0],["sea_lion","Sea Lion\n1966-70",850,600,C.suwa,0],["presmatic","Presmatic\n1967-73",690,470,C.suwa,0],["business_a","Business-A\n1967-72",850,470,C.suwa,0],["business","Business\n6206 1967-68",850,535,C.suwa,0],
-["super","Super\n1960-63",70,620,C.suwa,0],["sportsman","Sportsman\n1961-66",210,620,C.suwa,0],["sportsmatic","Sportsmatic\n1961-68",370,620,C.suwa,0],["sportsmatic5","Sportsmatic 5\n1963-68",530,620,C.suwa,0],
+["super","Super\n1960-63",70,690,C.suwa,0],["sportsman","Sportsman\n1961-66",210,690,C.suwa,0],["sportsmatic","Sportsmatic\n1961-68",370,690,C.suwa,0],["sportsmatic5","Sportsmatic 5\n1963-68",530,690,C.suwa,0],
 ["s5_first","Seiko 5\n1963-",530,755,C.seiko5,0],["s5_sports","5 Sports\n1968-85",690,755,C.seiko5,0],["s5_speed","5 Speed Timer\n1969-75",850,755,C.seiko5,1],["s5_actus","5 Actus\n1970-78",690,820,C.seiko5,0],["s5_dx","5 DX\n1970-78",850,820,C.seiko5,0],
 ["6309_sports","6309-8080\nSports 1976-88",1010,755,C.seiko5,0],["56ks","56 KS\nSuwa 1968-75",1010,395,C.ks,0],
-["silverwave","Seikomatic\nSilverwave\n1961-64",70,860,C.diver,1],["selfdater_mas","Seikomatic\nSelfdater MAS\n1963-65",210,860,C.diver,1],
-["62mas","62MAS\n1965-68",70,940,C.diver,1],["62mas_2","62MAS 8001\n1967-68",210,940,C.diver,0],["6215_pro","6215-7000\nPro 300m 1967-68",210,1005,C.diver,0],["6105_8000","6105-8000\n150m 1968-70",370,940,C.diver,1],["6105_willard","6105-8110\nWillard 1970-77",530,940,C.diver,1],["6105_last","6105-8009\n1973-77",530,1005,C.diver,0],["6309","6309 Turtle\n150m 1976-88",690,940,C.diver,0],["7002_node","7002\n150m 1988-96",850,940,C.diver,0],["6306_sd","SilverWave\nSurface Diver\n6306 1976-78",850,1005,C.diver,0],["skx","SKX007/009\n1996-2019",1010,940,C.diver,1],["6159_pro","6159-7000\nPro 300m 1968-75",370,1005,C.diver,1],["6159_tuna","6159 Tuna\n600m 1975-78",530,1075,C.diver,1],["6106_sport","Sports Diver\n70m 6106 1968-74",690,1075,C.diver,0],
-["6139_first","6139-6000\n1st Auto Chrono\n1969-72",70,1170,C.chrono,1],["6139_pogue","6139 Pogue\n1971-78",210,1170,C.chrono,1],["6138_yacht","6138 Yachtman\n1970-75",370,1170,C.chrono,0],["6138_kakume","6138 Kakume\n1972-77",530,1170,C.chrono,1],["6138_bull","6138 Bullhead\n1971-75",530,1240,C.chrono,1],["6138_panda","6138 Panda\n1971-75",370,1240,C.chrono,0],["6139_aqua","Aquatimer\n6139-7070 1976-79",690,1170,C.chrono,0],["6139_helmet","Helmet DV\n6139-7101\n1977-80",850,1170,C.chrono,0],["6139_hex","Hexagon\n6139-7080 1974-78",690,1240,C.chrono,0],
-["bell_4005","Bell-Matic\n(4005) 1966-67",70,1370,C.bell,0],["bell_4006","Bell-Matic\n(4006) 1967-78",210,1370,C.bell,1],["bell_4006_70","Bell-Matic\n4006-70xx 1970-78",370,1370,C.bell,0],
-["wt_6217","World Time\n(6217) 1964-69",690,1370,C.world,1],["wt_6117","World Time\n(6117) 1969-76",850,1370,C.world,0],["nav_timer","Navigator\nTimer 1970-76",1010,1370,C.world,0],
-["cronos","Cronos\n1958-62",70,1515,C.kameido,0],["cronos_sp","Cronos Sp.\n1959-62",70,1580,C.kameido,0],["cronos_sd","Cronos SD\n1960-62",70,1645,C.kameido,0],["ks_1st","King Seiko\n1961-63",210,1515,C.ks,1],["ks_hack","KS w/hacking\n1963-66",370,1515,C.ks,0],["ks_chrono","KS Chrono.\n1964-68",530,1515,C.ks,1],["44ks","44 KS Grammar\nof Design\n1964-69",530,1585,C.ks,1],["44ks_sp","44 KS Special\n1966-69",690,1585,C.ks,0],["45ks","45 KS Hi-Beat\n1968-70",690,1515,C.ks,1],["52ks","52 KS Special\n1971-75",1010,1645,C.ks,0],
-["44gs","44 Grand Seiko\n1967-68",370,1685,C.gs,1],["45gs","45 GS\n1968-74",530,1685,C.gs,1],["45gs_vfa","45 GS VFA\n1969-74",690,1685,C.gs,1],["56gs_k","56 GS\nKameido 1971-78",850,1685,C.gs,0],["19gs","19 GS\nlate 1960s-early 70s",850,1730,C.gs,0],["goldfeather","Goldfeather\n1960-66",210,1685,C.kameido,1],
-["champion","Champion\n1960-68",210,1775,C.kameido,0],["champion_cal","Champion Cal.\n1962-68",370,1775,C.kameido,0],["fairway","Fairway\n1962-66",210,1840,C.kameido,0],["champ_850","Champion 850\n1965-70",370,1840,C.kameido,0],["76_five","76 Seiko 5\nKameido 1966-75",530,1775,C.kameido,0],
-["advan","Advan\n1971-78",690,1775,C.kameido,0],["vanac","Vanac\n1972-75",850,1775,C.ks,1],["vanac_sp","Vanac Special\n1973-75",1010,1775,C.kameido,0],
-["k7016","7016 Flyback\n1970-75",530,1965,C.chrono,0],["k7015","7015 Chrono\n1972-75",1010,1965,C.chrono,0],["k7017","7017 Flyback\n1972-75",850,1965,C.chrono,0],["k7018","7018 5-reg\n1971-75",690,1965,C.chrono,1],["c701x","701x Flyback\nPlatform 1970-",690,1900,C.chrono,0],
-["gs_cont","GS Mechanical\nDormant ~1978-88",1250,100,C.gs,0],["gs_quartz_88","GS 9F Quartz\n1988-",1410,100,C.gs,0],["gs_mech_98","GS 9S Mech.\nRevival 1998-",1250,180,C.gs,0],["gs_sd_04","GS Spring Drive\n9R65 2004-",1730,270,C.gs,0],["gs_hibeat","GS 9S Hi-Beat\n36000 2009-",1570,180,C.gs,0],["sd_concept","Spring Drive\nconcept/patents\n1978-1997",1250,270,C.gs,0],["sd_7r68","7R68 manual\nSpring Drive\n1999",1410,270,C.gs,0],["sd_7r88","7R88 Credor\nSpring Drive\n2002",1570,270,C.gs,0],["gs_sd_chrono","GS Spring Drive\nChrono 9R86\n2007-",2050,180,C.gs,0],["gs_9r01","GS Spring Drive\n9R01 8 Days\n2016-",2190,180,C.gs,0],["gs_independence","Grand Seiko\nIndep. Brand\n2017-",1890,100,C.gs,0],
+["silverwave","Seikomatic\nSilverwave\n1961-64",70,895,C.diver,1],["selfdater_mas","Seikomatic\nSelfdater MAS\n1963-65",210,895,C.diver,1],
+["62mas","62MAS\n1965-68",70,960,C.diver,1],["62mas_2","62MAS 8001\n1967-68",210,960,C.diver,0],["6215_pro","6215-7000\nPro 300m 1967-68",210,1025,C.diver,0],["6105_8000","6105-8000\n150m 1968-70",370,960,C.diver,1],["6105_willard","6105-8110\nWillard 1970-77",530,960,C.diver,1],["6105_last","6105-8009\n1973-77",530,1025,C.diver,0],["6309","6309 Turtle\n150m 1976-88",690,960,C.diver,0],["7002_node","7002\n150m 1988-96",850,960,C.diver,0],["6306_sd","SilverWave\nSurface Diver\n6306 1976-78",850,1025,C.diver,0],["skx","SKX007/009\n1996-2019",1010,960,C.diver,1],["6159_pro","6159-7000\nPro 300m 1968-75",370,1025,C.diver,1],["6159_tuna","6159 Tuna\n600m 1975-78",530,1090,C.diver,1],["6106_sport","Sports Diver\n70m 6106 1968-74",690,1090,C.diver,0],
+["6139_first","6139-6000\n1st Auto Chrono\n1969-72",70,1170,C.chrono,1],["6139_pogue","6139 Pogue\n1971-78",210,1170,C.chrono,1],["6138_yacht","6138 Yachtman\n1970-75",370,1170,C.chrono,0],["6138_kakume","6138 Kakume\n1972-77",530,1170,C.chrono,1],["6138_bull","6138 Bullhead\n1971-75",530,1235,C.chrono,1],["6138_panda","6138 Panda\n1971-75",370,1235,C.chrono,0],["6139_aqua","Aquatimer\n6139-7070 1976-79",690,1170,C.chrono,0],["6139_helmet","Helmet DV\n6139-7101\n1977-80",850,1170,C.chrono,0],["6139_hex","Hexagon\n6139-7080 1974-78",690,1235,C.chrono,0],
+["bell_4005","Bell-Matic\n(4005) 1966-67",70,1330,C.bell,0],["bell_4006","Bell-Matic\n(4006) 1967-78",210,1330,C.bell,1],["bell_4006_70","Bell-Matic\n4006-70xx 1970-78",370,1330,C.bell,0],
+["wt_6217","World Time\n(6217) 1964-69",690,1330,C.world,1],["wt_6117","World Time\n(6117) 1969-76",850,1330,C.world,0],["nav_timer","Navigator\nTimer 1970-76",1010,1330,C.world,0],
+["cronos","Cronos\n1958-62",70,1510,C.kameido,0],["cronos_sp","Cronos Sp.\n1959-62",70,1575,C.kameido,0],["cronos_sd","Cronos SD\n1960-62",70,1640,C.kameido,0],["ks_1st","King Seiko\n1961-63",210,1510,C.ks,1],["ks_hack","KS w/hacking\n1963-66",370,1510,C.ks,0],["ks_chrono","KS Chrono.\n1964-68",530,1510,C.ks,1],["44ks","44 KS Grammar\nof Design\n1964-69",530,1575,C.ks,1],["44ks_sp","44 KS Special\n1966-69",690,1575,C.ks,0],["45ks","45 KS Hi-Beat\n1968-70",690,1510,C.ks,1],["52ks","52 KS Special\n1971-75",1010,1640,C.ks,0],
+["44gs","44 Grand Seiko\n1967-68",370,1720,C.gs,1],["45gs","45 GS\n1968-74",530,1720,C.gs,1],["45gs_vfa","45 GS VFA\n1969-74",690,1720,C.gs,1],["56gs_k","56 GS\nKameido 1971-78",850,1720,C.gs,0],["19gs","19 GS\nlate 1960s-early 70s",850,1765,C.gs,0],["goldfeather","Goldfeather\n1960-66",210,1720,C.kameido,1],
+["champion","Champion\n1960-68",210,1845,C.kameido,0],["champion_cal","Champion Cal.\n1962-68",370,1845,C.kameido,0],["fairway","Fairway\n1962-66",210,1900,C.kameido,0],["champ_850","Champion 850\n1965-70",370,1900,C.kameido,0],["76_five","76 Seiko 5\nKameido 1966-75",530,1845,C.kameido,0],
+["advan","Advan\n1971-78",690,1845,C.kameido,0],["vanac","Vanac\n1972-75",850,1845,C.ks,1],["vanac_sp","Vanac Special\n1973-75",1010,1845,C.kameido,0],
+["k7016","7016 Flyback\n1970-75",530,2020,C.chrono,0],["k7015","7015 Chrono\n1972-75",1010,2020,C.chrono,0],["k7017","7017 Flyback\n1972-75",850,2020,C.chrono,0],["k7018","7018 5-reg\n1971-75",690,2020,C.chrono,1],["c701x","701x Flyback\nPlatform 1970-",530,1955,C.chrono,0],
+["gs_cont","GS Mechanical\nProduct Line\nDormant ~1978-88",1250,100,C.gs,0],["gs_quartz_88","GS 9F Quartz\n1988-",1410,100,C.gs,0],["gs_mech_98","GS 9S Mech.\nRevival 1998-",1250,180,C.gs,0],["gs_sd_04","GS Spring Drive\n9R65 2004-",1730,270,C.gs,0],["gs_hibeat","GS 9S Hi-Beat\n36000 2009-",1570,180,C.gs,0],["sd_concept","Spring Drive\nconcept/patents\n1978-1997",1250,270,C.gs,0],["sd_7r68","7R68 manual\nSpring Drive\n1999",1410,270,C.gs,0],["sd_7r88","7R88 Credor\nSpring Drive\n2002",1570,270,C.gs,0],["gs_sd_chrono","GS Spring Drive\nChrono 9R86\n2007-",2050,180,C.gs,0],["gs_9r01","GS Spring Drive\n9R01 8 Days\n2016-",2190,180,C.gs,0],["gs_independence","Grand Seiko\nIndep. Brand\n2017-",1890,100,C.gs,0],
 ["gs_heritage","Heritage\nColl. 2018-",2050,50,C.gs,0],["gs_elegance","Elegance\nColl. 2018-",2190,50,C.gs,0],["gs_sport","Sport Coll.\n2018-",2330,50,C.gs,0],["gs_evo9","Evolution 9\n2021-",2470,50,C.gs,0],["gs_masterpiece","Masterpiece\n2020-",2610,50,C.gs,0],
 ["gs_9s","9S Caliber\nFamily 1998-",1410,180,C.gs,0],["gs_9s5","9SA5 Hi-Beat\nNext-Gen\n2020-",1730,180,C.gs,1],["gs_9r","9R Spring Drive\n2004-",1890,270,C.gs,0],["gs_9ra","9RA/9RB\nAdv. SD 2020-",2050,270,C.gs,1],["gs_ufa","Spring Drive\nU.F.A. 9RB2\n2025-",2190,270,C.gs,1],
-["ks_dormant","King Seiko\nDormant\n~1975-2022",1250,400,C.ks,0],["ks_revival","King Seiko\nRevival 2022-",1570,400,C.ks,0],["ks_sje","KS Modern\nSJE 2022-",1730,400,C.ks,0],["ks_vanac_25","King Seiko\nVANAC 2025-",1890,400,C.ks,1],["seiko_sus","Seiko SUS\n(4S15) 1995",1250,455,C.ks,0],["ks_reissue","KS Historical\nReissue 2000",1410,455,C.ks,0],
-["prospex","Prospex\n(rebrand 2012)",1250,570,C.prospex,0],["px_mm","Marinemaster\nmodern line",1410,570,C.prospex,0],["px_1965","1965 Heritage\nDiver 2017-",1410,640,C.prospex,0],["px_1968_diver","1968 Heritage\nDiver 2018-",1570,640,C.prospex,0],["px_1968_gmt","1968 Heritage\nGMT 2020-",1730,640,C.prospex,0],["px_1970","1970 Diver\nWillard 2020-",1890,640,C.prospex,0],["px_alpinist","Alpinist\n1959 heritage\n/ modern Prospex",1410,710,C.prospex,0],["px_speedtimer","Prospex Speedtimer\nMechanical\n2021-",1570,710,C.chrono,0],["px_land","Land Mech.\n2019-",1730,710,C.prospex,0],["px_sd_diver","Prospex SD\nGMT / Diver\n2005-",2050,640,C.prospex,0],["px_lx","LX Line\nSpring Drive\n2019-",2210,640,C.prospex,0],["px_hb_8l55","Hi-Beat Diver\n8L55 2015-",2050,710,C.prospex,0],["px_monster","Monster\nPlatform 2000-",1410,780,C.prospex,0],["px_samurai","Samurai\nPlatform 2004-",1570,780,C.prospex,0],["px_sumo","Sumo\nPlatform 2007-",1730,780,C.prospex,0],["px_shogun","Shogun\nPlatform 2008-",1890,780,C.prospex,0],
-["presage_node","Presage\n2016-",1250,880,C.presage,0],["prsg_cocktail","Cocktail Time\n2016-",1410,880,C.presage,0],["prsg_sharp","Sharp Edged\n2020-",1570,880,C.presage,0],["prsg_style60","Style60s\n2021-",1730,880,C.presage,0],["prsg_classic","Classic Series\n2024-",1410,950,C.presage,0],["prsg_craft","Craftsmanship\n2018-",1570,950,C.presage,0],["prsg_garden","Japanese\nGarden 2022-",1730,950,C.presage,0],["prsg_starbar","Star Bar\n2018-",1890,880,C.presage,0],
-["s5_modern","Seiko 5 Sports\n2019-",1250,1080,C.seiko5,0],["s5_skx_mod","SKX Heritage\n2019-",1410,1080,C.seiko5,0],["s5_field_mod","Field Series\n2019-",1570,1080,C.seiko5,0],["s5_street","Street Series\n2019-",1730,1080,C.seiko5,0],
-["s5_snxs","SNXS Series\n2024-",1890,1080,C.seiko5,0],
+["ks_dormant","King Seiko\nProduct Line\nDormant ~1975-2022",1250,400,C.ks,0],["ks_revival","King Seiko\nRevival 2022-",1570,400,C.ks,0],["ks_sje","KS Modern\nSJE 2022-",1730,400,C.ks,0],["ks_vanac_25","King Seiko\nVANAC 2025-",1890,400,C.ks,1],["seiko_sus","Seiko SUS\n(4S15) 1995",1250,455,C.ks,0],["ks_reissue","KS Historical\nReissue 2000",1410,455,C.ks,0],
+["prospex","Prospex\n(rebrand 2012)",1250,575,C.prospex,0],["px_mm","Marinemaster\nmodern line",1410,575,C.prospex,0],["px_1965","1965 Heritage\nDiver 2017-",1410,645,C.prospex,0],["px_1968_diver","1968 Heritage\nDiver 2018-",1570,645,C.prospex,0],["px_1968_gmt","1968 Heritage\nGMT 2020-",1730,645,C.prospex,0],["px_1970","1970 Diver\nWillard 2020-",1890,645,C.prospex,0],["px_alpinist","Alpinist\n1959 heritage\n/ modern Prospex",1410,715,C.prospex,0],["px_speedtimer","Prospex Speedtimer\nMechanical\n2021-",1570,715,C.chrono,0],["px_land","Land Mech.\n2019-",1730,715,C.prospex,0],["px_sd_diver","Prospex SD\nGMT / Diver\n2005-",2050,645,C.prospex,0],["px_lx","LX Line\nSpring Drive\n2019-",2210,645,C.prospex,0],["px_hb_8l55","Hi-Beat Diver\n8L55 2015-",2050,715,C.prospex,0],["px_monster","Monster\nPlatform 2000-",1410,785,C.prospex,0],["px_samurai","Samurai\nPlatform 2004-",1570,785,C.prospex,0],["px_sumo","Sumo\nPlatform 2007-",1730,785,C.prospex,0],["px_shogun","Shogun\nPlatform 2008-",1890,785,C.prospex,0],
+["presage_node","Presage\n2016-",1250,895,C.presage,0],["prsg_cocktail","Cocktail Time\n2016-",1410,895,C.presage,0],["prsg_sharp","Sharp Edged\n2020-",1570,895,C.presage,0],["prsg_style60","Style60s\n2021-",1730,895,C.presage,0],["prsg_classic","Classic Series\n2024-",1410,960,C.presage,0],["prsg_craft","Craftsmanship\n2018-",1570,960,C.presage,0],["prsg_garden","Japanese\nGarden 2022-",1730,960,C.presage,0],["prsg_starbar","Star Bar\n2018-",1890,895,C.presage,0],
+["s5_modern","Seiko 5 Sports\n2019-",1250,1050,C.seiko5,0],["s5_skx_mod","SKX Heritage\n2019-",1410,1050,C.seiko5,0],["s5_field_mod","Field Series\n2019-",1570,1050,C.seiko5,0],["s5_street","Street Series\n2019-",1730,1050,C.seiko5,0],
+["s5_snxs","SNXS Series\n2024-",1890,1050,C.seiko5,0],
 ];
 const edges=[
 ["marvel","gyro_marvel","strong"],["marvel","lord_marvel","strong"],["lord_marvel","lord_marvel_36k","strong"],["gyro_marvel","lord_marvel","medium"],
 ["crown","crown_sd","medium"],["crown","crown_sp","medium"],["crown","gs_1st","strong"],["gs_1st","gs_sd","strong"],["gs_sd","57gs_cal","medium"],["gs_1st","62gs","strong"],["62gs","61gs","strong"],["61gs","61gs_vfa","strong"],["61gs","61gs_sp","medium"],["61gs_vfa","56gs_s","strong"],
-["liner","liner_chr","strong"],["laurel","skyliner","strong"],["skyliner","61_skyliner","strong"],["skyliner","sky_cal","medium"],["liner","sky_cal","weak"],
-["lord_matic","lord_matic_sp","strong"],["lord_matic_sp","lord_matic_56","strong"],["61gs","lord_matic","weak"],
-["seikomatic","seikomatic_sd","strong"],["seikomatic","seikomatic_slim","strong"],["seikomatic_sd","weekdater_6206","strong"],["weekdater_6206","weekdater_6218","strong"],["seikomatic","seikomatic_r","medium"],["seikomatic_r","sea_lion","strong"],["weekdater_6218","presmatic","medium"],["sea_lion","presmatic","medium"],["weekdater_6218","seikomatic_chr","medium"],["seikomatic_chr","62gs","strong"],["weekdater_6218","business","medium"],["seikomatic_r","business_a","medium"],["seikomatic_p","presmatic","strong"],["business","lord_matic","medium"],["business_a","lord_matic","medium"],["presmatic","lord_matic_sp","medium"],["seikomatic","seikomatic_p","medium"],["presmatic","business_a","strong"],["lord_matic","presmatic","weak"],["sportsmatic","seikomatic","medium"],
+["liner","liner_chr","strong"],["laurel","skyliner","strong"],["skyliner","61_skyliner","strong"],["skyliner","sky_cal","medium"],
+["lord_matic","lord_matic_sp","strong"],["lord_matic_sp","lord_matic_56","strong"],
+["seikomatic","seikomatic_sd","strong"],["seikomatic","seikomatic_slim","strong"],["seikomatic_sd","weekdater_6206","strong"],["weekdater_6206","weekdater_6218","strong"],["seikomatic","seikomatic_r","medium"],["seikomatic_r","sea_lion","strong"],["weekdater_6218","presmatic","medium"],["sea_lion","presmatic","medium"],["weekdater_6218","seikomatic_chr","medium"],["seikomatic_chr","62gs","strong"],["weekdater_6218","business","medium"],["seikomatic_r","business_a","medium"],["seikomatic_p","presmatic","strong"],["business","lord_matic","medium"],["business_a","lord_matic","medium"],["presmatic","lord_matic_sp","medium"],["seikomatic","seikomatic_p","medium"],["presmatic","business_a","strong"],["sportsmatic","seikomatic","medium"],
 ["super","sportsman","strong"],["sportsman","sportsmatic","strong"],["sportsmatic","sportsmatic5","strong"],["sportsmatic5","s5_first","strong"],
 ["s5_first","s5_sports","strong"],["s5_sports","s5_speed","strong"],["s5_first","s5_actus","medium"],["s5_actus","s5_dx","medium"],
-["s5_sports","6309_sports","medium"],["6309","6309_sports","weak"],
-["silverwave","62mas","strong"],["selfdater_mas","62mas","strong"],["silverwave","selfdater_mas","medium"],["sportsmatic","silverwave","weak"],
+["s5_sports","6309_sports","medium"],
+["silverwave","62mas","strong"],["selfdater_mas","62mas","strong"],["silverwave","selfdater_mas","medium"],
 ["62mas","62mas_2","strong"],["62mas","6105_8000","strong"],["62mas_2","6105_8000","strong"],["62mas_2","6215_pro","medium"],["6215_pro","6159_pro","strong"],["6105_8000","6105_willard","strong"],["6105_8000","6106_sport","medium"],["6105_willard","6105_last","medium"],["6105_willard","6309","strong"],["6309","7002_node","strong"],["6309","6306_sd","medium"],["7002_node","skx","strong"],
 ["6105_8000","6159_pro","strong"],["6159_pro","6159_tuna","strong"],
 ["s5_speed","6139_first","strong"],
 ["bell_4005","bell_4006","strong"],["bell_4006","bell_4006_70","strong"],
 ["wt_6217","wt_6117","strong"],["wt_6117","nav_timer","strong"],
 ["cronos","cronos_sp","medium"],["cronos","cronos_sd","medium"],["cronos","ks_1st","strong"],["ks_1st","ks_hack","strong"],["ks_hack","ks_chrono","strong"],["ks_chrono","44ks","strong"],["44ks","44ks_sp","medium"],["44ks_sp","45ks","strong"],["45ks","56ks","medium"],
-["ks_chrono","44gs","strong"],["44gs","45gs","strong"],["45gs","45gs_vfa","strong"],["45gs","19gs","medium"],["19gs","56gs_k","medium"],["45gs_vfa","56gs_k","strong"],["goldfeather","44gs","weak"],["goldfeather","45gs","weak"],
+["ks_chrono","44gs","strong"],["44gs","45gs","strong"],["45gs","45gs_vfa","strong"],["45gs","19gs","medium"],["19gs","56gs_k","medium"],["45gs_vfa","56gs_k","strong"],
 ["champion","champion_cal","strong"],["champion","fairway","medium"],["fairway","champ_850","strong"],["champion_cal","76_five","medium"],["champ_850","76_five","medium"],
 ["advan","vanac","strong"],["vanac","vanac_sp","medium"],
-["ks_1st","gs_1st","weak"],
+
 ["56gs_s","gs_cont","medium"],["56gs_k","gs_cont","medium"],["45gs_vfa","gs_cont","medium"],
 ["gs_mech_98","gs_hibeat","strong"],
 ["gs_independence","gs_heritage","strong"],["gs_independence","gs_elegance","strong"],["gs_independence","gs_sport","strong"],["gs_independence","gs_evo9","strong"],["gs_heritage","gs_masterpiece","medium"],
@@ -355,25 +355,45 @@ const edges=[
 ["prospex","px_mm","strong"],["prospex","px_1965","strong"],["prospex","px_1968_diver","strong"],["prospex","px_1968_gmt","strong"],["prospex","px_1970","strong"],["prospex","px_alpinist","strong"],["prospex","px_speedtimer","strong"],["prospex","px_land","medium"],["px_1968_diver","px_1968_gmt","medium"],
 ["6139_first","px_speedtimer","weak"],["c701x","k7016","medium"],["c701x","k7017","medium"],["c701x","k7018","medium"],["c701x","k7015","medium"],["6139_first","6139_pogue","medium"],["6139_first","6138_yacht","medium"],["6139_first","6138_kakume","medium"],["6139_first","6138_bull","medium"],["6139_first","6138_panda","medium"],["6139_first","6139_hex","medium"],["6139_first","6139_aqua","medium"],["6139_first","6139_helmet","medium"],
 ["business_a","presage_node","weak"],["presmatic","presage_node","weak"],
-["presage_node","prsg_cocktail","strong"],["presage_node","prsg_sharp","strong"],["presage_node","prsg_style60","strong"],["presage_node","prsg_classic","strong"],["presage_node","prsg_craft","strong"],["presage_node","prsg_starbar","medium"],["prsg_classic","prsg_garden","strong"],["crown","prsg_style60","weak"],
+["presage_node","prsg_cocktail","strong"],["presage_node","prsg_sharp","strong"],["presage_node","prsg_style60","strong"],["presage_node","prsg_classic","strong"],["presage_node","prsg_craft","strong"],["presage_node","prsg_starbar","medium"],["prsg_classic","prsg_garden","strong"],
 ["s5_first","s5_modern","weak"],["skx","s5_skx_mod","weak"],
 ["s5_modern","s5_skx_mod","strong"],["s5_modern","s5_field_mod","strong"],["s5_modern","s5_street","strong"],
-["marvel","crown","strong"],["marvel","laurel","medium"],["marvel","sportsman","medium"],["sky_cal","61_skyliner_cal","medium"],["6159_pro","px_1968_diver","weak"],["6159_pro","px_1968_gmt","weak"],["gs_cont","gs_quartz_88","medium"],["gs_cont","gs_mech_98","medium"],["gs_cont","sd_concept","weak"],["sd_concept","sd_7r68","medium"],["sd_7r68","sd_7r88","medium"],["sd_7r88","gs_sd_04","strong"],["gs_sd_04","gs_sd_chrono","medium"],["gs_sd_04","gs_9r01","medium"],["gs_cont","gs_independence","medium"],["s5_modern","s5_snxs","strong"],
+["marvel","crown","strong"],["marvel","laurel","medium"],["marvel","sportsman","medium"],["sky_cal","61_skyliner_cal","medium"],["6159_pro","px_1968_diver","weak"],["6159_pro","px_1968_gmt","weak"],["gs_cont","gs_quartz_88","medium"],["gs_cont","gs_mech_98","medium"],["sd_concept","sd_7r68","medium"],["sd_7r68","sd_7r88","medium"],["sd_7r88","gs_sd_04","strong"],["gs_sd_04","gs_sd_chrono","medium"],["gs_sd_04","gs_9r01","medium"],["gs_cont","gs_independence","medium"],["s5_modern","s5_snxs","strong"],
 ];
 const sections=[
-{l:"SUWA SEIKOSHA · EARLY MECHANICAL ERA 諏訪精工舎",x:8,y:15,w:1150,h:810,c:C.suwa},
-{l:"SEIKOMATIC · BUSINESS AUTOMATICS",x:150,y:440,w:900,h:145,c:C.suwa,sub:1},
-{l:"DAINI / KAMEIDO · EARLY MECHANICAL ERA 第二精工舎",x:8,y:1465,w:1150,h:645,c:C.kameido},
-{l:"⚓ DIVER LINEAGE 1961-2025",x:15,y:825,w:1150,h:300,c:C.diver,sub:1},
-{l:"⏱ SUWA CHRONOGRAPHS · 613x Platform · Cal. 6139 / 6138",x:15,y:1130,w:1010,h:200,c:C.chrono},
-{l:"🔔 BELL-MATIC",x:15,y:1345,w:490,h:85,c:C.bell,sub:1},
-{l:"🌍 WORLD TIME",x:620,y:1345,w:530,h:85,c:C.world,sub:1},
-{l:"⏱ KAMEIDO CHRONOGRAPHS",x:470,y:1890,w:680,h:200,c:C.chrono,sub:1},
-{l:"GRAND SEIKO 1960-2025",x:1190,y:35,w:1550,h:290,c:C.gs},
-{l:"KING SEIKO 1961-2025",x:1190,y:360,w:850,h:155,c:C.ks},
-{l:"PROSPEX · MECHANICAL SPORT 2012-2025",x:1190,y:520,w:1160,h:305,c:C.prospex},
-{l:"PRESAGE · MECHANICAL DRESS 2016-2025",x:1190,y:835,w:860,h:170,c:C.presage},
-{l:"SEIKO 5 SPORTS · MODERN 2019-2025",x:1190,y:1035,w:850,h:95,c:C.seiko5},
+// ═══ LEVEL 1: MASTER ZONES ═══
+{l:"SUWA SEIKOSHA · VINTAGE 精工舎",x:5,y:10,w:1155,h:1430,c:C.suwa},
+{l:"DAINI / KAMEIDO · VINTAGE 第二精工舎",x:5,y:1460,w:1155,h:680,c:C.kameido},
+{l:"MODERN GRAND SEIKO",x:1190,y:30,w:1560,h:300,c:C.gs},
+{l:"COLLECTIONS",x:2030,y:38,w:720,h:55,c:C.gs,sub:1},
+{l:"CORPORATE BRIDGE",x:1200,y:80,w:900,h:75,c:C.gs,sub:1},
+{l:"9S MECHANICAL + SD OFFSHOOTS",x:1200,y:160,w:1150,h:75,c:C.gs,sub:1},
+{l:"SPRING DRIVE LINEAGE",x:1200,y:250,w:1160,h:75,c:C.gs,sub:1},
+{l:"MODERN KING SEIKO",x:1190,y:355,w:860,h:165,c:C.ks},
+{l:"REVIVAL + RENAISSANCE",x:1200,y:375,w:840,h:75,c:C.ks,sub:1},
+{l:"90s RENAISSANCE",x:1200,y:435,w:400,h:75,c:C.ks,sub:1},
+{l:"MODERN SEIKO COLLECTIONS",x:1190,y:530,w:1170,h:610,c:C.modern},
+
+// ═══ LEVEL 2: FAMILY CLUSTERS (Suwa) ═══
+{l:"HIGH-GRADE · GRAND SEIKO · DRESS",x:15,y:30,w:1135,h:285,c:C.suwa,sub:1},
+{l:"LINER · SKYLINER · LORD MATIC",x:15,y:320,w:1135,h:130,c:C.suwa,sub:1},
+{l:"SEIKOMATIC · BUSINESS · PRESMATIC",x:15,y:455,w:1000,h:200,c:C.suwa,sub:1},
+{l:"SEIKO 5 · MAINSTREAM",x:15,y:660,w:1135,h:210,c:C.seiko5,sub:1},
+{l:"⚓ DIVER LINEAGE",x:15,y:875,w:1135,h:260,c:C.diver,sub:1},
+{l:"⏱ SUWA CHRONOGRAPHS · 613x Platform",x:15,y:1140,w:1010,h:150,c:C.chrono,sub:1},
+{l:"🔔 BELL-MATIC",x:15,y:1300,w:490,h:85,c:C.bell,sub:1},
+{l:"🌍 WORLD TIME",x:520,y:1300,w:630,h:85,c:C.world,sub:1},
+
+// ═══ LEVEL 2: FAMILY CLUSTERS (Daini) ═══
+{l:"KING SEIKO · DAINI ORIGIN",x:15,y:1480,w:1135,h:210,c:C.ks,sub:1},
+{l:"GRAND SEIKO · DAINI",x:15,y:1695,w:1000,h:120,c:C.gs,sub:1},
+{l:"CHAMPION · MASS MARKET",x:15,y:1820,w:1145,h:125,c:C.kameido,sub:1},
+{l:"⏱ KAMEIDO CHRONOGRAPHS · 701x Platform",x:350,y:1930,w:805,h:170,c:C.chrono,sub:1},
+
+// ═══ LEVEL 2: MODERN PANELS ═══
+{l:"PROSPEX · SEA / LAND / AIR",x:1200,y:550,w:1150,h:310,c:C.prospex,sub:1},
+{l:"PRESAGE · MECHANICAL DRESS",x:1200,y:870,w:860,h:135,c:C.presage,sub:1},
+{l:"SEIKO 5 SPORTS",x:1200,y:1015,w:860,h:110,c:C.seiko5,sub:1},
 ];
 
 /* ═══ ENGINE ═══ */
