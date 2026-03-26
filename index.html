@@ -108,7 +108,8 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #watch-popup .popup-tag.t-hb{background:#c92a2a18;color:#c92a2a}
 #watch-popup .popup-tag.t-coll{background:#2d8a3e18;color:#2d8a3e}
 #edges-svg{position:absolute;top:0;left:0;pointer-events:none}
-#edges-svg path[data-desc]{pointer-events:stroke;cursor:crosshair}
+#edges-svg path[data-desc]{pointer-events:stroke;cursor:crosshair;stroke-linecap:round}
+#edges-svg path.edge-hit{pointer-events:stroke;stroke:transparent;stroke-width:18;fill:none;cursor:crosshair}
 #edge-tip{
   position:fixed;z-index:55;pointer-events:none;
   background:var(--paper);border:1px solid var(--rule);border-radius:3px;
@@ -518,7 +519,7 @@ nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElem
 
 function getPath(fn,tn){const fcx=fn[2]+NW/2,fcy=fn[3]+NH/2,tcx=tn[2]+NW/2,tcy=tn[3]+NH/2,dx=tcx-fcx,dy=tcy-fcy;let sx,sy,ex,ey;if(Math.abs(dx)>Math.abs(dy)){sx=dx>0?fn[2]+NW:fn[2];sy=fcy;ex=dx>0?tn[2]:tn[2]+NW;ey=tcy;}else{sx=fcx;sy=dy>0?fn[3]+NH:fn[3];ex=tcx;ey=dy>0?tn[3]:tn[3]+NH;}const mx=(sx+ex)/2,my=(sy+ey)/2;if(Math.abs(dx)>Math.abs(dy)){return`M${sx},${sy} C${mx},${sy} ${mx},${ey} ${ex},${ey}`;}return`M${sx},${sy} C${sx},${my} ${ex},${my} ${ex},${ey}`;}
 
-function renderEdges(){let h=`<defs><marker id="a" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="#aaa"/></marker><marker id="ah" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="${C.highlight}"/></marker></defs>`;edges.forEach(([f,t,type,desc])=>{const fn=nodeMap[f],tn=nodeMap[t];if(!fn||!tn)return;const cls=type==='weak'?'edge-weak':'';h+=`<path class="${cls}" data-from="${f}" data-to="${t}" data-type="${type}" data-desc="${desc||''}" d="${getPath(fn,tn)}" fill="none" stroke="#aaa" stroke-width="${type==='strong'?1.5:.8}" stroke-dasharray="${type==='weak'?'3,3':'0'}" opacity="${type==='weak'?.25:.45}" marker-end="url(#a)"/>`;});svg.innerHTML=h;}
+function renderEdges(){let h=`<defs><marker id="a" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="#aaa"/></marker><marker id="ah" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="${C.highlight}"/></marker></defs>`;edges.forEach(([f,t,type,desc])=>{const fn=nodeMap[f],tn=nodeMap[t];if(!fn||!tn)return;const cls=type==='weak'?'edge-weak':'';const d=getPath(fn,tn);h+=`<path class="edge-hit" data-from="${f}" data-to="${t}" data-type="${type}" data-desc="${desc||''}" d="${d}"/>`;h+=`<path class="${cls}" data-from="${f}" data-to="${t}" data-type="${type}" data-desc="${desc||''}" d="${d}" fill="none" stroke="#aaa" stroke-width="${type==='strong'?1.5:.8}" stroke-dasharray="${type==='weak'?'3,3':'0'}" opacity="${type==='weak'?.25:.45}" marker-end="url(#a)"/>`;});svg.innerHTML=h;}
 
 function isVis(n){if(filter==='all')return true;const c=n[4],id=n[0];if(filter==='iconic')return n[5]===1;if(filter==='diver')return c===C.diver||c===C.prospex;if(filter==='chrono')return c===C.chrono;if(filter==='gs')return c===C.gs;if(filter==='ks')return c===C.ks;if(filter==='modern')return c===C.prospex||c===C.presage||c===C.modern||([C.seiko5,C.chrono].includes(c)&&n[2]>1100);if(filter==='seiko5')return c===C.seiko5;if(filter==='collection')return inCollection.has(id);return true;}
 
