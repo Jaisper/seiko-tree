@@ -357,18 +357,7 @@ let popupTimer=null;
 const imgCache={};
 
 function showPopup(nodeId,e){
-  const d=popupData[nodeId// ═══ COLUMN 3: MODERN COLLECTION ERA 2001-2025 ═══
-{l:"MODERN COLLECTION ERA · 2001-2025",x:1640,y:10,w:880,h:791,c:C.modern},
-{l:"GRAND SEIKO · MODERN",x:1650,y:35,w:860,h:230,c:C.gs,sub:1},
-{l:"KING SEIKO · MODERN",x:1650,y:272,w:520,h:65,c:C.ks,sub:1},
-{l:"PROSPEX · SEA / LAND / AIR",x:1650,y:344,w:860,h:251,c:C.prospex,sub:1},
-{l:"BRAND · FLAGSHIP",x:1660,y:362,w:460,h:52,c:C.prospex,sub:1},
-{l:"HERITAGE DIVERS",x:1660,y:419,w:600,h:52,c:C.prospex,sub:1},
-{l:"DIVER PLATFORMS",x:1660,y:476,w:600,h:52,c:C.prospex,sub:1},
-{l:"LAND · CHRONO · ADVANCED TECH",x:1660,y:533,w:840,h:52,c:C.prospex,sub:1},
-{l:"PRESAGE · MECHANICAL DRESS",x:1650,y:600,w:860,h:122,c:C.presage,sub:1},
-{l:"SEIKO 5 SPORTS",x:1650,y:729,w:860,h:65,c:C.seiko5,sub:1},
-];
+  const d=popupData[nodeId];
   if(!d||scale<0.35)return;
   clearTimeout(popupTimer);
   // Instant text
@@ -489,6 +478,19 @@ const sections=[
 // ═══ COLUMN 2: LEGACY TRANSITION 1988-2001 ═══
 {l:"LEGACY TRANSITION ERA · 1988-2001",x:1180,y:10,w:440,h:570,c:C.modern},
 
+
+
+// ═══ COLUMN 3: MODERN COLLECTION ERA 2001-2025 ═══
+{l:"MODERN COLLECTION ERA · 2001-2025",x:1640,y:10,w:880,h:791,c:C.modern},
+{l:"GRAND SEIKO · MODERN",x:1650,y:35,w:860,h:230,c:C.gs,sub:1},
+{l:"KING SEIKO · MODERN",x:1650,y:272,w:520,h:65,c:C.ks,sub:1},
+{l:"PROSPEX · SEA / LAND / AIR",x:1650,y:344,w:860,h:251,c:C.prospex,sub:1},
+{l:"BRAND · FLAGSHIP",x:1660,y:362,w:460,h:52,c:C.prospex,sub:1},
+{l:"HERITAGE DIVERS",x:1660,y:419,w:600,h:52,c:C.prospex,sub:1},
+{l:"DIVER PLATFORMS",x:1660,y:476,w:600,h:52,c:C.prospex,sub:1},
+{l:"LAND · CHRONO · ADVANCED TECH",x:1660,y:533,w:840,h:52,c:C.prospex,sub:1},
+{l:"PRESAGE · MECHANICAL DRESS",x:1650,y:600,w:860,h:122,c:C.presage,sub:1},
+{l:"SEIKO 5 SPORTS",x:1650,y:729,w:860,h:65,c:C.seiko5,sub:1},
 ];
 
 /* ═══ ENGINE ═══ */
