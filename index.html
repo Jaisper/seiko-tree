@@ -126,7 +126,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   <div>
     <div class="eyebrow">精工 · Mechanical Heritage · 1960–2025 · Three Eras</div>
     <h1>The Complete Seiko Mechanical Family Tree</h1>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--muted);line-height:1.55;max-width:1100px;margin:6px 0 0">This diagram maps Seiko's mechanical watch families using a curatorial three-era framework based on major company and technology milestones. <strong style="color:var(--ink)">Vintage Factory Era (1960–1988)</strong> covers the Suwa Seikosha and Daini/Kameido production systems — two rival in-house factories whose internal competition drove Grand Seiko, King Seiko, divers, and chronographs to world-class standards. <strong style="color:var(--ink)">Legacy Transition (1988–2001)</strong> traces the bridge period: Grand Seiko's dormancy and late-1990s mechanical revival, the 1999 commercial launch of Spring Drive, and the late legacy divers (7002, SKX) that kept mechanical Seiko alive through the quartz era. <strong style="color:var(--ink)">Modern Collection Era (2001–2025)</strong> begins with the establishment of Seiko Watch Corporation and shows today's brand and collection structure — Grand Seiko as an independent brand, the King Seiko revival, and the Prospex, Presage, and Seiko 5 Sports families. Era divisions are editorial and do not represent an official Seiko periodization. Edges show direct lineage <span style="display:inline-block;width:16px;height:0;border-top:2px solid #aaa;vertical-align:middle;margin:0 2px"></span>, platform continuation <span style="display:inline-block;width:16px;height:0;border-top:1px solid #aaa;vertical-align:middle;margin:0 2px"></span>, and heritage influence <span style="display:inline-block;width:16px;height:0;border-top:1px dashed #aaa;vertical-align:middle;margin:0 2px"></span>. Hover any edge for historical context.</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--muted);line-height:1.55;max-width:1100px;margin:6px 0 0">This diagram maps Seiko's mechanical watch families using a curatorial three-era framework based on major company and technology milestones. <strong style="color:var(--ink)">Vintage Factory Era (1960–c. 1988)</strong> covers the Suwa Seikosha and Daini/Kameido production systems — two parallel in-house production centers (Suwa and Daini/Kameido) whose structured internal competition drove Grand Seiko, King Seiko, divers, and chronographs to world-class standards. <strong style="color:var(--ink)">Legacy Transition (c. 1988–2001)</strong> traces the bridge period: Grand Seiko's dormancy and late-1990s mechanical revival, the 1999 commercial launch of Spring Drive, and the late legacy divers (7002, SKX) that kept mechanical Seiko alive through the quartz era. <strong style="color:var(--ink)">Modern Collection Era (2001–2025)</strong> begins with the establishment of Seiko Watch Corporation and reflects today's brand and collection architecture — many lines shown here have deeper heritage roots (Prospex traces to 1965, Seiko 5 Sports to 1968, Grand Seiko to 1960) — Grand Seiko as an independent brand, the King Seiko revival, and the Prospex, Presage, and Seiko 5 Sports families. Era divisions are editorial and do not represent an official Seiko periodization. Edges show direct lineage <span style="display:inline-block;width:16px;height:0;border-top:2px solid #aaa;vertical-align:middle;margin:0 2px"></span>, platform continuation <span style="display:inline-block;width:16px;height:0;border-top:1px solid #aaa;vertical-align:middle;margin:0 2px"></span>, and heritage influence <span style="display:inline-block;width:16px;height:0;border-top:1px dashed #aaa;vertical-align:middle;margin:0 2px"></span>. Hover any edge for historical context.</p>
   </div>
   <div class="spacer"></div>
   <div class="filters" id="filters"></div>
@@ -175,8 +175,14 @@ const popupData={
   marvel:{n:"Seiko Marvel",era:"1956-62",d:"First Seiko with a movement designed fully in-house. Introduced Diashock system. Foundation of all subsequent Seiko mechanical development.",tags:["icon"]},
   lord_marvel_36k:{n:"Lord Marvel 36000",era:"1967-late 70s",d:"First Japanese watch with 36,000 bph movement. A precision milestone that launched Suwa's hi-beat era.",tags:["icon","hb"],hasImg:1},
   crown:{n:"Seiko Crown",era:"1958-65",d:"First Seiko with chronometer-grade movement. Bridge to Grand Seiko.",tags:[]},
-  gs_1st:{n:"Grand Seiko (Cal. 3180)",era:"1960-63",d:"The first Grand Seiko. 25 jewels, chronometer standard. Where it all began.",tags:["icon","gs"],hasImg:1},
-  "62gs":{n:"62GS Automatic",era:"1967-68",d:"First automatic Grand Seiko. Cal. 6245/6246.",tags:["icon","gs"],hasImg:1},
+  "44gs":{n:"44 Grand Seiko",era:"1967-68",d:"Cal. 4420. Manual-wind, 18,000 bph. Established the Grand Seiko Style -- the nine-element design grammar (zaratsu finishing, sharp hands, wide indices) that defines all modern Grand Seiko to this day.",tags:["icon","gs"],hasImg:1},
+  "62gs":{n:"62GS Automatic",era:"1967-68",d:"Cal. 6245/6246. First Grand Seiko automatic. Originally sold as Seikomatic Chronometer, renamed after European Chronometer Association challenged the name.",tags:["icon","gs"],hasImg:1},
+  "45gs":{n:"45 Grand Seiko",era:"1968-74",d:"Cal. 4520. Manual-wind hi-beat 36,000 bph from Daini. Ultra-thin 3.5mm movement. Won top honours at Neuchatel and Geneva observatory trials.",tags:["icon","gs","hb"],hasImg:1},
+  "45gs_vfa":{n:"45 GS V.F.A.",era:"1969-74",d:"Very Fine Adjusted. +/-2 seconds/day. The pinnacle of Seiko mechanical accuracy. Manual-wind hi-beat 36,000 bph.",tags:["icon","gs","hb"]},
+  "gs_sd":{n:"Grand Seiko Self-Dater",era:"1964-67",d:"Cal. 430/5722A. Second-generation GS with calendar and 50m water resistance. Stainless steel case for daily practicality.",tags:["gs"]},
+  "gs_quartz_88":{n:"Grand Seiko 9F Quartz",era:"1993-",d:"Cal. 9F83. Twin-pulse control motor, instant date change. +/-10 sec/year. First GS quartz was 1988 (Cal. 95xx); the landmark 9F platform launched 1993.",tags:["gs"]},
+  gs_1st:{n:"Grand Seiko (Cal. 3180)",era:"1960-63",d:"The first Grand Seiko. Cal. 3180, 25 jewels, 18,000 bph. Rated +12/-3 seconds/day. First watch made in Japan compliant with the Bureau Officiel standards. 35mm gold-filled case. Set the design codes — clean dial, long hands, applied indices — that Grand Seiko still follows.",tags:["icon","gs"],hasImg:1},
+  "62gs":{n:"62GS Automatic",era:"1967-68",d:"Cal. 6245/6246. First Grand Seiko automatic. Originally sold as Seikomatic Chronometer, renamed after European Chronometer Association challenged the name.",tags:["icon","gs"],hasImg:1},
   "61gs":{n:"61GS Hi-Beat",era:"1968-74",d:"36,000 bph automatic Grand Seiko. Suwa's hi-beat revolution.",tags:["icon","gs","hb"],hasImg:1},
   "61gs_vfa":{n:"61GS VFA",era:"1969-74",d:"Very Fine Adjusted — Suwa's ultimate mechanical precision.",tags:["icon","gs","hb"],hasImg:1},
   "56gs_s":{n:"56GS",era:"1970-78",d:"Ultra-thin automatic Grand Seiko. Cal. 5645/5646.",tags:["gs"]},
@@ -201,7 +207,7 @@ const popupData={
   "6159_tuna":{n:"6159 Tuna Can",era:"1975-78",d:"600m with external shroud. Titanium. The original Tuna.",tags:["icon","diver"],hasImg:1},
   "6309":{n:"6309 Turtle Diver",era:"1976-88",d:"150m turtle-case diver. Successor to 6105 in the diver line.",tags:["diver"],hasImg:1},
   "6306_sd":{n:"SilverWave Surface Diver",era:"1976-78",d:"Cal. 6306. Turtle-case 150m recreational diver. Non-professional companion to the 6309 line.",tags:["diver"]},
-  skx:{n:"SKX007/009",era:"1996-2019",d:"23 years of unbroken icon status. The people's diver.",tags:["icon","diver"],hasImg:1},
+  skx:{n:"SKX007/009",era:"1996-2019",d:"Cal. 7S26. 200m ISO-rated diver produced for 23 years without change. Among the most widely sold mechanical dive watches in history. Discontinued 2019 when Prospex absorbed the diver line.",tags:["icon","diver"],hasImg:1},
   // ── CHRONOGRAPHS ──
   "6139_first":{n:"6139-6000",era:"1969-72",d:"World's first automatic chronograph. May 1969. Vertical clutch, column wheel.",tags:["icon","chrono"],hasImg:1},
   "6139_pogue":{n:"6139 Pogue",era:"1971-78",d:"First automatic chronograph in space. Col. Pogue, Skylab 4, 1973.",tags:["icon","chrono"],hasImg:1},
@@ -214,16 +220,16 @@ const popupData={
   bell_4006:{n:"Bell-Matic (Cal. 4006)",era:"1967-78",d:"Mechanical alarm complication. Unique to Seiko.",tags:["icon"],hasImg:1},
   wt_6217:{n:"World Time (Cal. 6217)",era:"1964-69",d:"Seiko's first world timer. Tokyo Olympics 1964.",tags:["icon"],hasImg:1},
   // ── KING SEIKO / KAMEIDO ──
-  ks_1st:{n:"King Seiko",era:"1961-63",d:"Kameido's answer to Grand Seiko. The internal rivalry begins.",tags:["icon","ks"]},
+  ks_1st:{n:"King Seiko",era:"1961-63",d:"Daini/Kameido's counterpart to Grand Seiko, designed to match GS quality at a more accessible price. Seiko officially describes it as 'designed to emulate Grand Seiko as the pinnacle of Japanese watchmaking.'",tags:["icon","ks"]},
   "44ks":{n:"44KS Grammar of Design",era:"1964-69",d:"Taro Tanaka's design philosophy. Foundation of all GS/KS design language.",tags:["icon","ks"],hasImg:1},
   "45ks":{n:"45KS Hi-Beat",era:"1968-74",d:"Manual hi-beat 36,000 bph. Cal. 4500/4502. Two case variants: angular 7000 and oval turtle 8000.",tags:["icon","ks","hb"],hasImg:1},
   "56ks":{n:"56 King Seiko (Suwa)",era:"1968-75",d:"Cal. 5625/5626. Suwa-produced King Seiko — NOT made by Daini. Thin automatic dress line sharing platform with Lord Matic 56. The only KS made at the Suwa factory.",tags:["ks"]},
   "52ks":{n:"52KS",era:"1971-75",d:"Late King Seiko automatic. Cal. 5246. Thin-case everyday dress watch from Daini.",tags:["ks"]},
   vanac:{n:"Vanac",era:"1972-78",d:"Asymmetric crown, sporty 70s design. Cult following.",tags:["icon","ks"],hasImg:1},
   goldfeather:{n:"Goldfeather",era:"1960-66",d:"Ultra-thin prestige. Kameido's thinnest.",tags:["icon"],hasImg:1},
-  "44gs":{n:"44 Grand Seiko",era:"1967-68",d:"Grammar of Design origin. The first Grand Seiko made by Daini Seikosha.",tags:["icon","gs"],hasImg:1},
-  "45gs":{n:"45GS",era:"1968-74",d:"Manual-winding hi-beat Grand Seiko from Kameido/Daini. Cal. 4520/4522.",tags:["icon","gs","hb"]},
-  "45gs_vfa":{n:"45GS VFA",era:"1969-74",d:"Very Fine Adjusted — peak Kameido mechanical precision.",tags:["icon","gs","hb"],hasImg:1},
+  "44gs":{n:"44 Grand Seiko",era:"1967-68",d:"Cal. 4420. Manual-wind, 18,000 bph. Established the Grand Seiko Style -- the nine-element design grammar (zaratsu finishing, sharp hands, wide indices) that defines all modern Grand Seiko to this day.",tags:["icon","gs"],hasImg:1},
+  "45gs":{n:"45 Grand Seiko",era:"1968-74",d:"Cal. 4520. Manual-wind hi-beat 36,000 bph from Daini. Ultra-thin 3.5mm movement. Won top honours at Neuchatel and Geneva observatory trials.",tags:["icon","gs","hb"]},
+  "45gs_vfa":{n:"45 GS V.F.A.",era:"1969-74",d:"Very Fine Adjusted. +/-2 seconds/day -- the pinnacle of Seiko mechanical accuracy. Manual-wind hi-beat 36,000 bph.",tags:["icon","gs","hb"],hasImg:1},
   c701x:{n:"701x Flyback Chronograph Platform",era:"1970-75",d:"Daini/Kameido flyback chronograph family. Cal. 7015/7016/7017/7018 share core architecture. Parallel members, not a linear succession. First appeared 1970.",tags:["chrono"]},
   "19gs":{n:"19GS",era:"late 1960s-early 1970s",d:"Small-sized hi-beat Grand Seiko for women. Cal. 1944. Produced at Kameido/Daini.",tags:["gs","hb"]},
   k7016:{n:"7016 Flyback Chronograph",era:"1970-75",d:"Cal. 7016. Daini/Kameido flyback chronograph with Monaco-style case. Single pusher operation.",tags:["chrono"]},
@@ -231,7 +237,7 @@ const popupData={
   // ── GRAND SEIKO MODERN ──
   gs_9s5:{n:"Caliber 9SA5",era:"2020-",d:"Next-gen hi-beat mechanical. Dual impulse escapement. 80h power reserve.",tags:["icon","gs","hb"],hasImg:1},
   gs_ufa:{n:"Spring Drive U.F.A. 9RB2",era:"2025-",d:"Ultra Fine Accuracy. ±20 sec/year. Most accurate mainspring-powered watch.",tags:["icon","gs","sd"],hasImg:1},
-  sd_concept:{n:"Spring Drive Concept",era:"1978-1997",d:"Yoshikazu Akahane's vision: mainspring power with quartz-level accuracy. 20 years of R&D, 600+ patents. Tri-synchro regulator concept.",tags:["sd"]},
+  sd_concept:{n:"Spring Drive Concept",era:"1978-1997",d:"Yoshikazu Akahane's vision: mainspring power with quartz-level accuracy. 20 years of R&D, 50+ patents. Tri-synchro regulator concept.",tags:["sd"]},
   sd_7r68:{n:"7R68 Spring Drive",era:"1999",d:"First production Spring Drive. Manual-winding, sold in limited quantities. Seiko-branded, not yet Grand Seiko.",tags:["sd"]},
   sd_7r88:{n:"7R88 Credor Spring Drive",era:"2002",d:"Spring Drive in premium Credor brand. Automatic winding. Bridge to Grand Seiko adoption.",tags:["sd"]},
   gs_sd_chrono:{n:"GS Spring Drive Chronograph",era:"2007-",d:"Cal. 9R86. First Spring Drive chronograph. 30-min and 12-hr registers with glide motion seconds.",tags:["gs","sd"]},
@@ -261,7 +267,7 @@ const popupData={
   "lord_marvel":{n:"Lord Marvel",era:"late 1950s-75",d:"Premium manual-wind dress watch. Suwa's flagship line before Grand Seiko. Higher-grade finishing than standard Marvel.",tags:[]},
   "crown_sd":{n:"Crown Self Dater",era:"1960-65",d:"Crown with calendar complication. Date display added practicality to the Crown platform.",tags:[]},
   "crown_sp":{n:"Crown Special",era:"1960-65",d:"Higher-grade Crown with improved movement specs. Bridge between Crown and early Grand Seiko.",tags:[]},
-  "gs_sd":{n:"GS Self-Dater",era:"1963-67",d:"Second-generation Grand Seiko with calendar and improved water resistance. Practical evolution of the 3180.",tags:["gs"]},
+  "gs_sd":{n:"Grand Seiko Self-Dater",era:"1963-67",d:"Cal. 430/5722A. Second-generation GS with calendar function. Water resistance to 50m. Stainless steel case for daily practicality.",tags:["gs"]},
   "57gs_cal":{n:"57GS Calendar",era:"1964-67",d:"Cal. 5722. Grand Seiko with date complication. Manual-wind with Seiko's own Grand Seiko Standard accuracy.",tags:["gs"]},
   "61gs_sp":{n:"61GS Special",era:"1970-74",d:"Chronometer-grade automatic hi-beat Grand Seiko. Higher adjustment standard than regular 61GS.",tags:["gs","hb"]},
   "liner":{n:"Liner",era:"1960-65",d:"Mid-range manual-wind dress watch. Positioned between Marvel and Crown. Named for the ocean liner era.",tags:[]},
@@ -314,7 +320,7 @@ const popupData={
   "k7015":{n:"7015 Chronograph",era:"1972-75",d:"Cal. 7015. Two-register Daini chronograph. Simpler than the 7018 five-register. Part of the 701x flyback family.",tags:["chrono"]},
   "k7017":{n:"7017 Flyback Chronograph",era:"1972-75",d:"Cal. 7017. Single-register flyback chronograph. Distinctive Monaco-style case on some variants. Part of the 701x family.",tags:["chrono"]},
   "gs_cont":{n:"GS Product Line Dormant",era:"~1978-88",d:"Grand Seiko production ceased during the Quartz Crisis. The brand lay dormant for a decade before being revived with modern movements.",tags:["gs"]},
-  "gs_quartz_88":{n:"GS 9F Quartz",era:"1988-",d:"Grand Seiko revival began with quartz. Cal. 9F — the world's most accurate quartz movement. ±10 sec/year. Instant date change.",tags:["gs"]},
+  "gs_quartz_88":{n:"Grand Seiko 9F Quartz",era:"1993-",d:"Cal. 9F83. Twin-pulse control motor, instant date change. +/-10 seconds/year. The first GS quartz appeared in 1988 (Cal. 95xx); the landmark 9F platform launched in 1993.",tags:["gs"]},
   "gs_mech_98":{n:"GS 9S Mechanical Revival",era:"1998-",d:"Return of mechanical Grand Seiko after 30 years. Cal. 9S51. Hand-assembled at Shizukuishi. 50-hour power reserve.",tags:["gs"]},
   "gs_hibeat":{n:"GS 9S Hi-Beat 36000",era:"2009-",d:"Cal. 9S85. 36,000 bph automatic Grand Seiko. Smoother seconds hand, improved shock resistance at high frequency.",tags:["gs","hb"]},
   "gs_independence":{n:"Grand Seiko Independent Brand",era:"2017-",d:"Grand Seiko separated from the Seiko brand. Own logo at 12 o'clock. Global luxury positioning with independent identity.",tags:["gs"]},
@@ -334,7 +340,7 @@ const popupData={
   "px_1970":{n:"1970 Diver (Willard)",era:"2020-",d:"Modern reinterpretation of the 6105-8110 Willard. Cushion case with crown guard. The 'Captain Willard' returns.",tags:["diver"]},
   "px_speedtimer":{n:"Prospex Speedtimer Mechanical",era:"2021-",d:"Mechanical chronograph under Prospex. Heritage connection to 1960s-70s Seiko chronograph legacy. Cal. 8R48.",tags:["chrono"]},
   "px_land":{n:"Land Mechanical",era:"2019-",d:"Field and compass watches under Prospex. Includes Alpinist-derived models. Designed for terrestrial exploration.",tags:[]},
-  "presage_node":{n:"Presage",era:"2016-",d:"Mechanical dress watch collection. Japanese craftsmanship dials — enamel, urushi lacquer, guilloche. Cal. 4R/6R series.",tags:[]},
+  "presage_node":{n:"Presage",era:"c. 2010/2016-",d:"Modern named collection for mechanical dress watches. The Presage name was first used for a Seiko watch in 1960 and was revived around 2010-11 (Japan domestic market), with global rollout from 2016. Draws on older Seiko dress-watch heritage stretching back to the Crown and Lord Marvel lines of the 1960s. Japanese craftsmanship dials — enamel, urushi lacquer, Nishijin textile.",tags:[]},
   "prsg_classic":{n:"Classic Series",era:"2024-",d:"New structural category within Presage. Clean, traditional dress watch designs with emphasis on legibility.",tags:[]},
   "prsg_craft":{n:"Craftsmanship Series",era:"2018-",d:"Presage models highlighting traditional Japanese artisan techniques. Arita porcelain, Shippo enamel, Kanazawa lacquer.",tags:[]},
   "prsg_garden":{n:"Japanese Garden",era:"2022-",d:"Dial textures inspired by Japanese garden elements — raked gravel, moss, water. Zen aesthetic in watchmaking.",tags:[]},
@@ -414,13 +420,13 @@ const nodes=[
 ["champion","Champion\n1960-68",210,1845,C.kameido,0],["champion_cal","Champion Cal.\n1962-68",370,1845,C.kameido,0],["fairway","Fairway\n1962-66",210,1900,C.kameido,0],["champ_850","Champion 850\n1965-70",370,1900,C.kameido,0],["76_five","76 Seiko 5\nKameido 1966-75",530,1845,C.kameido,0],
 ["advan","Advan\n1971-78",690,1845,C.kameido,0],["vanac","Vanac\n1972-75",850,1845,C.ks,1],["vanac_sp","Vanac Special\n1973-75",1010,1845,C.kameido,0],
 ["k7016","7016 Flyback\n1970-75",530,2050,C.chrono,0],["k7015","7015 Chrono\n1972-75",1010,2050,C.chrono,0],["k7017","7017 Flyback\n1972-75",850,2050,C.chrono,0],["k7018","7018 5-reg\n1971-75",690,2050,C.chrono,1],["c701x","701x Flyback\nPlatform 1970-",530,1985,C.chrono,0],
-["gs_cont","GS Mechanical\nProduct Line\nDormant ~1978-88",1210,30,C.gs,0],["gs_quartz_88","GS 9F Quartz\n1988-",1370,30,C.gs,0],["gs_mech_98","GS 9S Mech.\nRevival 1998-",1370,95,C.gs,0],["gs_sd_04","GS Spring Drive\n9R65 2004-",1590,55,C.gs,0],["gs_hibeat","GS 9S Hi-Beat\n36000 2009-",1590,120,C.gs,0],["sd_concept","Spring Drive\nconcept/patents\n1978-1997",1210,160,C.gs,0],["sd_7r68","7R68 manual\nSpring Drive\n1999",1370,160,C.gs,0],["sd_7r88","7R88 Credor\nSpring Drive\n2002",1370,225,C.gs,0],["gs_sd_chrono","GS Spring Drive\nChrono 9R86\n2007-",1750,185,C.gs,0],["gs_9r01","GS Spring Drive\n9R01 8 Days\n2016-",1910,185,C.gs,0],["gs_independence","Grand Seiko\nIndep. Brand\n2017-",1750,55,C.gs,0],
+["gs_cont","GS Mechanical\nProduct Line\nDormant ~1978-88",1210,30,C.gs,0],["gs_quartz_88","GS 9F Quartz\n1993- (GS quartz from 1988)",1370,30,C.gs,0],["gs_mech_98","GS 9S Mech.\nRevival 1998-",1370,95,C.gs,0],["gs_sd_04","GS Spring Drive\n9R65 2004-",1590,55,C.gs,0],["gs_hibeat","GS 9S Hi-Beat\n36000 2009-",1590,120,C.gs,0],["sd_concept","Spring Drive\nconcept/patents\n1978-1997",1210,160,C.gs,0],["sd_7r68","7R68 manual\nSpring Drive\n1999",1370,160,C.gs,0],["sd_7r88","7R88 Credor\nSpring Drive\n2002",1370,225,C.gs,0],["gs_sd_chrono","GS Spring Drive\nChrono 9R86\n2007-",1750,185,C.gs,0],["gs_9r01","GS Spring Drive\n9R01 8 Days\n2016-",1910,185,C.gs,0],["gs_independence","Grand Seiko\nIndep. Brand\n2017-",1750,55,C.gs,0],
 ["gs_heritage","Heritage\nColl. 2018-",1590,250,C.gs,0],["gs_elegance","Elegance\nColl. 2018-",1750,250,C.gs,0],["gs_sport","Sport Coll.\n2018-",1910,250,C.gs,0],["gs_evo9","Evolution 9\n2021-",2230,250,C.gs,0],["gs_masterpiece","Masterpiece\n2020-",2070,250,C.gs,0],
 ["gs_9s5","9SA5 Hi-Beat\nNext-Gen\n2020-",1750,120,C.gs,1],["gs_9r","9R Spring Drive\n2004-",1590,185,C.gs,0],["gs_9ra","9RA/9RB\nAdv. SD 2020-",2070,185,C.gs,1],["gs_ufa","Spring Drive\nU.F.A. 9RB2\n2025-",2230,185,C.gs,1],
 ["ks_dormant","King Seiko\nProduct Line\nDormant ~1975-2022",1210,355,C.ks,0],["ks_revival","King Seiko\nRevival 2022-",1590,339,C.ks,0],["ks_sje","KS Modern\nSJE 2022-",1750,339,C.ks,0],["ks_vanac_25","King Seiko\nVANAC 2025-",1910,339,C.ks,1],["seiko_sus","SUS / 4S15\n1995-",1370,290,C.suwa,0],["s4_family","4S Mechanical\nPlatform 1992-2000s",1210,290,C.modern,0],
 ["prospex","Prospex\n(rebrand 2012)",1590,428,C.prospex,0],["px_mm","Marinemaster\nmodern line",1750,428,C.prospex,0],["px_1965","1965 Heritage\nDiver 2017-",1590,493,C.prospex,0],["px_1968_diver","1968 Heritage\nDiver 2018-",1750,493,C.prospex,0],["px_1968_gmt","1968 Heritage\nGMT 2020-",1910,493,C.prospex,0],["px_1970","1970 Diver\nWillard 2020-",2070,493,C.prospex,0],["px_alpinist","Alpinist\nProspex 2017-",1910,623,C.prospex,0],["px_speedtimer","Prospex Speedtimer\nMechanical\n2021-",2230,623,C.chrono,0],["px_land","Land Mech.\n2019-",2070,623,C.prospex,0],["px_sd_diver","Prospex SD\nGMT / Diver\n2005-",1590,623,C.prospex,0],["px_lx","LX Line\nSpring Drive\n2019-",1910,428,C.prospex,0],["px_hb_8l55","Hi-Beat Diver\n8L55 2015-",1750,623,C.prospex,0],["px_monster","Monster\nPlatform 2000-",1590,558,C.prospex,0],["px_samurai","Samurai\nPlatform 2004-",1750,558,C.prospex,0],["px_sumo","Sumo\nPlatform 2007-",1910,558,C.prospex,0],["px_shogun","Shogun\nPlatform 2008-",2070,558,C.prospex,0],
-["presage_node","Presage\n2016-",1590,712,C.presage,0],["prsg_cocktail","Cocktail Time\n2016-",1750,712,C.presage,0],["prsg_sharp","Sharp Edged\n2020-",2070,712,C.presage,0],["prsg_style60","Style60s\n2021-",2230,712,C.presage,0],["prsg_classic","Classic Series\n2024-",1910,777,C.presage,0],["prsg_craft","Craftsmanship\n2018-",1590,777,C.presage,0],["prsg_garden","Japanese\nGarden 2022-",1750,777,C.presage,0],["prsg_starbar","Star Bar\n2018-",1910,712,C.presage,0],
-["s5_modern","Seiko 5 Sports\n2019-",1590,866,C.seiko5,0],["s5_skx_mod","SKX Heritage\n2019-",1750,866,C.seiko5,0],["s5_field_mod","Field Series\n2019-",1910,866,C.seiko5,0],["s5_street","Street Series\n2019-",2070,866,C.seiko5,0],
+["presage_node","Presage\n2011/2016-",1590,712,C.presage,0],["prsg_cocktail","Cocktail Time\n2016-",1750,712,C.presage,0],["prsg_sharp","Sharp Edged\n2020-",2070,712,C.presage,0],["prsg_style60","Style60s\n2021-",2230,712,C.presage,0],["prsg_classic","Classic Series\n2024-",1910,777,C.presage,0],["prsg_craft","Craftsmanship\n2018-",1590,777,C.presage,0],["prsg_garden","Japanese\nGarden 2022-",1750,777,C.presage,0],["prsg_starbar","Star Bar\n2018-",1910,712,C.presage,0],
+["s5_modern","Seiko 5 Sports\n2019- (est. 1968)",1590,866,C.seiko5,0],["s5_skx_mod","SKX Heritage\n2019-",1750,866,C.seiko5,0],["s5_field_mod","Field Series\n2019-",1910,866,C.seiko5,0],["s5_street","Street Series\n2019-",2070,866,C.seiko5,0],
 ["s5_snxs","SNXS Series\n2024-",2230,866,C.seiko5,0],
 ];
 const edges=[
@@ -461,7 +467,7 @@ const edges=[
 ];
 const sections=[
 // ═══ COLUMN 1: VINTAGE FACTORY ERA 1960-1988 ═══
-{l:"VINTAGE FACTORY ERA · 1960-1988",x:5,y:10,w:1155,h:1430,c:C.suwa},
+{l:"VINTAGE FACTORY ERA · 1960–c. 1988",x:5,y:10,w:1155,h:1430,c:C.suwa},
 {l:"HIGH-GRADE · GRAND SEIKO · DRESS",x:15,y:30,w:1135,h:285,c:C.suwa,sub:1},
 {l:"LINER · SKYLINER · LORD MATIC",x:15,y:320,w:1135,h:130,c:C.suwa,sub:1},
 {l:"SEIKOMATIC · BUSINESS · PRESMATIC",x:15,y:455,w:1135,h:200,c:C.suwa,sub:1},
@@ -477,12 +483,12 @@ const sections=[
 {l:"⏱ KAMEIDO CHRONOGRAPHS · 701x Platform",x:350,y:1960,w:805,h:170,c:C.chrono,sub:1},
 
 // ═══ COLUMN 2: LEGACY TRANSITION 1988-2001 ═══
-{l:"LEGACY TRANSITION ERA · 1988-2001",x:1180,y:10,w:330,h:529,c:C.modern},
+{l:"LEGACY TRANSITION ERA · c. 1988–2001",x:1180,y:10,w:330,h:529,c:C.modern},
 
 
 
 // ═══ COLUMN 3: MODERN COLLECTION ERA 2001-2025 ═══
-{l:"MODERN COLLECTION ERA · 2001-2025",x:1560,y:10,w:820,h:920,c:C.modern},
+{l:"MODERN COLLECTION ERA · 2001–2025",x:1560,y:10,w:820,h:920,c:C.modern},
 {l:"GRAND SEIKO · MODERN",x:1570,y:35,w:800,h:269,c:C.gs,sub:1},
 {l:"KING SEIKO · MODERN",x:1570,y:319,w:520,h:74,c:C.ks,sub:1},
 {l:"PROSPEX · SEA / LAND / AIR",x:1570,y:408,w:800,h:269,c:C.prospex,sub:1},
