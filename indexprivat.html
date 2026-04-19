@@ -8,9 +8,9 @@
 <style>
 :root{--suwa:#1e3a5f;--kameido:#7a2332;--diver:#0d6651;--chrono:#9e6b00;--bell:#6d3a7a;--world:#2d7a53;--seiko5:#3d6d1e;--gs:#1a4a6a;--ks:#5a2a4a;--modern:#4a3a1e;--prospex:#0a5a4a;--presage:#3a2a5e;--icon:#b8942e;--coll:#2d8a3e;--bg:#faf9f7;--paper:#fff;--ink:#1a1a1a;--muted:#8a8780;--rule:#e0ddd6;--hibeat:#c92a2a;--springdrive:#1c7ed6;--quartz:#9e9e9e}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink);overflow:hidden}
-#app{width:100vw;height:100vh;display:flex;flex-direction:column}
-#header{padding:10px 20px 8px;border-bottom:1px solid var(--rule);background:var(--paper);z-index:20;flex-shrink:0;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;max-height:50vh;overflow-y:auto;transition:max-height .3s ease}
+body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)}
+#app{width:100vw;display:flex;flex-direction:column}
+#header{padding:14px 20px 12px;border-bottom:1px solid var(--rule);background:var(--paper);z-index:20;flex-shrink:0;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap}
 #header .eyebrow{font-size:8px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
 #header h1{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--ink);letter-spacing:.5px;line-height:1.2}
 #header .spacer{flex:1}
@@ -23,7 +23,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 .filters button{font-family:'IBM Plex Mono',monospace;font-size:8px;padding:3px 8px;background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:2px;cursor:pointer;letter-spacing:.3px;transition:all .15s}
 .filters button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .filters button:hover:not(.active){border-color:var(--muted);color:var(--ink)}
-#toolbar{padding:5px 20px;border-bottom:1px solid var(--rule);background:var(--paper);z-index:20;flex-shrink:0;display:flex;align-items:center;gap:10px}
+#toolbar{padding:5px 20px;border-bottom:1px solid var(--rule);background:var(--paper);z-index:20;flex-shrink:0;display:flex;align-items:center;gap:10px;position:sticky;top:0}
 #toolbar label{font-size:8px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
 #zoom-slider{-webkit-appearance:none;appearance:none;width:180px;height:3px;background:var(--rule);border-radius:2px;outline:none;cursor:pointer}
 #zoom-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--ink);cursor:pointer;border:2px solid var(--paper);box-shadow:0 1px 2px rgba(0,0,0,.2)}
@@ -37,7 +37,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #legend .dot{width:7px;height:7px;border-radius:1px}
 #legend span{font-size:7px;color:var(--muted);letter-spacing:.3px;user-select:none}
 #legend .sep{width:1px;height:10px;background:var(--rule);margin:0 2px}
-#canvas-wrap{flex:1;overflow:hidden;position:relative;cursor:grab;touch-action:none;background:var(--bg);background-image:radial-gradient(circle,#d8d5ce .4px,transparent .4px);background-size:20px 20px}
+#canvas-wrap{height:calc(100vh - 60px);min-height:520px;overflow:hidden;position:relative;cursor:grab;touch-action:none;background:var(--bg);background-image:radial-gradient(circle,#d8d5ce .4px,transparent .4px);background-size:20px 20px}
 #canvas-wrap.dragging{cursor:grabbing}
 #canvas{position:absolute;transform-origin:0 0}
 .section-bg{position:absolute;border-radius:4px;pointer-events:none}
@@ -54,56 +54,28 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 .node:hover .bar{opacity:1}
 .node.dimmed{opacity:.1}
 .node.hidden-filter{opacity:.04;pointer-events:none}
-/* Feature 1: Tech badges */
 .tech-badge{position:absolute;bottom:3px;right:4px;width:9px;height:9px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5px;font-weight:700;color:#fff;box-shadow:0 0 3px rgba(0,0,0,.15);transition:opacity .2s}
 .tech-badge.hibeat{background:var(--hibeat)}
 .tech-badge.springdrive{background:linear-gradient(135deg,#1971c2,#22b8cf);animation:sd-pulse 3s ease-in-out infinite}
 .tech-badge.quartz{background:var(--quartz)}
 @keyframes sd-pulse{0%,100%{box-shadow:0 0 3px rgba(28,126,214,.2)}50%{box-shadow:0 0 8px rgba(28,126,214,.5)}}
-/* Feature 2: Semantic zoom */
 #canvas.zoom-far .node .text{font-size:7px}
 #canvas.zoom-far .tech-badge{opacity:0}
 #canvas.zoom-far .coll-badge{opacity:0}
 #canvas.zoom-far .star-badge{font-size:5px;padding:0 2px}
 #canvas.zoom-far .section-bg.sub{opacity:.3}
-/* Feature 3: Minimap */
 #minimap{position:absolute;bottom:8px;right:10px;z-index:15;background:var(--paper);border:1px solid var(--rule);border-radius:3px;box-shadow:0 1px 6px rgba(0,0,0,.06);overflow:hidden;cursor:pointer}
 #minimap canvas{display:block}
 #minimap .viewport{position:absolute;border:1.5px solid var(--icon);background:rgba(184,148,46,.08);border-radius:1px;pointer-events:none}
-/* Feature 4: Spring Drive edge animation */
-/* Spring Drive edges use same styling as other edges - SD badges on nodes are sufficient */
-/* Feature 5: Instant info popup on hover with local images */
-#watch-popup{
-  position:fixed;z-index:50;pointer-events:none;
-  background:var(--paper);border:1px solid var(--rule);border-radius:4px;
-  box-shadow:0 4px 20px rgba(0,0,0,.12);padding:0;
-  opacity:0;transition:opacity .15s;width:210px;
-  display:none;overflow:hidden;
-}
+#watch-popup{position:fixed;z-index:50;pointer-events:none;background:var(--paper);border:1px solid var(--rule);border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,.12);padding:0;opacity:0;transition:opacity .15s;width:210px;display:none;overflow:hidden}
 #watch-popup.visible{opacity:1;display:block}
-#watch-popup img{
-  width:100%;height:140px;object-fit:cover;
-  display:none;background:#f0ede6;
-}
+#watch-popup img{width:100%;height:140px;object-fit:cover;display:none;background:#f0ede6}
 #watch-popup img.loaded{display:block}
 #watch-popup .popup-body{padding:8px 10px}
-#watch-popup .popup-name{
-  font-family:'Cormorant Garamond',serif;font-size:13px;
-  color:var(--ink);font-weight:600;line-height:1.25;margin-bottom:2px;
-}
-#watch-popup .popup-era{
-  font-size:8px;color:var(--muted);letter-spacing:.5px;
-  text-transform:uppercase;margin-bottom:3px;
-}
-#watch-popup .popup-desc{
-  font-size:9.5px;color:#555;line-height:1.4;
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-}
-#watch-popup .popup-tag{
-  display:inline-block;font-size:7px;padding:1px 5px;
-  border-radius:2px;margin-top:4px;margin-right:3px;font-weight:500;
-  letter-spacing:.3px;
-}
+#watch-popup .popup-name{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--ink);font-weight:600;line-height:1.25;margin-bottom:2px}
+#watch-popup .popup-era{font-size:8px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
+#watch-popup .popup-desc{font-size:9.5px;color:#555;line-height:1.4;font-family:'Cormorant Garamond',serif;font-style:italic}
+#watch-popup .popup-tag{display:inline-block;font-size:7px;padding:1px 5px;border-radius:2px;margin-top:4px;margin-right:3px;font-weight:500;letter-spacing:.3px}
 #watch-popup .popup-tag.t-diver{background:#0d665118;color:#0d6651}
 #watch-popup .popup-tag.t-chrono{background:#9e6b0018;color:#9e6b00}
 #watch-popup .popup-tag.t-gs{background:#1a4a6a18;color:#1a4a6a}
@@ -114,12 +86,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #watch-popup .popup-tag.t-coll{background:#2d8a3e18;color:#2d8a3e}
 #edges-svg{position:absolute;top:0;left:0;pointer-events:none}
 #edges-svg path[data-desc]{pointer-events:stroke;cursor:crosshair;stroke-linecap:round}
-#edge-tip{
-  position:fixed;z-index:55;pointer-events:none;
-  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
-  box-shadow:0 2px 10px rgba(0,0,0,.1);padding:5px 8px;
-  display:none;max-width:260px;
-}
+#edge-tip{position:fixed;z-index:55;pointer-events:none;background:var(--paper);border:1px solid var(--rule);border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.1);padding:5px 8px;display:none;max-width:260px}
 #edge-tip.show{display:block}
 #edge-tip .et-type{font-size:7px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 #edge-tip .et-desc{font-family:'Cormorant Garamond',serif;font-size:10.5px;color:var(--ink);line-height:1.35}
@@ -132,7 +99,6 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
     <div class="eyebrow">精工 · Mechanical Heritage · 1960–2025 · Three Eras</div>
     <h1>The Complete Seiko Mechanical Family Tree</h1>
     <div style="font-family:'Cormorant Garamond',serif;font-size:13.5px;color:var(--muted);line-height:1.65;max-width:1100px">
-
       <div id="intro-short" style="margin:8px 0 0">
         <p style="margin:0 0 10px">This diagram maps Seiko's mechanical watch families using a curatorial three-era framework based on major company and technology milestones.</p>
         <p style="margin:0 0 10px"><strong style="color:var(--ink)">Vintage Factory Era (1960–c. 1988)</strong> covers Suwa Seikosha and Daini/Kameido — two parallel in-house production centers whose structured internal competition drove Grand Seiko, King Seiko, divers, and chronographs to world-class standards.</p>
@@ -140,44 +106,30 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
         <p style="margin:0 0 10px"><strong style="color:var(--ink)">Modern Collection Era (2001–2025)</strong> begins with the establishment of Seiko Watch Corporation and reflects today's brand and collection architecture. Many lines shown here have deeper heritage roots — Prospex traces to 1965, Seiko 5 Sports to 1968, Grand Seiko to 1960.</p>
         <p style="margin:0;font-size:11px;opacity:.65;font-style:italic">Era divisions are editorial. Lineage edges are based on a synthesis of catalogues, movement data, and specialist literature. Edges show direct lineage <span style="display:inline-block;width:16px;height:0;border-top:2px solid #aaa;vertical-align:middle;margin:0 2px"></span>, platform continuation <span style="display:inline-block;width:16px;height:0;border-top:1px solid #aaa;vertical-align:middle;margin:0 2px"></span>, and heritage influence <span style="display:inline-block;width:16px;height:0;border-top:1px dashed #aaa;vertical-align:middle;margin:0 2px"></span>.</p>
       </div>
-
       <div id="intro-detail">
         <hr style="border:none;border-top:1px solid var(--rule);margin:12px 0">
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">The Foundations: Marvel to Grand Seiko</strong></p>
         <p style="margin:0 0 12px">Modern Seiko mechanical watchmaking begins with the Marvel (1956), the company's first watch with a fully in-house movement and Diashock system. The Marvel led to the Crown, Seiko's first chronometer-grade watch, and in 1960 the Crown's Cal. 560 became the foundation for the first Grand Seiko (Cal. 3180) — a 25-jewel hand-wound movement often cited as the first Japanese wristwatch certified to Swiss chronometer standards.</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">Two Factories, One Rivalry</strong></p>
         <p style="margin:0 0 12px">Throughout the 1960s and 1970s, Seiko's mechanical watches were produced at Suwa Seikosha (now Seiko Epson) in Nagano and Daini Seikosha (now SII/Morioka Seiko) in Iwate. Suwa produced Grand Seiko, the Seikomatic and Lord Matic dress families, and the 613x chronograph platform. Daini countered with King Seiko, the Champion line, and the 701x chronographs. This rivalry drove both factories to extraordinary heights — Grand Seiko won top honors at observatory trials, while King Seiko's 44KS established a design grammar that still defines Grand Seiko today.</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">Grand Seiko: The Pursuit of the Ideal Watch</strong></p>
         <p style="margin:0 0 12px">From the first GS in 1960 through the hi-beat 61GS and 45GS, to the V.F.A. models adjusted to ±2 seconds per day, Grand Seiko represented Seiko's relentless pursuit of accuracy. The 44GS (1967) established the Grand Seiko Style — a nine-element design grammar that remains the visual signature of every Grand Seiko today. After going dormant during the Quartz Crisis, GS was revived in 1998 with the 9S caliber, became an independent brand in 2017, and continues to push boundaries with the 2025 Spring Drive U.F.A. (±20 sec/year).</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">King Seiko: Daini's Answer</strong></p>
         <p style="margin:0 0 12px">King Seiko debuted in 1961 as Daini's counterpart to Grand Seiko. The 44KS, 45KS hi-beat, and 52KS automatic became landmarks of 1960s-70s Japanese horology. King Seiko ceased production in the mid-1970s and lay dormant for 47 years before being revived in 2022.</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">Divers: From SilverWave to Prospex</strong></p>
         <p style="margin:0 0 12px">Seiko's diver heritage begins with the SilverWave (c. 1961), an early diver-inspired sport watch. The 62MAS of 1965 is recognized as Japan's first professional diver's watch (150m), establishing the lineage that produced the 6105 "Captain Willard," the 6159 "Grandfather Tuna" (first titanium diver, 600m), the SKX007/009, and today's Prospex collection. The tree traces both the professional branch (62MAS → Tuna → Marinemaster) and the recreational branch (62MAS → Willard → 6309 → SKX → modern platforms).</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">Chronographs: The Race to Automatic</strong></p>
         <p style="margin:0 0 12px">Seiko's 6139-6000 was the first automatic chronograph to market (May 1969, though Zenith and Heuer also claim priority). The 6139 platform produced the Pogue (first automatic chronograph in space), the Helmet, and the Aquatimer. Daini's 701x created the five-register 7018. The Suwa 6138 contributed the cult-classic Kakume and the radical Bullhead.</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">Seiko 5: The People's Mechanical Watch</strong></p>
         <p style="margin:0 0 12px">The Seiko 5 concept originated with the Sportsmatic 5 in 1963, defining five attributes: automatic winding, day-date, water resistance, recessed crown, and durable case. The modern Seiko 5 Sports (2019) continues the concept with Cal. 4R36 and strong SKX design DNA.</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">Spring Drive: Twenty Years in the Making</strong></p>
         <p style="margin:0 0 12px">Yoshikazu Akahane's vision of a mainspring-powered movement with quartz-level accuracy took roughly two decades from the late 1970s, resulting in 50+ patents. The tri-synchro regulator debuted commercially with the 7R68 in 1999 and found its ultimate expression in Grand Seiko.</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">The Transition: Keeping Mechanical Alive</strong></p>
         <p style="margin:0 0 12px">While Seiko focused on quartz and Kinetic through the 1980s-90s, the 4S caliber family bridged vintage and modern mechanics. The 7002 and SKX kept the diver tradition alive. And in 2000, the Historical Collection tested market appetite for heritage reissues, directly informing the Prospex heritage program and the King Seiko revival.</p>
-
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:14px">The Modern Era</strong></p>
         <p style="margin:0 0 6px">Today's Seiko is structured around Grand Seiko (independent since 2017), King Seiko (revived 2022), Prospex, Presage (named c. 2010-11, global from 2016), and Seiko 5 Sports (relaunched 2019). Many have roots stretching back decades — the modern era reflects brand architecture, not necessarily birth dates.</p>
-
       </div>
-
       <button id="intro-toggle" onclick="const d=document.getElementById('intro-detail');d.classList.toggle('show');this.textContent=d.classList.contains('show')?'Show less ▲':'Read more — historical summary ▼'">Read more — historical summary ▼</button>
-
     </div>
   </div>
   <div class="spacer"></div>
@@ -193,7 +145,6 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   <div class="sep"></div>
   <span style="font-size:8px;color:var(--muted)">Scroll to zoom · Drag to pan · Dbl-click to zoom in · Hover for connections</span>
 </div>
-<div id="minimap"><canvas id="minimap-canvas"></canvas><div class="viewport" id="mm-viewport"></div></div>
 <div id="watch-popup">
   <img id="popup-img" src="" alt="">
   <div class="popup-body">
@@ -204,7 +155,10 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   </div>
 </div>
 <div id="edge-tip"><div class="et-type"></div><div class="et-desc"></div></div>
-<div id="canvas-wrap"><div id="canvas"><svg id="edges-svg"></svg></div></div>
+<div id="canvas-wrap">
+  <div id="canvas"><svg id="edges-svg"></svg></div>
+  <div id="minimap"><canvas id="minimap-canvas"></canvas><div class="viewport" id="mm-viewport"></div></div>
+</div>
 <div id="legend"></div>
 </div>
 <script>
@@ -218,12 +172,7 @@ const inCollection=new Set([
   "px_sumo","px_shogun"
 ]);
 const techMap={lord_marvel_36k:"hibeat","61gs":"hibeat","61gs_vfa":"hibeat","61gs_sp":"hibeat",lord_matic_sp:"hibeat","45ks":"hibeat","45gs":"hibeat","45gs_vfa":"hibeat",gs_hibeat:"hibeat",gs_9s5:"hibeat","19gs":"hibeat",gs_sd_04:"springdrive",gs_9r:"springdrive",gs_9ra:"springdrive",gs_ufa:"springdrive",gs_sport:"springdrive",px_hb_8l55:"hibeat",px_lx:"springdrive",px_sd_diver:"springdrive",gs_9r01:"springdrive",gs_sd_chrono:"springdrive",sd_7r88:"springdrive",sd_7r68:"springdrive",sd_concept:"springdrive",gs_quartz_88:"quartz"};
-/* ═══ Feature 5: Popup data — local images from ./img/ ═══
-   Only specific models get images (hasImg:true).
-   Broad families/collections do NOT get images.
-   Text info shows instantly; image loads async from ./img/{id}.jpg */
 const popupData={
-  // ── VINTAGE SUWA ──
   marvel:{n:"Seiko Marvel",era:"1956-62",d:"First Seiko with a movement designed fully in-house. Introduced Diashock system. Foundation of all subsequent Seiko mechanical development.",tags:["icon"]},
   lord_marvel_36k:{n:"Lord Marvel 36000",era:"1967-late 70s",d:"First Japanese watch with 36,000 bph movement. A precision milestone that launched Suwa's hi-beat era.",tags:["icon","hb"]},
   crown:{n:"Seiko Crown",era:"1958-65",d:"First Seiko with chronometer-grade movement. Bridge to Grand Seiko.",tags:[]},
@@ -234,11 +183,9 @@ const popupData={
   "gs_sd":{n:"Grand Seiko Self-Dater",era:"1964-67",d:"Cal. 430/5722A. Second-generation GS with calendar and 50m water resistance. Stainless steel case for daily practicality.",tags:["gs"]},
   "gs_quartz_88":{n:"Grand Seiko 9F Quartz",era:"1993-",d:"Cal. 9F83. Twin-pulse control motor, instant date change. +/-10 sec/year. First GS quartz was 1988 (Cal. 95xx); the landmark 9F platform launched 1993.",tags:["gs"]},
   gs_1st:{n:"Grand Seiko (Cal. 3180)",era:"1960-63",d:"The first Grand Seiko. Cal. 3180, 25 jewels, 18,000 bph. Rated +12/-3 seconds/day. Often cited as the first Japanese wristwatch certified to Swiss chronometer standards. 35mm gold-filled case. Set the design codes — clean dial, long hands, applied indices — that Grand Seiko still follows.",tags:["icon","gs"]},
-  "62gs":{n:"62GS Automatic",era:"1967-68",d:"Cal. 6245/6246. First Grand Seiko automatic. Originally sold as Seikomatic Chronometer, renamed after European Chronometer Association challenged the name.",tags:["icon","gs"],hasImg:1},
   "61gs":{n:"61GS Hi-Beat",era:"1968-74",d:"36,000 bph automatic Grand Seiko. Suwa's hi-beat revolution.",tags:["icon","gs","hb"],hasImg:1},
   "61gs_vfa":{n:"61GS VFA",era:"1969-74",d:"Very Fine Adjusted — Suwa's ultimate mechanical precision.",tags:["icon","gs","hb"],hasImg:1},
   "56gs_s":{n:"56GS",era:"1970-78",d:"Ultra-thin automatic Grand Seiko. Cal. 5645/5646.",tags:["gs"],hasImg:1},
-  // ── SEIKOMATIC ──
   lord_matic_56:{n:"Lord Matic 56",era:"1972-78",d:"Cal. 5606. Ultra-thin automatic dress watch. Final evolution of the Lord Matic line.",tags:[]},
   seikomatic_chr:{n:"Seikomatic Chronometer",era:"1966-67",d:"Cal. 6245/6246. Chronometer-grade automatic. Its movement directly became the basis for the 62GS - the first automatic Grand Seiko.",tags:["gs"]},
   seikomatic_p:{n:"Seikomatic-P",era:"1967-68",d:"Cal. 5106. Precision-oriented automatic. Direct precursor to the Presmatic.",tags:[]},
@@ -247,7 +194,6 @@ const popupData={
   presmatic:{n:"Presmatic",era:"1967-73",d:"33 jewels hi-beat. Premium Suwa automatic.",tags:["hb"]},
   business:{n:"Business",era:"1967-68",d:"Cal. 6206. Day-date automatic. Bridge between Weekdater and the premium Business-A line.",tags:[]},
   business_a:{n:"Business-A",era:"1967-72",d:"Hi-beat dress automatic. Cal. 8346.",tags:["hb"]},
-  // ── DIVERS ──
   silverwave:{n:"Seikomatic Silverwave",era:"1961-64",d:"Early diver-inspired sport watch (c. 1961-64). 50m WR, internal rotating bezel, screw-down caseback with tsunami motif. Not a professional diver -- preceded and influenced the 62MAS.",tags:["icon","diver"]},
   selfdater_mas:{n:"Seikomatic Selfdater MAS",era:"1963-65",d:"Cal. 6217 — same movement as 62MAS. Direct precursor.",tags:["icon","diver"]},
   "62mas":{n:"62MAS",era:"1965-68",d:"First true Seiko professional diver. 150m. Cal. 6217. The one that started the legend.",tags:["icon","diver"],hasImg:1},
@@ -260,7 +206,6 @@ const popupData={
   "6309":{n:"6309 Turtle Diver",era:"1976-88",d:"150m turtle-case diver. Successor to 6105 in the diver line.",tags:["diver"],hasImg:1},
   "6306_sd":{n:"SilverWave Surface Diver",era:"1976-78",d:"Cal. 6306. Turtle-case 150m recreational diver. Non-professional companion to the 6309 line.",tags:["diver"]},
   skx:{n:"SKX007/009",era:"1996-2019",d:"Cal. 7S26. 200m ISO-rated diver produced for 23 years without change. Among the most widely sold mechanical dive watches in history. Discontinued 2019 when Prospex absorbed the diver line.",tags:["icon","diver"]},
-  // ── CHRONOGRAPHS ──
   "6139_first":{n:"6139-6000",era:"1969-72",d:"First automatic chronograph to market (May 1969, though Zenith and Heuer also claim priority). Vertical clutch, column wheel.",tags:["icon","chrono"],hasImg:1},
   "6139_pogue":{n:"6139 Pogue",era:"1971-78",d:"First automatic chronograph in space. Col. Pogue, Skylab 4, 1973.",tags:["icon","chrono"],hasImg:1},
   "6138_kakume":{n:"6138 Kakume",era:"1972-77",d:"'Square eye' — dual-register chrono. Cult classic.",tags:["icon","chrono"],hasImg:1},
@@ -268,10 +213,8 @@ const popupData={
   "6139_hex":{n:"6139 Hexagon",era:"1974-78",d:"Hexagonal case chronograph. Late 6139 variant.",tags:["chrono"],hasImg:1},
   "6139_aqua":{n:"6139 Aquatimer",era:"1976-79",d:"Sport diver chronograph. 6139-7070.",tags:["chrono"],hasImg:1},
   "6139_helmet":{n:"6139 Helmet 'Darth Vader'",era:"1977-80",d:"6139-7101. Distinctive helmet-shaped case. Fixed tachymeter scale on dial.",tags:["chrono"],hasImg:1},
-  // ── BELL-MATIC / WORLD TIME ──
   bell_4006:{n:"Bell-Matic (Cal. 4006)",era:"1967-78",d:"Mechanical alarm complication. Unique to Seiko.",tags:["icon"]},
   wt_6217:{n:"World Time (Cal. 6217)",era:"1964-69",d:"Seiko's first world timer. Tokyo Olympics 1964.",tags:["icon"]},
-  // ── KING SEIKO / KAMEIDO ──
   ks_1st:{n:"King Seiko",era:"1961-63",d:"Daini/Kameido's counterpart to Grand Seiko, designed to match GS quality at a more accessible price. Seiko officially describes it as 'designed to emulate Grand Seiko as the pinnacle of Japanese watchmaking.'",tags:["icon","ks"]},
   "44ks":{n:"44KS Grammar of Design",era:"1964-69",d:"Taro Tanaka's design philosophy. Foundation of all GS/KS design language.",tags:["icon","ks"],hasImg:1},
   "45ks":{n:"45KS Hi-Beat",era:"1968-74",d:"Manual hi-beat 36,000 bph. Cal. 4500/4502. Two case variants: angular 7000 and oval turtle 8000.",tags:["icon","ks","hb"],hasImg:1},
@@ -279,14 +222,10 @@ const popupData={
   "52ks":{n:"52KS",era:"1971-75",d:"Late King Seiko automatic. Cal. 5246. Thin-case everyday dress watch from Daini.",tags:["ks"],hasImg:1},
   vanac:{n:"Vanac",era:"1972-78",d:"Asymmetric crown, sporty 70s design. Cult following.",tags:["icon","ks"]},
   goldfeather:{n:"Goldfeather",era:"1960-66",d:"Ultra-thin prestige. Kameido's thinnest.",tags:["icon"]},
-  "44gs":{n:"44 Grand Seiko",era:"1967-68",d:"Cal. 4420. Manual-wind, 18,000 bph. Established the Grand Seiko Style -- the nine-element design grammar (zaratsu finishing, sharp hands, wide indices) that defines all modern Grand Seiko to this day.",tags:["icon","gs"],hasImg:1},
-  "45gs":{n:"45 Grand Seiko",era:"1968-74",d:"Cal. 4520. Manual-wind hi-beat 36,000 bph from Daini. Ultra-thin 3.5mm movement. Won top honours at Neuchatel and Geneva observatory trials.",tags:["icon","gs","hb"],hasImg:1},
-  "45gs_vfa":{n:"45 GS V.F.A.",era:"1969-74",d:"Very Fine Adjusted. +/-2 seconds/day -- the pinnacle of Seiko mechanical accuracy. Manual-wind hi-beat 36,000 bph.",tags:["icon","gs","hb"]},
   c701x:{n:"701x Flyback Chronograph Platform",era:"1970-75",d:"Daini/Kameido flyback chronograph family. Cal. 7015/7016/7017/7018 share core architecture. Parallel members, not a linear succession. First appeared 1970.",tags:["chrono"]},
   "19gs":{n:"19GS",era:"late 1960s-early 1970s",d:"Small-sized hi-beat Grand Seiko for women. Cal. 1944. Produced at Kameido/Daini.",tags:["gs","hb"]},
   k7016:{n:"7016 Flyback Chronograph",era:"1970-75",d:"Cal. 7016. Daini/Kameido flyback chronograph with Monaco-style case. Single pusher operation.",tags:["chrono"]},
   k7018:{n:"7018 Five-Register Chrono",era:"1971-75",d:"Most complex Kameido chronograph. Five sub-dials.",tags:["icon","chrono"]},
-  // ── GRAND SEIKO MODERN ──
   gs_9s5:{n:"Caliber 9SA5",era:"2020-",d:"Next-gen hi-beat mechanical. Dual impulse escapement. 80h power reserve.",tags:["icon","gs","hb"]},
   gs_ufa:{n:"Spring Drive U.F.A. 9RB2",era:"2025-",d:"Ultra Fine Accuracy. ±20 sec/year. Grand Seiko's most precise mainspring-powered wristwatch to date.",tags:["icon","gs","sd"]},
   sd_concept:{n:"Spring Drive Concept",era:"1978-1997",d:"Yoshikazu Akahane's long-term vision: a mainspring-powered movement with quartz-level accuracy. Developed over roughly two decades from the late 1970s, culminating in the tri-synchro regulator. 50+ patents.",tags:["sd"]},
@@ -295,13 +234,11 @@ const popupData={
   gs_sd_chrono:{n:"GS Spring Drive Chronograph",era:"2007-",d:"Cal. 9R86. First Spring Drive chronograph. 30-min and 12-hr registers with glide motion seconds.",tags:["gs","sd"]},
   gs_9r01:{n:"GS Spring Drive 8 Days",era:"2016-",d:"Cal. 9R01. Micro Artist Studio. Three mainspring barrels for 192-hour power reserve. Platinum case.",tags:["gs","sd"]},
   gs_sd_04:{n:"Grand Seiko Spring Drive",era:"2004-",d:"9R caliber. Tri-synchro regulator. The glide motion seconds hand.",tags:["gs","sd"]},
-  // ── KING SEIKO MODERN ──
   hist_2000:{n:"Historical Collection 2000",era:"2000",d:"Seven-piece reissue collection released in 2000, before Seiko Watch Corporation (2001). Included 52KS (Cal. 4S28), 62MAS diver, Crown Chronograph, Alpinist, and World Timer reissues. Proto-modern heritage strategy that tested market appetite for vintage reconnection — directly anticipating the KS revival and Prospex heritage diver programs.",tags:[]},
   s4_family:{n:"4S Mechanical Platform",era:"1992-2000s",d:"Cal. 4S15/4S25/4S36. Higher-grade mechanical platform bridging vintage Seiko and the modern era. Derived from KS 52xx architecture. Used in SUS, SARB, and early Presage predecessors.",tags:[]},
   seiko_sus:{n:"Seiko SUS",era:"1990s",d:"Cal. 4S15 hand-wound. Transitional mechanical line bridging vintage Seiko and modern collection era. Higher-grade 4S platform derived from the King Seiko 52xx family. Proved market demand for mechanical watches still existed.",tags:[]},
   ks_revival:{n:"King Seiko Revival",era:"2022-",d:"Revived under the modern King Seiko banner, drawing especially on the 1960s Daini design language.",tags:["ks"]},
   ks_vanac_25:{n:"King Seiko VANAC",era:"2025-",d:"Revival of the 1972 asymmetric design. Medium link to vintage Vanac.",tags:["ks"]},
-  // ── PROSPEX ──
   px_mm:{n:"Marinemaster",era:"modern era",d:"Modern professional diver family drawing on Seiko's high-end diver heritage, especially the 6159 line.",tags:["diver"]},
   px_monster:{n:"Monster Platform",era:"2000-",d:"Radical asymmetric case design. First-gen SKX779/781. Distinctive shrouded crown at 4. Became an enduring Seiko diver archetype reissued under Prospex.",tags:["diver"]},
   px_samurai:{n:"Samurai Platform",era:"2004-",d:"Angular case with pronounced crown guards. Cal. 7S26/4R35. Named for its sharp, blade-like case lines. Revived 2017 under Prospex as SRPB series.",tags:["diver"]},
@@ -311,99 +248,95 @@ const popupData={
   px_lx:{n:"LX Line",era:"2019-",d:"Flagship Prospex Spring Drive divers. Titanium, ceramic. The pinnacle of Seiko diver technology.",tags:["diver","sd"]},
   px_hb_8l55:{n:"Hi-Beat Professional Diver",era:"2015-",d:"Cal. 8L55. 36,000 bph mechanical professional diver. Combines hi-beat precision with 300m+ water resistance.",tags:["diver","hb"]},
   px_alpinist:{n:"Alpinist",era:"1959 heritage / modern",d:"Heritage traces to 1959 Laurel Alpine; first concrete Alpinist model 1962. Inner compass bezel. Modern Prospex revival with green dial icon.",tags:["icon"]},
-  // ── PRESAGE ──
   prsg_cocktail:{n:"Cocktail Time",era:"2016-",d:"Textured dials inspired by Japanese cocktail culture.",tags:[]},
   prsg_sharp:{n:"Sharp Edged Series",era:"2020-",d:"Asanoha hemp-leaf pattern. Angular case construction.",tags:[]},
   prsg_style60:{n:"Style60s",era:"2021-",d:"Inspired by the 1964 Crown Chronograph. Fixed 60-min bezel.",tags:[]},
-  "gyro_marvel":{n:"Gyro Marvel",era:"1959-63",d:"Suwa's first automatic watch. 'Gyro' denoted the rotor-wound self-winding system. Built on Marvel architecture.",tags:[]},
-  "lord_marvel":{n:"Lord Marvel",era:"late 1950s-75",d:"Premium manual-wind dress watch. Suwa's flagship line before Grand Seiko. Higher-grade finishing than standard Marvel.",tags:[]},
-  "crown_sd":{n:"Crown Self Dater",era:"1960-65",d:"Crown with calendar complication. Date display added practicality to the Crown platform.",tags:[]},
-  "crown_sp":{n:"Crown Special",era:"1960-65",d:"Higher-grade Crown with improved movement specs. Bridge between Crown and early Grand Seiko.",tags:[]},
-  "gs_sd":{n:"Grand Seiko Self-Dater",era:"1963-67",d:"Cal. 430/5722A. Second-generation GS with calendar function. Water resistance to 50m. Stainless steel case for daily practicality.",tags:["gs"]},
+  gyro_marvel:{n:"Gyro Marvel",era:"1959-63",d:"Suwa's first automatic watch. 'Gyro' denoted the rotor-wound self-winding system. Built on Marvel architecture.",tags:[]},
+  lord_marvel:{n:"Lord Marvel",era:"late 1950s-75",d:"Premium manual-wind dress watch. Suwa's flagship line before Grand Seiko. Higher-grade finishing than standard Marvel.",tags:[]},
+  crown_sd:{n:"Crown Self Dater",era:"1960-65",d:"Crown with calendar complication. Date display added practicality to the Crown platform.",tags:[]},
+  crown_sp:{n:"Crown Special",era:"1960-65",d:"Higher-grade Crown with improved movement specs. Bridge between Crown and early Grand Seiko.",tags:[]},
   "57gs_cal":{n:"57GS Calendar",era:"1964-67",d:"Cal. 5722. Grand Seiko with date complication. Manual-wind with Seiko's own Grand Seiko Standard accuracy.",tags:["gs"]},
   "61gs_sp":{n:"61GS Special",era:"1970-74",d:"Chronometer-grade automatic hi-beat Grand Seiko. Higher adjustment standard than regular 61GS.",tags:["gs","hb"]},
-  "liner":{n:"Liner",era:"1960-65",d:"Mid-range manual-wind dress watch. Positioned between Marvel and Crown. Named for the ocean liner era.",tags:[]},
-  "liner_chr":{n:"Liner Chronometer",era:"1961-65",d:"Chronometer-certified Liner. Demonstrated Suwa's precision capabilities at a lower price point than GS.",tags:[]},
-  "laurel":{n:"Laurel",era:"1959-64",d:"Entry-level Suwa dress watch. Feeds into the Skyliner branch and carries Alpinist heritage from 1959.",tags:[]},
-  "skyliner":{n:"Skyliner",era:"1960-69",d:"Popular mid-range automatic. Cal. 6220. Thin-case everyday dress watch. Workhorse of the Suwa lineup.",tags:[]},
+  liner:{n:"Liner",era:"1960-65",d:"Mid-range manual-wind dress watch. Positioned between Marvel and Crown. Named for the ocean liner era.",tags:[]},
+  liner_chr:{n:"Liner Chronometer",era:"1961-65",d:"Chronometer-certified Liner. Demonstrated Suwa's precision capabilities at a lower price point than GS.",tags:[]},
+  laurel:{n:"Laurel",era:"1959-64",d:"Entry-level Suwa dress watch. Feeds into the Skyliner branch and carries Alpinist heritage from 1959.",tags:[]},
+  skyliner:{n:"Skyliner",era:"1960-69",d:"Popular mid-range automatic. Cal. 6220. Thin-case everyday dress watch. Workhorse of the Suwa lineup.",tags:[]},
   "61_skyliner":{n:"61 Skyliner",era:"1968-72",d:"Hi-beat Skyliner with Cal. 6100 series. 28,800 bph upgrade to the Skyliner platform.",tags:[]},
-  "sky_cal":{n:"Skyliner Calendar",era:"1962-69",d:"Skyliner with date complication. Day-date variants available. High-volume everyday Suwa automatic.",tags:[]},
+  sky_cal:{n:"Skyliner Calendar",era:"1962-69",d:"Skyliner with date complication. Day-date variants available. High-volume everyday Suwa automatic.",tags:[]},
   "61_skyliner_cal":{n:"61 Skyliner Calendar",era:"late 1960s",d:"Hi-beat Skyliner with calendar. Final evolution of the Skyliner platform before Lord Matic era.",tags:[]},
-  "lord_matic":{n:"Lord Matic",era:"1968-75",d:"Cal. 5601. Premium automatic dress watch. Succeeded the Seikomatic/Business lines as Suwa's high-end automatic.",tags:[]},
-  "lord_matic_sp":{n:"Lord Matic Special",era:"1970-75",d:"Hi-beat 28,800 bph Lord Matic. Cal. 5206. Superior finishing and accuracy adjustment. Suwa's finest non-GS automatic.",tags:["hb"]},
-  "seikomatic_sd":{n:"Seikomatic Self Dater",era:"1962-68",d:"Seikomatic with date complication. Cal. 6205/6206. Popular mid-range automatic with calendar.",tags:[]},
-  "seikomatic_slim":{n:"Seikomatic Slimdate",era:"1963-68",d:"Thinner Seikomatic with date. Suwa's push toward slimmer automatic dress watches.",tags:[]},
-  "weekdater_6206":{n:"Weekdater 400/6206",era:"1965-67",d:"Day-date automatic. Cal. 6206. Evolution of Seikomatic Self Dater with added day display.",tags:[]},
-  "weekdater_6218":{n:"Weekdater 6216/6218",era:"1967-70",d:"Upgraded Weekdater family. Cal. 6218 with quickset date. Key platform that branched into Business and chronometer lines.",tags:[]},
-  "sea_lion":{n:"Sea Lion",era:"1966-70",d:"Water-resistant automatic. Positioned between Seikomatic-R and Presmatic. Semi-sport dress watch.",tags:[]},
-  "super":{n:"Super",era:"1960-63",d:"Entry-level Suwa manual-wind. Budget line that evolved into the sports-oriented Sportsman and Sportsmatic families.",tags:[]},
-  "sportsman":{n:"Sportsman",era:"1961-66",d:"Sport-oriented manual-wind. Bridge between Super and the automatic Sportsmatic. Water-resistant case.",tags:[]},
-  "sportsmatic":{n:"Sportsmatic",era:"1961-68",d:"Suwa's first mass-market automatic. Cal. 6619. Day-date, water-resistant. Key precursor to the Seiko 5 concept, though the Seiko 5 line drew on multiple parallel developments.",tags:[]},
-  "sportsmatic5":{n:"Sportsmatic 5",era:"1963-68",d:"Automatic with five key features: automatic winding, day-date, water resistance, recessed crown, and durable case. Introduced in 1963 and effectively the first Seiko 5, establishing a concept that would evolve into Seiko's longest-running watch family.",tags:[]},
-  "s5_first":{n:"Seiko 5",era:"1963-",d:"Seiko 5 as an ongoing line grew from the 1963 Sportsmatic 5 concept. The five promises -- automatic, day-date, water resistance, recessed crown, durability -- became the DNA of Seiko's most enduring mechanical watch family.",tags:[]},
-  "s5_sports":{n:"5 Sports",era:"1968-85",d:"Sportier Seiko 5 variant. Rotating bezel, bolder design. Cal. 6119/7S26. Predecessor to modern 5 Sports reboot.",tags:[]},
-  "s5_speed":{n:"5 Speed Timer",era:"1969-75",d:"Seiko 5 with chronograph. Cal. 6139. Combined the 5 Sports platform with the new automatic chronograph movement.",tags:["chrono"]},
-  "s5_actus":{n:"5 Actus",era:"1970-78",d:"Cal. 7019. 'Action' oriented Seiko 5. Faceted cases, 70s styling. Higher-beat than standard 5 models.",tags:[]},
-  "s5_dx":{n:"5 DX",era:"1970-78",d:"'Deluxe' Seiko 5. Higher finishing than standard. Day-date with applied indices. Premium end of the Seiko 5 range.",tags:[]},
+  lord_matic:{n:"Lord Matic",era:"1968-75",d:"Cal. 5601. Premium automatic dress watch. Succeeded the Seikomatic/Business lines as Suwa's high-end automatic.",tags:[]},
+  lord_matic_sp:{n:"Lord Matic Special",era:"1970-75",d:"Hi-beat 28,800 bph Lord Matic. Cal. 5206. Superior finishing and accuracy adjustment. Suwa's finest non-GS automatic.",tags:["hb"]},
+  seikomatic_sd:{n:"Seikomatic Self Dater",era:"1962-68",d:"Seikomatic with date complication. Cal. 6205/6206. Popular mid-range automatic with calendar.",tags:[]},
+  seikomatic_slim:{n:"Seikomatic Slimdate",era:"1963-68",d:"Thinner Seikomatic with date. Suwa's push toward slimmer automatic dress watches.",tags:[]},
+  weekdater_6206:{n:"Weekdater 400/6206",era:"1965-67",d:"Day-date automatic. Cal. 6206. Evolution of Seikomatic Self Dater with added day display.",tags:[]},
+  weekdater_6218:{n:"Weekdater 6216/6218",era:"1967-70",d:"Upgraded Weekdater family. Cal. 6218 with quickset date. Key platform that branched into Business and chronometer lines.",tags:[]},
+  sea_lion:{n:"Sea Lion",era:"1966-70",d:"Water-resistant automatic. Positioned between Seikomatic-R and Presmatic. Semi-sport dress watch.",tags:[]},
+  super:{n:"Super",era:"1960-63",d:"Entry-level Suwa manual-wind. Budget line that evolved into the sports-oriented Sportsman and Sportsmatic families.",tags:[]},
+  sportsman:{n:"Sportsman",era:"1961-66",d:"Sport-oriented manual-wind. Bridge between Super and the automatic Sportsmatic. Water-resistant case.",tags:[]},
+  sportsmatic:{n:"Sportsmatic",era:"1961-68",d:"Suwa's first mass-market automatic. Cal. 6619. Day-date, water-resistant. Key precursor to the Seiko 5 concept, though the Seiko 5 line drew on multiple parallel developments.",tags:[]},
+  sportsmatic5:{n:"Sportsmatic 5",era:"1963-68",d:"Automatic with five key features: automatic winding, day-date, water resistance, recessed crown, and durable case. Introduced in 1963 and effectively the first Seiko 5, establishing a concept that would evolve into Seiko's longest-running watch family.",tags:[]},
+  s5_first:{n:"Seiko 5",era:"1963-",d:"Seiko 5 as an ongoing line grew from the 1963 Sportsmatic 5 concept. The five promises -- automatic, day-date, water resistance, recessed crown, durability -- became the DNA of Seiko's most enduring mechanical watch family.",tags:[]},
+  s5_sports:{n:"5 Sports",era:"1968-85",d:"Sportier Seiko 5 variant. Rotating bezel, bolder design. Cal. 6119/7S26. Predecessor to modern 5 Sports reboot.",tags:[]},
+  s5_speed:{n:"5 Speed Timer",era:"1969-75",d:"Seiko 5 with chronograph. Cal. 6139. Combined the 5 Sports platform with the new automatic chronograph movement.",tags:["chrono"]},
+  s5_actus:{n:"5 Actus",era:"1970-78",d:"Cal. 7019. 'Action' oriented Seiko 5. Faceted cases, 70s styling. Higher-beat than standard 5 models.",tags:[]},
+  s5_dx:{n:"5 DX",era:"1970-78",d:"'Deluxe' Seiko 5. Higher finishing than standard. Day-date with applied indices. Premium end of the Seiko 5 range.",tags:[]},
   "6309_sports":{n:"6309-8080 Sports",era:"1976-88",d:"Cal. 6309 automatic sports watch. Day-date, 17 jewels. Robust everyday sport automatic from the late Suwa era.",tags:[]},
   "62mas_2":{n:"62MAS 8001",era:"1967-68",d:"Second-generation 62MAS with improved case. Same Cal. 6217 movement. Transitional model before the 6105 line.",tags:["diver"]},
   "6105_last":{n:"6105-8009 'Slim Willard'",era:"1973-77",d:"Slimmer final variant of the 6105 diver. Thinner case profile than the 8110 Willard. Same 150m rating. Sometimes called the Slim Willard.",tags:["diver"]},
   "7002_node":{n:"7002",era:"1988-96",d:"Cal. 7002. Replaced the 6309 Turtle. 150m diver bridging vintage and modern eras. Last Seiko diver before the iconic SKX took over.",tags:["diver"]},
   "6138_yacht":{n:"6138 Yachtman",era:"1970-75",d:"Cal. 6138 dual-register chronograph. Yachting timer with regatta countdown. First Seiko with two chrono sub-dials.",tags:["chrono"]},
   "6138_panda":{n:"6138 Panda",era:"1971-75",d:"Cal. 6138 with contrasting white dial and dark sub-dials — the classic 'panda' layout. Popular collector variant.",tags:["chrono"]},
-  "bell_4005":{n:"Bell-Matic (4005)",era:"1966-67",d:"Cal. 4005. First-generation mechanical alarm watch. Predecessor to the improved 4006 movement.",tags:[]},
-  "bell_4006_70":{n:"Bell-Matic 4006-70xx",era:"1970-78",d:"Later Bell-Matic production with updated case designs. 70s styling with fluted bezels and faceted cases.",tags:[]},
-  "wt_6117":{n:"World Time (6117)",era:"1969-76",d:"Cal. 6117 automatic world timer. Navigator-style with 24-city rotating bezel. Improved over the manual-wind 6217.",tags:[]},
-  "nav_timer":{n:"Navigator Timer",era:"1970-76",d:"GMT/world time variant with 24-hour hand. Internal rotating city bezel. Late evolution of the Seiko world timer family.",tags:[]},
-  "cronos":{n:"Cronos",era:"1958-62",d:"Daini Seikosha's answer to Suwa's Marvel. Thinner case, higher specs. The root of all Kameido mechanical development.",tags:[]},
-  "cronos_sp":{n:"Cronos Special",era:"1959-62",d:"Higher-grade Cronos with improved finishing. Demonstrated Daini's precision ambitions.",tags:[]},
-  "cronos_sd":{n:"Cronos Self Dater",era:"1960-62",d:"Cronos with date complication. Practical evolution of the Cronos platform.",tags:[]},
-  "ks_hack":{n:"KS with Hacking",era:"1963-66",d:"Second-generation King Seiko with hacking seconds for precise time-setting. Key step toward observatory-grade accuracy.",tags:["ks"]},
-  "ks_chrono":{n:"KS Chronometer",era:"1964-68",d:"Chronometer-certified King Seiko. Competed directly with Swiss observatory chronometers. Peak accuracy of the early KS line.",tags:["ks"]},
+  bell_4005:{n:"Bell-Matic (4005)",era:"1966-67",d:"Cal. 4005. First-generation mechanical alarm watch. Predecessor to the improved 4006 movement.",tags:[]},
+  bell_4006_70:{n:"Bell-Matic 4006-70xx",era:"1970-78",d:"Later Bell-Matic production with updated case designs. 70s styling with fluted bezels and faceted cases.",tags:[]},
+  wt_6117:{n:"World Time (6117)",era:"1969-76",d:"Cal. 6117 automatic world timer. Navigator-style with 24-city rotating bezel. Improved over the manual-wind 6217.",tags:[]},
+  nav_timer:{n:"Navigator Timer",era:"1970-76",d:"GMT/world time variant with 24-hour hand. Internal rotating city bezel. Late evolution of the Seiko world timer family.",tags:[]},
+  cronos:{n:"Cronos",era:"1958-62",d:"Daini Seikosha's answer to Suwa's Marvel. Thinner case, higher specs. The root of all Kameido mechanical development.",tags:[]},
+  cronos_sp:{n:"Cronos Special",era:"1959-62",d:"Higher-grade Cronos with improved finishing. Demonstrated Daini's precision ambitions.",tags:[]},
+  cronos_sd:{n:"Cronos Self Dater",era:"1960-62",d:"Cronos with date complication. Practical evolution of the Cronos platform.",tags:[]},
+  ks_hack:{n:"KS with Hacking",era:"1963-66",d:"Second-generation King Seiko with hacking seconds for precise time-setting. Key step toward observatory-grade accuracy.",tags:["ks"]},
+  ks_chrono:{n:"KS Chronometer",era:"1964-68",d:"Chronometer-certified King Seiko. Competed directly with Swiss observatory chronometers. Peak accuracy of the early KS line.",tags:["ks"]},
   "44ks_sp":{n:"44KS Special",era:"1966-69",d:"Higher-grade 44KS with superior adjustment. Grammar of Design styling with chronometer-level accuracy.",tags:["ks"]},
   "56gs_k":{n:"56GS (Kameido)",era:"1971-78",d:"Cal. 5645/5646. Ultra-thin automatic Grand Seiko from Daini. Shared the 56 platform with Suwa's 56GS but independently produced.",tags:["gs"]},
-  "champion":{n:"Champion",era:"1960-68",d:"Daini's entry-level manual-wind. Cal. 860. Affordable everyday watch. Foundation of Kameido's mass-market lines.",tags:[]},
-  "champion_cal":{n:"Champion Calendar",era:"1962-68",d:"Champion with date complication. Budget day-date from Daini. High production volume.",tags:[]},
-  "fairway":{n:"Fairway",era:"1962-66",d:"Budget Daini automatic. Positioned between Champion and the premium Cronos/KS lines. Golf-inspired naming.",tags:[]},
-  "champ_850":{n:"Champion 850",era:"1965-70",d:"Cal. 850 automatic Champion. Upgraded with self-winding and improved water resistance. Bridge to Seiko 5 Kameido.",tags:[]},
+  champion:{n:"Champion",era:"1960-68",d:"Daini's entry-level manual-wind. Cal. 860. Affordable everyday watch. Foundation of Kameido's mass-market lines.",tags:[]},
+  champion_cal:{n:"Champion Calendar",era:"1962-68",d:"Champion with date complication. Budget day-date from Daini. High production volume.",tags:[]},
+  fairway:{n:"Fairway",era:"1962-66",d:"Budget Daini automatic. Positioned between Champion and the premium Cronos/KS lines. Golf-inspired naming.",tags:[]},
+  champ_850:{n:"Champion 850",era:"1965-70",d:"Cal. 850 automatic Champion. Upgraded with self-winding and improved water resistance. Bridge to Seiko 5 Kameido.",tags:[]},
   "76_five":{n:"76 Seiko 5 (Kameido)",era:"1966-75",d:"Daini-produced Seiko 5. Cal. 7600 series. Distinct from Suwa Seiko 5 — parallel production at both factories.",tags:[]},
-  "advan":{n:"Advan",era:"1971-78",d:"Cal. 7019. Sporty 70s Daini automatic with faceted cases. Named for 'advance'. Higher-beat than standard Kameido models.",tags:[]},
-  "vanac_sp":{n:"Vanac Special",era:"1973-75",d:"Higher-grade Vanac with superior finishing. Asymmetric crown, sporty 70s design. Final premium Daini automatic before quartz.",tags:["ks"]},
-  "k7015":{n:"7015 Chronograph",era:"1972-75",d:"Cal. 7015. Two-register Daini chronograph. Simpler than the 7018 five-register. Part of the 701x flyback family.",tags:["chrono"]},
-  "k7017":{n:"7017 Flyback Chronograph",era:"1972-75",d:"Cal. 7017. Single-register flyback chronograph. Distinctive Monaco-style case on some variants. Part of the 701x family.",tags:["chrono"]},
-  "gs_cont":{n:"GS Product Line Dormant",era:"~1978-88",d:"Grand Seiko mechanical production was phased out by the mid-1970s during the Quartz Crisis. Through the 1980s-90s Seiko focused on quartz and Kinetic (A.G.S.) technology, leaving mechanical watchmaking marginal until the 9S revival in 1998.",tags:["gs"]},
-  "gs_quartz_88":{n:"Grand Seiko 9F Quartz",era:"1993-",d:"Cal. 9F83. Twin-pulse control motor, instant date change. +/-10 seconds/year. The first GS quartz appeared in 1988 (Cal. 95xx); the landmark 9F platform launched in 1993.",tags:["gs"]},
-  "gs_mech_98":{n:"GS 9S Mechanical Revival",era:"1998-",d:"Return of mechanical Grand Seiko after 30 years. Cal. 9S51. Hand-assembled at Shizukuishi. 50-hour power reserve.",tags:["gs"]},
-  "gs_hibeat":{n:"GS 9S Hi-Beat 36000",era:"2009-",d:"Cal. 9S85. 36,000 bph automatic Grand Seiko. Smoother seconds hand, improved shock resistance at high frequency.",tags:["gs","hb"]},
-  "gs_independence":{n:"Grand Seiko Independent Brand",era:"2017-",d:"Grand Seiko separated from the Seiko brand. Own logo at 12 o'clock. Global luxury positioning with independent identity.",tags:["gs"]},
-  "gs_heritage":{n:"Heritage Collection",era:"2018-",d:"Classic Grand Seiko designs. Traditional case shapes, restrained dials. Carries forward the Grammar of Design philosophy.",tags:["gs"]},
-  "gs_elegance":{n:"Elegance Collection",era:"2018-",d:"Thinner, dressier Grand Seiko models. Leather straps, smaller cases. Formal and refined.",tags:["gs"]},
-  "gs_sport":{n:"Sport Collection",era:"2018-",d:"Larger, more robust Grand Seiko models. Bracelets, rotating bezels, higher water resistance. Includes Spring Drive divers.",tags:["gs","sd"]},
-  "gs_evo9":{n:"Evolution 9",era:"2021-",d:"Next-generation Grand Seiko design language. Series 9 movement family. Angular case, wider lugs. Includes White Birch SLGH005.",tags:["gs"]},
-  "gs_masterpiece":{n:"Masterpiece Collection",era:"2020-",d:"Ultra-high-end Grand Seiko. Micro Artist Studio pieces, Eichi-level finishing. Platinum and precious metals.",tags:["gs"]},
-  "gs_9r":{n:"9R Spring Drive Family",era:"2004-",d:"Spring Drive movement platform. 9R65 (automatic), 9R86 (chrono GMT), 9R31 (manual). Made at Shinshu Watch Studio.",tags:["gs","sd"]},
-  "gs_9ra":{n:"9RA/9RB Advanced Spring Drive",era:"2020-",d:"Next-gen Spring Drive. Thinner, 120-hour power reserve. 9RA5 (auto), 9RB1 (thin). ±10 sec/month accuracy.",tags:["gs","sd"]},
-  "ks_dormant":{n:"King Seiko Product Line Dormant",era:"~1975-2022",d:"King Seiko ceased in the mid-1970s as Seiko shifted to quartz and later Kinetic. The brand lay dormant for 47 years while Seiko pursued energy-harvesting technology over traditional mechanics.",tags:["ks"]},
-  "ks_sje":{n:"KS Modern SJE Series",era:"2022-",d:"Modern King Seiko mechanical models. Cal. 6L35/6R31. Grammar of Design cases with contemporary proportions.",tags:["ks"]},
-  "prospex":{n:"Prospex",era:"rebrand 2012",d:"Seiko's professional/sports umbrella brand. Absorbed existing diver, field, and chronograph lines under one identity. Sea, Land, Air, Ice.",tags:[]},
-  "px_1965":{n:"1965 Heritage Diver",era:"2017-",d:"Modern reinterpretation of the 62MAS. Compact case, bezel-less design. Heritage connection to Seiko's first professional diver.",tags:["diver"]},
-  "px_1968_diver":{n:"1968 Heritage Diver",era:"2018-",d:"Modern reinterpretation of the 6159-7000 Pro 300m. Hi-beat or standard automatic. Professional-grade heritage diver.",tags:["diver"]},
-  "px_1968_gmt":{n:"1968 Heritage GMT",era:"2020-",d:"GMT variant of the 1968 Heritage Diver. Dual-time with rotating bezel. 200m water resistance.",tags:["diver"]},
-  "px_1970":{n:"1970 Diver (Willard)",era:"2020-",d:"Modern reinterpretation of the 6105-8110 Willard. Cushion case with crown guard. The 'Captain Willard' returns.",tags:["diver"]},
-  "px_speedtimer":{n:"Prospex Speedtimer Mechanical",era:"2021-",d:"Mechanical chronograph under Prospex. Heritage connection to 1960s-70s Seiko chronograph legacy. Cal. 8R48.",tags:["chrono"]},
-  "px_land":{n:"Land Mechanical",era:"2019-",d:"Field and compass watches under Prospex. Includes Alpinist-derived models. Designed for terrestrial exploration.",tags:[]},
-  "presage_node":{n:"Presage",era:"c. 2010/2016-",d:"Modern named collection for mechanical dress watches. The Presage name was first used for a Seiko watch in 1960 and was revived around 2010-11 (Japan domestic market), with global rollout from 2016. Draws on older Seiko dress-watch heritage stretching back to the Crown and Lord Marvel lines of the 1960s. Japanese craftsmanship dials — enamel, urushi lacquer, Nishijin textile.",tags:[]},
-  "prsg_classic":{n:"Classic Series",era:"2024-",d:"New structural category within Presage. Clean, traditional dress watch designs with emphasis on legibility.",tags:[]},
-  "prsg_craft":{n:"Craftsmanship Series",era:"2018-",d:"Presage models highlighting traditional Japanese artisan techniques. Arita porcelain, Shippo enamel, Kanazawa lacquer.",tags:[]},
-  "prsg_garden":{n:"Japanese Garden",era:"2022-",d:"Dial textures inspired by Japanese garden elements — raked gravel, moss, water. Zen aesthetic in watchmaking.",tags:[]},
-  "prsg_starbar":{n:"Star Bar",era:"2018-",d:"Limited editions inspired by Tokyo's Star Bar Ginza cocktails. Rich dial colors with textured finishes.",tags:[]},
-  "s5_modern":{n:"Seiko 5 Sports",era:"2019-",d:"Complete reboot of Seiko 5. Cal. 4R36. Modern case designs absorbing SKX, field, and street styling. Entry-level mechanical.",tags:[]},
-  "s5_skx_mod":{n:"SKX Heritage",era:"2019-",d:"Seiko 5 Sports models inspired by SKX007/009. Diver-style bezel and case. Spiritual successor to the discontinued SKX.",tags:["diver"]},
-  "s5_field_mod":{n:"Field Series",era:"2019-",d:"Military/field-inspired Seiko 5 Sports. Arabic numerals, high legibility, canvas/nylon straps. Tool-watch aesthetic.",tags:[]},
-  "s5_street":{n:"Street Series",era:"2019-",d:"Urban-styled Seiko 5 Sports. Bold colors, contemporary case shapes. Designed for younger, style-conscious audience.",tags:[]},
-  "s5_snxs":{n:"SNXS Series",era:"2024-",d:"Reissue-inspired Seiko 5 with vintage proportions. 37mm case echoing classic SNXS73. Compact dress-sport crossover.",tags:[]},
+  advan:{n:"Advan",era:"1971-78",d:"Cal. 7019. Sporty 70s Daini automatic with faceted cases. Named for 'advance'. Higher-beat than standard Kameido models.",tags:[]},
+  vanac_sp:{n:"Vanac Special",era:"1973-75",d:"Higher-grade Vanac with superior finishing. Asymmetric crown, sporty 70s design. Final premium Daini automatic before quartz.",tags:["ks"]},
+  k7015:{n:"7015 Chronograph",era:"1972-75",d:"Cal. 7015. Two-register Daini chronograph. Simpler than the 7018 five-register. Part of the 701x flyback family.",tags:["chrono"]},
+  k7017:{n:"7017 Flyback Chronograph",era:"1972-75",d:"Cal. 7017. Single-register flyback chronograph. Distinctive Monaco-style case on some variants. Part of the 701x family.",tags:["chrono"]},
+  gs_cont:{n:"GS Product Line Dormant",era:"~1978-88",d:"Grand Seiko mechanical production was phased out by the mid-1970s during the Quartz Crisis. Through the 1980s-90s Seiko focused on quartz and Kinetic (A.G.S.) technology, leaving mechanical watchmaking marginal until the 9S revival in 1998.",tags:["gs"]},
+  gs_mech_98:{n:"GS 9S Mechanical Revival",era:"1998-",d:"Return of mechanical Grand Seiko after 30 years. Cal. 9S51. Hand-assembled at Shizukuishi. 50-hour power reserve.",tags:["gs"]},
+  gs_hibeat:{n:"GS 9S Hi-Beat 36000",era:"2009-",d:"Cal. 9S85. 36,000 bph automatic Grand Seiko. Smoother seconds hand, improved shock resistance at high frequency.",tags:["gs","hb"]},
+  gs_independence:{n:"Grand Seiko Independent Brand",era:"2017-",d:"Grand Seiko separated from the Seiko brand. Own logo at 12 o'clock. Global luxury positioning with independent identity.",tags:["gs"]},
+  gs_heritage:{n:"Heritage Collection",era:"2018-",d:"Classic Grand Seiko designs. Traditional case shapes, restrained dials. Carries forward the Grammar of Design philosophy.",tags:["gs"]},
+  gs_elegance:{n:"Elegance Collection",era:"2018-",d:"Thinner, dressier Grand Seiko models. Leather straps, smaller cases. Formal and refined.",tags:["gs"]},
+  gs_sport:{n:"Sport Collection",era:"2018-",d:"Larger, more robust Grand Seiko models. Bracelets, rotating bezels, higher water resistance. Includes Spring Drive divers.",tags:["gs","sd"]},
+  gs_evo9:{n:"Evolution 9",era:"2021-",d:"Next-generation Grand Seiko design language. Series 9 movement family. Angular case, wider lugs. Includes White Birch SLGH005.",tags:["gs"]},
+  gs_masterpiece:{n:"Masterpiece Collection",era:"2020-",d:"Ultra-high-end Grand Seiko. Micro Artist Studio pieces, Eichi-level finishing. Platinum and precious metals.",tags:["gs"]},
+  gs_9r:{n:"9R Spring Drive Family",era:"2004-",d:"Spring Drive movement platform. 9R65 (automatic), 9R86 (chrono GMT), 9R31 (manual). Made at Shinshu Watch Studio.",tags:["gs","sd"]},
+  gs_9ra:{n:"9RA/9RB Advanced Spring Drive",era:"2020-",d:"Next-gen Spring Drive. Thinner, 120-hour power reserve. 9RA5 (auto), 9RB1 (thin). ±10 sec/month accuracy.",tags:["gs","sd"]},
+  ks_dormant:{n:"King Seiko Product Line Dormant",era:"~1975-2022",d:"King Seiko ceased in the mid-1970s as Seiko shifted to quartz and later Kinetic. The brand lay dormant for 47 years while Seiko pursued energy-harvesting technology over traditional mechanics.",tags:["ks"]},
+  ks_sje:{n:"KS Modern SJE Series",era:"2022-",d:"Modern King Seiko mechanical models. Cal. 6L35/6R31. Grammar of Design cases with contemporary proportions.",tags:["ks"]},
+  prospex:{n:"Prospex",era:"rebrand 2012",d:"Seiko's professional/sports umbrella brand. Absorbed existing diver, field, and chronograph lines under one identity. Sea, Land, Air, Ice.",tags:[]},
+  px_1965:{n:"1965 Heritage Diver",era:"2017-",d:"Modern reinterpretation of the 62MAS. Compact case, bezel-less design. Heritage connection to Seiko's first professional diver.",tags:["diver"]},
+  px_1968_diver:{n:"1968 Heritage Diver",era:"2018-",d:"Modern reinterpretation of the 6159-7000 Pro 300m. Hi-beat or standard automatic. Professional-grade heritage diver.",tags:["diver"]},
+  px_1968_gmt:{n:"1968 Heritage GMT",era:"2020-",d:"GMT variant of the 1968 Heritage Diver. Dual-time with rotating bezel. 200m water resistance.",tags:["diver"]},
+  px_1970:{n:"1970 Diver (Willard)",era:"2020-",d:"Modern reinterpretation of the 6105-8110 Willard. Cushion case with crown guard. The 'Captain Willard' returns.",tags:["diver"]},
+  px_speedtimer:{n:"Prospex Speedtimer Mechanical",era:"2021-",d:"Mechanical chronograph under Prospex. Heritage connection to 1960s-70s Seiko chronograph legacy. Cal. 8R48.",tags:["chrono"]},
+  px_land:{n:"Land Mechanical",era:"2019-",d:"Field and compass watches under Prospex. Includes Alpinist-derived models. Designed for terrestrial exploration.",tags:[]},
+  presage_node:{n:"Presage",era:"c. 2010/2016-",d:"Modern named collection for mechanical dress watches. The Presage name was first used for a Seiko watch in 1960 and was revived around 2010-11 (Japan domestic market), with global rollout from 2016. Draws on older Seiko dress-watch heritage stretching back to the Crown and Lord Marvel lines of the 1960s. Japanese craftsmanship dials — enamel, urushi lacquer, Nishijin textile.",tags:[]},
+  prsg_classic:{n:"Classic Series",era:"2024-",d:"New structural category within Presage. Clean, traditional dress watch designs with emphasis on legibility.",tags:[]},
+  prsg_craft:{n:"Craftsmanship Series",era:"2018-",d:"Presage models highlighting traditional Japanese artisan techniques. Arita porcelain, Shippo enamel, Kanazawa lacquer.",tags:[]},
+  prsg_garden:{n:"Japanese Garden",era:"2022-",d:"Dial textures inspired by Japanese garden elements — raked gravel, moss, water. Zen aesthetic in watchmaking.",tags:[]},
+  prsg_starbar:{n:"Star Bar",era:"2018-",d:"Limited editions inspired by Tokyo's Star Bar Ginza cocktails. Rich dial colors with textured finishes.",tags:[]},
+  s5_modern:{n:"Seiko 5 Sports",era:"2019-",d:"Complete reboot of Seiko 5. Cal. 4R36. Modern case designs absorbing SKX, field, and street styling. Entry-level mechanical.",tags:[]},
+  s5_skx_mod:{n:"SKX Heritage",era:"2019-",d:"Seiko 5 Sports models inspired by SKX007/009. Diver-style bezel and case. Spiritual successor to the discontinued SKX.",tags:["diver"]},
+  s5_field_mod:{n:"Field Series",era:"2019-",d:"Military/field-inspired Seiko 5 Sports. Arabic numerals, high legibility, canvas/nylon straps. Tool-watch aesthetic.",tags:[]},
+  s5_street:{n:"Street Series",era:"2019-",d:"Urban-styled Seiko 5 Sports. Bold colors, contemporary case shapes. Designed for younger, style-conscious audience.",tags:[]},
+  s5_snxs:{n:"SNXS Series",era:"2024-",d:"Reissue-inspired Seiko 5 with vintage proportions. 37mm case echoing classic SNXS73. Compact dress-sport crossover.",tags:[]},
 };
-
 const popup=document.getElementById('watch-popup');
 const popupImg=document.getElementById('popup-img');
 const popupName=document.getElementById('popup-name');
@@ -411,24 +344,17 @@ const popupEra=document.getElementById('popup-era');
 const popupDesc=document.getElementById('popup-desc');
 const popupTags=document.getElementById('popup-tags');
 let popupTimer=null;
-
-// Pre-cache which images exist (avoids 404 flash)
 const imgCache={};
-
 function showPopup(nodeId,e){
   const d=popupData[nodeId];
   if(!d||scale<0.35)return;
   clearTimeout(popupTimer);
-  // Instant text
   popupName.textContent=d.n;
   popupEra.textContent=d.era;
   popupDesc.textContent=d.d;
-  // Tags
   const tagMap={icon:'★ Iconic',diver:'⚓ Diver',chrono:'⏱ Chrono',gs:'Grand Seiko',ks:'King Seiko',hb:'Hi-Beat',sd:'Spring Drive'};
   popupTags.innerHTML=(d.tags||[]).map(t=>`<span class="popup-tag t-${t}">${tagMap[t]||t}</span>`).join('');
-  // Add collection tag if owned
   if(inCollection.has(nodeId)) popupTags.innerHTML+=`<span class="popup-tag t-coll">In Collection</span>`;
-  // Image — only for hasImg nodes, from local ./img/
   popupImg.classList.remove('loaded');
   if(d.hasImg){
     const src=`./img/${nodeId}.jpg`;
@@ -441,7 +367,6 @@ function showPopup(nodeId,e){
       test.src=src;
     }
   }
-  // Position
   const px=Math.min(e.clientX+16,window.innerWidth-230);
   const py=Math.max(10,Math.min(e.clientY-80,window.innerHeight-280));
   popup.style.left=px+'px';popup.style.top=py+'px';
@@ -450,7 +375,6 @@ function showPopup(nodeId,e){
 function hidePopup(){
   popupTimer=setTimeout(()=>{popup.classList.remove('visible');popupImg.classList.remove('loaded');},100);
 }
-
 const NW=124,NH=42,CW=2390,CH=2290;
 const nodes=[
 ["marvel","Marvel\n1956-62",50,50,C.suwa,1],["gyro_marvel","Gyro Marvel\n1959-63",50,110,C.suwa,0],["lord_marvel","Lord Marvel\nlate 1950s-75",210,50,C.suwa,0],["lord_marvel_36k","Lord Marvel\n36000 1967-late 70s",370,50,C.suwa,1],
@@ -500,12 +424,10 @@ const edges=[
 ["ks_chrono","44gs","strong","44GS was Daini\'s first Grand Seiko, grown from KS Chronometer expertise"],["44gs","45gs","strong","45GS advanced Daini\'s Grand Seiko to manual-wind hi-beat precision"],["goldfeather","45gs","weak","Goldfeather\'s ultra-thin design philosophy influenced 45GS case development"],["45gs","45gs_vfa","strong","45GS VFA pushed Daini Grand Seiko to its ultimate precision standard"],["45gs","19gs","medium","19GS miniaturized the hi-beat Grand Seiko platform for women\'s watches"],["19gs","56gs_k","medium","56GS continued Kameido\'s Grand Seiko tradition in thin automatic form"],["45gs_vfa","56gs_k","strong","56GS inherited Kameido\'s hi-beat precision heritage from the 45GS VFA era"],
 ["champion","champion_cal","strong","Champion Calendar added date display to Daini\'s entry-level line"],["champion","fairway","medium","Fairway offered an automatic budget alternative alongside Champion"],["fairway","champ_850","strong","Champion 850 upgraded to automatic with improved water resistance"],["champion_cal","76_five","medium","76 Seiko 5 evolved from Champion Calendar as Daini\'s Seiko 5 production"],["champ_850","76_five","medium","Champion 850 automatic platform fed into Kameido\'s Seiko 5 manufacturing"],
 ["advan","vanac","strong","Vanac evolved from Advan as Daini\'s sporty premium 70s automatic"],["vanac","vanac_sp","medium","Vanac Special added superior finishing to the asymmetric Vanac design"],
-
 ["56gs_s","gs_cont","medium","Suwa 56GS production ended as Grand Seiko entered the dormant period"],["56gs_k","gs_cont","medium","Kameido 56GS production ended as Grand Seiko entered the dormant period"],["45gs_vfa","gs_cont","medium","Peak Daini precision faded as quartz disrupted mechanical watchmaking"],
-["gs_mech_98","gs_hibeat","strong","GS Hi-Beat brought 36,000 bph back to Grand Seiko after decades"],["gs_mech_98","gs_9s5","strong","9SA5 is the next-gen evolution of the 9S mechanical platform","GS Hi-Beat brought 36,000 bph back to Grand Seiko after decades"],
+["gs_mech_98","gs_hibeat","strong","GS Hi-Beat brought 36,000 bph back to Grand Seiko after decades"],["gs_mech_98","gs_9s5","strong","9SA5 is the next-gen evolution of the 9S mechanical platform"],
 ["gs_independence","gs_heritage","medium","Heritage Collection carries the classic Grand Seiko design tradition"],["gs_independence","gs_elegance","medium","Elegance Collection offers thinner, dressier Grand Seiko models"],["gs_independence","gs_sport","medium","Sport Collection provides robust Grand Seiko for active use"],["gs_independence","gs_evo9","medium","Evolution 9 represents the next-generation Grand Seiko design language"],
 ["gs_sd_04","gs_9r","strong","9R caliber family defines the Grand Seiko Spring Drive platform"],["gs_9r","gs_9ra","strong","9RA/9RB advanced Spring Drive with thinner case and longer power reserve"],["gs_9ra","gs_ufa","strong","U.F.A. achieves ultimate Spring Drive accuracy at ±20 seconds per year"],
-
 ["56ks","ks_dormant","medium","56KS was among the last King Seiko models before the line went dormant"],["52ks","ks_dormant","medium","52KS Special was Daini\'s final premium KS before the quartz transition"],["vanac","ks_dormant","medium","Vanac\'s end coincided with the broader KS product line dormancy"],
 ["lord_matic_56","56ks","medium","56KS shares Suwa\'s thin Cal. 56xx movement platform with Lord Matic 56"],["ks_dormant","ks_revival","weak","King Seiko revival reconnected with the dormant brand after 47 years"],["s4_family","seiko_sus","strong","SUS was built on the higher-grade 4S mechanical platform"],["52ks","s4_family","weak","4S platform traces heritage to the King Seiko 52xx movement family"],["52ks","seiko_sus","weak","SUS 4S15 platform traces heritage to the King Seiko 52xx movement family"],["52ks","hist_2000","weak","52KS was one of seven vintage models reissued in the 2000 collection"],["62mas","hist_2000","weak","62MAS diver was reissued as part of the 2000 historical collection"],["hist_2000","px_1965","weak","62MAS reissue in 2000 collection anticipated the Prospex heritage diver program"],["hist_2000","ks_revival","medium","Historical Collection included 52KS reissue — tested appetite for eventual KS revival"],["ks_revival","ks_sje","strong","KS Modern SJE series implements the Grammar of Design in modern form"],["ks_revival","ks_vanac_25","medium","KS VANAC 2025 revives the asymmetric Vanac design under King Seiko"],["vanac","ks_vanac_25","weak","Heritage revival of the original 1972 Vanac design language"],["44ks","ks_revival","weak","Modern KS revival draws on 44KS Grammar of Design philosophy"],
 ["skx","prospex","medium","SKX line was absorbed into the Prospex brand umbrella in 2012"],["skx","px_monster","medium","Monster emerged from the same Seiko diver ecosystem as SKX"],["skx","px_samurai","medium","Samurai developed alongside SKX in Seiko\'s pre-Prospex diver range"],["skx","px_sumo","medium","Sumo launched in the SKX era as a higher-spec mid-size diver"],["skx","px_shogun","medium","Shogun emerged as a titanium diver in the late SKX-era lineup"],["6159_tuna","px_mm","weak","Marinemaster continues the professional diver heritage from the Tuna era"],["px_sd_diver","px_lx","medium","LX Line elevates Prospex Spring Drive divers to flagship status"],["62mas","px_1965","weak","Modern reinterpretation of Seiko\'s 1965 diver archetype"],["6105_willard","px_1970","weak","Modern reinterpretation of the 1970 Captain Willard diver"],
@@ -518,7 +440,6 @@ const edges=[
 ["marvel","crown","strong","Crown advanced the Marvel platform into Suwa\'s flagship precision line"],["marvel","laurel","medium","Laurel branched from the Marvel era as an entry-level Suwa line"],["marvel","sportsman","medium","Sportsman branched from the Marvel era into sport-oriented watches"],["sky_cal","61_skyliner_cal","medium","61 Skyliner Calendar upgraded to hi-beat movement in the late 1960s"],["6159_pro","px_1968_diver","weak","Modern 1968 Heritage Diver revives the 6159 professional diver archetype"],["6159_pro","px_1968_gmt","weak","Modern 1968 Heritage GMT draws on the 6159 professional diver heritage"],["gs_cont","gs_quartz_88","medium","GS revival began with quartz during the dormant mechanical period"],["gs_cont","gs_mech_98","medium","GS mechanical revival emerged from the dormant period in 1998"],["sd_concept","sd_7r68","medium","20 years of R&D produced the first production Spring Drive in 1999"],["sd_7r68","sd_7r88","medium","Credor Spring Drive proved the technology in a premium brand context"],["sd_7r88","gs_sd_04","strong","Grand Seiko adopted Spring Drive as a core movement technology in 2004"],["gs_sd_04","gs_sd_chrono","medium","Spring Drive Chronograph extended the GS SD platform in 2007"],["gs_sd_04","gs_9r01","medium","9R01 8-Day achieved 192-hour reserve from the Micro Artist Studio"],["gs_cont","gs_independence","medium","Grand Seiko became an independent brand built on the revived legacy"],["s5_modern","s5_snxs","strong","SNXS Series revives vintage Seiko 5 proportions in the modern lineup"],
 ];
 const sections=[
-// ═══ COLUMN 1: VINTAGE FACTORY ERA 1960-1988 ═══
 {l:"VINTAGE FACTORY ERA · 1960–c. 1988",x:5,y:10,w:1155,h:1430,c:C.suwa},
 {l:"HIGH-GRADE · GRAND SEIKO · DRESS",x:15,y:30,w:1135,h:285,c:C.suwa,sub:1},
 {l:"LINER · SKYLINER · LORD MATIC",x:15,y:320,w:1135,h:130,c:C.suwa,sub:1},
@@ -533,13 +454,7 @@ const sections=[
 {l:"GRAND SEIKO · DAINI",x:15,y:1695,w:1135,h:120,c:C.gs,sub:1},
 {l:"CHAMPION · MASS MARKET",x:15,y:1820,w:1135,h:125,c:C.kameido,sub:1},
 {l:"⏱ KAMEIDO CHRONOGRAPHS · 701x Platform",x:350,y:1960,w:805,h:170,c:C.chrono,sub:1},
-
-// ═══ COLUMN 2: LEGACY TRANSITION 1988-2001 ═══
 {l:"LEGACY TRANSITION ERA · c. 1988–2001",x:1180,y:10,w:330,h:537,c:C.modern},
-
-
-
-// ═══ COLUMN 3: MODERN COLLECTION ERA 2001-2025 ═══
 {l:"MODERN COLLECTION ERA · 2001–2025",x:1560,y:10,w:880,h:960,c:C.modern},
 {l:"GRAND SEIKO · MODERN",x:1570,y:35,w:800,h:277,c:C.gs,sub:1},
 {l:"KING SEIKO · MODERN",x:1570,y:327,w:520,h:82,c:C.ks,sub:1},
@@ -551,14 +466,11 @@ const sections=[
 {l:"PRESAGE · MECHANICAL DRESS",x:1570,y:716,w:860,h:147,c:C.presage,sub:1},
 {l:"SEIKO 5 SPORTS",x:1570,y:878,w:860,h:82,c:C.seiko5,sub:1},
 ];
-
-/* ═══ ENGINE ═══ */
 const nodeMap={};nodes.forEach(n=>nodeMap[n[0]]=n);
 const canvas=document.getElementById('canvas'),svg=document.getElementById('edges-svg'),wrap=document.getElementById('canvas-wrap'),slider=document.getElementById('zoom-slider'),zoomVal=document.getElementById('zoom-val');
 canvas.style.width=CW+'px';canvas.style.height=CH+'px';
 svg.setAttribute('width',CW);svg.setAttribute('height',CH);
 let tx=0,ty=0,scale=.4,dragging=false,startX=0,startY=0,hovered=null,filter='all';
-
 function applyTransform(){
   canvas.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;
   slider.value=Math.round(scale*100);zoomVal.textContent=Math.round(scale*100)+'%';
@@ -568,28 +480,18 @@ function applyTransform(){
 }
 function fitView(){const cw=wrap.clientWidth;scale=(cw/CW)*.95;tx=(cw-CW*scale)/2;ty=10;applyTransform();}
 function view100(){scale=1;tx=0;ty=0;applyTransform();}
-
 sections.forEach(s=>{const d=document.createElement('div');d.className='section-bg'+(s.sub?' sub':'');d.style.cssText=`left:${s.x}px;top:${s.y}px;width:${s.w}px;height:${s.h}px;border:1px solid ${s.c}${s.sub?'18':'0e'};background:${s.c}${s.sub?'06':'04'}`;d.innerHTML=`<div class="label" style="color:${s.c}99">${s.l}</div>`;canvas.appendChild(d);});
-
 const nodeEls={};
 nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElement('div');d.className='node'+(isIcon?' icon':'');d.style.cssText=`left:${x}px;top:${y}px;border:${isIcon?2:1}px solid ${isIcon?C.highlight+'88':color+'30'}`;d.dataset.id=id;let inner='';if(isIcon)inner+=`<div class="star-badge">★</div>`;if(inCollection.has(id))inner+=`<div class="coll-badge">In Collection</div>`;const tech=techMap[id];if(tech){const lb={hibeat:'HB',springdrive:'SD',quartz:'Q'};inner+=`<div class="tech-badge ${tech}" title="${tech==='hibeat'?'Hi-Beat 36000 bph':tech==='springdrive'?'Spring Drive':'Quartz'}">${lb[tech]}</div>`;}inner+=`<div class="text">${label}</div>`;d.innerHTML=inner;d.addEventListener('mouseenter',(e)=>{hovered=id;updateHL();showPopup(id,e);if(typeof edgeTipVisible!=='undefined'&&edgeTipVisible){document.getElementById('edge-tip').classList.remove('show');edgeTipVisible=false;}});d.addEventListener('mousemove',(e)=>{});d.addEventListener('mouseleave',()=>{hovered=null;updateHL();hidePopup();});canvas.appendChild(d);nodeEls[id]=d;});
-
 function getPath(fn,tn){const fcx=fn[2]+NW/2,fcy=fn[3]+NH/2,tcx=tn[2]+NW/2,tcy=tn[3]+NH/2,dx=tcx-fcx,dy=tcy-fcy;let sx,sy,ex,ey;if(Math.abs(dx)>Math.abs(dy)){sx=dx>0?fn[2]+NW:fn[2];sy=fcy;ex=dx>0?tn[2]:tn[2]+NW;ey=tcy;}else{sx=fcx;sy=dy>0?fn[3]+NH:fn[3];ex=tcx;ey=dy>0?tn[3]:tn[3]+NH;}const mx=(sx+ex)/2,my=(sy+ey)/2;if(Math.abs(dx)>Math.abs(dy)){return`M${sx},${sy} C${mx},${sy} ${mx},${ey} ${ex},${ey}`;}return`M${sx},${sy} C${sx},${my} ${ex},${my} ${ex},${ey}`;}
-
 function renderEdges(){let h=`<defs><marker id="a" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="#aaa"/></marker><marker id="ah" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="${C.highlight}"/></marker></defs>`;edges.forEach(([f,t,type,desc])=>{const fn=nodeMap[f],tn=nodeMap[t];if(!fn||!tn)return;const cls=type==='weak'?'edge-weak':'';const d=getPath(fn,tn);h+=`<path class="${cls}" data-from="${f}" data-to="${t}" data-type="${type}" data-desc="${desc||''}" d="${d}" fill="none" stroke="#aaa" stroke-width="${type==='strong'?1.5:.8}" stroke-dasharray="${type==='weak'?'3,3':'0'}" opacity="${type==='weak'?.25:.45}" marker-end="url(#a)"/>`;});svg.innerHTML=h;}
-
 function isVis(n){if(filter==='all')return true;const c=n[4],id=n[0];if(filter==='iconic')return n[5]===1;if(filter==='diver')return c===C.diver||c===C.prospex;if(filter==='chrono')return c===C.chrono;if(filter==='gs')return c===C.gs;if(filter==='ks')return c===C.ks;if(filter==='modern')return c===C.prospex||c===C.presage||c===C.modern||([C.seiko5,C.chrono].includes(c)&&n[2]>1100);if(filter==='seiko5')return c===C.seiko5;if(filter==='collection')return inCollection.has(id);return true;}
-
 function updateHL(){const conn=new Set();if(hovered)edges.forEach(([f,t,_t,_d])=>{if(f===hovered)conn.add(t);if(t===hovered)conn.add(f);});nodes.forEach(n=>{const el=nodeEls[n[0]],vis=isVis(n);el.classList.toggle('hidden-filter',!vis);if(hovered&&vis){const isH=n[0]===hovered,isC=conn.has(n[0]);el.classList.toggle('dimmed',!isH&&!isC);el.style.borderColor=isH?C.highlight:(n[5]?C.highlight+'88':n[4]+'30');el.style.boxShadow=isH?`0 4px 16px ${C.highlight}30`:'';}else if(vis){el.classList.remove('dimmed');el.style.borderColor=n[5]?C.highlight+'88':n[4]+'30';el.style.boxShadow='';}});svg.querySelectorAll('path[data-from]').forEach(p=>{const f=p.dataset.from,t=p.dataset.to,type=p.dataset.type;if(hovered&&(f===hovered||t===hovered)){p.setAttribute('stroke',C.highlight);p.setAttribute('opacity','.85');p.setAttribute('stroke-width','2.5');p.setAttribute('marker-end','url(#ah)');}else if(hovered){p.setAttribute('stroke','#aaa');p.setAttribute('opacity','.04');p.setAttribute('stroke-width','.5');p.setAttribute('marker-end','url(#a)');}else{p.setAttribute('stroke','#aaa');p.setAttribute('opacity',type==='weak'?'.25':'.45');p.setAttribute('stroke-width',type==='strong'?'1.5':'.8');p.setAttribute('marker-end','url(#a)');}});}
-
 [['all','All'],['diver','⚓ Diver'],['chrono','⏱ Chrono'],['gs','Grand Seiko'],['ks','King Seiko'],['collection','● My Collection'],['iconic','★ Iconic']].forEach(([k,l])=>{const b=document.createElement('button');b.textContent=l;b.className=k==='all'?'active':'';b.onclick=()=>{filter=k;document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');updateHL();};document.getElementById('filters').appendChild(b);});
-
 const legendEl=document.getElementById('legend');
 [[C.diver,'⚓ Diver'],[C.chrono,'⏱ Chrono'],[C.bell,'Bell-Matic'],[C.world,'World Time'],[C.seiko5,'Seiko 5'],[C.gs,'Grand Seiko'],[C.ks,'King Seiko'],[C.prospex,'Prospex'],[C.presage,'Presage'],[C.highlight,'★ Icon'],[C.collection,'● In Collection'],].forEach(([c,l])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="dot" style="background:${c}"></div><span>${l}</span>`;legendEl.appendChild(d);});
 const sepEl=document.createElement('div');sepEl.className='sep';legendEl.appendChild(sepEl);
 [['var(--hibeat)','HB','Hi-Beat 36k'],['var(--springdrive)','SD','Spring Drive'],['var(--quartz)','Q','Quartz']].forEach(([bg,ab,tip])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="dot" style="background:${bg};border-radius:50%;width:8px;height:8px;font-size:5px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700">${ab}</div><span>${tip}</span>`;legendEl.appendChild(d);});
-
-/* ═══ MINIMAP ═══ */
 const mmCanvas=document.getElementById('minimap-canvas'),mmCtx=mmCanvas.getContext('2d'),mmView=document.getElementById('mm-viewport'),mmC=document.getElementById('minimap');
 const MM_W=180,MM_SC=MM_W/CW,MM_H=Math.round(CH*MM_SC);
 mmCanvas.width=MM_W;mmCanvas.height=MM_H;mmCanvas.style.width=MM_W+'px';mmCanvas.style.height=MM_H+'px';mmC.style.width=MM_W+'px';mmC.style.height=MM_H+'px';
@@ -597,8 +499,6 @@ function drawMM(){mmCtx.clearRect(0,0,MM_W,MM_H);mmCtx.fillStyle='#f5f4f1';mmCtx
 function updateMinimap(){const ww=wrap.clientWidth,wh=wrap.clientHeight,vx=(-tx)/scale,vy=(-ty)/scale,vw=ww/scale,vh=wh/scale;mmView.style.left=Math.max(0,vx*MM_SC)+'px';mmView.style.top=Math.max(0,vy*MM_SC)+'px';mmView.style.width=Math.min(MM_W,vw*MM_SC)+'px';mmView.style.height=Math.min(MM_H,vh*MM_SC)+'px';}
 mmC.addEventListener('click',e=>{const r=mmC.getBoundingClientRect(),mx=(e.clientX-r.left)/MM_SC,my=(e.clientY-r.top)/MM_SC,ww=wrap.clientWidth,wh=wrap.clientHeight;tx=-(mx-ww/(2*scale))*scale;ty=-(my-wh/(2*scale))*scale;applyTransform();});
 drawMM();
-
-/* ═══ INTERACTION ═══ */
 wrap.addEventListener('pointerdown',e=>{if(e.target.closest('.node'))return;dragging=true;startX=e.clientX-tx;startY=e.clientY-ty;wrap.classList.add('dragging');wrap.setPointerCapture(e.pointerId);});
 wrap.addEventListener('dblclick',e=>{e.preventDefault();const r=wrap.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;if(scale>0.75){fitView();return;}const ns=Math.min(1.0,scale*1.8);tx=mx-(mx-tx)*(ns/scale);ty=my-(my-ty)*(ns/scale);scale=ns;applyTransform();});
 wrap.addEventListener('pointermove',e=>{if(!dragging)return;tx=e.clientX-startX;ty=e.clientY-startY;applyTransform();});
@@ -610,13 +510,11 @@ slider.addEventListener('input',()=>{const ns=parseInt(slider.value)/100,cw=wrap
 document.getElementById('btn-fit').onclick=fitView;
 document.getElementById('btn-100').onclick=view100;
 renderEdges();
-// Edge tooltip handlers
 const edgeTip=document.getElementById('edge-tip');
 const etType=edgeTip.querySelector('.et-type');
 const etDesc=edgeTip.querySelector('.et-desc');
 svg.style.pointerEvents='none';
 let edgeTipVisible=false,edgeThrottle=0;
-
 wrap.addEventListener('mousemove',e=>{
   const now=Date.now();
   if(now-edgeThrottle<80)return;
