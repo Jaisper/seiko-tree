@@ -14,6 +14,11 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #header .eyebrow{font-size:8px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
 #header h1{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--ink);letter-spacing:.5px;line-height:1.2}
 #header .spacer{flex:1}
+#intro-text{max-height:60px;overflow:hidden;transition:max-height .4s ease;position:relative}
+#intro-text.expanded{max-height:3000px}
+#intro-text:not(.expanded)::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,var(--paper))}
+#intro-toggle{font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--ink);background:none;border:1px solid var(--rule);border-radius:3px;padding:3px 12px;cursor:pointer;margin-top:6px;opacity:.7;transition:opacity .15s}
+#intro-toggle:hover{opacity:1}
 .filters{display:flex;gap:3px;flex-wrap:wrap}
 .filters button{font-family:'IBM Plex Mono',monospace;font-size:8px;padding:3px 8px;background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:2px;cursor:pointer;letter-spacing:.3px;transition:all .15s}
 .filters button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -126,7 +131,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   <div>
     <div class="eyebrow">精工 · Mechanical Heritage · 1960–2025 · Three Eras</div>
     <h1>The Complete Seiko Mechanical Family Tree</h1>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:13.5px;color:var(--muted);line-height:1.7;max-width:1100px;margin:8px 0 0">
+    <div id="intro-text" style="font-family:'Cormorant Garamond',serif;font-size:13.5px;color:var(--muted);line-height:1.7;max-width:1100px;margin:8px 0 0">
 
       <p style="margin:0 0 12px">This diagram maps the mechanical watch families of Seiko from 1960 to 2025 — a curatorial framework organized into three eras based on major company and technology milestones. What follows is a brief guide to the key stories told in the tree below.</p>
 
@@ -166,6 +171,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
       <p style="margin:0;font-size:11px;opacity:.65;font-style:italic">Era divisions are editorial and do not represent an official Seiko periodization. Lineage edges are based on a synthesis of catalogues, movement data, and specialist literature — not necessarily explicit official statements.</p>
 
     </div>
+    <button id="intro-toggle" onclick="const t=document.getElementById('intro-text');t.classList.toggle('expanded');this.textContent=t.classList.contains('expanded')?'Show less ▲':'Read more — full historical summary ▼'">Read more — full historical summary ▼</button>
   </div>
   <div class="spacer"></div>
   <div class="filters" id="filters"></div>
