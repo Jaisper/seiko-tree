@@ -37,7 +37,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #legend{background:var(--paper);border-top:1px solid var(--rule);padding:8px 16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;flex-shrink:0}
 #legend .item{display:flex;align-items:center;gap:3px}
 #legend .dot{width:7px;height:7px;border-radius:1px}
-#legend span{font-size:7px;color:var(--muted);letter-spacing:.3px;user-select:none}
+#legend span{font-size:9px;color:var(--muted);letter-spacing:.3px;user-select:none}
 #legend .sep{width:1px;height:10px;background:var(--rule);margin:0 2px}
 #canvas-wrap{height:70vh;min-height:500px;overflow:hidden;position:relative;cursor:grab;touch-action:none;background:var(--bg);background-image:radial-gradient(circle,#d8d5ce .4px,transparent .4px);background-size:20px 20px}
 #canvas-wrap.dragging{cursor:grabbing}
@@ -672,9 +672,11 @@ filterDef.forEach(def=>{
   document.getElementById('filters').appendChild(b);
 });
 const legendEl=document.getElementById('legend');
-[[C.diver,'⚓ Diver'],[C.chrono,'⏱ Chrono'],[C.bell,'Bell-Matic'],[C.world,'World Time'],[C.seiko5,'Seiko 5'],[C.gs,'Grand Seiko'],[C.ks,'King Seiko'],[C.prospex,'Prospex'],[C.presage,'Presage'],[C.highlight,'★ Icon'],].forEach(([c,l])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="dot" style="background:${c}"></div><span>${l}</span>`;legendEl.appendChild(d);});
+[[C.highlight,'★ Iconic model'],].forEach(([c,l])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="dot" style="background:${c}"></div><span>${l}</span>`;legendEl.appendChild(d);});
 const sepEl=document.createElement('div');sepEl.className='sep';legendEl.appendChild(sepEl);
-[['var(--hibeat)','HB','Hi-Beat 36k'],['var(--springdrive)','SD','Spring Drive'],['var(--quartz)','Q','Quartz']].forEach(([bg,ab,tip])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="dot" style="background:${bg};border-radius:50%;width:8px;height:8px;font-size:5px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700">${ab}</div><span>${tip}</span>`;legendEl.appendChild(d);});
+[['var(--hibeat)','HB','Hi-Beat 36,000 bph'],['var(--springdrive)','SD','Spring Drive'],['var(--quartz)','Q','Quartz']].forEach(([bg,ab,tip])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class="dot" style="background:${bg};border-radius:50%;width:8px;height:8px;font-size:5px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700">${ab}</div><span>${tip}</span>`;legendEl.appendChild(d);});
+const sepEl2=document.createElement('div');sepEl2.className='sep';legendEl.appendChild(sepEl2);
+[['#888','Strong lineage','solid'],['#aaa','Medium','solid-thin'],['#bbb','Weak','dashed']].forEach(([c,l,style])=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<svg width="24" height="6" style="margin-right:2px"><line x1="0" y1="3" x2="24" y2="3" stroke="${c}" stroke-width="${style==='solid'?1.8:style==='solid-thin'?1:0.9}" ${style==='dashed'?'stroke-dasharray="3,2"':''}/></svg><span>${l}</span>`;legendEl.appendChild(d);});
 const mmCanvas=document.getElementById('minimap-canvas'),mmCtx=mmCanvas.getContext('2d'),mmView=document.getElementById('mm-viewport'),mmC=document.getElementById('minimap');
 const MM_W=180,MM_SC=MM_W/CW,MM_H=Math.round(CH*MM_SC);
 mmCanvas.width=MM_W;mmCanvas.height=MM_H;mmCanvas.style.width=MM_W+'px';mmCanvas.style.height=MM_H+'px';mmC.style.width=MM_W+'px';mmC.style.height=MM_H+'px';
