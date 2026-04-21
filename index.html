@@ -45,7 +45,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 .section-bg{position:absolute;border-radius:4px;pointer-events:none}
 .section-bg .label{position:absolute;top:-8px;left:10px;font-size:10px;letter-spacing:2px;font-weight:600;background:var(--bg);padding:0 6px;text-transform:uppercase}
 .section-bg.sub .label{font-size:7px;letter-spacing:1px;top:-6px;left:6px;font-weight:500}
-.factory-banner{position:absolute;pointer-events:none;writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;letter-spacing:16px;color:var(--ink);opacity:.08;text-transform:uppercase;white-space:nowrap}
+.factory-banner{position:absolute;pointer-events:none;writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;letter-spacing:10px;color:var(--ink);opacity:.11;text-transform:uppercase;white-space:nowrap}
 .factory-divider{position:absolute;pointer-events:none;height:2px;background:linear-gradient(to right,transparent 0%,var(--kameido) 15%,var(--kameido) 85%,transparent 100%);opacity:.35}
 .node{position:absolute;width:124px;min-height:42px;background:var(--paper);border-radius:3px;padding:5px 6px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:default;transition:opacity .2s,border-color .2s,box-shadow .2s;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .node .text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:8.5px;color:var(--ink);line-height:1.25;text-align:center;white-space:pre-line;transition:font-size .15s;text-decoration:none}
@@ -572,12 +572,12 @@ sections.forEach(s=>{const d=document.createElement('div');d.className='section-
   const suwa=document.createElement('div');
   suwa.className='factory-banner';
   suwa.textContent='SUWA · 諏訪精工舎';
-  suwa.style.cssText='right:auto;left:1120px;top:350px;color:'+C.suwa;
+  suwa.style.cssText='left:1112px;top:535px;color:'+C.suwa;
   canvas.appendChild(suwa);
   const kameido=document.createElement('div');
   kameido.className='factory-banner';
-  kameido.textContent='DAINI · KAMEIDO · 第二精工舎';
-  kameido.style.cssText='right:auto;left:1120px;top:1540px;color:'+C.kameido;
+  kameido.textContent='DAINI · 第二精工舎';
+  kameido.style.cssText='left:1112px;top:1680px;color:'+C.kameido;
   canvas.appendChild(kameido);
   const div=document.createElement('div');
   div.className='factory-divider';
