@@ -47,6 +47,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 .section-bg.sub .label{font-size:7px;letter-spacing:1px;top:-6px;left:6px;font-weight:500}
 .factory-banner{position:absolute;pointer-events:none;writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;letter-spacing:10px;color:var(--ink);opacity:.11;text-transform:uppercase;white-space:nowrap}
 .factory-divider{position:absolute;pointer-events:none;height:2px;background:linear-gradient(to right,transparent 0%,var(--kameido) 15%,var(--kameido) 85%,transparent 100%);opacity:.35}
+.platform-label{position:absolute;pointer-events:none;writing-mode:vertical-rl;transform:rotate(180deg);font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:500;letter-spacing:2px;color:var(--muted);text-transform:uppercase;white-space:nowrap;opacity:.55}
 .node{position:absolute;width:124px;min-height:42px;background:var(--paper);border-radius:3px;padding:5px 6px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:default;transition:opacity .2s,border-color .2s,box-shadow .2s;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .node .text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:8.5px;color:var(--ink);line-height:1.25;text-align:center;white-space:pre-line;transition:font-size .15s;text-decoration:none}
 .node.icon{border-width:2px!important}
@@ -583,6 +584,29 @@ sections.forEach(s=>{const d=document.createElement('div');d.className='section-
   div.className='factory-divider';
   div.style.cssText='left:5px;top:1447px;width:1155px';
   canvas.appendChild(div);
+  /* Movement platform labels — y-center of each row + label */
+  const platforms=[
+    {t:'Cal. 5xx · Marvel / Crown',       y:75},
+    {t:'Cal. 3180 · 6145 · 5646 · GS Vintage', y:215},
+    {t:'Cal. 62xx · Liner / Skyliner / Lord Matic', y:360},
+    {t:'Cal. 62xx · Seikomatic / Business', y:500},
+    {t:'Cal. 83xx · 51xx · Presmatic / Lord Matic SP', y:630},
+    {t:'Cal. 6xxx · Seiko 5 Mainstream',  y:765},
+    {t:'Cal. 62xx → 6105 → 6309 · Divers', y:990},
+    {t:'Cal. 6139 · 6138 · Suwa Chrono',  y:1195},
+    {t:'Cal. 4006 · 6217 · Complications', y:1335},
+    {t:'Cal. 44x · 45x · 52xx · King Seiko', y:1570},
+    {t:'Cal. 44xx · 45xx · 19xx · GS Daini', y:1745},
+    {t:'Cal. 6602 · 6802 · Champion',     y:1870},
+    {t:'Cal. 7016 · 7018 · 7015 · Kameido Chrono', y:2035}
+  ];
+  platforms.forEach(p=>{
+    const d=document.createElement('div');
+    d.className='platform-label';
+    d.textContent=p.t;
+    d.style.cssText=`left:18px;top:${p.y}px`;
+    canvas.appendChild(d);
+  });
 })();
 const nodeEls={};
 nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElement('div');d.className='node'+(isIcon?' icon':'');d.style.cssText=`left:${x}px;top:${y}px;border:${isIcon?2:1}px solid ${isIcon?C.highlight+'88':color+'30'}`;d.dataset.id=id;let inner='';if(isIcon)inner+=`<div class="star-badge">★</div>`;if(inCollection.has(id))inner+=`<div class="coll-badge">In Collection</div>`;const tech=techMap[id];if(tech){const lb={hibeat:'HB',springdrive:'SD',quartz:'Q'};inner+=`<div class="tech-badge ${tech}" title="${tech==='hibeat'?'Hi-Beat 36000 bph':tech==='springdrive'?'Spring Drive':'Quartz'}">${lb[tech]}</div>`;}inner+=`<div class="text">${label}</div>`;d.innerHTML=inner;d.addEventListener('mouseenter',(e)=>{hovered=id;updateHL();showPopup(id,e);if(typeof edgeTipVisible!=='undefined'&&edgeTipVisible){document.getElementById('edge-tip').classList.remove('show');edgeTipVisible=false;}});d.addEventListener('mousemove',(e)=>{});d.addEventListener('click',(e)=>{e.stopPropagation();locked=(locked===id)?null:id;updateHL();});d.addEventListener('mouseleave',()=>{hovered=null;updateHL();hidePopup();});canvas.appendChild(d);nodeEls[id]=d;});
