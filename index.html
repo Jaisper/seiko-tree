@@ -336,7 +336,7 @@ const popupData={
   sd_7r68:{n:"7R68 Spring Drive",era:"1999",d:"The first production Spring Drive. Manual-winding, released in very limited quantity (~500 pieces) under the Seiko brand — not yet Grand Seiko. Launched the year after lead engineer Yoshikazu Akahane's death. The culmination of roughly two decades of sustained R&D; proved the tri-synchro regulator concept commercially viable.",tags:["sd"]},
   sd_7r88:{n:"7R88 Credor Spring Drive",era:"2002",d:"Spring Drive's first automatic version, launched under Credor — Seiko's ultra-exclusive haute horlogerie brand. Transitioning from manual to auto-winding required solving the bidirectional winding mechanism. Platinum cases only. Acted as a proving ground for Spring Drive luxury positioning before the 2004 Grand Seiko debut.",tags:["sd"]},
   gs_sd_chrono:{n:"GS Spring Drive Chronograph",era:"2007-",d:"Cal. 9R86. The world's first Spring Drive chronograph with GMT function. 30-minute and 12-hour registers read against the silent glide-motion seconds hand — no ticking, chronograph sweep is smooth. 72-hour reserve. Combined the precision of Spring Drive with chronograph complication, unique in the luxury watch market.",tags:["gs","sd"]},
-  gs_9r01:{n:"GS Spring Drive 8 Days",era:"2016-",d:"Cal. 9R01 — Spring Drive's ultimate power-reserve achievement. Three mainspring barrels in series deliver 192-hour (8-day) reserve, one of the longest in any wristwatch. Platinum cases only, hand-assembled by the Micro Artist Studio in Shiojiri, Nagano. Represents Grand Seiko's highest mechanical craftsmanship, representing one of Grand Seiko's highest expressions of Spring Drive craftsmanship.",tags:["gs","sd"]},
+  gs_9r01:{n:"GS Spring Drive 8 Days",era:"2016-",d:"Cal. 9R01 — Spring Drive's ultimate power-reserve achievement. Three mainspring barrels in series deliver 192-hour (8-day) reserve, one of the longest in any wristwatch. Platinum cases only, hand-assembled by the Micro Artist Studio in Shiojiri, Nagano. Represents one of Grand Seiko's highest expressions of Spring Drive craftsmanship.",tags:["gs","sd"]},
   gs_sd_04:{n:"Grand Seiko Spring Drive",era:"2004-",d:"Cal. 9R65. The moment Spring Drive became a serious luxury movement. 72-hour power reserve, ±1 second per day, tri-synchro regulator (mainspring power, electromagnetic brake, quartz reference). The glide motion seconds hand became Grand Seiko's visual signature — unlike any other mechanical or quartz watch on the market.",tags:["gs","sd"]},
   hist_2000:{n:"Historical Collection 2000",era:"2000",d:"A seven-model heritage-reissue series released through 2000, just before Seiko Watch Corporation was formed in 2001. Highlights included the SBDX003 Marinemaster 300m tribute with Cal. 8L35, the SCVM001 Laurel reissue with Cal. 4S28, the SCVN001 King Seiko reissue with Cal. 4S15, visually close to late-1960s King Seiko design while mechanically linked to the 52-family-derived 4S platform, the SCVR001 Railway Watch with Cal. 8L34, the tactile SQBR017 pocket watch, the SCQZ002 Astron quartz reissue with Cal. 9F61, and the SBDX005 600m Tuna tribute. The collection was a decisive early signal that Seiko's back catalogue had become strategic design capital.",tags:[],confidence:"medium",sourceNote:"Product list and caliber assignments should be maintained against collector and Seiko archive sources."},
   s4_family:{n:"4S Mechanical Platform",era:"1992-2000s",d:"Cal. 4S15/4S25/4S36. Higher-grade mechanical platform bridging vintage Seiko and the modern era. Derived from KS 52xx architecture. Used in SUS, SARB, and early Presage predecessors.",tags:[]},
@@ -629,7 +629,7 @@ const nodeTags={
   px_shogun:["prospex","diver"],
   px_sd_diver:["prospex","diver","springdrive"],
   px_hb_8l55:["prospex","diver","beat10"],
-  px_lx:["prospex","flagship","springdrive"],
+  px_lx:["prospex","diver","flagship","springdrive"],
   px_alpinist:["prospex","field","heritage"],
   px_land:["prospex","field"],
   px_speedtimer:["prospex","chrono","heritage"],
@@ -665,7 +665,9 @@ const nodeTags={
   "56ks":["ks"],
   ks_revival:["ks"],
   ks_sje:["ks"],
-  ks_vanac_25:["ks"]
+  ks_vanac_25:["ks"],
+  vanac:["ks","heritage","design"],
+  vanac_sp:["ks","design"]
 };
 function isVis(n){
   const c=n[4],id=n[0];
