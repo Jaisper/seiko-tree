@@ -4,8 +4,6 @@ An interactive, single-file visualization of Seiko's mechanical watch heritage f
 
 🔗 **Live site:** [jaisper.github.io/seiko-tree](https://jaisper.github.io/seiko-tree)
 
-![Screenshot of the family tree](preview.png)
-
 ## What this is
 
 A curated genealogy of Seiko's mechanical watch families, organized as a three-era visual model:
