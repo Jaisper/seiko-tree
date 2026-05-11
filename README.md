@@ -1,6 +1,6 @@
 # Seiko — A Curated Mechanical Family Tree (1960–2025)
 
-An interactive, single-file visualization of Seiko's mechanical watch heritage from 1960 to 2025 — covering Suwa Seikosha, Daini/Kameido, Grand Seiko, King Seiko, divers, chronographs, Spring Drive, and the modern collection era.
+Greetings all Seiko Fan boys -and girs ! I've made an interactive, single-file visualization of Seiko's mechanical watch heritage from 1960 to 2025 — covering Suwa Seikosha, Daini/Kameido, Grand Seiko, King Seiko, divers, chronographs, Spring Drive, and the modern collection era.
 
 🔗 **Live site:** [jaisper.github.io/seiko-tree](https://jaisper.github.io/seiko-tree)
 
