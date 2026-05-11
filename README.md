@@ -6,7 +6,7 @@ Greetings all Seiko Fan boys -and girs ! I've made an interactive, single-file v
 
 ## What this is
 
-A curated genealogy of Seiko's mechanical watch families, organized as a three-era visual model:
+First and foremost this is a personal  hobby project, motivated by my interest in Seiko's mechanical watches and the history and evolution of these. It is a curated genealogy of Seiko's mechanical watch families, organized as a three-era visual model:
 
 - **Vintage Factory Era (1960–c. 1988)** — Suwa Seikosha and Daini/Kameido as parallel in-house production centers
 - **Legacy Transition (c. 1988–2001)** — the dormancy and revival period: 1988 GS quartz return, 1998 9S mechanical revival, 1999 7R68 Spring Drive, the 4S bridge family, 7002 and SKX divers
@@ -16,10 +16,10 @@ The diagram traces caliber lineages, platform families, market succession, desig
 
 ## What this isn't
 
-- Not a complete reference catalogue
-- Not a strict caliber genealogy (those branch in many directions a single 2D layout can't capture)
-- Not authoritative Seiko corporate history — editorial choices have been made about era boundaries, model groupings, and which relations count as direct lineage vs. design influence
-- Not an investment guide or pricing reference
+- NOT a complete reference catalogue
+- NOT a strict caliber genealogy (those branch in many directions a single 2D layout can't capture)
+- NOT authoritative Seiko corporate history — editorial choices have been made about era boundaries, model groupings, and which relations count as direct lineage vs. design influence
+- NOT an investment guide or pricing reference
 
 ## Features
 
