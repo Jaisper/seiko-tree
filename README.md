@@ -17,7 +17,7 @@ The diagram traces caliber lineages, platform families, market succession, desig
 ## What this isn't
 
 - NOT a complete reference catalogue
-- NOT a strict caliber genealogy (those branch in many directions a single 2D layout can't capture)
+- NOT a strict caliber genealogy (which branch in many directions - a single 2D layout can't capture that)
 - NOT authoritative Seiko corporate history — editorial choices have been made about era boundaries, model groupings, and which relations count as direct lineage vs. design influence
 - NOT an investment guide or pricing reference
 
