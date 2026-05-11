@@ -241,9 +241,9 @@ The code is MIT-licensed — fork freely. The curated content (edge claims, era 
 
 Watch and brand names are trademarks of their respective owners and used here for identification only.
 
-Hope you find it useful!
-Jesper
-
 ## Acknowledgments
 
 This project is the work of an enthusiast, not a Seiko employee. It owes everything to the long tradition of Seiko collectors, archivists, and writers who have done the real research over decades. Thanks especially to the wider community, Plus9Time and GS9 Club archives, and Seiko's own design-history publications.
+
+I hope you find it useful!
+Jesper
