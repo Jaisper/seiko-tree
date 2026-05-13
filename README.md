@@ -5,6 +5,7 @@ Greetings, fellow Seiko enthusiasts. I have had a long-standing interest in Seik
 So I set out to create a map of Seiko’s mechanical watch heritage from 1960 to 2025: covering Suwa Seikosha, Daini/Kameido, Grand Seiko, King Seiko, divers, chronographs, Spring Drive, and the modern collection era. I think it has turned out pretty good, and I am now sharing it for fellow enthusiasts to explore, use, challenge, and improve.
 
 I hope you find it useful!
+
 Best Jesper
 
 🔗 **Live site:** [jaisper.github.io/seiko-tree](https://jaisper.github.io/seiko-tree)
