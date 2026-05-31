@@ -105,12 +105,6 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #watch-popup .popup-era{font-size:9.5px;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px}
 #watch-popup .popup-desc{font-size:14px;color:#333;line-height:1.5;font-family:'Cormorant Garamond',serif}
 #watch-popup .popup-tag{display:inline-block;font-size:8.5px;padding:2px 6px;border-radius:2px;margin-top:5px;margin-right:3px;font-weight:500;letter-spacing:.3px}
-#popup-source{margin-top:7px;padding-top:6px;border-top:1px solid var(--rule);font-size:8.5px;color:var(--muted);line-height:1.35;font-family:'IBM Plex Mono',monospace;display:none}
-#popup-source div{margin-bottom:3px}
-#popup-source .conf{text-transform:uppercase;letter-spacing:.5px;font-weight:600;font-size:8px}
-#popup-source .conf.high{color:#2d8a3e}
-#popup-source .conf.medium{color:#9e6b00}
-#popup-source .conf.interpretive{color:var(--muted)}
 #watch-popup .popup-tag.t-diver{background:#0d665118;color:#0d6651}
 #watch-popup .popup-tag.t-chrono{background:#9e6b0018;color:#9e6b00}
 #watch-popup .popup-tag.t-gs{background:#1a4a6a18;color:#1a4a6a}
@@ -149,6 +143,15 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   #edge-tip{max-width:240px}
   #edge-tip .et-desc{font-size:13px}
   .node{width:110px;min-height:38px}
+  /* Intro-short fold on mobile: hide all but first paragraph until expanded */
+  #intro-short:not(.expanded) > p:not(:first-child){display:none}
+  #intro-short:not(.expanded)::after{content:'';display:block;height:0}
+  #intro-short-toggle{display:inline-block;font-family:'Noto Serif',Georgia,serif;font-size:12px;color:var(--ink);background:none;border:none;padding:0;cursor:pointer;opacity:.75;text-decoration:underline;margin-top:2px}
+  #intro-short-toggle:hover{opacity:1}
+}
+@media (min-width:769px){
+  #intro-short-toggle{display:none}
+  #intro-short > p{display:block!important}
 }
 @media (max-width:480px){
   #header h1{font-size:14px}
@@ -157,6 +160,22 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   #minimap{transform:scale(.55)}
   #watch-popup{width:220px}
   #watch-popup img{height:110px}
+}
+#search-box{position:relative;display:inline-flex;align-items:center;gap:4px}
+#search-input{font-family:'IBM Plex Mono',monospace;font-size:10px;border:1px solid var(--rule);border-radius:3px;padding:3px 7px;background:var(--paper);color:var(--ink);width:140px;outline:none}
+#search-input:focus{border-color:var(--ink)}
+#search-input::placeholder{color:var(--muted);font-style:italic}
+#search-results{position:absolute;top:100%;left:0;margin-top:2px;background:var(--paper);border:1px solid var(--rule);border-radius:3px;box-shadow:0 4px 18px rgba(0,0,0,.12);max-height:240px;overflow-y:auto;width:280px;z-index:60;display:none}
+#search-results.open{display:block}
+#search-results .sr-item{padding:6px 10px;cursor:pointer;border-bottom:1px solid var(--rule);font-family:'Cormorant Garamond',serif}
+#search-results .sr-item:last-child{border-bottom:none}
+#search-results .sr-item:hover,#search-results .sr-item.active{background:#f5f3ee}
+#search-results .sr-name{font-size:13px;color:var(--ink);line-height:1.25}
+#search-results .sr-meta{font-size:9px;color:var(--muted);font-family:'IBM Plex Mono',monospace;letter-spacing:.4px;margin-top:1px}
+#search-results .sr-empty{padding:10px 12px;font-size:11px;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif}
+@media (max-width:768px){
+  #search-input{width:100px;font-size:9px}
+  #search-results{width:240px}
 }
 #tour-launcher{position:fixed;top:calc(100vh - 56px);right:20px;z-index:30;background:var(--paper);border:1px solid var(--rule);border-radius:20px;box-shadow:0 2px 10px rgba(0,0,0,.08);padding:8px 14px;font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s}
 #tour-launcher:hover{box-shadow:0 3px 14px rgba(184,148,46,.2);border-color:var(--icon)}
@@ -205,6 +224,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
         <p style="margin:0 0 10px"><strong style="color:var(--ink)">Legacy Transition (c. 1988–2001)</strong> covers the bridge between Seiko's vintage mechanical era and the modern collection architecture. The Grand Seiko name returned in 1988 as a quartz line (95GS, Cal. 9581/9587), and mechanical Grand Seiko was reintroduced ten years later with the 9S5 caliber (1998). In parallel, the 4S caliber family (from 1992, derived from the 1970s King Seiko 52xx) carried higher-grade mechanical Seikos through the 1990s, and Spring Drive moved from long-running R&amp;D to a first commercial release with the 7R68 in 1999. On the diver side, the 7002 (1988) and SKX (1996) kept Seiko's mechanical diver line continuously visible before the global Prospex architecture took over.</p>
         <p style="margin:0 0 10px"><strong style="color:var(--ink)">Modern Collection Era (2001–2025)</strong> begins with the 2001 establishment of Seiko Watch Corporation as the dedicated watch-business company. The product architecture shown here reflects today's globally consolidated brand and collection structure — Grand Seiko (separated as an independent brand in 2017), King Seiko (revived as a modern collection in 2022), Prospex (consolidated as a global brand in 2014, with diver heritage going back to 1965), Presage (launched in Japan and rolled out globally in 2016, drawing on older Seiko dress-watch lines), and Seiko 5 Sports (rebooted in 2019 from a concept that began in 1968). These are editorial groupings, not line origins.</p>
         <p style="margin:0;font-size:13px;opacity:.65;font-style:italic">Era divisions are editorial. This is not a strict caliber genealogy — it combines technical lineage, movement/platform continuation, market succession, design influence, brand revival and modern heritage reinterpretation. Solid lines <span style="display:inline-block;width:16px;height:0;border-top:2px solid #aaa;vertical-align:middle;margin:0 2px"></span> indicate stronger lineage; thinner <span style="display:inline-block;width:16px;height:0;border-top:1px solid #aaa;vertical-align:middle;margin:0 2px"></span> or dashed <span style="display:inline-block;width:16px;height:0;border-top:1px dashed #aaa;vertical-align:middle;margin:0 2px"></span> lines indicate looser interpretive links. This is a curated interpretive model, not an official Seiko genealogy.</p>
+        <button id="intro-short-toggle" onclick="const s=document.getElementById('intro-short');s.classList.toggle('expanded');this.textContent=s.classList.contains('expanded')?'Show less':'Show full intro ▼'">Show full intro ▼</button>
       </div>
       <div id="intro-detail">
         <hr style="border:none;border-top:1px solid var(--rule);margin:12px 0">
@@ -236,6 +256,11 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   <div class="filters" id="filters"></div>
 </div>
 <div id="toolbar">
+  <div id="search-box">
+    <input id="search-input" type="text" placeholder="Search watches…" autocomplete="off" aria-label="Search watches">
+    <div id="search-results"></div>
+  </div>
+  <div class="sep"></div>
   <label>Zoom</label>
   <input type="range" id="zoom-slider" min="15" max="120" value="40">
   <span id="zoom-val">40%</span>
@@ -243,7 +268,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   <button class="tbtn" id="btn-fit">Fit Width</button>
   <button class="tbtn" id="btn-100">100%</button>
   <div class="sep"></div>
-  <span style="font-size:8px;color:var(--muted)">Scroll to zoom · Drag to pan · Dbl-click zoom · Hover for links · Click node to trace lineage · Esc to clear</span>
+  <span style="font-size:8px;color:var(--muted)">Search · Scroll to zoom · Drag to pan · Click node to trace · Esc to clear</span>
 </div>
 <div id="watch-popup">
   <img id="popup-img" src="" alt="">
@@ -252,7 +277,6 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
     <div class="popup-era" id="popup-era"></div>
     <div class="popup-desc" id="popup-desc"></div>
     <div id="popup-tags"></div>
-    <div id="popup-source"></div>
   </div>
 </div>
 <div id="edge-tip"><div class="et-type"></div><div class="et-desc"></div></div>
@@ -296,8 +320,8 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
    ║   5. LAYOUT                 (declarative grid; node x/y auto-comp.)  ║
    ║   6. RELATIONSHIPS          (edges — lines between nodes)            ║
    ║   7. FILTER TAGS            (nodeTags — for category filtering)      ║
-   ║   8. GUIDED TOURS           (the narrated walk-throughs)             ║
-   ║   9. RENDERING & INTERACTION (the engine — usually no need to edit)  ║
+   ║   8. RENDERING & INTERACTION (the engine — usually no need to edit)  ║
+   ║   9. GUIDED TOURS           (the narrated walk-throughs)             ║
    ║                                                                      ║
    ║  Container boxes are auto-generated by the engine from Section 5;    ║
    ║  no separate "sections" array to maintain.                           ║
@@ -370,12 +394,22 @@ const techMap = {
   gs_hibeat: "beat10",
   gs_9s5: "beat10",
   px_hb_8l55: "beat10",
+  "61gs": "beat10",
+  "61gs_vfa": "beat10",
+  "45gs": "beat10",
+  "45gs_vfa": "beat10",
+  ks_hack: "beat10",
+  ks_chrono: "beat10",
+  "45ks": "beat10",
+  "52ks": "beat10",
 
   /* — 28,800 vph (8-beat) — */
   lord_matic_sp: "beat8",
   business_a: "beat8",
   "61_skyliner": "beat8",
   "61_skyliner_cal": "beat8",
+  "56gs_s": "beat8",
+  "56gs_k": "beat8",
 
   /* — Spring Drive — */
   gs_sd_04: "springdrive",
@@ -412,7 +446,7 @@ const inCollection = new Set([
 
 
 /* ═══════════════════════════════════════════════════════════════════════
-   WATCH DATA — popupData
+   SECTION 4 · WATCH DATA — popupData
    ═══════════════════════════════════════════════════════════════════════
    What you see when hovering or focusing on a watch node.
    
@@ -517,9 +551,9 @@ const popupData={
   "62mas":{n:"62MAS",era:"1965-68",d:"Japan's first professional diver's watch. 150m water resistance, external rotating bezel and Cal. 6217A automatic movement (17 jewels, 18,000 bph). Seiko documents that the model was worn by members of the Japanese Antarctic Research Expedition from 1966 onward, helping establish its reputation as a serious tool watch. The improved 6217-8001 \"Big Crown\" version refined usability while preserving the simple, functional case architecture that became the root of Seiko's diver lineage.",tags:["icon","diver"]},
   "62mas_2":{n:"62MAS 8001",era:"1967-68",d:"Second-generation 62MAS with improved case. Same Cal. 6217 movement. Transitional model before the 6105 line.",tags:["diver"]},
   "6215_pro":{n:"6215-7000 Professional",era:"1967-68",d:"Seiko's first 300m professional diver. Preceded the 6159 Pro. Very rare — produced briefly alongside the 62MAS.",tags:["diver"]},
-  "6105_8000":{n:"6105-8000",era:"1968-70",d:"The first-generation 6105 diver and direct evolution of the 62MAS. 150m water resistance, Cal. 6105 automatic (21,600 bph, hacking but non-hand-winding), external rotating bezel, crown at 4 o'clock — an early example of the asymmetric crown placement that became a Seiko diver signature. Symmetric cushion case sits between the earlier barrel-case 62MAS and the famous later 6105-8110/8119 'Willard' with its crown-guard cushion case. A pivotal but relatively short-lived transitional model.",tags:["icon","diver"]},
+  "6105_8000":{n:"6105-8000/8009",era:"1968-77",d:"The first-generation 6105 diver and direct evolution of the 62MAS. 150m water resistance, Cal. 6105 automatic (21,600 bph, hacking but non-hand-winding), external rotating bezel, crown at 4 o'clock — an early example of the asymmetric crown placement that became a Seiko diver signature. The 6105-8000 (1968-70) and 6105-8009 (1970-77) are parallel references within the same first-generation symmetric cushion case family, sitting between the earlier barrel-case 62MAS and the famous later 6105-8110 'Willard' with its crown-guard asymmetric cushion case redesigned by Taro Tanaka.",tags:["icon","diver"]},
   "6105_willard":{n:"6105-8110 Willard",era:"1970-77",d:"The 'Captain Willard' — worn by Martin Sheen in Apocalypse Now (1979), cementing its place in cinema and vintage diver culture. 44mm asymmetric cushion case with integrated crown guard at 4 o'clock, external rotating dive bezel, 150m rating and Cal. 6105B automatic. One of the most recognizable Seiko dive watches ever made.",tags:["icon","diver"]},
-  "6105_last":{n:"6105-8000/8009",era:"1968-70",d:"First-generation 6105 diver case family. Slimmer and more symmetrical than the later 6105-8110/8119 'Willard'. Best understood as the early 6105 branch rather than a final Willard variant.",tags:["diver"]},
+  _:{n:"6105-8000/8009",era:"1968-70",d:"First-generation 6105 diver case family. Slimmer and more symmetrical than the later 6105-8110/8119 'Willard'. Best understood as the early 6105 branch rather than a final Willard variant.",tags:["diver"]},
   "6309":{n:"6309-7040/7049 Turtle",era:"1976-88",d:"The 'Turtle' — 150m diver with cushion-shaped case. Cal. 6309 automatic, non-hand-winding and generally non-hacking. The JDM 6306 sibling added hacking. A mass-produced workhorse diver and one of the roots of modern Seiko diver enthusiasm.",tags:["diver"]},
   "6306_sd":{n:"SilverWave Surface Diver",era:"1976-78",d:"Cal. 6306. Turtle-case 150m recreational diver. Non-professional companion to the 6309 line.",tags:["diver"]},
   "6106_sport":{n:"Sports Diver 70M",era:"1968-74",d:"Cal. 6106. Recreational 70m water-resistant diver. Affordable entry-level complement to the professional 6105/6159 lines.",tags:["diver"]},
@@ -758,9 +792,9 @@ const nodeLabels = {
   "62mas": "62MAS\n1965-68",
   "62mas_2": "62MAS 8001\n1967-68",
   "6215_pro": "6215-7000\nPro 300m 1967-68",
-  "6105_8000": "6105-8000\n150m 1968-70",
+  "6105_8000": "6105-8000/8009\n150m 1968-77",
   "6105_willard": "6105-8110\nWillard 1970-77",
-  "6105_last": "6105-8000/8009\nFirst-gen 6105\n1968-70",
+  _: "6105-8000/8009\nFirst-gen 6105\n1968-70",
   "6309": "6309 Turtle\n150m 1976-88",
   "6306_sd": "SilverWave\nSurface Diver\n6306 1976-78",
   "6106_sport": "Sports Diver\n70m 6106 1968-74",
@@ -1029,7 +1063,7 @@ const LAYOUT = {
       rows: [
         ["silverwave", "selfdater_mas"],
         ["62mas", "62mas_2", "6105_8000", "6105_willard", "6309"],
-        [_, "6215_pro", "6159_pro", "6105_last", _, "6306_sd"],
+        [_, "6215_pro", "6159_pro", _, _, "6306_sd"],
         [_, _, _, "6159_tuna", "6106_sport"],
       ]
     },
@@ -1209,7 +1243,7 @@ const LAYOUT = {
 
 
 /* ═══════════════════════════════════════════════════════════════════════
-   RELATIONSHIPS — edges
+   SECTION 6 · RELATIONSHIPS — edges
    ═══════════════════════════════════════════════════════════════════════
    Each edge is a line drawn between two nodes. Format:
      ["from","to","type","description","relation"]   (last field optional)
@@ -1298,7 +1332,6 @@ const edges=[
   ["6215_pro","6159_pro","strong","6159 advanced the professional diver to Hi-Beat with improved depth rating"],
   ["6105_8000","6105_willard","strong","Willard redesigned the 6105 with cushion case and crown guard"],
   ["6105_8000","6106_sport","medium","6106 Sports Diver offered an affordable 70m recreational companion"],
-  ["6105_8000","6105_last","weak","6105-8009 belongs to the first-generation 6105 case family alongside the 8000"],
   ["6105_willard","6309","strong","6309 Turtle replaced the Willard as Seiko\'s mainstream 150m diver"],
   ["6309","6306_sd","medium","6306 Surface Diver was a recreational companion to the 6309 Turtle"],
   ["6105_8000","6159_pro","medium","6159-7000/7001 was the contemporary professional 300m branch alongside the recreational 6105"],
@@ -1525,12 +1558,58 @@ const nodeTags = {
   ks_vanac_25: ["ks"],
   vanac: ["ks","heritage","design"],
   vanac_sp: ["ks","design"],
+
+  /* ── Tags added by filter-bug fix (May 2026) ── */
+  gs_sd: ["gs","icon"],
+  "57gs_cal": ["gs"],
+  "61gs_vfa": ["gs","icon"],
+  "61gs_sp": ["gs"],
+  "56gs_s": ["gs"],
+  "45gs_vfa": ["gs","icon"],
+  "56gs_k": ["gs"],
+  "19gs": ["gs"],
+  gs_independence: ["gs","heritage"],
+  gs_sd_04: ["gs","sd","icon"],
+  gs_9r: ["gs","sd","heritage"],
+  gs_9r01: ["gs","sd","flagship","icon"],
+  gs_sd_chrono: ["gs","sd","chrono"],
+  gs_9ra: ["gs","sd","icon"],
+  gs_ufa: ["gs","sd","icon","flagship"],
+  gs_9s5: ["gs","heritage"],
+  gs_heritage: ["gs","heritage"],
+  gs_elegance: ["gs"],
+  gs_sport: ["gs"],
+  gs_masterpiece: ["gs","flagship"],
+  gs_evo9: ["gs","heritage"],
+  gs_cont: ["gs"],
+  gs_quartz_88: ["gs","heritage"],
+  gs_mech_98: ["gs","heritage"],
+  gs_hibeat: ["gs","hb"],
+  ks_hack: ["ks"],
+  ks_chrono: ["ks","chrono","icon"],
+  "44ks_sp": ["ks"],
+  ks_dormant: ["ks"],
+  silverwave: ["diver"],
+  selfdater_mas: ["diver"],
+  "62mas_2": ["diver","heritage"],
+  "6215_pro": ["diver","heritage"],
+  _: ["diver","heritage"],
+  "6306_sd": ["diver"],
+  "6106_sport": ["diver"],
+  mm300: ["diver","flagship"],
+  c701x: ["chrono"],
+  k7015: ["chrono"],
+  k7016: ["chrono"],
+  k7017: ["chrono"],
+  k7018: ["chrono"],
+  s5_speed: ["chrono","heritage"],
+
 };
 
 
 
 /* ═══════════════════════════════════════════════════════════════════════
-   SECTION 9 · RENDERING & INTERACTION ENGINE
+   SECTION 8 · RENDERING & INTERACTION ENGINE
    ═══════════════════════════════════════════════════════════════════════
    The diagram's runtime: builds the DOM, draws SVG edges, handles
    zoom/pan/clicks/keyboard, manages the minimap and filters, and
@@ -1631,7 +1710,7 @@ const popupName=document.getElementById('popup-name');
 const popupEra=document.getElementById('popup-era');
 const popupDesc=document.getElementById('popup-desc');
 const popupTags=document.getElementById('popup-tags');
-const popupSource=document.getElementById('popup-source');
+
 let popupTimer=null;
 const imgCache={};
 function showPopup(nodeId,e){
@@ -1644,16 +1723,6 @@ function showPopup(nodeId,e){
   const tagMap={icon:'★ Iconic',diver:'⚓ Diver',chrono:'⏱ Chrono',gs:'Grand Seiko',ks:'King Seiko',hb:'Hi-Beat',sd:'Spring Drive'};
   popupTags.innerHTML=(d.tags||[]).map(t=>`<span class="popup-tag t-${t}">${tagMap[t]||t}</span>`).join('');
   if(inCollection.has(nodeId)) popupTags.innerHTML+=`<span class="popup-tag t-coll">In Collection</span>`;
-  /* Confidence + source note rendering */
-  if(d.confidence||d.sourceNote){
-    const confHtml=d.confidence?`<div><span class="conf ${d.confidence}">Confidence: ${d.confidence}</span></div>`:'';
-    const noteHtml=d.sourceNote?`<div>${d.sourceNote}</div>`:'';
-    popupSource.innerHTML=confHtml+noteHtml;
-    popupSource.style.display='block';
-  }else{
-    popupSource.innerHTML='';
-    popupSource.style.display='none';
-  }
   popupImg.classList.remove('loaded');
   if(d.hasImg){
     const src=`./img/${nodeId}.jpg`;
@@ -1688,7 +1757,23 @@ function showPopup(nodeId,e){
 function hidePopup(){
   popupTimer=setTimeout(()=>{popup.classList.remove('visible');popupImg.classList.remove('loaded');},100);
 }
-const NW=124,NH=42,CW=2490,CH=2200;
+/* Node dimensions — synced from actual CSS size on resize (mobile uses 110×38) */
+let NW=124,NH=42;
+const CW=2490,CH=2200;
+function syncNodeSize(){
+  /* Read actual rendered .node dimensions from CSS. Falls back to defaults if no
+     node has been rendered yet. Called once after initial render and on resize. */
+  const sampleEl=document.querySelector('.node');
+  if(sampleEl){
+    const r=sampleEl.getBoundingClientRect();
+    /* getBoundingClientRect reports the CSS dimensions; node sizing is independent
+       of the canvas transform so this is reliable. */
+    if(scale){
+      NW=Math.round(r.width/scale);
+      NH=Math.round(r.height/scale);
+    }
+  }
+}
 
 const nodeMap={};nodes.forEach(n=>nodeMap[n[0]]=n);
 const canvas=document.getElementById('canvas'),svg=document.getElementById('edges-svg'),wrap=document.getElementById('canvas-wrap'),slider=document.getElementById('zoom-slider'),zoomVal=document.getElementById('zoom-val');
@@ -1707,34 +1792,32 @@ function view100(){scale=1;tx=0;ty=0;applyTransform();}
 sections.forEach(s=>{const d=document.createElement('div');d.className='section-bg'+(s.sub?' sub':'');d.style.cssText=`left:${s.x}px;top:${s.y}px;width:${s.w}px;height:${s.h}px;border:1px solid ${s.c}${s.sub?'18':'0e'};background:${s.c}${s.sub?'06':'04'}`;d.innerHTML=`<div class="label" style="color:${s.c}99">${s.l}</div>`;canvas.appendChild(d);});
 const nodeEls={};
 nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElement('div');d.className='node'+(isIcon?' icon':'');d.style.cssText=`left:${x}px;top:${y}px;border:${isIcon?2:1}px solid ${isIcon?C.highlight+'88':color+'30'}`;d.dataset.id=id;d.setAttribute('role','button');d.setAttribute('tabindex','0');d.setAttribute('aria-label',label.replace(/\n/g,' '));let inner='';if(isIcon)inner+=`<div class="star-badge">★</div>`;if(inCollection.has(id))inner+=`<div class="coll-badge">In Collection</div>`;const tech=techMap[id];if(tech){const lb={beat10:'10B',beat8:'8B',springdrive:'SD',quartz:'Q'};inner+=`<div class="tech-badge ${tech}" title="${({beat10:'36,000 vph / 10-beat',beat8:'28,800 vph / 8-beat',springdrive:'Spring Drive',quartz:'Quartz'})[tech]||tech}">${lb[tech]}</div>`;}inner+=`<div class="text">${label}</div>`;d.innerHTML=inner;d.addEventListener('mouseenter',(e)=>{hovered=id;updateHL();showPopup(id,e);if(typeof edgeTipVisible!=='undefined'&&edgeTipVisible){document.getElementById('edge-tip').classList.remove('show');edgeTipVisible=false;}});d.addEventListener('mousemove',(e)=>{});d.addEventListener('click',(e)=>{e.stopPropagation();locked=(locked===id)?null:id;updateHL();});d.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();locked=(locked===id)?null:id;updateHL();}});d.addEventListener('focus',(e)=>{hovered=id;updateHL();showPopup(id,e);});d.addEventListener('blur',()=>{hovered=null;updateHL();hidePopup();});d.addEventListener('mouseleave',()=>{hovered=null;updateHL();hidePopup();});canvas.appendChild(d);nodeEls[id]=d;});
+/* Sync NW/NH to actual rendered node size (handles mobile breakpoints) */
+syncNodeSize();
+window.addEventListener('resize',()=>{syncNodeSize();if(typeof drawEdges==='function')drawEdges();});
 function getPath(fn,tn){const fcx=fn[2]+NW/2,fcy=fn[3]+NH/2,tcx=tn[2]+NW/2,tcy=tn[3]+NH/2,dx=tcx-fcx,dy=tcy-fcy;let sx,sy,ex,ey;if(Math.abs(dx)>Math.abs(dy)){sx=dx>0?fn[2]+NW:fn[2];sy=fcy;ex=dx>0?tn[2]:tn[2]+NW;ey=tcy;}else{sx=fcx;sy=dy>0?fn[3]+NH:fn[3];ex=tcx;ey=dy>0?tn[3]:tn[3]+NH;}const mx=(sx+ex)/2,my=(sy+ey)/2;if(Math.abs(dx)>Math.abs(dy)){return`M${sx},${sy} C${mx},${sy} ${mx},${ey} ${ex},${ey}`;}return`M${sx},${sy} C${sx},${my} ${ex},${my} ${ex},${ey}`;}
 function renderEdges(){let h=`<defs><marker id="a" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="#aaa"/></marker><marker id="ah" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="${C.highlight}"/></marker></defs>`;edges.forEach(([f,t,type,desc,relation])=>{const fn=nodeMap[f],tn=nodeMap[t];if(!fn||!tn)return;const cls=type==='weak'?'edge-weak':'';const d=getPath(fn,tn);h+=`<path class="${cls}" data-from="${f}" data-to="${t}" data-type="${type}" data-desc="${desc||''}" data-relation="${relation||''}" d="${d}" fill="none" stroke="#aaa" stroke-width="${type==='strong'?1.5:.8}" stroke-dasharray="${type==='weak'?'3,3':'0'}" opacity="${type==='weak'?.25:.45}" marker-end="url(#a)"/>`;});svg.innerHTML=h;}
 
 function hasTag(id,tag){return nodeTags[id]&&nodeTags[id].includes(tag);}
 function isVis(n){
-  const c=n[4],id=n[0];
+  const id=n[0];
   if(filter.cats.size>0){
     let ok=false;
-    if(filter.cats.has('diver')){
-      if(hasTag(id,'diver')) ok=true;
-      else if(c===C.diver && !nodeTags[id]) ok=true;
-    }
-    if(filter.cats.has('chrono')){
-      if(hasTag(id,'chrono')) ok=true;
-      else if(c===C.chrono && !nodeTags[id]) ok=true;
-    }
-    if(filter.cats.has('gs')){
-      if(hasTag(id,'gs')) ok=true;
-      else if(c===C.gs && !nodeTags[id]) ok=true;
-    }
-    if(filter.cats.has('ks')){
-      if(hasTag(id,'ks')) ok=true;
-      else if(c===C.ks && !nodeTags[id]) ok=true;
-    }
+    /* Tag-driven filtering: a node shows under a category ONLY if it carries
+       the matching tag in nodeTags (Section 7). Box colour is NOT used —
+       colour groups visual families which don't always align with conceptual
+       categories (e.g. Vintage Suwa GS uses suwa colour; Goldfeather uses gs
+       colour but isn't a Grand Seiko). */
+    if(filter.cats.has('diver')&&hasTag(id,'diver')) ok=true;
+    if(filter.cats.has('chrono')&&hasTag(id,'chrono')) ok=true;
+    if(filter.cats.has('gs')&&hasTag(id,'gs')) ok=true;
+    if(filter.cats.has('ks')&&hasTag(id,'ks')) ok=true;
     if(!ok)return false;
   }
   if(filter.mods.has('iconic')&&n[5]!==1)return false;
   if(filter.mods.has('collection')&&!inCollection.has(id))return false;
+  if(filter.mods.has('hibeat')&&techMap[id]!=='beat10')return false;
+  if(filter.mods.has('sd')&&techMap[id]!=='springdrive')return false;
   return true;
 }
 function getLineage(nodeId){
@@ -1801,7 +1884,9 @@ const filterDef=[
   {k:'gs',l:'Grand Seiko',type:'cat'},
   {k:'ks',l:'King Seiko',type:'cat'},
   {type:'sep'},
-  {k:'iconic',l:'★ Iconic',type:'mod'}
+  {k:'iconic',l:'★ Iconic',type:'mod'},
+  {k:'hibeat',l:'10B Hi-Beat',type:'mod'},
+  {k:'sd',l:'SD Spring Drive',type:'mod'}
 ];
 filterDef.forEach(def=>{
   if(def.type==='sep'){
@@ -1854,15 +1939,13 @@ const etType=edgeTip.querySelector('.et-type');
 const etDesc=edgeTip.querySelector('.et-desc');
 svg.style.pointerEvents='none';
 let edgeTipVisible=false,edgeThrottle=0;
-wrap.addEventListener('mousemove',e=>{
-  const now=Date.now();
-  if(now-edgeThrottle<80)return;
-  edgeThrottle=now;
-  if(!edgeTip||dragging||hovered)return;
-  if(edgeTipVisible&&hovered){edgeTip.classList.remove('show');edgeTipVisible=false;return;}
+/* Edge-tooltip proximity detection — shared logic used by both mouse and touch.
+   Returns the nearest edge path within tolerance, or null. */
+function findEdgeAt(clientX,clientY){
+  if(!edgeTip||dragging) return null;
   const r=wrap.getBoundingClientRect();
-  const cx=(e.clientX-r.left-tx)/scale;
-  const cy=(e.clientY-r.top-ty)/scale;
+  const cx=(clientX-r.left-tx)/scale;
+  const cy=(clientY-r.top-ty)/scale;
   let closest=null,closestDist=22/scale;
   svg.querySelectorAll('path[data-desc]').forEach(p=>{
     if(!p.dataset.desc)return;
@@ -1875,27 +1958,67 @@ wrap.addEventListener('mousemove',e=>{
       if(dist<closestDist){closestDist=dist;closest=p;}
     }
   });
-  if(closest){
-    const typeLabels={strong:'Direct lineage',medium:'Platform / influence',weak:'Heritage / stylistic'};
-    const relationLabels={direct_lineage:'Caliber / platform lineage',same_platform:'Same movement or platform family',market_successor:'Product succession / market successor',design_influence:'Design influence',heritage_reinterpretation:'Heritage reinterpretation',brand_revival:'Brand revival',technology_branch:'Technology branch',collection_structure:'Modern collection structure'};
-    const relation=closest.dataset.relation;
-    etType.textContent=relationLabels[relation]||typeLabels[closest.dataset.type]||closest.dataset.type;
-    etDesc.textContent=closest.dataset.desc;
-    edgeTip.style.left=Math.min(e.clientX+12,window.innerWidth-280)+'px';
-    edgeTip.style.top=Math.max(8,e.clientY-40)+'px';
-    edgeTip.classList.add('show');
-    edgeTipVisible=true;
-  } else if(edgeTipVisible){
-    edgeTip.classList.remove('show');
-    edgeTipVisible=false;
-  }
+  return closest;
+}
+function showEdgeTip(path,clientX,clientY){
+  const typeLabels={strong:'Direct lineage',medium:'Platform / influence',weak:'Heritage / stylistic'};
+  const relationLabels={direct_lineage:'Caliber / platform lineage',same_platform:'Same movement or platform family',market_successor:'Product succession / market successor',design_influence:'Design influence',heritage_reinterpretation:'Heritage reinterpretation',brand_revival:'Brand revival',technology_branch:'Technology branch',collection_structure:'Modern collection structure'};
+  const relation=path.dataset.relation;
+  etType.textContent=relationLabels[relation]||typeLabels[path.dataset.type]||path.dataset.type;
+  etDesc.textContent=path.dataset.desc;
+  edgeTip.style.left=Math.min(clientX+12,window.innerWidth-280)+'px';
+  edgeTip.style.top=Math.max(8,clientY-40)+'px';
+  edgeTip.classList.add('show');
+  edgeTipVisible=true;
+}
+function hideEdgeTip(){
+  if(edgeTipVisible){edgeTip.classList.remove('show');edgeTipVisible=false;}
+}
+wrap.addEventListener('mousemove',e=>{
+  const now=Date.now();
+  if(now-edgeThrottle<80)return;
+  edgeThrottle=now;
+  if(hovered){hideEdgeTip();return;}
+  const closest=findEdgeAt(e.clientX,e.clientY);
+  if(closest) showEdgeTip(closest,e.clientX,e.clientY);
+  else hideEdgeTip();
 });
+/* Touch support — tap an empty area near an edge to show its tooltip.
+   We detect a quick stationary tap (not a drag, not a pinch) and check
+   for an edge under the touch point. */
+let touchStart=null;
+wrap.addEventListener('touchstart',e=>{
+  if(e.touches.length===1){
+    touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY,t:Date.now()};
+  }else{
+    touchStart=null;
+  }
+},{passive:true});
+wrap.addEventListener('touchend',e=>{
+  if(!touchStart||e.changedTouches.length!==1)return;
+  const t=e.changedTouches[0];
+  const dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y;
+  const dragged=Math.sqrt(dx*dx+dy*dy)>10;
+  const tooLong=Date.now()-touchStart.t>400;
+  touchStart=null;
+  if(dragged||tooLong)return;
+  /* If the tap landed on a node, the node's own click handler runs. We only
+     care about taps in the gaps between nodes. */
+  if(t.target.closest('.node'))return;
+  const closest=findEdgeAt(t.clientX,t.clientY);
+  if(closest){
+    showEdgeTip(closest,t.clientX,t.clientY);
+    e.preventDefault();
+  }else{
+    hideEdgeTip();
+  }
+},{passive:false});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&locked){locked=null;updateHL();}});
 
 
 
 /* ═══════════════════════════════════════════════════════════════════════
-   SECTION 8 · GUIDED TOURS
+   SECTION 9 · GUIDED TOURS
    ═══════════════════════════════════════════════════════════════════════
    Curated narrative walk-throughs of the diagram. Each tour pans through
    a sequence of stops with a paragraph of context for each.
@@ -1940,7 +2063,7 @@ const tours=[
     {n:'s5_speed',name:'Seiko 5 Speed Timer · 1969',t:"The Speed Timer housed the 6139 movement in a sports-5 case. It was part of the landmark 1969 race for the first automatic chronograph, alongside Zenith's El Primero and the Heuer/Breitling/Hamilton consortium — each manufacturer has a credible claim depending on what counts as launch (patent, presentation, shop availability)."},
     {n:'6139_first',name:'The 6139-6000 · 1969',t:"A fully integrated column-wheel chronograph with vertical clutch. Zenith's El Primero was likewise integrated; the Heuer Cal. 11 was modular. All three were announced in 1969, and each has a credible first-to-market claim depending on criteria. The 6139 carried Seiko's single-register automatic chronograph branch; the related 6138 family carried the dual-register branch."},
     {n:'6139_pogue',name:'6139 Pogue · 1971',t:"First automatic chronograph in space. Col. William Pogue wore his yellow-dial 6139-6002 unofficially aboard Skylab 4 in 1973. A remarkable second life for a watch that started as a regular production model."},
-    {n:'6138_bull',name:'6138 Bullhead · 1971',t:"The 6138 platform added a 12-hour register to create a full 3-register chronograph. The Bullhead placed the pushers at 12 o'clock — an unmistakable case design that has become one of Seiko's most instantly recognizable chronographs."},
+    {n:'6138_bull',name:'6138 Bullhead · 1971',t:"The 6138 added a 12-hour register to the 6139's single elapsed-minutes layout, creating a bi-compax chronograph (30-minute + 12-hour registers). The Bullhead placed the pushers at 12 o'clock — an unmistakable case design that has become one of Seiko's most instantly recognizable chronographs."},
     {n:'px_speedtimer',name:'Prospex Speedtimer Mechanical · 2021',t:"Fifty years later, Seiko reinstated the Speedtimer name. Cal. 8R48, modern mechanical chronograph, visual callbacks to the 1969 original. The heritage Seiko underplayed for decades is finally being celebrated."}
   ]},
   {id:'sd',title:'Spring Drive — Twenty Years of Pursuit',sub:'Akahane\'s dream, 1977 to 1999',stops:[
@@ -2034,6 +2157,109 @@ document.addEventListener('keydown',e=>{
 });
 fitView();
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   URL HASH DEEP-LINKING
+   ═══════════════════════════════════════════════════════════════════════
+   Lets you share or bookmark a specific node or tour:
+     /seiko-tree/#node=62mas      → opens with 62MAS locked and centred
+     /seiko-tree/#tour=diver      → starts the Divers tour
+   ═══════════════════════════════════════════════════════════════════════ */
+function panToNode(id){
+  const n=nodeMap[id];
+  if(!n)return;
+  const ww=wrap.clientWidth,wh=wrap.clientHeight;
+  const targetScale=Math.max(scale,0.65);
+  scale=targetScale;
+  tx=ww/2-(n[2]+NW/2)*scale;
+  ty=wh/2-(n[3]+NH/2)*scale;
+  applyTransform();
+}
+function applyHash(){
+  const h=location.hash.replace(/^#/,'');
+  if(!h)return;
+  const m=h.match(/^(node|tour)=([a-z0-9_-]+)$/i);
+  if(!m)return;
+  if(m[1]==='node'&&nodeMap[m[2]]){
+    locked=m[2];
+    updateHL();
+    setTimeout(()=>panToNode(m[2]),50);
+  }else if(m[1]==='tour'&&tours.find(t=>t.id===m[2])){
+    startTour(m[2]);
+  }
+}
+/* Update URL when locking or unlocking a node. We hook into click + key events
+   by polling `locked` and `tour.active` periodically rather than instrumenting
+   every handler — simpler and less invasive. */
+let _lastHashState='';
+setInterval(()=>{
+  let want='';
+  if(tour.active)want='#tour='+tour.active.id;
+  else if(locked)want='#node='+locked;
+  if(want!==_lastHashState){
+    _lastHashState=want;
+    if(want)history.replaceState(null,'',want);
+    else history.replaceState(null,'',location.pathname+location.search);
+  }
+},300);
+window.addEventListener('hashchange',applyHash);
+/* Apply hash after initial render completes */
+setTimeout(applyHash,100);
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FREETEXT SEARCH
+   ═══════════════════════════════════════════════════════════════════════
+   Searches the popup name, label and era fields. Highlights the matching
+   node when selected, pans to it, and locks it for lineage tracing.
+   ═══════════════════════════════════════════════════════════════════════ */
+const searchInput=document.getElementById('search-input');
+const searchResults=document.getElementById('search-results');
+let searchActiveIdx=-1;
+function buildSearchIndex(){
+  const out=[];
+  for(const id in popupData){
+    const d=popupData[id];
+    const label=(nodeLabels[id]||'').replace(/\n/g,' ');
+    out.push({id,name:d.n||id,era:d.era||'',label,searchText:((d.n||'')+' '+(d.era||'')+' '+label+' '+id).toLowerCase()});
+  }
+  return out;
+}
+const _searchIndex=buildSearchIndex();
+function runSearch(q){
+  q=q.trim().toLowerCase();
+  if(!q){searchResults.classList.remove('open');return;}
+  const hits=_searchIndex.filter(e=>e.searchText.includes(q)).slice(0,20);
+  if(hits.length===0){
+    searchResults.innerHTML='<div class="sr-empty">No matches</div>';
+    searchResults.classList.add('open');
+    return;
+  }
+  searchResults.innerHTML=hits.map((h,i)=>`<div class="sr-item${i===0?' active':''}" data-id="${h.id}"><div class="sr-name">${h.name}</div><div class="sr-meta">${h.era}${h.era&&h.id?' · ':''}${h.id}</div></div>`).join('');
+  searchActiveIdx=0;
+  searchResults.classList.add('open');
+  searchResults.querySelectorAll('.sr-item').forEach(el=>{
+    el.addEventListener('mousedown',e=>{e.preventDefault();selectSearchResult(el.dataset.id);});
+  });
+}
+function selectSearchResult(id){
+  searchInput.value='';
+  searchResults.classList.remove('open');
+  locked=id;
+  updateHL();
+  panToNode(id);
+}
+searchInput.addEventListener('input',e=>runSearch(e.target.value));
+searchInput.addEventListener('focus',()=>{if(searchInput.value)runSearch(searchInput.value);});
+searchInput.addEventListener('blur',()=>setTimeout(()=>searchResults.classList.remove('open'),150));
+searchInput.addEventListener('keydown',e=>{
+  const items=searchResults.querySelectorAll('.sr-item');
+  if(e.key==='ArrowDown'){e.preventDefault();if(items.length){searchActiveIdx=(searchActiveIdx+1)%items.length;items.forEach((el,i)=>el.classList.toggle('active',i===searchActiveIdx));items[searchActiveIdx].scrollIntoView({block:'nearest'});}}
+  else if(e.key==='ArrowUp'){e.preventDefault();if(items.length){searchActiveIdx=(searchActiveIdx-1+items.length)%items.length;items.forEach((el,i)=>el.classList.toggle('active',i===searchActiveIdx));items[searchActiveIdx].scrollIntoView({block:'nearest'});}}
+  else if(e.key==='Enter'){e.preventDefault();if(items.length&&items[searchActiveIdx])selectSearchResult(items[searchActiveIdx].dataset.id);}
+  else if(e.key==='Escape'){searchInput.value='';searchResults.classList.remove('open');searchInput.blur();}
+});
 </script>
 </body>
 </html>
