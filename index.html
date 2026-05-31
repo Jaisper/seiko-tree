@@ -74,7 +74,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 .node .star-badge{position:absolute;top:-1px;right:5px;background:var(--icon);color:var(--paper);font-size:6px;padding:0 3px;border-radius:0 0 2px 2px;font-weight:500}
 .node .coll-badge{position:absolute;top:-1px;left:5px;background:var(--coll);color:var(--paper);font-size:5.5px;padding:0 3px;border-radius:0 0 2px 2px;font-weight:500;text-transform:uppercase}
 .node:hover{box-shadow:0 2px 10px rgba(184,148,46,.12)}
-.node.dimmed{opacity:.1}
+.node.dimmed{opacity:.08}
 .node.hidden-filter{opacity:.04;pointer-events:none}
 .node.locked-node{background:#fff4cc!important;border-color:var(--icon)!important;border-width:3px!important;box-shadow:0 0 0 4px rgba(184,148,46,.35),0 0 24px rgba(184,148,46,.55),0 4px 20px rgba(0,0,0,.15)!important;z-index:10;animation:lock-pulse 1.8s ease-in-out infinite}
 .node.locked-node .text{color:#5a4a10!important;font-weight:600!important}
@@ -1848,16 +1848,22 @@ function updateHL(){
     const inLineagePath=lineage&&lineage.has(f)&&lineage.has(t);
     const inHoverPath=hovered&&!lineage&&(f===hovered||t===hovered);
     if(inLineagePath||inHoverPath){
+      p.style.display='';
       p.setAttribute('stroke',C.highlight);
       p.setAttribute('opacity','.85');
       p.setAttribute('stroke-width',type==='strong'?'2.5':'2');
       p.setAttribute('marker-end','url(#ah)');
-    }else if(lineage||hovered){
+    }else if(lineage){
+      /* Lock state: hide unrelated edges entirely so the lineage stands alone */
+      p.style.display='none';
+    }else if(hovered){
+      /* Hover state: dim unrelated edges but keep them visible (lighter touch) */
       p.setAttribute('stroke','#aaa');
-      p.setAttribute('opacity','.04');
+      p.setAttribute('opacity','.06');
       p.setAttribute('stroke-width','.5');
       p.setAttribute('marker-end','url(#a)');
     }else{
+      p.style.display='';
       p.setAttribute('stroke','#aaa');
       p.setAttribute('opacity',type==='weak'?'.25':'.45');
       p.setAttribute('stroke-width',type==='strong'?'1.5':'.8');
