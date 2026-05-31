@@ -237,7 +237,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:16.5px;font-weight:600">King Seiko: Daini's Answer</strong></p>
         <p style="margin:0 0 12px">King Seiko debuted in 1961 as Daini's counterpart to Grand Seiko. The 44KS, 45KS Hi-Beat, and 52KS automatic became landmarks of 1960s-70s Japanese horology. King Seiko largely disappeared from Seiko's regular mechanical lineup after the mid-1970s and was revived as a modern collection in 2022.</p>
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:16.5px;font-weight:600">Divers: From 62MAS to Prospex</strong></p>
-        <p style="margin:0 0 12px">Seiko's professional diver lineage is anchored by the 62MAS of 1965, widely recognized as Japan's first professional diver's watch (150m). Earlier water-sport watches such as the SilverWave (c. 1961) sit in the broader pre-professional context rather than as direct ancestors. The 62MAS established the lineage that produced the 6105 "Captain Willard," the 6159-7000/7001 Hi-Beat 300m professional (1968-69), the 6159-7010 "Grandfather Tuna" (1975, 600m saturation diver, one of the earliest widely produced titanium-cased professional dive watches), the SKX007/009, and today's Prospex collection. The tree traces both the professional branch (62MAS → 6215/6159 → Tuna → Marinemaster) and the recreational branch (62MAS → Willard → 6309 → SKX → modern platforms).</p>
+        <p style="margin:0 0 12px">Seiko's professional diver lineage is anchored by the 62MAS of 1965, widely recognized as Japan's first professional diver's watch (150m). Earlier water-sport watches such as the SilverWave (c. 1961) sit in the broader pre-professional context rather than as direct ancestors. The 62MAS established the lineage that produced the 6105 "Captain Willard," the 6159-7000/7001 Hi-Beat 300m professional (1968-69), the 6159-7010 "Grandfather Tuna" (1975, 600m saturation diver, with a titanium protective shroud over a stainless monocoque case), the SKX007/009, and today's Prospex collection. The tree traces both the professional branch (62MAS → 6215/6159 → Tuna → Marinemaster) and the recreational branch (62MAS → Willard → 6309 → SKX → modern platforms).</p>
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:16.5px;font-weight:600">Chronographs: The Race to Automatic</strong></p>
         <p style="margin:0 0 12px">Seiko's 6139-6000 was part of the landmark 1969 race for the first automatic chronograph, alongside Zenith's El Primero and the Heuer/Breitling/Hamilton Cal. 11 — each manufacturer has credible claims to first-to-market depending on criteria. Within Suwa's 613x family, the 6139 branch carried the single-register automatic chronographs such as the Pogue (worn in space on Skylab 4), the Helmet and the Aquatimer, while the related 6138 branch carried dual-register models such as the Kakume, Panda, Yachtman and Bullhead. Daini's parallel 701x family created compact automatic flyback chronographs such as the 7018.</p>
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:16.5px;font-weight:600">Seiko 5: The People's Mechanical Watch</strong></p>
@@ -394,14 +394,7 @@ const techMap = {
   gs_hibeat: "beat10",
   gs_9s5: "beat10",
   px_hb_8l55: "beat10",
-  "61gs": "beat10",
-  "61gs_vfa": "beat10",
-  "45gs": "beat10",
-  "45gs_vfa": "beat10",
-  ks_hack: "beat10",
-  ks_chrono: "beat10",
-  "45ks": "beat10",
-  "52ks": "beat10",
+  "52ks": "beat8",
 
   /* — 28,800 vph (8-beat) — */
   lord_matic_sp: "beat8",
@@ -553,12 +546,11 @@ const popupData={
   "6215_pro":{n:"6215-7000 Professional",era:"1967-68",d:"Seiko's first 300m professional diver. Preceded the 6159 Pro. Very rare — produced briefly alongside the 62MAS.",tags:["diver"]},
   "6105_8000":{n:"6105-8000/8009",era:"1968-77",d:"The first-generation 6105 diver and direct evolution of the 62MAS. 150m water resistance, Cal. 6105 automatic (21,600 bph, hacking but non-hand-winding), external rotating bezel, crown at 4 o'clock — an early example of the asymmetric crown placement that became a Seiko diver signature. The 6105-8000 (1968-70) and 6105-8009 (1970-77) are parallel references within the same first-generation symmetric cushion case family, sitting between the earlier barrel-case 62MAS and the famous later 6105-8110 'Willard' with its crown-guard asymmetric cushion case redesigned by Taro Tanaka.",tags:["icon","diver"]},
   "6105_willard":{n:"6105-8110 Willard",era:"1970-77",d:"The 'Captain Willard' — worn by Martin Sheen in Apocalypse Now (1979), cementing its place in cinema and vintage diver culture. 44mm asymmetric cushion case with integrated crown guard at 4 o'clock, external rotating dive bezel, 150m rating and Cal. 6105B automatic. One of the most recognizable Seiko dive watches ever made.",tags:["icon","diver"]},
-  _:{n:"6105-8000/8009",era:"1968-70",d:"First-generation 6105 diver case family. Slimmer and more symmetrical than the later 6105-8110/8119 'Willard'. Best understood as the early 6105 branch rather than a final Willard variant.",tags:["diver"]},
   "6309":{n:"6309-7040/7049 Turtle",era:"1976-88",d:"The 'Turtle' — 150m diver with cushion-shaped case. Cal. 6309 automatic, non-hand-winding and generally non-hacking. The JDM 6306 sibling added hacking. A mass-produced workhorse diver and one of the roots of modern Seiko diver enthusiasm.",tags:["diver"]},
   "6306_sd":{n:"SilverWave Surface Diver",era:"1976-78",d:"Cal. 6306. Turtle-case 150m recreational diver. Non-professional companion to the 6309 line.",tags:["diver"]},
   "6106_sport":{n:"Sports Diver 70M",era:"1968-74",d:"Cal. 6106. Recreational 70m water-resistant diver. Affordable entry-level complement to the professional 6105/6159 lines.",tags:["diver"]},
   "6159_pro":{n:"6159-7000/7001 Professional 300m",era:"1968-69",d:"Seiko's Hi-Beat 300m professional diver, following the 6215-7000. Cal. 6159, 36,000 bph, one-piece professional case architecture. Should be separated from the 1975 6159-7010 600m saturation-diving Tuna, which introduced the titanium shrouded professional format.",tags:["icon","diver","hb"]},
-  "6159_tuna":{n:"6159-7010 Tuna",era:"1975-78",d:"The original \"Tuna\" and Seiko's breakthrough 600m saturation diver. Cal. 6159 Hi-Beat (36,000 bph), one-piece titanium case architecture and a protective outer shroud designed for reliability, legibility and snag resistance in deep-sea work. Developed after Seiko received a professional saturation diver's complaint in 1968 that its 300m diver was unfit for decompression-chamber use. The design generated more than 20 patents, utility-model and design registrations and still defines the Tuna family today.",tags:["icon","diver","hb"]},
+  "6159_tuna":{n:"6159-7010 Tuna",era:"1975-78",d:"The original \"Tuna\" and Seiko's breakthrough 600m saturation diver. Cal. 6159 Hi-Beat (36,000 bph), a titanium protective shroud over a one-piece stainless monocoque case, designed for reliability, legibility and snag resistance in deep-sea work. Developed after Seiko received a professional saturation diver's complaint in 1968 that its 300m diver was unfit for decompression-chamber use. The design generated more than 20 patents, utility-model and design registrations and still defines the Tuna family today.",tags:["icon","diver","hb"]},
 
   /* ─── SUWA · CHRONOGRAPHS · 613x PLATFORM ─── */
   /* The 1960s and 70s Suwa chronograph family. Crown Chronograph (1964) was Japan's first
@@ -616,7 +608,7 @@ const popupData={
      established the Grand Seiko Style; 45GS pushed Hi-Beat manual-wind precision. */
 
   "44gs":{n:"44 Grand Seiko",era:"1967-68",d:"Cal. 4420. Manual-wind, 18,000 bph. First Grand Seiko produced at Daini Seikosha. Realized Taro Tanaka's 'Grammar of Design' — the nine-element design language (flat mirror-polished surfaces, sharp geometric bevels, wide faceted indices) that still defines every Grand Seiko today, now also known as the Grand Seiko Style.",tags:["icon","gs"]},
-  "45gs":{n:"45 Grand Seiko",era:"1968-74",d:"Cal. 4520. Manual-wind Hi-Beat 36,000 bph from Daini. Ultra-thin 3.5mm movement. Developed in the context of Daini's observatory-competition work — the 45GS belongs to that high-precision tradition rather than being itself an observatory-trial winner.",tags:["icon","gs","hb"]},
+  "45gs":{n:"45 Grand Seiko",era:"1968-74",d:"Cal. 4520. Manual-wind Hi-Beat 36,000 bph from Daini. Developed in the context of Daini's observatory-competition work — the 45GS belongs to that high-precision tradition rather than being itself an observatory-trial winner.",tags:["icon","gs","hb"]},
   "45gs_vfa":{n:"45 GS V.F.A.",era:"1969-74",d:"Very Fine Adjusted — Daini's ultimate manual-wind precision watch and counterpart to the automatic 61GS VFA. Cal. 4580, Hi-Beat 36,000 bph, 25 jewels, individually regulated to ±2 seconds per day — among the most exacting serial-production mechanical standards of its era. Produced at very low volumes during the height of the observatory-trial era. Each watch shipped with its own certification document.",tags:["icon","gs","hb"]},
   "56gs_k":{n:"56GS (Kameido)",era:"1971-75",d:"Cal. 5645/5646. Ultra-thin automatic Grand Seiko from Daini. Shared the 56 platform with Suwa's 56GS but independently produced. Daini production wound down earlier than Suwa's as the quartz transition advanced.",tags:["gs"]},
   "19gs":{n:"19GS",era:"late 1960s-early 1970s",d:"Small-sized Hi-Beat Grand Seiko for women. Cal. 1944. Produced at Kameido/Daini.",tags:["gs","hb"]},
@@ -653,7 +645,7 @@ const popupData={
   gs_quartz_88:{n:"Grand Seiko 9F Quartz",era:"1993-",d:"Cal. 9F83. Twin-pulse control motor, instant date change. +/-10 sec/year. First GS quartz was 1988 (Cal. 95xx); the landmark 9F platform launched 1993.",tags:["gs"]},
   gs_mech_98:{n:"GS 9S Mechanical Revival",era:"1998-",d:"Return of mechanical Grand Seiko after 30 years. Cal. 9S51. Hand-assembled at Shizukuishi. 50-hour power reserve.",tags:["gs"]},
   gs_hibeat:{n:"GS 9S Hi-Beat 36000",era:"2009-",d:"Cal. 9S85. 36,000 bph automatic Grand Seiko. Smoother seconds hand, improved shock resistance at high frequency.",tags:["gs","hb"]},
-  sd_concept:{n:"Spring Drive Concept",era:"1978-1997",d:"Yoshikazu Akahane's long-term vision for Spring Drive: a mainspring-powered movement with quartz-level accuracy. Roughly two decades of development from the late 1970s, hundreds of prototypes and a large patent portfolio, culminating in the tri-synchro regulator that synchronizes a free-running mainspring against a quartz reference.",tags:["sd"]},
+  sd_concept:{n:"Spring Drive Concept",era:"1977-1997",d:"Yoshikazu Akahane's long-term vision for Spring Drive: a mainspring-powered movement with quartz-level accuracy. Roughly two decades of development from the late 1970s, hundreds of prototypes and a large patent portfolio, culminating in the tri-synchro regulator that synchronizes a free-running mainspring against a quartz reference.",tags:["sd"]},
   sd_7r68:{n:"7R68 Spring Drive",era:"1999",d:"The first production Spring Drive. Manual-winding, released in very limited quantity (~500 pieces) under the Seiko brand — not yet Grand Seiko. Launched the year after lead engineer Yoshikazu Akahane's death. The culmination of roughly two decades of sustained R&D; proved the tri-synchro regulator concept commercially viable.",tags:["sd"]},
   sd_7r88:{n:"7R88 Credor Spring Drive",era:"2002",d:"Spring Drive's first automatic version, launched under Credor — Seiko's ultra-exclusive haute horlogerie brand. Transitioning from manual to auto-winding required solving the bidirectional winding mechanism. Platinum cases only. Acted as a proving ground for Spring Drive luxury positioning before the 2004 Grand Seiko debut.",tags:["sd"]},
   ks_dormant:{n:"King Seiko Product Line Dormant",era:"~1975-2022",d:"King Seiko ceased in the mid-1970s as Seiko shifted to quartz and later Kinetic. The brand lay dormant for 47 years while Seiko pursued energy-harvesting technology over traditional mechanics.",tags:["ks"]},
@@ -755,7 +747,7 @@ const nodeLabels = {
   "61gs_sp": "61 GS Special\n1970-74",
   "56gs_s": "56 GS\n1970-77",
   liner: "Liner\n1960-65",
-  liner_chr: "Liner\nChronograph\n1961-65",
+  liner_chr: "Liner\nChronometer\n1961-65",
   laurel: "Laurel /\nAlpinist 1959-64",
   skyliner: "Skyliner\n1960-69",
   "61_skyliner": "61 Skyliner\n1968-72",
@@ -794,7 +786,6 @@ const nodeLabels = {
   "6215_pro": "6215-7000\nPro 300m 1967-68",
   "6105_8000": "6105-8000/8009\n150m 1968-77",
   "6105_willard": "6105-8110\nWillard 1970-77",
-  _: "6105-8000/8009\nFirst-gen 6105\n1968-70",
   "6309": "6309 Turtle\n150m 1976-88",
   "6306_sd": "SilverWave\nSurface Diver\n6306 1976-78",
   "6106_sport": "Sports Diver\n70m 6106 1968-74",
@@ -849,7 +840,7 @@ const nodeLabels = {
   gs_quartz_88: "GS Quartz\n95GS 1988 / 9F 1993-",
   gs_mech_98: "GS 9S Mechanical\nRevival 1998-",
   gs_hibeat: "GS 9S Hi-Beat\n36000 2009-",
-  sd_concept: "Spring Drive\nconcept/patents\n1978-1997",
+  sd_concept: "Spring Drive\nconcept/patents\n1977-1997",
   sd_7r68: "7R68 manual\nSpring Drive\n1999",
   sd_7r88: "7R88 Credor\nSpring Drive\n2002",
   ks_dormant: "King Seiko\nProduct Line\nDormant ~1975-2022",
@@ -1593,7 +1584,6 @@ const nodeTags = {
   selfdater_mas: ["diver"],
   "62mas_2": ["diver","heritage"],
   "6215_pro": ["diver","heritage"],
-  _: ["diver","heritage"],
   "6306_sd": ["diver"],
   "6106_sport": ["diver"],
   mm300: ["diver","flagship"],
@@ -1788,7 +1778,7 @@ const nodeEls={};
 nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElement('div');d.className='node'+(isIcon?' icon':'');d.style.cssText=`left:${x}px;top:${y}px;border:${isIcon?2:1}px solid ${isIcon?C.highlight+'88':color+'30'}`;d.dataset.id=id;d.setAttribute('role','button');d.setAttribute('tabindex','0');d.setAttribute('aria-label',label.replace(/\n/g,' '));let inner='';if(isIcon)inner+=`<div class="star-badge">★</div>`;if(inCollection.has(id))inner+=`<div class="coll-badge">In Collection</div>`;const tech=techMap[id];if(tech){const lb={beat10:'10B',beat8:'8B',springdrive:'SD',quartz:'Q'};inner+=`<div class="tech-badge ${tech}" title="${({beat10:'36,000 vph / 10-beat',beat8:'28,800 vph / 8-beat',springdrive:'Spring Drive',quartz:'Quartz'})[tech]||tech}">${lb[tech]}</div>`;}inner+=`<div class="text">${label}</div>`;d.innerHTML=inner;d.addEventListener('mouseenter',(e)=>{hovered=id;updateHL();showPopup(id,e);if(typeof edgeTipVisible!=='undefined'&&edgeTipVisible){document.getElementById('edge-tip').classList.remove('show');edgeTipVisible=false;}});d.addEventListener('mousemove',(e)=>{});d.addEventListener('click',(e)=>{e.stopPropagation();locked=(locked===id)?null:id;updateHL();});d.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();locked=(locked===id)?null:id;updateHL();}});d.addEventListener('focus',(e)=>{hovered=id;updateHL();showPopup(id,e);});d.addEventListener('blur',()=>{hovered=null;updateHL();hidePopup();});d.addEventListener('mouseleave',()=>{hovered=null;updateHL();hidePopup();});canvas.appendChild(d);nodeEls[id]=d;});
 /* Sync NW/NH to actual rendered node size (handles mobile breakpoints) */
 syncNodeSize();
-window.addEventListener('resize',()=>{syncNodeSize();if(typeof drawEdges==='function')drawEdges();});
+window.addEventListener('resize',()=>{syncNodeSize();renderEdges();});
 function getPath(fn,tn){const fcx=fn[2]+NW/2,fcy=fn[3]+NH/2,tcx=tn[2]+NW/2,tcy=tn[3]+NH/2,dx=tcx-fcx,dy=tcy-fcy;let sx,sy,ex,ey;if(Math.abs(dx)>Math.abs(dy)){sx=dx>0?fn[2]+NW:fn[2];sy=fcy;ex=dx>0?tn[2]:tn[2]+NW;ey=tcy;}else{sx=fcx;sy=dy>0?fn[3]+NH:fn[3];ex=tcx;ey=dy>0?tn[3]:tn[3]+NH;}const mx=(sx+ex)/2,my=(sy+ey)/2;if(Math.abs(dx)>Math.abs(dy)){return`M${sx},${sy} C${mx},${sy} ${mx},${ey} ${ex},${ey}`;}return`M${sx},${sy} C${sx},${my} ${ex},${my} ${ex},${ey}`;}
 function renderEdges(){let h=`<defs><marker id="a" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="#aaa"/></marker><marker id="ah" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="${C.highlight}"/></marker></defs>`;edges.forEach(([f,t,type,desc,relation])=>{const fn=nodeMap[f],tn=nodeMap[t];if(!fn||!tn)return;const cls=type==='weak'?'edge-weak':'';const d=getPath(fn,tn);h+=`<path class="${cls}" data-from="${f}" data-to="${t}" data-type="${type}" data-desc="${desc||''}" data-relation="${relation||''}" d="${d}" fill="none" stroke="#aaa" stroke-width="${type==='strong'?1.5:.8}" stroke-dasharray="${type==='weak'?'3,3':'0'}" opacity="${type==='weak'?.25:.45}" marker-end="url(#a)"/>`;});svg.innerHTML=h;}
 
