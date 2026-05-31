@@ -1761,18 +1761,12 @@ function hidePopup(){
 let NW=124,NH=42;
 const CW=2490,CH=2200;
 function syncNodeSize(){
-  /* Read actual rendered .node dimensions from CSS. Falls back to defaults if no
-     node has been rendered yet. Called once after initial render and on resize. */
-  const sampleEl=document.querySelector('.node');
-  if(sampleEl){
-    const r=sampleEl.getBoundingClientRect();
-    /* getBoundingClientRect reports the CSS dimensions; node sizing is independent
-       of the canvas transform so this is reliable. */
-    if(scale){
-      NW=Math.round(r.width/scale);
-      NH=Math.round(r.height/scale);
-    }
-  }
+  /* Pick NW/NH to match the CSS breakpoint. The mobile media query at
+     max-width:768px shrinks .node to 110×38; otherwise it's 124×42.
+     Keeping this in sync ensures edge endpoints land on the actual node
+     borders rather than 14px past them. */
+  if(window.innerWidth<=768){NW=110;NH=38;}
+  else{NW=124;NH=42;}
 }
 
 const nodeMap={};nodes.forEach(n=>nodeMap[n[0]]=n);
