@@ -10,7 +10,7 @@
 /* ═══════════════════════════════════════════════════════════════════════
    FONTS — loaded from Google Fonts above. Three families are used:
    ───────────────────────────────────────────────────────────────────────
-     • Cormorant Garamond  — main title + popup serif (warm, editorial) 
+     • Cormorant Garamond  — main title + popup serif (warm, editorial)
      • IBM Plex Mono       — eyebrow + UI labels + node text (technical)
      • Noto Serif          — intro prose (clean readable serif)
    Want to swap a font? Update the <link rel="stylesheet"> in <head>
@@ -195,10 +195,10 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #tour-panel .tp-narration{font-family:'Cormorant Garamond',serif;font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:10px}
 #tour-panel .tp-controls{display:flex;justify-content:space-between;align-items:center;gap:6px;border-top:1px solid var(--rule);padding-top:10px;flex-wrap:wrap}
 #tour-panel .tp-btn{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:4px 10px;background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:3px;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;transition:all .15s}
-#tour-panel .tp-btn:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}
 #tour-panel .tp-btn:disabled{opacity:.35;cursor:not-allowed}
-#tour-panel .tp-btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-#tour-panel .tp-btn.primary:hover{background:#000}
+@media (hover:hover){#tour-panel .tp-btn:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}}
+#tour-panel .tp-btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);-webkit-tap-highlight-color:transparent}
+@media (hover:hover){#tour-panel .tp-btn.primary:hover{background:#000}}
 #tour-panel .tp-dots{display:flex;gap:4px;flex:1 1 auto;justify-content:center;min-width:60px}
 #tour-panel .tp-dot{width:6px;height:6px;border-radius:50%;background:var(--rule);cursor:pointer;transition:background .15s}
 #tour-panel .tp-dot.active{background:var(--icon)}
