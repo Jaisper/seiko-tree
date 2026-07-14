@@ -37,6 +37,10 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #intro-short{margin:8px 0 0}
 #intro-detail{display:none;margin:4px 0 0}
 #intro-detail.show{display:block}
+#methodology-detail{display:none;margin:4px 0 0}
+#methodology-detail.show{display:block}
+#methodology-toggle{font-family:'Noto Serif',Georgia,serif;font-size:13px;color:var(--ink);background:none;border:1px solid var(--rule);border-radius:3px;padding:5px 14px;cursor:pointer;margin-top:8px;margin-left:6px;opacity:.7;transition:opacity .15s}
+#methodology-toggle:hover{opacity:1}
 #intro-toggle{font-family:'Noto Serif',Georgia,serif;font-size:13px;color:var(--ink);background:none;border:1px solid var(--rule);border-radius:3px;padding:5px 14px;cursor:pointer;margin-top:8px;opacity:.7;transition:opacity .15s}
 #intro-toggle:hover{opacity:1}
 .filters{display:flex;gap:3px;flex-wrap:wrap}
@@ -124,7 +128,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   #header h1{font-size:16px}
   #header .eyebrow{font-size:7px;letter-spacing:2.5px}
   #header > div > div{font-size:11.5px!important;max-width:none!important}
-  #intro-toggle{font-size:11px;padding:4px 10px}
+  #intro-toggle,#methodology-toggle{font-size:11px;padding:4px 10px}
   .filters{width:100%;margin-top:6px}
   .filters button{font-size:9px;padding:4px 8px;flex:1;min-width:auto}
   .filters .filter-sep{display:none}
@@ -227,7 +231,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
         <p style="margin:0 0 10px"><strong style="color:var(--ink)">Legacy Transition (c. 1988–2001)</strong> covers the bridge between Seiko's vintage mechanical era and the modern collection architecture. The Grand Seiko name returned in 1988 as a quartz line (95GS, Cal. 9581/9587), and mechanical Grand Seiko was reintroduced ten years later with the 9S5 caliber (1998). In parallel, the 4S caliber family (from 1992, derived from the 1970s King Seiko 52xx) carried higher-grade mechanical Seikos through the 1990s, and Spring Drive moved from long-running R&amp;D to a first commercial release with the 7R68 in 1999. On the diver side, the 7002 (1988) and SKX (1996) kept Seiko's mechanical diver line continuously visible before the global Prospex architecture took over.</p>
         <p style="margin:0 0 10px"><strong style="color:var(--ink)">Modern Collection Era (2001–2025)</strong> begins with the 2001 establishment of Seiko Watch Corporation as the dedicated watch-business company. The product architecture shown here reflects today's globally consolidated brand and collection structure — Grand Seiko (separated as an independent brand in 2017), King Seiko (revived as a modern collection in 2022), Prospex (consolidated as a global brand in 2014, with diver heritage going back to 1965), Presage (launched in Japan and rolled out globally in 2016, drawing on older Seiko dress-watch lines), and Seiko 5 Sports (rebooted in 2019 from a concept that began in 1968). These are editorial groupings, not line origins.</p>
         <p style="margin:0 0 10px;padding:8px 12px;background:#f7f5f0;border-left:3px solid var(--ink);font-size:14px"><strong style="color:var(--ink)">Companion view —</strong> for the underlying movement lineage, see the <a href="https://jaisper.github.io/seiko-calibers/" style="color:var(--ink);text-decoration:underline">Seiko Caliber Family Tree</a>, which traces Seiko's mechanical calibers as a parallel genealogy organized by movement architecture rather than by model and brand.</p>
-        <p style="margin:0;font-size:13px;opacity:.65;font-style:italic">Era divisions are editorial. This is not a strict caliber genealogy — it combines technical lineage, movement/platform continuation, market succession, design influence, brand revival and modern heritage reinterpretation. Solid lines <span style="display:inline-block;width:16px;height:0;border-top:2px solid #aaa;vertical-align:middle;margin:0 2px"></span> indicate stronger lineage; thinner <span style="display:inline-block;width:16px;height:0;border-top:1px solid #aaa;vertical-align:middle;margin:0 2px"></span> or dashed <span style="display:inline-block;width:16px;height:0;border-top:1px dashed #aaa;vertical-align:middle;margin:0 2px"></span> lines indicate looser interpretive links. This is a curated interpretive model, not an official Seiko genealogy.</p>
+        <p style="margin:0;font-size:13px;opacity:.65;font-style:italic">This is a curated interpretive model, not an official Seiko genealogy — era divisions are editorial and it combines technical lineage, platform continuation, market succession, design influence, brand revival and heritage reinterpretation. See the <strong>Methodology guide</strong> below for line-weight conventions and axis structure.</p>
         <button id="intro-short-toggle" onclick="const s=document.getElementById('intro-short');s.classList.toggle('expanded');this.textContent=s.classList.contains('expanded')?'Show less':'Show full intro ▼'">Show full intro ▼</button>
       </div>
       <div id="intro-detail">
@@ -253,8 +257,31 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
         <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:16.5px;font-weight:600">The Modern Era</strong></p>
         <p style="margin:0 0 6px">Today's Seiko is structured as a set of named brands and collections: Grand Seiko (separated as an independent brand in 2017, with its own logo at 12 o'clock), King Seiko (revived as a modern collection in 2022 after long dormancy), Prospex (consolidated as a global professional-sports brand in 2014, with diver heritage tracing to the 62MAS of 1965), Presage (launched in Japan as a mechanical dress-watch collection and rolled out globally in 2016, drawing on Seiko's older Crown / Lord Marvel / 4S dress lineage), and Seiko 5 Sports (rebooted in 2019 with Cal. 4R36, building on the 1968 5 Sports concept and absorbing much of the SKX's design DNA). These are editorial groupings of a globally consolidated catalogue, not the origin dates of the underlying product lines — many lines have roots stretching back decades.</p>
         <p style="margin:0 0 6px">Credor continues as Seiko's JDM haute horlogerie brand at the Micro Artist Studio in Shiojiri — hand-built mechanical pieces including the Eichi enamel-dial series, Fugaku tourbillon, Spring Drive Sonnerie and Minute Repeater. Credor sits outside this tree's editorial scope (JDM-only, largely non-mainstream), but its 7R Spring Drive calibers (7R68 in 1999, 7R88 in 2002) laid the groundwork for the 9R Grand Seiko Spring Drive family, and the Micro Artist Studio also hand-assembles the GS 9R01 and 9SA5. The companion caliber tree covers the 7R lineage in more depth.</p>
+        </div>
       </div>
       <button id="intro-toggle" onclick="const d=document.getElementById('intro-detail');d.classList.toggle('show');this.textContent=d.classList.contains('show')?'Show less ▲':'Read more — historical summary ▼'">Read more — historical summary ▼</button>
+      <button id="methodology-toggle" onclick="const d=document.getElementById('methodology-detail');d.classList.toggle('show');this.textContent=d.classList.contains('show')?'Show less ▲':'Methodology guide ▼'">Methodology guide ▼</button>
+      <div id="methodology-detail">
+        <div style="background:#f4f1eb; border:1px solid var(--rule); border-radius:4px; padding:16px; margin-bottom:24px;">
+          <p style="margin:0 0 8px"><strong style="color:var(--ink);font-size:16.5px;font-weight:600">How to Read This Tree</strong></p>
+          <p style="margin:0 0 12px; line-height:1.6">
+            This diagram is a <em>chronological-taxonomic family tree</em> mapping both time (vertically) and structural/conceptual relationships (horizontally). To navigate the visualization systematically, read the chart along two axes and three distinct line weights:
+          </p>
+          <ul style="margin:0 0 16px 20px; line-height:1.6; list-style-type: square; color:#3f3d38">
+            <li style="margin-bottom:6px"><strong>The Horizontal Axis (Chronology):</strong> Time flows from left to right through three key eras: <em>Vintage Factory Era (1960–c. 1988)</em>, <em>Legacy Transition (c. 1988–2001)</em>, and <em>Modern Collection Era (2001–2025)</em>. A node's horizontal position indicates its release/introduction year.</li>
+            <li style="margin-bottom:6px"><strong>The Vertical Axis (Structure):</strong> Nodes are grouped into family boxes stacked vertically. During the <em>Vintage Factory Era</em>, the families are organized by factory of origin — <strong>Suwa Seikosha</strong> families in the upper half, <strong>Daini Seikosha/Kameido</strong> families in the lower half — to highlight the internal rivalry. In the <em>Modern Era</em>, the vertical stack represents the five globally consolidated collection pillars (Grand Seiko, King Seiko, Prospex, Presage, Seiko 5 Sports).</li>
+            <li style="margin-bottom:6px"><strong>Strong Connections (Thick, solid lines):</strong> Indicate direct, mechanical and technological caliber/platform lineage (e.g., <span style="font-family:'IBM Plex Mono';font-size:11px">marvel → crown → gs_1st</span>).</li>
+            <li style="margin-bottom:6px"><strong>Medium Connections (Thin, solid lines):</strong> Indicate direct product succession, market continuation, or closely related movement siblings within the same platform family.</li>
+            <li style="margin-bottom:6px"><strong>Weak Connections (Dashed lines):</strong> Indicate looser conceptual influences, design lineage, or modern heritage/revival programs without continuous movement inheritance (e.g., <span style="font-family:'IBM Plex Mono';font-size:11px">62mas → px_1965</span>).</li>
+          </ul>
+          <p style="margin:0 0 4px"><strong style="color:var(--ink);font-size:16.5px;font-weight:600">What the Tree Does <u>Not</u> Show</strong></p>
+          <ul style="margin:0 0 0 20px; line-height:1.5; list-style-type: circle; color:#5a5750">
+            <li style="margin-bottom:4px"><em>Not a complete watch index:</em> The tree is highly curated, focusing on major family milestones. For pure movement genealogy, see the companion <a href="https://jaisper.github.io/seiko-calibers/" style="color:var(--ink);text-decoration:underline">Seiko Caliber Family Tree</a>.</li>
+            <li style="margin-bottom:4px"><em>Omission of mainstream quartz/volume:</em> The scope is strictly limited to high-grade mechanical watchmaking and historically significant innovations. Consumer quartz and Kinetic lines are excluded.</li>
+            <li style="margin-bottom:4px"><em>The illusion of continuity:</em> Lineage lines trace intellectual and design heritage. They often span deep historical dormant periods (e.g., King Seiko lay completely dormant for 47 years from ~1975 to 2022).</li>
+            <li><em>Modern branding vs. historic origins:</em> Modern consolidated collections (such as Prospex or Presage) are modern editorial classifications; their historical roots originally crossed back and forth between the parallel Suwa and Daini factories.</li>
+          </ul>
+      </div>
     </div>
   </div>
   <div class="spacer"></div>
