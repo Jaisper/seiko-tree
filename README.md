@@ -1,8 +1,8 @@
-# Seiko — A Curated Mechanical Family Tree (1960–2025)
+# Seiko — A Curated Mechanical Family Tree (1956–2025)
 
 Greetings, fellow Seiko enthusiasts. I have had a long-standing interest in Seiko watches, especially the mechanical vintage lines. Over time, however, the sheer number of models, calibres, factories, sub-brands, and product families made it difficult — at least for me... ;-) — to grasp "the bigger picture".
 
-So I set out to create a map of Seiko's mechanical watch heritage from 1960 to 2025: covering Suwa Seikosha, Daini/Kameido, Grand Seiko, King Seiko, divers, chronographs, Spring Drive, and the modern collection era. I think it has turned out pretty good, and I am now sharing it for fellow enthusiasts to explore, use, challenge, and improve.
+So I set out to create a map of Seiko's mechanical watch heritage from 1956 to 2025: covering Suwa Seikosha, Daini/Kameido, Grand Seiko, King Seiko, divers, chronographs, Spring Drive, and the modern collection era. I think it has turned out pretty good, and I am now sharing it for fellow enthusiasts to explore, use, challenge, and improve.
 
 I hope you find it useful!
 
@@ -17,7 +17,7 @@ Jesper
 
 A curated genealogy of Seiko's mechanical watch families, organized as a three-era visual model:
 
-- **Vintage Factory Era (1960–c. 1988)** — Suwa Seikosha and Daini Seikosha/Kameido as parallel in-house production centers, becoming Seiko Epson and Seiko Instruments in the 1983 corporate restructuring
+- **Vintage Factory Era (1956–c. 1988)** — Suwa Seikosha and Daini Seikosha/Kameido as parallel in-house production centers, becoming Seiko Epson and Seiko Instruments in the 1983 corporate restructuring
 - **Legacy Transition (c. 1988–2001)** — the dormancy and revival period: 1988 GS quartz return, 1998 9S mechanical revival, 1999 7R68 Spring Drive, the 4S bridge family, 7002 and SKX divers
 - **Modern Collection Era (2001–2025)** — today's globally consolidated brand architecture: Grand Seiko (independent brand 2017), King Seiko (revived 2022), Prospex (2014), Presage (global 2016), and Seiko 5 Sports (rebooted 2019)
 
