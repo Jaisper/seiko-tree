@@ -240,15 +240,6 @@ The data is compiled from a wide range of primary corporate documentation, speci
 
 For sensitive or contested claims (Antarctic expedition use of the 62MAS, the 1968 Tuna diver letter, individual model release years), the descriptions are kept appropriately tentative and primary-source-aware.
 
-## Editorial history
-
-Some of the notable rounds of factual correction and structural refinement include:
-
-- **2026-07** — Full validation against the Seiko 2003 anniversary book; Marvel corrected from 1956–62 to 1956–59; 56KS Suwa corrected from 1968–75 to 1969–75; 7R88 corrected from "first automatic Spring Drive" to "manual-wind refinement"; Taro Tanaka corrected from "joined Daini" to "joined K. Hattori central design"; 19GS caliber corrected from Cal. 1944 (Daini) to Cal. 1964 (Suwa); 4S caliber list corrected from 4S15/25/36 to 4S15/25/35; Cronos Special era corrected from 1959–62 to 1962–64
-- **2026-06/07** — Multiple external AI review rounds (ChatGPT/Fable, storebror 4.8, TheSeikoGuy) with genuine corrections applied and hallucinated suggestions rejected. Filter bug, 6105 dublet, 6138 bi-compax, missing Hi-Beat badges resolved. Bell-Matic 4005/4006 relationship reversed (4006 is the original 1966 platform; 4005 is a later 1968–69 date-only sibling)
-- **2026-04/05** — Grid-based declarative layout system introduced (replacing hand-tuned pixel coordinates); nine-section code structure; touch tooltips, URL hash deep-linking, freetext search, multi-select filters, guided tours
-- **2026-04** — Public/private split; comprehensive editorial rewrite softening overclaims to curated interpretive tone
-
 ## Tech
 
 Single-file HTML/JS, no framework, no build step:
