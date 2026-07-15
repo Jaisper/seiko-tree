@@ -13,8 +13,6 @@ Jesper
 
 📎 **Companion project:** [jaisper.github.io/seiko-calibers](https://jaisper.github.io/seiko-calibers) — the same story told through movement genealogy rather than watch families
 
-![Screenshot of the family tree](preview.png)
-
 ## What this is
 
 A curated genealogy of Seiko's mechanical watch families, organized as a three-era visual model:
