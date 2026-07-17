@@ -1079,11 +1079,11 @@ const LAYOUT = {
         // Row 0: Marvel main line + Lord Marvel evolution
         ["marvel", "lord_marvel", _, _, _, "lord_marvel_36k"],
         // Row 1: Crown line
-        [_, "crown", "crown_sd", _, _, _, _],
+        ["crown", "crown_sd", _, _, _, _, _],
         // Row 2: Sports/foundation pioneers
-        [_, "gyro_marvel", "crown_sp", _, _, _, _],
+        ["gyro_marvel", "crown_sp", _, _, _, _, _],
         // Row 3: Laurel Alpinist (Seiko's first sports watch — pioneer of Alpinist lineage)
-        [_, "laurel", _, _, _, _, _],
+        ["laurel", _, _, _, _, _, _],
       ]
     },
 
@@ -1855,7 +1855,7 @@ function hidePopup(){
 }
 /* Node dimensions — synced from actual CSS size on resize (mobile uses 110×38) */
 let NW=124,NH=42;
-const CW=2490,CH=2200;
+const CW=2490,CH=2500;
 function syncNodeSize(){
   /* Pick NW/NH to match the CSS breakpoint. The mobile media query at
      max-width:768px shrinks .node to 110×38; otherwise it's 124×42.
