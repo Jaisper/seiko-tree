@@ -697,10 +697,9 @@ const popupData={
      a linear succession), with different register layouts and several offering flyback
      functionality. */
 
-  c701x:{n:"701x Chronograph Platform",era:"1970s",d:"Daini/Kameido's compact automatic chronograph family. The 701x calibers were parallel variants rather than a linear succession; several offered flyback functionality, with different elapsed-time register layouts. The 7015 was a two-register chronograph; 7016/7017/7018 included flyback variants.",tags:["chrono"]},
   k7015:{n:"7015 Chronograph",era:"1972-75",d:"Cal. 7015. Two-register Daini automatic chronograph, simpler than the flyback 701x variants. A parallel member within the 701x family rather than a successor.",tags:["chrono"]},
-  k7016:{n:"7016 Flyback Chronograph",era:"1970-75",d:"Kameido Daini's entry in the chronograph race. Cal. 7016 flyback chronograph with single-pusher operation at 2 o'clock — controls start, stop, and reset in one button. Asymmetric Monaco-style square case. A technically distinctive alternative to the column-wheel 6139/6138 family coming from Suwa.",tags:["chrono"]},
-  k7017:{n:"7017 Flyback Chronograph",era:"1972-75",d:"Cal. 7017. Single-register flyback chronograph. Distinctive Monaco-style case on some variants. Part of the 701x family.",tags:["chrono"]},
+  k7016:{n:"7016 Flyback Chronograph",era:"1972-75",d:"Kameido Daini's entry in the chronograph race. Cal. 7016 flyback chronograph with single-pusher operation at 2 o'clock — controls start, stop, and reset in one button. Asymmetric Monaco-style square case. A technically distinctive alternative to the column-wheel 6139/6138 family coming from Suwa.",tags:["chrono"]},
+  k7017:{n:"7017 Flyback Chronograph",era:"1970-75",d:"Cal. 7017. Single-register flyback chronograph. Distinctive Monaco-style case on some variants. Part of the 701x family.",tags:["chrono"]},
   k7018:{n:"7018 Flyback Chronograph",era:"1971-75",d:"Daini/Kameido's compact automatic flyback chronograph. Part of the 701x family, with day/date and chronograph minute recording. Important for its compact engineering and flyback function, not because it was a conventional 'five-register' chronograph.",tags:["icon","chrono"]},
 
   /* ─── LEGACY TRANSITION · 1988–2001 ─── */
@@ -899,8 +898,7 @@ const nodeLabels = {
   champ_850: "Champion 850\n1965-70",
   "76_five": "76 Seiko 5\nKameido 1966-75",
   advan: "Advan\n1971-78",
-  c701x: "701x Chronograph\nPlatform 1970s",
-  k7015: "7015 Chrono\n1972-75",
+    k7015: "7015 Chrono\n1972-75",
   k7016: "7016 Flyback\n1970-75",
   k7017: "7017 Flyback\n1972-75",
   k7018: "7018 Flyback\n1971-75",
@@ -1046,7 +1044,7 @@ const LAYOUT = {
      and uses their bounds as containers for the families below. */
   parents: [
     {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1960–c. 1988", x:5, y:10, w:1155, h:1430, c:C.suwa},
-    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1960–c. 1988", x:5, y:1460, w:1155, h:820, c:C.kameido},
+    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1960–c. 1988", x:5, y:1460, w:1155, h:790, c:C.kameido},
     {l:"LEGACY TRANSITION ERA · c. 1988–2001", x:1210, y:10, w:330, h:587, c:C.modern},
     {l:"MODERN COLLECTION ERA · 2001–2025", x:1590, y:10, w:880, h:985, c:C.modern},
   ],
@@ -1168,7 +1166,7 @@ const LAYOUT = {
       label: "KING SEIKO · DAINI ORIGIN",
       color: C.ks,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1490, sectionW: 1135,
+      sectionX: 15, sectionY: 1590, sectionW: 1135,
       rows: [
         ["cronos", "ks_1st", "ks_hack", "ks_chrono", "45ks"],
         ["cronos_sp", _, _, "44ks", "44ks_sp", "vanac", "vanac_sp"],
@@ -1181,7 +1179,7 @@ const LAYOUT = {
       label: "GRAND SEIKO · DAINI",
       color: C.gs,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1707, sectionW: 1135,
+      sectionX: 15, sectionY: 1490, sectionW: 1135,
       rows: [
         ["goldfeather", "44gs", "45gs", "45gs_vfa", "56gs_k"],
       ]
@@ -1192,7 +1190,7 @@ const LAYOUT = {
       label: "PREMIUM DAINI BUSINESS · 51xx Automatic",
       color: C.kameido,
       grid: "suwa7",
-      sectionX: 15, sectionY: 1859, sectionW: 1135,
+      sectionX: 15, sectionY: 1820, sectionW: 1135,
       rows: [
         [_, "seikomatic_p", "presmatic"],
       ]
@@ -1203,7 +1201,7 @@ const LAYOUT = {
       label: "CHAMPION · MASS MARKET",
       color: C.kameido,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1960, sectionW: 1135,
+      sectionX: 15, sectionY: 1920, sectionW: 1135,
       rows: [
         ["champion", "champion_cal", "76_five", "advan"],
         ["fairway", "champ_850"],
@@ -1212,13 +1210,15 @@ const LAYOUT = {
 
     /* ─── ⏱ KAMEIDO CHRONOGRAPHS · 701x Platform ─── */
     {
-      label: "⏱ KAMEIDO CHRONOGRAPHS · 701x Platform",
+      label: "⏱ KAMEIDO CHRONOGRAPHS · 701x Family (7017 → 7018 → 7015/7016)",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 2112, sectionW: 1135,
+      sectionX: 15, sectionY: 2085, sectionW: 1135,
       rows: [
-        [_, _, _, "c701x"],
-        [_, _, _, "k7016", "k7018", "k7017", "k7015"],
+        // Row 0: 7017 founder (1970), 7018 successor (1971)
+        [_, _, _, "k7017", "k7018", _, _],
+        // Row 1: 7015, 7016 variants (both 1972)
+        [_, _, _, _, _, "k7015", "k7016"],
       ]
     },
 
@@ -1420,6 +1420,9 @@ const edges=[
   ["crown_chrono","6138_yacht","medium","The 6138 dual-register platform emerged from the same Suwa chronograph development lineage that began with the manual-wind Crown Chronograph","same_platform"],
   ["6138_panda","6138_jumbo","medium","Both 6138-8020 Panda and 6138-3002 Jumbo share the Cal. 6138 dual-register architecture in distinctive cushion cases","same_platform"],
   ["6139_first","6139_helmet","medium","Helmet used a distinctive shaped case with the 6139 movement","same_platform"],
+    ["k7017","k7018","strong","7018 (1971) was the direct successor to the record-thin 7017 — retained the 5.9mm thickness while adding a 30-minute totalizer"],
+  ["k7017","k7015","medium","7015 (1972) was a 701x variant with central chronograph hand only, sharing 7017's architecture"],
+  ["k7017","k7016","strong","7016 (1972) was Daini's top-of-line 701x with a distinctive stacked sub-dial at 6 o'clock — 30-min and 12-hour totalizers in one register"],
   ["6139_first","6139_pogue","medium","Pogue is a case/dial variant of the 6139 automatic chronograph platform"],
 
   /* ── Within: SUWA · BELL-MATIC ── */
@@ -1459,10 +1462,6 @@ const edges=[
   ["champ_850","76_five","medium","Champion 850 automatic platform fed into Kameido\'s Seiko 5 manufacturing"],
 
   /* ── Within: DAINI · CHRONOGRAPHS · 701x PLATFORM ── */
-  ["c701x","k7016","medium","7016 is a flyback member within the parallel 701x Daini chronograph family","same_platform"],
-  ["c701x","k7017","medium","7017 is a flyback member within the parallel 701x Daini chronograph family","same_platform"],
-  ["c701x","k7018","medium","7018 is a flyback member within the parallel 701x Daini chronograph family","same_platform"],
-  ["c701x","k7015","medium","7015 is the two-register member within the parallel 701x Daini chronograph family","same_platform"],
 
   /* ── Within: LEGACY TRANSITION · 1988–2001 ── */
   ["7002_node","skx","strong","SKX007/009 succeeded the 7002 as Seiko\'s definitive affordable diver"],
