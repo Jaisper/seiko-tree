@@ -1043,8 +1043,8 @@ const LAYOUT = {
   /* The outermost parent boxes — eras and factories. The engine draws these
      and uses their bounds as containers for the families below. */
   parents: [
-    {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1960–c. 1988", x:5, y:10, w:1155, h:1430, c:C.suwa},
-    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1960–c. 1988", x:5, y:1460, w:1155, h:790, c:C.kameido},
+    {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1960–c. 1988", x:5, y:10, w:1155, h:1660, c:C.suwa},
+    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1960–c. 1988", x:5, y:1690, w:1155, h:790, c:C.kameido},
     {l:"LEGACY TRANSITION ERA · c. 1988–2001", x:1210, y:10, w:330, h:587, c:C.modern},
     {l:"MODERN COLLECTION ERA · 2001–2025", x:1590, y:10, w:880, h:985, c:C.modern},
   ],
@@ -1054,19 +1054,36 @@ const LAYOUT = {
      generates the box from this and places the watches automatically. */
   families: [
 
-    /* ─── HIGH-GRADE · GRAND SEIKO · DRESS ─── */
+    /* ─── GRAND SEIKO · SUWA (isolated, pure GS lineage from 1960) ─── */
     {
-      label: "HIGH-GRADE · GRAND SEIKO · DRESS",
-      color: C.suwa,
-      grid: "suwa7",                  // column grid identifier
+      label: "GRAND SEIKO · SUWA",
+      color: C.gs,
+      grid: "suwa7",
       sectionX: 15, sectionY: 30, sectionW: 1135,
-      topPad: 20, botPad: 23,   /* non-standard padding */
-      rowStrides: [60, 80, 60],  /* visual breathing room (non-65 strides) */
       rows: [
-        ["crown", "gs_1st", "gs_sd", "62gs", "61gs", "61gs_vfa", "56gs_s"],
-        ["crown_sd", "crown_sp", "57gs_cal", _, _, "61gs_sp", "19gs"],
-        ["marvel", "lord_marvel", "lord_marvel_36k"],
-        ["gyro_marvel", "laurel"],
+        // Row 0: main GS lineage — 1960 → 1970
+        [_, "gs_1st", "gs_sd", "62gs", "61gs", "61gs_vfa", "56gs_s"],
+        // Row 1: variants and specials
+        [_, _, "57gs_cal", _, "19gs", _, "61gs_sp"],
+      ]
+    },
+
+    /* ─── SUWA HIGH-GRADE FOUNDATION (Marvel → Crown → Lord Marvel) ─── */
+    {
+      label: "SUWA HIGH-GRADE FOUNDATION · Marvel → Crown → Lord Marvel",
+      color: C.suwa,
+      grid: "suwa7",
+      sectionX: 15, sectionY: 195, sectionW: 1135,
+      topPad: 20, botPad: 14,
+      rows: [
+        // Row 0: Marvel main line + Lord Marvel evolution
+        ["marvel", "lord_marvel", _, _, _, "lord_marvel_36k"],
+        // Row 1: Crown line
+        [_, _, "crown", "crown_sd", _, _, _],
+        // Row 2: Sports/foundation pioneers
+        [_, _, "gyro_marvel", "crown_sp", _, _, _],
+        // Row 3: Laurel Alpinist (Seiko's first sports watch — pioneer of Alpinist lineage)
+        [_, _, "laurel", _, _, _, _],
       ]
     },
 
@@ -1075,7 +1092,7 @@ const LAYOUT = {
       label: "LINER · SKYLINER · LORD MATIC",
       color: C.suwa,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 320, sectionW: 1135,
+      sectionX: 15, sectionY: 490, sectionW: 1135,
       topPad: 10, botPad: 13,   /* non-standard padding */
       rows: [
         [_, "liner", "liner_chr", "sky_cal", "lord_matic", "lord_matic_sp", "lord_matic_56"],
@@ -1088,7 +1105,7 @@ const LAYOUT = {
       label: "SEIKOMATIC · BUSINESS (Suwa)",
       color: C.suwa,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 455, sectionW: 1135,
+      sectionX: 15, sectionY: 655, sectionW: 1135,
       topPad: 15, botPad: 13,   /* non-standard padding */
       rows: [
         [_, "seikomatic", "seikomatic_sd", "seikomatic_slim", _, "business_a"],
@@ -1102,7 +1119,7 @@ const LAYOUT = {
       label: "SEIKO 5 · MAINSTREAM",
       color: C.seiko5,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 660, sectionW: 1135,
+      sectionX: 15, sectionY: 885, sectionW: 1135,
       topPad: 30, botPad: 8,   /* non-standard padding */
       rows: [
         ["super", "sportsman", "sportsmatic", "sportsmatic5"],
@@ -1116,7 +1133,7 @@ const LAYOUT = {
       label: "⚓ DIVER LINEAGE · VINTAGE",
       color: C.diver,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 875, sectionW: 1135,
+      sectionX: 15, sectionY: 1115, sectionW: 1135,
       rows: [
         ["silverwave", "selfdater_mas"],
         ["62mas", "62mas_2", "6105_8000", "6105_willard", "6309"],
@@ -1130,7 +1147,7 @@ const LAYOUT = {
       label: "⏱ SUWA CHRONOGRAPHS · 613x Platform",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1157, sectionW: 1135,
+      sectionX: 15, sectionY: 1410, sectionW: 1135,
       rows: [
         // Row 0: 6139 single-register lineage (crown_chrono = ancestor at col 0)
         ["crown_chrono", "6139_first", "6139_pogue", "6139_hex", "6139_helmet", "6139_baby_jumbo"],
@@ -1144,7 +1161,7 @@ const LAYOUT = {
       label: "🔔 BELL-MATIC",
       color: C.bell,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1317, sectionW: 490,
+      sectionX: 15, sectionY: 1575, sectionW: 490,
       rows: [
         ["bell_4005", "bell_4006", "bell_4006_70"],
       ]
@@ -1155,7 +1172,7 @@ const LAYOUT = {
       label: "🌍 WORLD TIME",
       color: C.world,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 520, sectionY: 1317, sectionW: 630,
+      sectionX: 520, sectionY: 1575, sectionW: 630,
       rows: [
         [_, _, _, "wt_6217", "wt_6117", "nav_timer"],
       ]
@@ -1166,7 +1183,7 @@ const LAYOUT = {
       label: "KING SEIKO · DAINI ORIGIN",
       color: C.ks,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1590, sectionW: 1135,
+      sectionX: 15, sectionY: 1820, sectionW: 1135,
       rows: [
         ["cronos", "ks_1st", "ks_hack", "ks_chrono", "45ks"],
         ["cronos_sp", _, _, "44ks", "44ks_sp", "vanac", "vanac_sp"],
@@ -1179,7 +1196,7 @@ const LAYOUT = {
       label: "GRAND SEIKO · DAINI",
       color: C.gs,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1490, sectionW: 1135,
+      sectionX: 15, sectionY: 1720, sectionW: 1135,
       rows: [
         ["goldfeather", "44gs", "45gs", "45gs_vfa", "56gs_k"],
       ]
@@ -1190,7 +1207,7 @@ const LAYOUT = {
       label: "PREMIUM DAINI BUSINESS · 51xx Automatic",
       color: C.kameido,
       grid: "suwa7",
-      sectionX: 15, sectionY: 1820, sectionW: 1135,
+      sectionX: 15, sectionY: 2050, sectionW: 1135,
       rows: [
         [_, "seikomatic_p", "presmatic"],
       ]
@@ -1201,7 +1218,7 @@ const LAYOUT = {
       label: "CHAMPION · MASS MARKET",
       color: C.kameido,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1920, sectionW: 1135,
+      sectionX: 15, sectionY: 2150, sectionW: 1135,
       rows: [
         ["champion", "champion_cal", "76_five", "advan"],
         ["fairway", "champ_850"],
@@ -1213,7 +1230,7 @@ const LAYOUT = {
       label: "⏱ KAMEIDO CHRONOGRAPHS · 701x Family (7017 → 7018 → 7015/7016)",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 2085, sectionW: 1135,
+      sectionX: 15, sectionY: 2315, sectionW: 1135,
       rows: [
         // Row 0: 7017 founder (1970), 7018 successor (1971)
         [_, _, _, "k7017", "k7018", _, _],
