@@ -1130,13 +1130,13 @@ const LAYOUT = {
     {
       label: "⏱ SUWA CHRONOGRAPHS · 613x Platform",
       color: C.chrono,
-      grid: "suwa7",                  // column grid identifier
+      grid: "suwa8",                  // 8-column chronological grid
       sectionX: 15, sectionY: 1157, sectionW: 1135,
       rows: [
-        // Row 0: 6139 single-register lineage (crown_chrono = ancestor at col 0)
-        ["crown_chrono", "6139_first", "6139_pogue", "6139_hex", "6139_helmet", "6139_baby_jumbo"],
-        // Row 1: 6138 dual-register lineage
-        [_,              "6138_yacht", "6138_bull",  "6138_panda", "6138_kakume", "6138_jumbo"],
+        // Row 0: 6139 single-register (crown_chrono = ancestor, cols track intro year: 1964, 1969, [gap], 1971, [gap], 1974, 1975, 1976)
+        ["crown_chrono", "6139_first",  _,           "6139_pogue",  _,             "6139_hex", "6139_helmet", "6139_baby_jumbo"],
+        // Row 1: 6138 dual-register (yacht=1970, bull=1971, panda=1971 (slight drift), kakume=1972, jumbo=1972+)
+        [_,              _,             "6138_yacht", "6138_bull",  "6138_panda", "6138_kakume", "6138_jumbo",  _              ],
       ]
     },
 
@@ -1698,6 +1698,7 @@ function buildLayout(L) {
   // Column-grid x-positions used inside families.
   const GRID_XS = {
     suwa7:   [50, 210, 370, 530, 690, 850, 1010],   // 7 columns, 160 stride
+    suwa8:   [50, 185, 320, 455, 590, 725, 860, 995], // 8 columns, 135 stride (chronograph family)
     modern5: [1620, 1780, 1940, 2100, 2260],         // 5 columns, 160 stride
     legacy2: [1240, 1400]                            // 2 columns
   };
