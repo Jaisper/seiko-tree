@@ -556,7 +556,7 @@ const popupData={
 
   liner:{n:"Liner",era:"1960-65",d:"Mid-range manual-wind dress watch. Positioned between Marvel and Crown. Named for the ocean liner era.",tags:[]},
   liner_chr:{n:"Liner Chronometer",era:"1961-65",d:"Chronometer-certified Liner. Demonstrated Suwa's precision capabilities at a lower price point than GS.",tags:[]},
-  laurel:{n:"Laurel / Laurel Alpinist",era:"1959-64",d:"Entry-level Suwa dress-watch family. The 1959 Laurel Alpinist variant was Seiko's first sports watch, built for mountaineering use with robust construction and luminous markers — described by Seiko itself as the ancestor of Seiko sports watches. The heritage root of today's Alpinist line, although the internal compass bezel became a later Alpinist signature.",tags:["icon"]},
+  laurel:{n:"Laurel / Laurel Alpinist",era:"1959-64",d:"Seiko's first sports watch, built at Suwa for mountaineering use with robust construction and luminous markers — described by Seiko itself as the ancestor of Seiko sports watches. Placed here at the foundation level rather than in the Suwa dress line to reflect its role as a pioneer outdoor/sports piece and as the direct heritage source of today's Prospex Alpinist. The internal compass bezel became a later Alpinist signature.",tags:["icon"]},
   skyliner:{n:"Skyliner",era:"1961-69",d:"Mid-range hand-wound dress line, commonly associated with the Cal. 6220 manual-wind movement. Slim, accessible Suwa dress watch positioned as a successor to the Liner tradition — not an automatic branch. Some later 1960s Skyliner references used the 61xx platform.",tags:[]},
   "61_skyliner":{n:"61 Skyliner",era:"1968-72",d:"8-beat Skyliner with Cal. 6100 series at 28,800 bph — a faster-running upgrade to the Skyliner platform.",tags:[]},
   sky_cal:{n:"Skyliner Calendar",era:"1962-69",d:"Skyliner with date complication. Day-date variants available. High-volume everyday Suwa automatic.",tags:[]},
@@ -574,13 +574,13 @@ const popupData={
   seikomatic_sd:{n:"Seikomatic Self Dater",era:"1962-68",d:"Seikomatic with date complication. Cal. 6205/6206. Popular mid-range automatic with calendar.",tags:[]},
   seikomatic_slim:{n:"Seikomatic Slimdate",era:"1963-68",d:"Thinner Seikomatic with date. Suwa's push toward slimmer automatic dress watches.",tags:[]},
   seikomatic_r:{n:"Seikomatic-R",era:"1965-68",d:"Refined automatic with day-date. Bridged the gap between Seikomatic and Lord Matic.",tags:[]},
-  seikomatic_p:{n:"Seikomatic-P",era:"1967-68",d:"Cal. 5106. Precision-oriented automatic. Direct precursor to the Presmatic.",tags:[]},
+  seikomatic_p:{n:"Seikomatic-P",era:"1967-68",d:"Daini-produced precision-oriented automatic using Cal. 5106 (Daini's 33-jewel 51xx platform). Positioned as Daini's answer to Suwa's business-oriented Seikomatic-R; direct precursor to the Presmatic (1968) which continued the same 5106 platform under the new brand name.",tags:[]},
   seikomatic_chr:{n:"Seikomatic Chronometer",era:"1966-67",d:"Cal. 6245/6246. Chronometer-grade automatic. Its movement directly became the basis for the 62GS - the first automatic Grand Seiko.",tags:["gs"]},
   weekdater_6206:{n:"Weekdater 400/6206",era:"1965-67",d:"Day-date automatic. Cal. 6206. Evolution of Seikomatic Self Dater with added day display.",tags:[]},
   weekdater_6218:{n:"Weekdater 6216/6218",era:"1967-70",d:"Upgraded Weekdater family. Cal. 6218 with quickset date. Key platform that branched into Business and chronometer lines.",tags:[]},
   business:{n:"Business",era:"1967-68",d:"Cal. 6206. Day-date automatic. Bridge between Weekdater and the premium Business-A line.",tags:[]},
   business_a:{n:"Business-A",era:"1967-72",d:"Suwa's 8-beat dress automatic. Cal. 8346 at 28,800 bph — an upmarket upgrade from the Business line. Day-date complication, refined case finishing. Positioned alongside Presmatic as part of Suwa's premium-but-below-GS tier. Later replaced by Lord Matic as Suwa's high-end automatic dress line.",tags:[]},
-  presmatic:{n:"Presmatic",era:"1967-73",d:"Premium Suwa automatic dress line. Cal. 5106 with 33 jewels — unusually high jewel count signaling top-tier platform finishing. Day-date complication. Positioned between everyday Seikomatic and Grand Seiko — the hi-spec option for buyers wanting refined automation without GS pricing.",tags:[]},
+  presmatic:{n:"Presmatic",era:"1967-73",d:"Premium Daini automatic dress line built on the Daini-developed Cal. 5106 (33 jewels — unusually high count signaling top-tier platform finishing) and later Cal. 5146. Day-date complication. Positioned as Daini's upper mid-market business/dress automatic response to Suwa's Seikomatic-R, sitting below King Seiko/Grand Seiko in pricing.",tags:[]},
   sea_lion:{n:"Sea Lion",era:"1966-70",d:"Water-resistant automatic. Positioned between Seikomatic-R and Presmatic. Semi-sport dress watch.",tags:[]},
 
   /* ─── SUWA · SPORTSMATIC & SEIKO 5 ORIGIN ─── */
@@ -1046,7 +1046,7 @@ const LAYOUT = {
      and uses their bounds as containers for the families below. */
   parents: [
     {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1960–c. 1988", x:5, y:10, w:1155, h:1430, c:C.suwa},
-    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1960–c. 1988", x:5, y:1460, w:1155, h:718, c:C.kameido},
+    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1960–c. 1988", x:5, y:1460, w:1155, h:820, c:C.kameido},
     {l:"LEGACY TRANSITION ERA · c. 1988–2001", x:1210, y:10, w:330, h:587, c:C.modern},
     {l:"MODERN COLLECTION ERA · 2001–2025", x:1590, y:10, w:880, h:985, c:C.modern},
   ],
@@ -1066,9 +1066,9 @@ const LAYOUT = {
       rowStrides: [60, 80, 60],  /* visual breathing room (non-65 strides) */
       rows: [
         ["crown", "gs_1st", "gs_sd", "62gs", "61gs", "61gs_vfa", "56gs_s"],
-        ["crown_sd", "crown_sp", "57gs_cal", _, _, "61gs_sp"],
+        ["crown_sd", "crown_sp", "57gs_cal", _, _, "61gs_sp", "19gs"],
         ["marvel", "lord_marvel", "lord_marvel_36k"],
-        ["gyro_marvel"],
+        ["gyro_marvel", "laurel"],
       ]
     },
 
@@ -1081,20 +1081,20 @@ const LAYOUT = {
       topPad: 10, botPad: 13,   /* non-standard padding */
       rows: [
         [_, "liner", "liner_chr", "sky_cal", "lord_matic", "lord_matic_sp", "lord_matic_56"],
-        [_, "laurel", "skyliner", "61_skyliner", "61_skyliner_cal", _, "56ks"],
+        [_, _, "skyliner", "61_skyliner", "61_skyliner_cal", _, "56ks"],
       ]
     },
 
     /* ─── SEIKOMATIC · BUSINESS · PRESMATIC ─── */
     {
-      label: "SEIKOMATIC · BUSINESS · PRESMATIC",
+      label: "SEIKOMATIC · BUSINESS (Suwa)",
       color: C.suwa,
       grid: "suwa7",                  // column grid identifier
       sectionX: 15, sectionY: 455, sectionW: 1135,
       topPad: 15, botPad: 13,   /* non-standard padding */
       rows: [
-        [_, "seikomatic", "seikomatic_sd", "seikomatic_slim", "presmatic", "business_a"],
-        [_, "weekdater_6206", "weekdater_6218", "seikomatic_r", "seikomatic_p", "business"],
+        [_, "seikomatic", "seikomatic_sd", "seikomatic_slim", _, "business_a"],
+        [_, "weekdater_6206", "weekdater_6218", "seikomatic_r", _, "business"],
         [_, _, _, _, "seikomatic_chr", "sea_lion"],
       ]
     },
@@ -1184,7 +1184,17 @@ const LAYOUT = {
       sectionX: 15, sectionY: 1707, sectionW: 1135,
       rows: [
         ["goldfeather", "44gs", "45gs", "45gs_vfa", "56gs_k"],
-        [_, _, _, _, "19gs"],
+      ]
+    },
+
+    /* ─── PREMIUM DAINI BUSINESS · Cal. 51xx Platform ─── */
+    {
+      label: "PREMIUM DAINI BUSINESS · 51xx Automatic",
+      color: C.kameido,
+      grid: "suwa7",
+      sectionX: 15, sectionY: 1859, sectionW: 1135,
+      rows: [
+        [_, "seikomatic_p", "presmatic"],
       ]
     },
 
@@ -1193,7 +1203,7 @@ const LAYOUT = {
       label: "CHAMPION · MASS MARKET",
       color: C.kameido,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1859, sectionW: 1135,
+      sectionX: 15, sectionY: 1960, sectionW: 1135,
       rows: [
         ["champion", "champion_cal", "76_five", "advan"],
         ["fairway", "champ_850"],
@@ -1205,7 +1215,7 @@ const LAYOUT = {
       label: "⏱ KAMEIDO CHRONOGRAPHS · 701x Platform",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 2011, sectionW: 1135,
+      sectionX: 15, sectionY: 2112, sectionW: 1135,
       rows: [
         [_, _, _, "c701x"],
         [_, _, _, "k7016", "k7018", "k7017", "k7015"],
@@ -1362,7 +1372,7 @@ const edges=[
   ["weekdater_6206","weekdater_6218","strong","Upgraded Weekdater family with quickset date and improved movement"],
   ["seikomatic","seikomatic_r","medium","Seikomatic-R refined the automatic platform for water-resistant use"],
   ["seikomatic_r","sea_lion","strong","Sea Lion extended Seikomatic-R into a semi-sport water-resistant dress watch"],
-  ["weekdater_6218","presmatic","medium","Presmatic grew from the Weekdater automatic platform into a premium line"],
+  ["weekdater_6218","presmatic","weak","Both Weekdater 6218 and Presmatic 5106 were 1967-era premium automatics, though from different factories (Suwa 62xx vs Daini 51xx respectively) — the connection is market-positioning, not caliber lineage","conceptual"],
   ["sea_lion","presmatic","medium","Sea Lion\'s water-resistant features influenced Presmatic development"],
   ["weekdater_6218","seikomatic_chr","medium","Weekdater movement evolved into the chronometer-grade 6245/6246"],
   ["weekdater_6218","business","medium","Business grew from the Weekdater platform as a practical day-date dress watch"],
@@ -1438,7 +1448,7 @@ const edges=[
   ["45gs","45gs_vfa","strong","45GS VFA pushed Daini Grand Seiko to its ultimate precision standard"],
   ["lord_marvel_36k","19gs","strong","Lord Marvel 36000 established Suwa's 36,000 vph Hi-Beat platform; 19GS is the ladies' derivative"],
   ["45gs","19gs","medium","19GS miniaturized the Hi-Beat Grand Seiko platform for women\'s watches"],
-  ["19gs","56gs_k","medium","56GS continued Kameido\'s Grand Seiko tradition in thin automatic form"],
+  ["19gs","56gs_k","weak","19GS ladies\' Hi-Beat (Suwa) and 56GS (Daini) both represent late-1960s Grand Seiko development — the connection is thematic (small-format GS) rather than direct lineage","conceptual"],
   ["45gs_vfa","56gs_k","strong","56GS inherited Kameido\'s Hi-Beat precision heritage from the 45GS VFA era"],
 
   /* ── Within: DAINI · CHAMPION & MASS-MARKET ── */
@@ -1547,7 +1557,7 @@ const edges=[
   ["skx","px_shogun","medium","Shogun emerged as a titanium diver in the late SKX-era lineup"],
   ["6159_tuna","mm300","medium","Marine Master 300M SBDX001 continues the 6159 Tuna professional diver heritage with modern Cal. 8L35"],
   ["crown_chrono","prsg_style60","weak","Presage Style60s is a modern reinterpretation of the 1964 Crown Chronograph"],
-  ["laurel","px_alpinist","weak","Modern Alpinist heritage traces to the 1959 Laurel Alpinist sports watch"],
+  ["laurel","px_alpinist","strong","Modern Alpinist heritage traces directly to the 1959 Laurel Alpinist — Seiko's first sports watch and the fundamental ancestor of the entire Alpinist lineage","heritage_source"],
   ["62mas","px_1965","weak","Modern reinterpretation of Seiko\'s 1965 diver archetype"],
   ["6105_willard","px_1970","weak","Modern reinterpretation of the 1970 Captain Willard diver","heritage_reinterpretation"],
   ["6139_first","px_speedtimer","weak","Modern Speedtimer revives Seiko\'s 1969 automatic chronograph heritage"],
