@@ -1737,6 +1737,51 @@ function buildLayout(L) {
   // Parent boxes (eras, factories) — drawn as outer containers.
   for (const p of L.parents) sections.push(p);
 
+  // Auto-cascade sectionY for families that don't specify it explicitly.
+  // Groups families by parent-region (based on sectionX/sectionW), then
+  // cascades each family's sectionY from previous family bottom + configurable gap.
+  //
+  // Manual override: if a family specifies { sectionY: N }, that value wins.
+  // If it also specifies { cascadeStart: true }, that family becomes the anchor
+  // for its region's cascade (starts a new column/parent group).
+  const NH_default = L.canvas?.NH ?? 52;
+  const CASCADE_GAP = L.canvas?.cascadeGap ?? 8;   // visual gap between family boxes
+  
+  // Group families by parent region using sectionX bounds
+  const regionCascade = new Map();  // regionKey → last bottom y
+  const familyH = new Map();         // family index → computed height
+  
+  function computeFamilyHeight(f) {
+    const topPad = f.topPad ?? 20;
+    const botPad = f.botPad ?? 20;
+    const strides = f.rowStrides;
+    let stridesSum = 0;
+    for (let r = 0; r < f.rows.length - 1; r++) {
+      stridesSum += (strides ? strides[r] : 65) ?? 65;
+    }
+    return topPad + stridesSum + NH_default + botPad;
+  }
+  
+  // First pass: apply auto-cascade to families that need it
+  for (let i = 0; i < L.families.length; i++) {
+    const f = L.families[i];
+    // Region key: use sectionX rounded to region (fast bucketing)
+    const regionKey = f.sectionX < 500 ? 'left' 
+                    : f.sectionX < 1500 ? 'legacy'
+                    : 'modern';
+    
+    const h = computeFamilyHeight(f);
+    familyH.set(i, h);
+    
+    // If sectionY not explicitly set, cascade from previous
+    if (f.sectionY == null || f.cascadeAuto) {
+      const prevBottom = regionCascade.get(regionKey) ?? (f.cascadeStartY ?? 30);
+      f.sectionY = prevBottom + CASCADE_GAP;
+    }
+    
+    regionCascade.set(regionKey, f.sectionY + h);
+  }
+
   // Family sub-sections + their nodes.
   for (const f of L.families) {
     const xs = GRID_XS[f.grid];
@@ -1889,7 +1934,13 @@ nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElem
 syncNodeSize();
 window.addEventListener('resize',()=>{syncNodeSize();renderEdges();});
 function getPath(fn,tn){const fcx=fn[2]+NW/2,fcy=fn[3]+NH/2,tcx=tn[2]+NW/2,tcy=tn[3]+NH/2,dx=tcx-fcx,dy=tcy-fcy;let sx,sy,ex,ey;if(Math.abs(dx)>Math.abs(dy)){sx=dx>0?fn[2]+NW:fn[2];sy=fcy;ex=dx>0?tn[2]:tn[2]+NW;ey=tcy;}else{sx=fcx;sy=dy>0?fn[3]+NH:fn[3];ex=tcx;ey=dy>0?tn[3]:tn[3]+NH;}const mx=(sx+ex)/2,my=(sy+ey)/2;if(Math.abs(dx)>Math.abs(dy)){return`M${sx},${sy} C${mx},${sy} ${mx},${ey} ${ex},${ey}`;}return`M${sx},${sy} C${sx},${my} ${ex},${my} ${ex},${ey}`;}
-function renderEdges(){let h=`<defs><marker id="a" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="#aaa"/></marker><marker id="ah" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="${C.highlight}"/></marker></defs>`;edges.forEach(([f,t,type,desc,relation])=>{const fn=nodeMap[f],tn=nodeMap[t];if(!fn||!tn)return;const cls=type==='weak'?'edge-weak':'';const d=getPath(fn,tn);h+=`<path class="${cls}" data-from="${f}" data-to="${t}" data-type="${type}" data-desc="${desc||''}" data-relation="${relation||''}" d="${d}" fill="none" stroke="#aaa" stroke-width="${type==='strong'?1.5:.8}" stroke-dasharray="${type==='weak'?'3,3':'0'}" opacity="${type==='weak'?.25:.45}" marker-end="url(#a)"/>`;});svg.innerHTML=h;}
+function renderEdges(){let h=`<defs><marker id="a" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="#aaa"/></marker><marker id="ah" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L8,3 L0,6 Z" fill="${C.highlight}"/></marker></defs>`;edges.forEach(([f,t,type,desc,relation])=>{const fn=nodeMap[f],tn=nodeMap[t];if(!fn||!tn)return;const cls=type==='weak'?'edge-weak':'';const d=getPath(fn,tn);const pe=type==='weak'?'none':'';h+=`<path class="${cls}" data-from="${f}" data-to="${t}" data-type="${type}" data-desc="${desc||''}" data-relation="${relation||''}" d="${d}" fill="none" stroke="#aaa" stroke-width="${type==='strong'?1.5:.8}" stroke-dasharray="${type==='weak'?'3,3':'0'}" opacity="${type==='weak'?.25:.45}" pointer-events="${pe}" marker-end="url(#a)"/>`;});svg.innerHTML=h;
+  // B3: Cache bounding boxes for each edge path for fast hit-filtering
+  svg.querySelectorAll('path[data-desc]').forEach(p=>{
+    const bb=p.getBBox();
+    p._bx0=bb.x; p._by0=bb.y; p._bx1=bb.x+bb.width; p._by1=bb.y+bb.height;
+  });
+}
 
 function hasTag(id,tag){return nodeTags[id]&&nodeTags[id].includes(tag);}
 function isVis(n){
@@ -2046,8 +2097,13 @@ function findEdgeAt(clientX,clientY){
   const cx=(clientX-r.left-tx)/scale;
   const cy=(clientY-r.top-ty)/scale;
   let closest=null,closestDist=22/scale;
+  const pad=closestDist;
   svg.querySelectorAll('path[data-desc]').forEach(p=>{
     if(!p.dataset.desc)return;
+    // B3: fast bounding-box pre-filter (skip if mouse is far from edge's bbox)
+    if(p._bx0!=null){
+      if(cx<p._bx0-pad||cx>p._bx1+pad||cy<p._by0-pad||cy>p._by1+pad)return;
+    }
     const len=p.getTotalLength();
     const steps=Math.max(6,Math.floor(len/40));
     for(let i=0;i<=steps;i++){
