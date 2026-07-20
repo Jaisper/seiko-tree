@@ -1185,12 +1185,12 @@ const LAYOUT = {
       grid: "suwa7",                  // column grid identifier
       sectionX: 15, sectionY: 1820, sectionW: 1135,
       rows: [
-        // Row 0: main KS chronology - Cronos → First KS → (44KS) → 45KS
-        ["cronos", "ks_1st", _, _, "45ks", _, _],
-        // Row 1: 44KS central + one of its parallel variants (KSK/44-9990)
-        ["cronos_sp", _, _, "44ks", "ks_44_9990", "vanac", "vanac_sp"],
-        // Row 2: remaining 44KS variants + 52KS (successor to 45KS)
-        ["cronos_sd", _, _, "ks_44_self_dater", "ks_44_chronometer", _, "52ks"],
+        // Row 0: main KS chronology + first 44 variant (44-9990 steel) top of stack
+        ["cronos", "ks_1st", _, _, "ks_44_9990", "45ks", _],
+        // Row 1: 44KS central + Self Dater (middle of stack)
+        ["cronos_sp", _, _, "44ks", "ks_44_self_dater", "vanac", "vanac_sp"],
+        // Row 2: Chronometer (bottom of variant stack) + 52KS
+        ["cronos_sd", _, _, _, "ks_44_chronometer", _, "52ks"],
       ]
     },
 
