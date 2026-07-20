@@ -592,7 +592,7 @@ const popupData={
   sportsmatic5:{n:"Sportsmatic 5",era:"1963-68",d:"The 1963 model that established the five defining features: automatic winding, day-date, water resistance, recessed crown, and a durable case. Effectively launched the Seiko 5 concept and naming that later Seiko 5 families would build on, though subsequent 5-series models use different movements and cases.",tags:[]},
   s5_first:{n:"Seiko 5",era:"1963-",d:"As a line and brand, Seiko 5 grew out of the 1963 Sportsmatic 5 concept. The 'five promises' — automatic winding, day-date, water resistance, recessed crown, durability — remain the conceptual continuity across the family, while movements and cases have evolved across several generations.",tags:[]},
   s5_sports:{n:"5 Sports",era:"1968-85",d:"Sportier and more rugged evolution of the Seiko 5 concept, launched in 1968 with up to 70m water resistance, Hardlex crystal, luminous inserts and a wide range of youthful dial designs. Early examples used robust automatic movements such as the Cal. 6119 family. The spirit of this line later informed the modern Seiko 5 Sports reboot of 2019.",tags:[]},
-  s5_speed:{n:"5 Speed Timer",era:"1969-75",d:"Seiko 5 Sports model line powered by the Cal. 6139 automatic chronograph movement, which was developed at Suwa as Seiko's first automatic chronograph platform. The 6139 was a fully integrated column-wheel/vertical-clutch chronograph; Seiko's claim to 'first to market' in the 1969 race alongside Zenith and the Heuer/Breitling/Hamilton Cal. 11 depends on criteria. What is beyond dispute is that the 6139 became one of Seiko's most important chronograph platforms of the 1970s.",tags:["icon","chrono"]},
+  "s5_speed":{n:"5 Sports Speed Timer",era:"1969-75",d:"Cal. 6139 automatic chronograph housed in a Seiko 5-branded case — 5 Sports Speed Timer. Historically one of the first automatic chronographs (1969), part of the landmark year that also produced Zenith's El Primero and the Heuer/Breitling Cal. 11. Placed here under Suwa Chronographs to reflect its true 6139 caliber lineage; the Seiko 5 Sports branding was a marketing/case-design decision rather than a chronograph platform distinction. See also 6139-6000 and the wider 6139 chronograph family.",tags:["chrono"]},
   s5_actus:{n:"5 Actus",era:"1970-78",d:"Cal. 7019. 'Action' oriented Seiko 5. Faceted cases, 70s styling. Higher-beat than standard 5 models.",tags:[]},
   s5_dx:{n:"5 DX",era:"1970-78",d:"'Deluxe' Seiko 5. Higher finishing than standard. Day-date with applied indices. Premium end of the Seiko 5 range.",tags:[]},
   "56ks":{n:"56 King Seiko (Suwa)",era:"1969-75",d:"Cal. 5625/5626. Suwa-produced King Seiko — NOT made by Daini. Thin automatic dress line sharing platform with Lord Matic 56. The only KS made at the Suwa factory.",tags:["ks"]},
@@ -835,7 +835,7 @@ const nodeLabels = {
   sportsmatic5: "Sportsmatic 5\n1963-68",
   s5_first: "Seiko 5\n1963-",
   s5_sports: "5 Sports\n1968-85",
-  s5_speed: "5 Speed Timer\n1969-75",
+  s5_speed: "5 Sports Speed Timer\nCal. 6139\n1969-75",
   s5_actus: "5 Actus\n1970-78",
   s5_dx: "5 DX\n1970-78",
   "56ks": "56 KS\nSuwa 1969-75",
@@ -1037,7 +1037,7 @@ const LAYOUT = {
   /* The outermost parent boxes — eras and factories. The engine draws these
      and uses their bounds as containers for the families below. */
   parents: [
-    {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988", x:5, y:10, w:1155, h:1660, c:C.suwa},
+    {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988", x:5, y:10, w:1155, h:1665, c:C.suwa},
     {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988", x:5, y:1690, w:1155, h:790, c:C.kameido},
     {l:"LEGACY TRANSITION ERA · c. 1988–2001", x:1210, y:10, w:330, h:660, c:C.modern},
     {l:"MODERN COLLECTION ERA · 2001–2025", x:1590, y:10, w:880, h:985, c:C.modern},
@@ -1112,9 +1112,11 @@ const LAYOUT = {
       grid: "suwa7",                  // column grid identifier
       sectionX: 15, sectionY: 885, sectionW: 1135,
       rows: [
-        ["super", "sportsman", "sportsmatic", "sportsmatic5"],
-        [_, _, _, "s5_first", "s5_sports", "s5_speed"],
-        [_, _, _, _, "s5_actus", "s5_dx"],
+        // Foundation chain: Super → Sportsman → Sportsmatic → Sportsmatic 5 → Seiko 5 (central)
+        ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first"],
+        // Parallel Seiko 5 sub-lines: 5 Sports, 5 Actus, 5 DX (all branch from Seiko 5)
+        [_, _, _, _, _, "s5_sports", "s5_dx"],
+        [_, _, _, _, _, "s5_actus"],
       ]
     },
 
@@ -1139,12 +1141,14 @@ const LAYOUT = {
       label: "⏱ SUWA CHRONOGRAPHS · 613x Platform",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1410, sectionW: 1135,
+      sectionX: 15, sectionY: 1345, sectionW: 1135,
       rows: [
         // Row 0: 6139 single-register lineage (crown_chrono = ancestor at col 0)
         ["crown_chrono", "6139_first", "6139_pogue", "6139_hex", "6139_helmet", "6139_baby_jumbo"],
         // Row 1: 6138 dual-register lineage
         [_,              "6138_yacht", "6138_bull",  "6138_panda", "6138_kakume", "6138_jumbo"],
+        // Row 2: 5 Sports Speed Timer — 6139 chronograph with Seiko 5 branding (aligned under 6139_first)
+        [_,              "s5_speed"],
       ]
     },
 
@@ -1399,12 +1403,12 @@ const edges=[
   /* ── Within: SUWA · SPORTSMATIC & SEIKO 5 ORIGIN ── */
   ["super","sportsman","strong","Sportsman evolved Super into a sport-oriented manual-wind line"],
   ["sportsman","sportsmatic","strong","Sportsmatic added automatic winding to the Sportsman concept"],
+  ["sportsmatic","silverwave","weak","The Seikomatic Silverwave (1961) shared the era's waterproof-mechanical design language with the Sportsmatic — a design/positioning inspiration rather than direct caliber lineage","design_influence"],
   ["sportsmatic","sportsmatic5","strong","Sportsmatic 5 added the five key features that became Seiko 5"],
   ["sportsmatic5","s5_first","strong","Seiko 5 evolved directly from the Sportsmatic 5 concept"],
   ["s5_first","s5_sports","strong","5 Sports added rotating bezel and sportier design to Seiko 5"],
-  ["s5_sports","s5_speed","strong","5 Speed Timer added chronograph to the 5 Sports platform"],
-  ["s5_first","s5_actus","medium","5 Actus applied higher-beat movement and 70s styling to Seiko 5"],
-  ["s5_actus","s5_dx","medium","5 DX offered deluxe finishing within the same 70s Seiko 5 platform"],
+  ["s5_first","s5_dx","strong","5 DX (Deluxe) was a premium parallel Seiko 5 sub-line — higher finishing, applied indices, day-date, positioned at the top of the Seiko 5 range"],
+  ["s5_first","s5_actus","strong","5 Actus was a parallel Seiko 5 sub-line positioned as accessible mid-market — sold as Seiko 5 Actus with the same 5 attributes (auto, day-date, water-resistant, recessed crown, durable case), using Cal. 7019 (Suwa) and 6106 (Daini) movements"],
 
   /* ── Within: SUWA · VINTAGE DIVERS (PRE-PROSPEX) ── */
   ["silverwave","62mas","weak","SilverWave sits in the broader pre-professional water-sport context at Suwa rather than as a direct technical ancestor of the 62MAS"],
