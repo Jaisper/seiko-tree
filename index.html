@@ -635,15 +635,14 @@ const popupData={
      mechanical alarm — one of the most distinctive Seiko complications of the era. */
 
   bell_4005:{n:"Bell-Matic (4005)",era:"1968-69",d:"Cal. 4005. A later date-only sibling within the Bell-Matic family — the 4006 (day-date) came first in 1966 and remained the mainstream Bell-Matic; the 4005 was a shorter-run parallel with date only. Sometimes mistaken for a predecessor, but the calibre lineage runs 4006 → 4005 as sibling variants.",tags:[]},
-  bell_4006:{n:"Bell-Matic (Cal. 4006)",era:"1966-78",d:"Seiko's landmark automatic alarm watch family. Combined automatic winding with a mechanical alarm complication in a robust, mass-produced Japanese package. Cal. 4006 was the first Bell-Matic (day-date, 1966); Cal. 4005 followed as a shorter-run date-only sibling (1968-69). Twin barrels (one for timekeeping, one for the alarm spring), inner rotating alarm disk with red alarm marker, and 2 o'clock alarm pusher made it one of Seiko's most distinctive mechanical complications of the 1960s-70s. Produced in over 80 case variations during its run.",tags:["icon"]},
-  bell_4006_70:{n:"Bell-Matic 4006-70xx",era:"1970-78",d:"Later Bell-Matic production with updated case designs. 70s styling with fluted bezels and faceted cases.",tags:[]},
+  "bell_4006":{n:"Bell-Matic (Cal. 4006)",era:"1966-78",d:"Cal. 4006 — Seiko's core mechanical alarm platform, produced 1966-78. Automatic winding with alarm complication, day-date. Multiple case series produced over the platform's lifetime — the standard round cases, the Business Bell (dress-oriented references), and the distinctive 4006-70xx 'UFO' cushion-case sports variant (1970-78). All shared the same 4006 movement architecture.",tags:["bell"]},
 
   /* ─── SUWA · WORLD TIME / GMT ─── */
   /* The world-time / GMT watches starting with the 1964 Olympic 6217 — Seiko's first GMT
      wristwatch. */
 
   wt_6217:{n:"World Time 6217-7000",era:"1964 (+1967 re-run)",d:"Seiko's first GMT/world-time watch, created for the 1964 Tokyo Olympics where Seiko was official timekeeper. Cal. 6217A (same 62-series family as the 1965 62MAS diver), 17 jewels, 18,000 bph. Rotating cities bezel with 24-city scale; Olympic-torch caseback. Produced March-November 1964 (~95,000 pieces), with a brief 1967 re-run. The longer 1964-69 World Time presence on the market came through the later 6117/Navigator generation. A signal that post-war Japan was ready for a global audience.",tags:["icon"]},
-  wt_6117:{n:"World Time (6117)",era:"1969-76",d:"Cal. 6117 automatic world timer. Navigator-style with 24-city rotating bezel. Improved over the manual-wind 6217.",tags:[]},
+  "wt_6117":{n:"6117 World Time Platform",era:"1969-76",d:"Cal. 6117 — Seiko's second-generation world-time / GMT platform, replacing the earlier Cal. 6217. Multiple references built on the same movement: the 6117-6400 World Time (internal rotating city disc, world-time display), the Navigator Timer (dual-time / GMT bezel format, more travel-focused), and various GMT-oriented references. All share the same 6117 automatic movement architecture — the differences are in dial, bezel and complication presentation rather than in the caliber itself.",tags:[]},
   nav_timer:{n:"Navigator Timer",era:"1970-76",d:"GMT/world time variant with 24-hour hand. Internal rotating city bezel. Late evolution of the Seiko world timer family.",tags:[]},
 
   /* ─── DAINI · CRONOS & KING SEIKO ─── */
@@ -863,7 +862,6 @@ const nodeLabels = {
   "6138_jumbo": "6138-3002 Jumbo\n1972-78",
   bell_4005: "Bell-Matic\n(4005) 1968-69",
   bell_4006: "Bell-Matic\n(4006) 1966-78",
-  bell_4006_70: "Bell-Matic\n4006-70xx 1970-78",
   wt_6217: "World Time 6217\n1964 +1967",
   wt_6117: "World Time\n(6117) 1969-76",
   nav_timer: "Navigator\nTimer 1970-76",
@@ -1157,7 +1155,7 @@ const LAYOUT = {
       grid: "suwa7",                  // column grid identifier
       sectionX: 15, sectionY: 1575, sectionW: 490,
       rows: [
-        ["bell_4005", "bell_4006", "bell_4006_70"],
+        ["bell_4005", "bell_4006"],
       ]
     },
 
@@ -1440,11 +1438,10 @@ const edges=[
 
   /* ── Within: SUWA · BELL-MATIC ── */
   ["bell_4006","bell_4005","medium","4005 was a later date-only sibling within the Bell-Matic family — not a predecessor to the 4006"],
-  ["bell_4006","bell_4006_70","strong","Later Bell-Matic production with updated 1970s case styling"],
 
   /* ── Within: SUWA · WORLD TIME / GMT ── */
   ["wt_6217","wt_6117","strong","World Time 6117 upgraded to automatic winding from the manual 6217"],
-  ["wt_6117","nav_timer","strong","Navigator Timer evolved the world timer with GMT hand and 24-hour track"],
+  ["wt_6117","nav_timer","medium","The Navigator Timer (1970-76) was a variant/side branch of the 6117 World Time family — shared the same 6117 movement platform but with a different case and rotating GMT/timezone bezel rather than the internal-disc world-time display","same_platform"],
 
   /* ── Within: DAINI · CRONOS & KING SEIKO ── */
   ["cronos","cronos_sp","medium","Cronos Special offered higher-grade finishing within the Cronos family"],
