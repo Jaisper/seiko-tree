@@ -610,8 +610,6 @@ const popupData={
   "6105_8000":{n:"6105-8000/8009",era:"1968-77",d:"The first-generation 6105 diver and direct evolution of the 62MAS. 150m water resistance, Cal. 6105 automatic (21,600 bph, hacking but non-hand-winding), external rotating bezel, crown at 4 o'clock — an early example of the asymmetric crown placement that became a Seiko diver signature. The 6105-8000 (1968-70) and 6105-8009 (1970-77) are parallel references within the same first-generation symmetric cushion case family, sitting between the earlier barrel-case 62MAS and the famous later 6105-8110 'Willard' with its crown-guard asymmetric cushion case redesigned by Taro Tanaka.",tags:["icon","diver"]},
   "6105_willard":{n:"6105-8110 Willard",era:"1970-77",d:"The 'Captain Willard' — worn by Martin Sheen in Apocalypse Now (1979), cementing its place in cinema and vintage diver culture. 44mm asymmetric cushion case with integrated crown guard at 4 o'clock, external rotating dive bezel, 150m rating and Cal. 6105B automatic. One of the most recognizable Seiko dive watches ever made.",tags:["icon","diver"]},
   "6309":{n:"6309-7040/7049 Turtle",era:"1976-88",d:"The 'Turtle' — 150m diver with cushion-shaped case. Cal. 6309 automatic, non-hand-winding and generally non-hacking. The JDM 6306 sibling added hacking. A mass-produced workhorse diver and one of the roots of modern Seiko diver enthusiasm.",tags:["diver"]},
-  "6306_sd":{n:"SilverWave Surface Diver",era:"1976-78",d:"Cal. 6306. Turtle-case 150m recreational diver. Non-professional companion to the 6309 line.",tags:["diver"]},
-  "6106_sport":{n:"Sports Diver 70M",era:"1968-74",d:"Cal. 6106. Recreational 70m water-resistant diver. Affordable entry-level complement to the professional 6105/6159 lines.",tags:["diver"]},
   "6159_pro":{n:"6159-7000/7001 Professional 300m",era:"1968-69",d:"Seiko's Hi-Beat 300m professional diver, following the 6215-7000. Cal. 6159, 36,000 bph, one-piece professional case architecture. Should be separated from the 1975 6159-7010 600m saturation-diving Tuna, which introduced the titanium shrouded professional format.",tags:["icon","diver","hb"]},
   "6159_tuna":{n:"6159-7010 Tuna",era:"1975-78",d:"The original \"Tuna\" and Seiko's breakthrough 600m saturation diver. Cal. 6159 Hi-Beat (36,000 bph), a titanium protective shroud over a one-piece stainless monocoque case, designed for reliability, legibility and snag resistance in deep-sea work. Developed after Seiko received a professional saturation diver's complaint in 1968 that its 300m diver was unfit for decompression-chamber use. The design generated more than 20 patents, utility-model and design registrations and still defines the Tuna family today.",tags:["icon","diver","hb"]},
 
@@ -850,8 +848,6 @@ const nodeLabels = {
   "6105_8000": "6105-8000/8009\n150m 1968-77",
   "6105_willard": "6105-8110\nWillard 1970-77",
   "6309": "6309 Turtle\n150m 1976-88",
-  "6306_sd": "SilverWave\nSurface Diver\n6306 1976-78",
-  "6106_sport": "Sports Diver\n70m 6106 1968-74",
   "6159_pro": "6159-7000/7001\nPro 300m 1968-69",
   "6159_tuna": "6159 Tuna\n600m 1975-78",
   crown_chrono: "Crown Chrono\n1964",
@@ -1131,10 +1127,12 @@ const LAYOUT = {
       grid: "suwa7",                  // column grid identifier
       sectionX: 15, sectionY: 1115, sectionW: 1135,
       rows: [
+        // Row 0: pre-62MAS heritage
         ["silverwave", "selfdater_mas"],
+        // Row 1: CONSUMER / SPORT branch — 62MAS → 6105 → Willard → 6309 Turtle
         [_, "62mas", "62mas_2", "6105_8000", "6105_willard", "6309"],
-        [_, _, "6215_pro", "6159_pro", _, _, "6306_sd"],
-        [_, _, _, _, "6159_tuna", "6106_sport"],
+        // Row 2: PROFESSIONAL branch — 62MAS → 6215 Pro → 6159 Hi-Beat Pro → Tuna
+        [_, _, "6215_pro", "6159_pro", _, "6159_tuna"],
       ]
     },
 
@@ -1417,13 +1415,10 @@ const edges=[
   ["62mas","62mas_2","strong","62MAS 8001 was an improved case variant of the original 62MAS"],
   ["62mas","6105_8000","strong","6105 succeeded 62MAS as Seiko\'s main 150m recreational diver"],
   ["62mas_2","6105_8000","strong","6105 replaced the 62MAS platform in Seiko\'s diver lineup"],
-  ["62mas_2","6215_pro","medium","6215 branched into Seiko\'s first 300m professional diver line"],
+  ["62mas","6215_pro","strong","62MAS split into two lineages: the professional-diver branch (300m+ pieces) began with the 6215 Pro in 1967, taking the 62MAS concept toward true saturation-diver capability"],
   ["6215_pro","6159_pro","strong","6159 advanced the professional diver to Hi-Beat with improved depth rating"],
   ["6105_8000","6105_willard","strong","Willard redesigned the 6105 with cushion case and crown guard"],
-  ["6105_8000","6106_sport","medium","6106 Sports Diver offered an affordable 70m recreational companion"],
   ["6105_willard","6309","strong","6309 Turtle replaced the Willard as Seiko\'s mainstream 150m diver"],
-  ["6309","6306_sd","medium","6306 Surface Diver was a recreational companion to the 6309 Turtle"],
-  ["6105_8000","6159_pro","medium","6159-7000/7001 was the contemporary professional 300m branch alongside the recreational 6105"],
   ["6159_pro","6159_tuna","medium","6159-7010 Tuna (1975) advanced the professional line to 600m saturation depth — a separate model with titanium shroud"],
 
   /* ── Within: SUWA · CHRONOGRAPHS · 613x PLATFORM ── */
@@ -1691,8 +1686,6 @@ const nodeTags = {
   selfdater_mas: ["diver"],
   "62mas_2": ["diver","heritage"],
   "6215_pro": ["diver","heritage"],
-  "6306_sd": ["diver"],
-  "6106_sport": ["diver"],
   mm300: ["diver","flagship"],
   k7015: ["chrono"],
   k7016: ["chrono"],
