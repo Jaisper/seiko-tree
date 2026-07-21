@@ -1099,9 +1099,12 @@ const LAYOUT = {
       grid: "suwa7",                  // column grid identifier
       sectionX: 15, sectionY: 655, sectionW: 1135,
       rows: [
-        [_, "seikomatic", "seikomatic_sd", "seikomatic_slim", _, "business_a"],
-        [_, "weekdater_6206", "weekdater_6218", "seikomatic_r", _, "business"],
-        [_, _, _, _, "seikomatic_chr", "sea_lion"],
+        // Row 0: Seikomatic central + parallel variants + Weekdater origin
+        [_, "seikomatic", "seikomatic_sd", "seikomatic_slim", "weekdater_6206", _, _],
+        // Row 1: Weekdater 6216/6218 → Seikomatic-R → Sea Lion (upper branch)
+        [_, _, _, _, "weekdater_6218", "seikomatic_r", "sea_lion"],
+        // Row 2: 6245 Chronometer + Business/Business-A (Seikomatic-R descendants)
+        [_, _, _, _, "seikomatic_chr", "business", "business_a"],
       ]
     },
 
@@ -1389,16 +1392,16 @@ const edges=[
   ["seikomatic","seikomatic_slim","strong","Slimdate pushed the Seikomatic toward thinner automatic dress design"],
   ["seikomatic_sd","weekdater_6206","strong","Weekdater added day display to the Seikomatic Self Dater platform"],
   ["weekdater_6206","weekdater_6218","strong","Upgraded Weekdater family with quickset date and improved movement"],
-  ["seikomatic","seikomatic_r","medium","Seikomatic-R refined the automatic platform for water-resistant use"],
+  ["seikomatic","seikomatic_r","strong","Seikomatic-R introduced a new rotor and caliber architecture — the platform that became the convergence point for the late-Seikomatic ecosystem (Sea Lion, Business, 6245 Chronometer)"],
+  ["seikomatic_r","seikomatic_chr","strong","6245 Chronometer emerged from the Seikomatic-R platform as the most refined chronometer-grade Seikomatic — the last major evolution of the family before Lord Matic"],
+  ["seikomatic_r","business","strong","Business was a parallel Seikomatic-R sub-line targeting the mid-market business-automatic segment"],
+  ["business","business_a","strong","Business-A was the direct successor to Business, updated with a new movement/case for the late-1960s upper-mid segment"],
   ["seikomatic_r","sea_lion","strong","Sea Lion extended Seikomatic-R into a semi-sport water-resistant dress watch"],
   ["weekdater_6218","presmatic","weak","Both Weekdater 6218 and Presmatic 5106 were 1967-era premium automatics, though from different factories (Suwa 62xx vs Daini 51xx respectively) — the connection is market-positioning, not caliber lineage","conceptual"],
-  ["sea_lion","presmatic","medium","Sea Lion\'s water-resistant features influenced Presmatic development"],
-  ["weekdater_6218","seikomatic_chr","medium","Weekdater movement evolved into the chronometer-grade 6245/6246"],
-  ["weekdater_6218","business","medium","Business grew from the Weekdater platform as a practical day-date dress watch"],
-  ["seikomatic_r","business_a","medium","Business-A drew on Seikomatic-R\'s refined automatic architecture"],
+  ["sea_lion","presmatic","weak","Sea Lion (Suwa) and Presmatic (Daini) both occupied the premium business-automatic segment in the late 1960s from different factories — the connection is market-positioning, not caliber lineage","conceptual"],
   ["seikomatic_p","presmatic","strong","Presmatic replaced Seikomatic-P as Suwa\'s premium automatic dress line"],
-  ["seikomatic","seikomatic_p","medium","Seikomatic-P branched off as a precision-oriented automatic variant"],
-  ["presmatic","business_a","strong","Presmatic and Business-A shared the same premium Suwa automatic tier"],
+  ["seikomatic","seikomatic_p","weak","Seikomatic (Suwa) and Seikomatic-P (Daini) shared naming and market positioning as parallel factory responses to the business-automatic segment — connection is market-positioning, not caliber lineage","conceptual"],
+  ["presmatic","business_a","weak","Presmatic (Daini) and Business-A (Suwa) both represented the upper-mid business segment of the late 1960s from different factories — connection is market-positioning, not caliber lineage","conceptual"],
 
   /* ── Within: SUWA · SPORTSMATIC & SEIKO 5 ORIGIN ── */
   ["super","sportsman","strong","Sportsman evolved Super into a sport-oriented manual-wind line"],
@@ -1533,9 +1536,10 @@ const edges=[
   /* ── Cross-group: heritage reinterpretations, brand revivals, era bridges ── */
   /* These are the longer interpretive lines that span eras and families.    */
   ["crown","gs_1st","strong","Crown provided the precision foundation for the first Grand Seiko","direct_lineage"],
+  ["seikomatic_chr","lord_matic","strong","The 6245 Chronometer platform architecture directly evolved into the Cal. 5606 that powered Lord Matic — this is the reel platform-lineage shift from Seikomatic to Lord Matic, marking the generation transition"],
   ["seikomatic_chr","62gs","strong","The 6245 chronometer movement directly became the basis for the 62GS"],
-  ["business","lord_matic","medium","Lord Matic succeeded the Business line as Suwa\'s high-end automatic"],
-  ["business_a","lord_matic","medium","Lord Matic absorbed the Business-A\'s market position and platform"],
+  ["business","lord_matic","weak","Business and Lord Matic both occupied the upper-mid Suwa segment across the Seikomatic-to-Lord Matic transition — market/positioning succession rather than direct platform lineage","conceptual"],
+  ["business_a","lord_matic","weak","Business-A and Lord Matic represented consecutive Suwa upper-mid business-automatic positions — market/positioning succession rather than direct platform lineage","conceptual"],
   ["presmatic","lord_matic_sp","medium","Lord Matic Special succeeded Presmatic with Hi-Beat movement"],
   ["sportsmatic","seikomatic","medium","Sportsmatic and Seikomatic shared early Suwa automatic architecture"],
   ["6309","7002_node","strong","7002 directly succeeded the 6309 in Seiko\'s mainstream diver family"],
