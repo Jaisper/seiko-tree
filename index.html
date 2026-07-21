@@ -1037,10 +1037,10 @@ const LAYOUT = {
   /* The outermost parent boxes — eras and factories. The engine draws these
      and uses their bounds as containers for the families below. */
   parents: [
-    {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988", x:5, y:10, w:1155, h:1860, c:C.suwa},
-    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988", x:5, y:1880, w:1155, h:800, c:C.kameido},
-    {l:"LEGACY TRANSITION ERA · c. 1988–2001", x:1210, y:10, w:330, h:660, c:C.modern},
-    {l:"MODERN COLLECTION ERA · 2001–2025", x:1590, y:10, w:880, h:985, c:C.modern},
+    {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988", key:"suwa", x:5, y:10, w:1155, h:0, autoH:true, c:C.suwa},
+    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988", key:"daini", x:5, y:0, stackAfter:"suwa", w:1155, h:0, autoH:true, c:C.kameido},
+    {l:"LEGACY TRANSITION ERA · c. 1988–2001", key:"legacy", x:1210, y:10, w:330, h:660, c:C.modern},
+    {l:"MODERN COLLECTION ERA · 2001–2025", key:"modern", x:1590, y:10, w:880, h:985, c:C.modern},
   ],
 
   /* Families inside the parents. Each family is positioned by its
@@ -1051,9 +1051,10 @@ const LAYOUT = {
     /* ─── GRAND SEIKO · SUWA (isolated, pure GS lineage from 1960) ─── */
     {
       label: "GRAND SEIKO · SUWA",
+      parent: "suwa",
       color: C.gs,
       grid: "suwa7",
-      sectionX: 15, sectionY: 30, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: main GS lineage — 1960 → 1970
         ["gs_1st", "gs_sd", "62gs", "61gs", "61gs_vfa", "56gs_s"],
@@ -1065,6 +1066,7 @@ const LAYOUT = {
     /* ─── SUWA HIGH-GRADE FOUNDATION (Marvel → Crown → Lord Marvel) ─── */
     {
       label: "SUWA HIGH-GRADE FOUNDATION · Marvel → Crown → Lord Marvel",
+      parent: "suwa",
       color: C.suwa,
       grid: "suwa7",
       sectionX: 15, sectionW: 1135,
@@ -1083,9 +1085,10 @@ const LAYOUT = {
     /* ─── LINER · SKYLINER · LORD MATIC ─── */
     {
       label: "LINER · SKYLINER · LORD MATIC",
+      parent: "suwa",
       color: C.suwa,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 490, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: Liner (manual dress) + Skyliner (automatic mid-range) blocks
         ["liner", "liner_chr", "skyliner", "sky_cal", _, _],
@@ -1101,9 +1104,10 @@ const LAYOUT = {
     /* ─── SEIKOMATIC · BUSINESS · PRESMATIC ─── */
     {
       label: "SEIKOMATIC · BUSINESS (Suwa)",
+      parent: "suwa",
       color: C.suwa,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 785, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: Seikomatic central + parallel variants + Weekdater origin
         ["seikomatic", "seikomatic_sd", "seikomatic_slim", "weekdater_6206", _, _],
@@ -1117,9 +1121,10 @@ const LAYOUT = {
     /* ─── SEIKO 5 · MAINSTREAM ─── */
     {
       label: "SEIKO 5 · MAINSTREAM",
+      parent: "suwa",
       color: C.seiko5,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1015, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Foundation chain: Super → Sportsman → Sportsmatic → Sportsmatic 5 → Seiko 5 (central)
         ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first"],
@@ -1132,9 +1137,10 @@ const LAYOUT = {
     /* ─── ⚓ DIVER LINEAGE · VINTAGE ─── */
     {
       label: "⚓ DIVER LINEAGE · VINTAGE",
+      parent: "suwa",
       color: C.diver,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1245, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: pre-62MAS heritage
         ["silverwave", "selfdater_mas"],
@@ -1148,9 +1154,10 @@ const LAYOUT = {
     /* ─── ⏱ SUWA CHRONOGRAPHS · 613x Platform ─── */
     {
       label: "⏱ SUWA CHRONOGRAPHS · 613x Platform",
+      parent: "suwa",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1475, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: 6139 single-register lineage (crown_chrono = ancestor at col 0)
         ["crown_chrono", "6139_first", "6139_pogue", "6139_hex", "6139_helmet", "6139_baby_jumbo"],
@@ -1164,9 +1171,10 @@ const LAYOUT = {
     /* ─── 🔔 COMPLICATIONS · Bell-Matic + World Time ─── */
     {
       label: "🔔 COMPLICATIONS · Bell-Matic + World Time",
+      parent: "suwa",
       color: C.bell,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1705, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: Bell-Matic (alarm complication, Cal. 4006)
         ["bell_4005", "bell_4006"],
@@ -1175,12 +1183,26 @@ const LAYOUT = {
       ]
     },
 
+    /* ─── GRAND SEIKO · DAINI ─── */
+    {
+      label: "GRAND SEIKO · DAINI",
+      parent: "daini",
+      color: C.gs,
+      grid: "suwa7",                  // column grid identifier
+      sectionX: 15, sectionW: 1135,
+      rows: [
+        // Aligned with KS · DAINI: 44gs=col 3 (same as 44ks-variants column), 45gs=col 4 (same as 45ks), 56gs_k=col 5
+        ["goldfeather", _, _, "44gs", "45gs", "56gs_k"],
+      ]
+    },
+
     /* ─── KING SEIKO · DAINI ORIGIN ─── */
     {
       label: "KING SEIKO · DAINI ORIGIN",
+      parent: "daini",
       color: C.ks,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 2010, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: main KS chronology + first 44 variant (44-9990 steel) top of stack
         ["cronos", "ks_1st", _, "ks_44_9990", "45ks", _, _],
@@ -1191,24 +1213,13 @@ const LAYOUT = {
       ]
     },
 
-    /* ─── GRAND SEIKO · DAINI ─── */
-    {
-      label: "GRAND SEIKO · DAINI",
-      color: C.gs,
-      grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1910, sectionW: 1135,
-      rows: [
-        // Aligned with KS · DAINI: 44gs=col 3 (same as 44ks-variants column), 45gs=col 4 (same as 45ks), 56gs_k=col 5
-        ["goldfeather", _, _, "44gs", "45gs", "56gs_k"],
-      ]
-    },
-
     /* ─── PREMIUM DAINI BUSINESS · Cal. 51xx Platform ─── */
     {
       label: "PREMIUM DAINI BUSINESS · 51xx Automatic",
+      parent: "daini",
       color: C.kameido,
       grid: "suwa7",
-      sectionX: 15, sectionY: 2240, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         ["seikomatic_p", "presmatic"],
       ]
@@ -1217,9 +1228,10 @@ const LAYOUT = {
     /* ─── CHAMPION · MASS MARKET ─── */
     {
       label: "CHAMPION · MASS MARKET",
+      parent: "daini",
       color: C.kameido,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 2340, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         ["champion", "champion_cal", "76_five", "advan"],
         ["fairway", "champ_850"],
@@ -1229,9 +1241,10 @@ const LAYOUT = {
     /* ─── ⏱ KAMEIDO CHRONOGRAPHS · 701x Platform ─── */
     {
       label: "⏱ KAMEIDO CHRONOGRAPHS · 701x Family (7017 → 7018 → 7015/7016)",
+      parent: "daini",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 2505, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: 7017 founder (1970), 7018 successor (1971)
         ["k7017", "k7018", _, _],
@@ -1243,6 +1256,7 @@ const LAYOUT = {
     /* ─── GRAND SEIKO · MODERN ─── */
     {
       label: "GRAND SEIKO · MODERN",
+      parent: "modern",
       color: C.gs,
       grid: "modern5",                  // column grid identifier
       sectionX: 1600, sectionY: 30, sectionW: 860,
@@ -1257,9 +1271,10 @@ const LAYOUT = {
     /* ─── KING SEIKO · MODERN ─── */
     {
       label: "KING SEIKO · MODERN",
+      parent: "modern",
       color: C.ks,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionW: 860,
+      sectionX: 1600, sectionY: 325, sectionW: 860,
       rows: [
         ["ks_revival", "ks_sje", "ks_vanac_25"],
       ]
@@ -1268,9 +1283,10 @@ const LAYOUT = {
     /* ─── PROSPEX · SEA / LAND / AIR ─── */
     {
       label: "PROSPEX · SEA / LAND / AIR",
+      parent: "modern",
       color: C.prospex,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionW: 860,
+      sectionX: 1600, sectionY: 425, sectionW: 860,
       rows: [
         ["prospex", "px_mm", "px_lx"],
         ["px_1965", "px_1968_diver", "px_1968_gmt", "px_1970"],
@@ -1282,9 +1298,10 @@ const LAYOUT = {
     /* ─── PRESAGE · MECHANICAL DRESS ─── */
     {
       label: "PRESAGE · MECHANICAL DRESS",
+      parent: "modern",
       color: C.presage,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionW: 860,
+      sectionX: 1600, sectionY: 720, sectionW: 860,
       rows: [
         ["presage_node", "prsg_cocktail", "prsg_starbar", "prsg_sharp", "prsg_style60"],
         ["prsg_craft", "prsg_garden", "prsg_classic"],
@@ -1294,9 +1311,10 @@ const LAYOUT = {
     /* ─── SEIKO 5 SPORTS ─── */
     {
       label: "SEIKO 5 SPORTS",
+      parent: "modern",
       color: C.seiko5,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionW: 860,
+      sectionX: 1600, sectionY: 885, sectionW: 860,
       rows: [
         ["s5_modern", "s5_skx_mod", "s5_field_mod", "s5_street", "s5_snxs"],
       ]
@@ -1731,19 +1749,38 @@ function buildLayout(L) {
   // Parent boxes (eras, factories) — drawn as outer containers.
   for (const p of L.parents) sections.push(p);
 
-  // Auto-cascade sectionY for families that don't specify it explicitly.
-  // Groups families by parent-region (based on sectionX/sectionW), then
-  // cascades each family's sectionY from previous family bottom + configurable gap.
+  // ═══════════════════════════════════════════════════════════════════════
+  // FASE 1 AUTO-LAYOUT (Parent-based cascade):
+  //   Each family can specify { parent: "suwa" | "daini" | "modern" | "legacy" }
+  //   Families are grouped per parent, sorted by declaration order (or explicit `order`).
+  //   sectionY auto-cascaded within each parent group.
+  //   Parent boxes auto-sized based on contained families' total height.
   //
-  // Manual override: if a family specifies { sectionY: N }, that value wins.
-  // If it also specifies { cascadeStart: true }, that family becomes the anchor
-  // for its region's cascade (starts a new column/parent group).
+  //   Backwards-compat: families with explicit sectionY still respected (override).
+  //   Special: pairWith: "parent-label" makes a family share sectionY with another
+  //            (was: sameYAsPrevious flag).
+  //
+  //   Parent lookup:
+  //     1. If f.parent is set, use that key
+  //     2. Else fall back to detecting by sectionX/Y matching a parent's bounds
+  //     3. Else fall back to sectionX-based bucketing
+  // ═══════════════════════════════════════════════════════════════════════
   const NH_default = L.canvas?.NH ?? 52;
   const CASCADE_GAP = L.canvas?.cascadeGap ?? 8;   // visual gap between family boxes
+  const PARENT_TOP_PAD = L.canvas?.parentTopPad ?? 20;   // space between parent top and first family
+  const PARENT_BOT_PAD = L.canvas?.parentBotPad ?? 20;   // space between last family and parent bottom
+  const PARENT_LEFT_PAD = L.canvas?.parentLeftPad ?? 10; // horizontal padding inside parent
   
-  // Group families by parent region using sectionX bounds
-  const regionCascade = new Map();  // regionKey → last bottom y
-  const familyH = new Map();         // family index → computed height
+  // Build parent-key lookup: normalize keys to lower case
+  const parentByKey = new Map();       // key (short id) → parent object
+  const parentByLabel = new Map();     // label → parent object
+  if (L.parents) {
+    for (const p of L.parents) {
+      parentByLabel.set(p.l, p);
+      // Also index by short key if provided (e.g. p.key: "suwa")
+      if (p.key) parentByKey.set(p.key, p);
+    }
+  }
   
   function computeFamilyHeight(f) {
     const topPad = f.topPad ?? 20;
@@ -1756,48 +1793,127 @@ function buildLayout(L) {
     return topPad + stridesSum + NH_default + botPad;
   }
   
-  // First pass: apply auto-cascade to families that need it
-  for (let i = 0; i < L.families.length; i++) {
-    const f = L.families[i];
-    // Region key: identify by parent box that contains this family's sectionX+sectionY
-    // Fall back to sectionX-based bucketing if no parent match
-    let regionKey = null;
-    if (L.parents) {
+  function resolveParent(f) {
+    // 1. Explicit f.parent (key like "suwa" or "daini")
+    if (f.parent) {
+      if (parentByKey.has(f.parent)) return parentByKey.get(f.parent);
+      if (parentByLabel.has(f.parent)) return parentByLabel.get(f.parent);
+    }
+    // 2. Detect by sectionX/Y matching a parent's bounds
+    if (L.parents && f.sectionX != null) {
       for (const p of L.parents) {
-        if (f.sectionX >= p.x && f.sectionX < p.x + p.w &&
-            (f.sectionY == null || (f.sectionY >= p.y && f.sectionY < p.y + p.h))) {
-          regionKey = p.l;  // parent label uniquely identifies region
-          break;
+        if (f.sectionX >= p.x && f.sectionX < p.x + p.w) {
+          if (f.sectionY == null || (f.sectionY >= p.y && f.sectionY < p.y + p.h)) {
+            return p;
+          }
         }
       }
     }
-    if (!regionKey) {
-      regionKey = f.sectionX < 500 ? 'left' 
-                : f.sectionX < 1500 ? 'legacy'
-                : 'modern';
+    return null;
+  }
+  
+  // First pass: group families by parent and compute heights
+  const familyH = new Map();
+  const familiesByParent = new Map();  // parent → [family, family, ...]
+  const unparentedFamilies = [];
+  
+  for (let i = 0; i < L.families.length; i++) {
+    const f = L.families[i];
+    familyH.set(i, computeFamilyHeight(f));
+    const p = resolveParent(f);
+    if (p) {
+      if (!familiesByParent.has(p)) familiesByParent.set(p, []);
+      familiesByParent.get(p).push({ family: f, index: i });
+    } else {
+      unparentedFamilies.push({ family: f, index: i });
     }
+  }
+  
+  // Auto-position parents that stackAfter another parent
+  // (Sort parents so upstream parents are processed first)
+  const parentOrder = L.parents ? [...L.parents] : [];
+  const PARENT_GAP = L.canvas?.parentGap ?? 20;   // gap between stacked parents
+  
+  // Sort so that stackAfter dependencies come after their targets
+  const parentIsSorted = new Set();
+  const sortedParents = [];
+  function addParent(p) {
+    if (parentIsSorted.has(p)) return;
+    if (p.stackAfter) {
+      const target = parentOrder.find(x => x.key === p.stackAfter || x.l === p.stackAfter);
+      if (target && !parentIsSorted.has(target)) addParent(target);
+    }
+    sortedParents.push(p);
+    parentIsSorted.add(p);
+  }
+  for (const p of parentOrder) addParent(p);
+  
+  // Second pass: cascade sectionY within each parent group; auto-size parents
+  for (const parent of sortedParents) {
+    const families = familiesByParent.get(parent) ?? [];
     
-    const h = computeFamilyHeight(f);
-    familyH.set(i, h);
+    // Sort by explicit `order` if set, else preserve declaration order
+    families.sort((a, b) => {
+      const ao = a.family.order ?? a.index;
+      const bo = b.family.order ?? b.index;
+      return ao - bo;
+    });
     
-    // If sectionY not explicitly set, cascade from previous
-    if (f.sectionY == null || f.cascadeAuto) {
-      if (f.sameYAsPrevious && i > 0) {
-        // Side-by-side family: copy previous family's sectionY
-        f.sectionY = L.families[i-1].sectionY;
-      } else {
-        const prevBottom = regionCascade.get(regionKey) ?? (f.cascadeStartY ?? 30);
-        f.sectionY = prevBottom + CASCADE_GAP;
+    // Auto-position parent y if it stackAfter another parent
+    if (parent.stackAfter) {
+      const target = parentOrder.find(x => x.key === parent.stackAfter || x.l === parent.stackAfter);
+      if (target) {
+        parent.y = target.y + target.h + PARENT_GAP;
       }
     }
     
-    // Only advance region cascade if not sharing y with previous
-    if (!f.sameYAsPrevious) {
-      regionCascade.set(regionKey, f.sectionY + h);
-    } else {
-      // For side-by-side, use the max bottom
-      const existing = regionCascade.get(regionKey) ?? 0;
-      regionCascade.set(regionKey, Math.max(existing, f.sectionY + h));
+    let cursor = parent.y + PARENT_TOP_PAD;
+    let lastNonPairedFamily = null;
+    let lastNonPairedBottom = cursor;
+    
+    for (const { family: f, index: i } of families) {
+      const h = familyH.get(i);
+      
+      // Handle pairWith (side-by-side family)
+      if (f.pairWith) {
+        // Find target family and share its sectionY
+        const target = L.families.find(x => 
+          x.label === f.pairWith || x.key === f.pairWith
+        );
+        if (target && target.sectionY != null) {
+          f.sectionY = target.sectionY;
+        }
+        // Don't advance cursor for paired families
+        continue;
+      }
+      
+      // Manual override still respected
+      if (f.sectionY == null) {
+        f.sectionY = cursor;
+      }
+      
+      // Also set sectionX if not manually set
+      if (f.sectionX == null) {
+        f.sectionX = parent.x + PARENT_LEFT_PAD;
+      }
+      
+      lastNonPairedFamily = f;
+      lastNonPairedBottom = f.sectionY + h;
+      cursor = lastNonPairedBottom + CASCADE_GAP;
+    }
+    
+    // Auto-size parent to contain all families + bottom padding
+    // Only if parent doesn't have explicit h (or has "auto" marker)
+    if (parent.autoH || parent.h == null) {
+      parent.h = (lastNonPairedBottom - parent.y) + PARENT_BOT_PAD;
+    }
+  }
+  
+  // Handle any unparented families (fallback: keep their explicit positions)
+  for (const { family: f } of unparentedFamilies) {
+    if (f.sectionX == null || f.sectionY == null) {
+      // Skip families that can't be positioned
+      console.warn('Family without parent and without explicit position:', f.label);
     }
   }
 
@@ -1922,7 +2038,7 @@ function hidePopup(){
 }
 /* Node dimensions — synced from actual CSS size on resize (mobile uses 110×38) */
 let NW=124,NH=42;
-const CW=2490,CH=2500;
+const CW=2490,CH=2700;
 function syncNodeSize(){
   /* Pick NW/NH to match the CSS breakpoint. The mobile media query at
      max-width:768px shrinks .node to 110×38; otherwise it's 124×42.
