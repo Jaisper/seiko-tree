@@ -1037,8 +1037,8 @@ const LAYOUT = {
   /* The outermost parent boxes — eras and factories. The engine draws these
      and uses their bounds as containers for the families below. */
   parents: [
-    {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988", x:5, y:10, w:1155, h:1665, c:C.suwa},
-    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988", x:5, y:1690, w:1155, h:790, c:C.kameido},
+    {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988", x:5, y:10, w:1155, h:1860, c:C.suwa},
+    {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988", x:5, y:1880, w:1155, h:800, c:C.kameido},
     {l:"LEGACY TRANSITION ERA · c. 1988–2001", x:1210, y:10, w:330, h:660, c:C.modern},
     {l:"MODERN COLLECTION ERA · 2001–2025", x:1590, y:10, w:880, h:985, c:C.modern},
   ],
@@ -1056,9 +1056,9 @@ const LAYOUT = {
       sectionX: 15, sectionY: 30, sectionW: 1135,
       rows: [
         // Row 0: main GS lineage — 1960 → 1970
-        [_, "gs_1st", "gs_sd", "62gs", "61gs", "61gs_vfa", "56gs_s"],
+        ["gs_1st", "gs_sd", "62gs", "61gs", "61gs_vfa", "56gs_s"],
         // Row 1: variants and specials
-        [_, _, "57gs_cal", _, "19gs", _, "61gs_sp"],
+        [_, "57gs_cal", _, "19gs", _, "61gs_sp"],
       ]
     },
 
@@ -1067,7 +1067,7 @@ const LAYOUT = {
       label: "SUWA HIGH-GRADE FOUNDATION · Marvel → Crown → Lord Marvel",
       color: C.suwa,
       grid: "suwa7",
-      sectionX: 15, sectionY: 195, sectionW: 1135,
+      sectionX: 15, sectionW: 1135,
       rows: [
         // Row 0: Marvel main line + Lord Marvel evolution
         ["marvel", "lord_marvel", _, _, _, "lord_marvel_36k"],
@@ -1087,8 +1087,14 @@ const LAYOUT = {
       grid: "suwa7",                  // column grid identifier
       sectionX: 15, sectionY: 490, sectionW: 1135,
       rows: [
-        [_, "liner", "liner_chr", "sky_cal", "lord_matic", "lord_matic_sp", "lord_matic_56"],
-        [_, _, "skyliner", "61_skyliner", "61_skyliner_cal", _, "56ks"],
+        // Row 0: Liner (manual dress) + Skyliner (automatic mid-range) blocks
+        ["liner", "liner_chr", "skyliner", "sky_cal", _, _],
+        // Row 1: 61 Skyliner platform (8-beat evolution of Skyliner)
+        [_, _, "61_skyliner", "61_skyliner_cal", _, _],
+        // Row 2: Lord Matic platform (5606) + Special variant
+        [_, _, _, _, "lord_matic", "lord_matic_sp"],
+        // Row 3: Lord Matic 56 (5626 next generation, shares platform with 56KS)
+        [_, _, _, _, "lord_matic_56", "56ks"],
       ]
     },
 
@@ -1097,14 +1103,14 @@ const LAYOUT = {
       label: "SEIKOMATIC · BUSINESS (Suwa)",
       color: C.suwa,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 655, sectionW: 1135,
+      sectionX: 15, sectionY: 785, sectionW: 1135,
       rows: [
         // Row 0: Seikomatic central + parallel variants + Weekdater origin
-        [_, "seikomatic", "seikomatic_sd", "seikomatic_slim", "weekdater_6206", _, _],
+        ["seikomatic", "seikomatic_sd", "seikomatic_slim", "weekdater_6206", _, _],
         // Row 1: Weekdater 6216/6218 → Seikomatic-R → Sea Lion (upper branch)
-        [_, _, _, _, "weekdater_6218", "seikomatic_r", "sea_lion"],
+        [_, _, _, "weekdater_6218", "seikomatic_r", "sea_lion"],
         // Row 2: 6245 Chronometer + Business/Business-A (Seikomatic-R descendants)
-        [_, _, _, _, "seikomatic_chr", "business", "business_a"],
+        [_, _, _, "seikomatic_chr", "business", "business_a"],
       ]
     },
 
@@ -1113,7 +1119,7 @@ const LAYOUT = {
       label: "SEIKO 5 · MAINSTREAM",
       color: C.seiko5,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 885, sectionW: 1135,
+      sectionX: 15, sectionY: 1015, sectionW: 1135,
       rows: [
         // Foundation chain: Super → Sportsman → Sportsmatic → Sportsmatic 5 → Seiko 5 (central)
         ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first"],
@@ -1128,7 +1134,7 @@ const LAYOUT = {
       label: "⚓ DIVER LINEAGE · VINTAGE",
       color: C.diver,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1115, sectionW: 1135,
+      sectionX: 15, sectionY: 1245, sectionW: 1135,
       rows: [
         // Row 0: pre-62MAS heritage
         ["silverwave", "selfdater_mas"],
@@ -1144,7 +1150,7 @@ const LAYOUT = {
       label: "⏱ SUWA CHRONOGRAPHS · 613x Platform",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1345, sectionW: 1135,
+      sectionX: 15, sectionY: 1475, sectionW: 1135,
       rows: [
         // Row 0: 6139 single-register lineage (crown_chrono = ancestor at col 0)
         ["crown_chrono", "6139_first", "6139_pogue", "6139_hex", "6139_helmet", "6139_baby_jumbo"],
@@ -1155,25 +1161,17 @@ const LAYOUT = {
       ]
     },
 
-    /* ─── 🔔 BELL-MATIC ─── */
+    /* ─── 🔔 COMPLICATIONS · Bell-Matic + World Time ─── */
     {
-      label: "🔔 BELL-MATIC",
+      label: "🔔 COMPLICATIONS · Bell-Matic + World Time",
       color: C.bell,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1575, sectionW: 490,
+      sectionX: 15, sectionY: 1705, sectionW: 1135,
       rows: [
+        // Row 0: Bell-Matic (alarm complication, Cal. 4006)
         ["bell_4005", "bell_4006"],
-      ]
-    },
-
-    /* ─── 🌍 WORLD TIME ─── */
-    {
-      label: "🌍 WORLD TIME",
-      color: C.world,
-      grid: "suwa7",                  // column grid identifier
-      sectionX: 520, sectionY: 1575, sectionW: 630,
-      rows: [
-        [_, _, _, "wt_6217", "wt_6117", "nav_timer"],
+        // Row 1: World Time (GMT/world-time complication)
+        ["wt_6217", "wt_6117", "nav_timer"],
       ]
     },
 
@@ -1182,7 +1180,7 @@ const LAYOUT = {
       label: "KING SEIKO · DAINI ORIGIN",
       color: C.ks,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1820, sectionW: 1135,
+      sectionX: 15, sectionY: 2010, sectionW: 1135,
       rows: [
         // Row 0: main KS chronology + first 44 variant (44-9990 steel) top of stack
         ["cronos", "ks_1st", _, "ks_44_9990", "45ks", _, _],
@@ -1198,7 +1196,7 @@ const LAYOUT = {
       label: "GRAND SEIKO · DAINI",
       color: C.gs,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 1720, sectionW: 1135,
+      sectionX: 15, sectionY: 1910, sectionW: 1135,
       rows: [
         // Aligned with KS · DAINI: 44gs=col 3 (same as 44ks-variants column), 45gs=col 4 (same as 45ks), 56gs_k=col 5
         ["goldfeather", _, _, "44gs", "45gs", "56gs_k"],
@@ -1210,9 +1208,9 @@ const LAYOUT = {
       label: "PREMIUM DAINI BUSINESS · 51xx Automatic",
       color: C.kameido,
       grid: "suwa7",
-      sectionX: 15, sectionY: 2050, sectionW: 1135,
+      sectionX: 15, sectionY: 2240, sectionW: 1135,
       rows: [
-        [_, "seikomatic_p", "presmatic"],
+        ["seikomatic_p", "presmatic"],
       ]
     },
 
@@ -1221,7 +1219,7 @@ const LAYOUT = {
       label: "CHAMPION · MASS MARKET",
       color: C.kameido,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 2150, sectionW: 1135,
+      sectionX: 15, sectionY: 2340, sectionW: 1135,
       rows: [
         ["champion", "champion_cal", "76_five", "advan"],
         ["fairway", "champ_850"],
@@ -1233,12 +1231,12 @@ const LAYOUT = {
       label: "⏱ KAMEIDO CHRONOGRAPHS · 701x Family (7017 → 7018 → 7015/7016)",
       color: C.chrono,
       grid: "suwa7",                  // column grid identifier
-      sectionX: 15, sectionY: 2315, sectionW: 1135,
+      sectionX: 15, sectionY: 2505, sectionW: 1135,
       rows: [
         // Row 0: 7017 founder (1970), 7018 successor (1971)
-        [_, _, _, "k7017", "k7018", _, _],
+        ["k7017", "k7018", _, _],
         // Row 1: 7015, 7016 variants (both 1972)
-        [_, _, _, _, _, "k7015", "k7016"],
+        [_, _, "k7015", "k7016"],
       ]
     },
 
@@ -1261,7 +1259,7 @@ const LAYOUT = {
       label: "KING SEIKO · MODERN",
       color: C.ks,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 322, sectionW: 860,
+      sectionX: 1600, sectionW: 860,
       rows: [
         ["ks_revival", "ks_sje", "ks_vanac_25"],
       ]
@@ -1272,7 +1270,7 @@ const LAYOUT = {
       label: "PROSPEX · SEA / LAND / AIR",
       color: C.prospex,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 419, sectionW: 860,
+      sectionX: 1600, sectionW: 860,
       rows: [
         ["prospex", "px_mm", "px_lx"],
         ["px_1965", "px_1968_diver", "px_1968_gmt", "px_1970"],
@@ -1286,7 +1284,7 @@ const LAYOUT = {
       label: "PRESAGE · MECHANICAL DRESS",
       color: C.presage,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 711, sectionW: 860,
+      sectionX: 1600, sectionW: 860,
       rows: [
         ["presage_node", "prsg_cocktail", "prsg_starbar", "prsg_sharp", "prsg_style60"],
         ["prsg_craft", "prsg_garden", "prsg_classic"],
@@ -1298,7 +1296,7 @@ const LAYOUT = {
       label: "SEIKO 5 SPORTS",
       color: C.seiko5,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 873, sectionW: 860,
+      sectionX: 1600, sectionW: 860,
       rows: [
         ["s5_modern", "s5_skx_mod", "s5_field_mod", "s5_street", "s5_snxs"],
       ]
@@ -1382,9 +1380,10 @@ const edges=[
   ["laurel","liner","medium","Laurel fed into the Liner family as an entry-level Suwa dress watch"],
   ["laurel","skyliner","strong","Skyliner succeeded Laurel as Suwa\'s main mid-range hand-wound dress line"],
   ["skyliner","61_skyliner","strong","61 Skyliner upgraded the Skyliner platform to Hi-Beat movement"],
+  ["61_skyliner","61_skyliner_cal","strong","61 Skyliner Calendar added the date complication to the 61 Skyliner platform (8-beat)","same_platform"],
   ["skyliner","sky_cal","medium","Skyliner Calendar added date complication to the Skyliner family"],
   ["lord_matic","lord_matic_sp","strong","Lord Matic Special raised the platform to Hi-Beat with superior finishing"],
-  ["lord_matic_sp","lord_matic_56","strong","Lord Matic 56 evolved the line into ultra-thin Cal. 5606 automatic"],
+  ["lord_matic","lord_matic_56","strong","Lord Matic 56 (Cal. 5626) was the second-generation Lord Matic platform — direct successor to the original Cal. 5606 with refined architecture"],
   ["sky_cal","61_skyliner_cal","medium","61 Skyliner Calendar upgraded to Hi-Beat movement in the late 1960s"],
 
   /* ── Within: SUWA · SEIKOMATIC / BUSINESS / PRESMATIC ── */
@@ -1760,21 +1759,46 @@ function buildLayout(L) {
   // First pass: apply auto-cascade to families that need it
   for (let i = 0; i < L.families.length; i++) {
     const f = L.families[i];
-    // Region key: use sectionX rounded to region (fast bucketing)
-    const regionKey = f.sectionX < 500 ? 'left' 
-                    : f.sectionX < 1500 ? 'legacy'
-                    : 'modern';
+    // Region key: identify by parent box that contains this family's sectionX+sectionY
+    // Fall back to sectionX-based bucketing if no parent match
+    let regionKey = null;
+    if (L.parents) {
+      for (const p of L.parents) {
+        if (f.sectionX >= p.x && f.sectionX < p.x + p.w &&
+            (f.sectionY == null || (f.sectionY >= p.y && f.sectionY < p.y + p.h))) {
+          regionKey = p.l;  // parent label uniquely identifies region
+          break;
+        }
+      }
+    }
+    if (!regionKey) {
+      regionKey = f.sectionX < 500 ? 'left' 
+                : f.sectionX < 1500 ? 'legacy'
+                : 'modern';
+    }
     
     const h = computeFamilyHeight(f);
     familyH.set(i, h);
     
     // If sectionY not explicitly set, cascade from previous
     if (f.sectionY == null || f.cascadeAuto) {
-      const prevBottom = regionCascade.get(regionKey) ?? (f.cascadeStartY ?? 30);
-      f.sectionY = prevBottom + CASCADE_GAP;
+      if (f.sameYAsPrevious && i > 0) {
+        // Side-by-side family: copy previous family's sectionY
+        f.sectionY = L.families[i-1].sectionY;
+      } else {
+        const prevBottom = regionCascade.get(regionKey) ?? (f.cascadeStartY ?? 30);
+        f.sectionY = prevBottom + CASCADE_GAP;
+      }
     }
     
-    regionCascade.set(regionKey, f.sectionY + h);
+    // Only advance region cascade if not sharing y with previous
+    if (!f.sameYAsPrevious) {
+      regionCascade.set(regionKey, f.sectionY + h);
+    } else {
+      // For side-by-side, use the max bottom
+      const existing = regionCascade.get(regionKey) ?? 0;
+      regionCascade.set(regionKey, Math.max(existing, f.sectionY + h));
+    }
   }
 
   // Family sub-sections + their nodes.
