@@ -17,7 +17,7 @@ Jesper
 
 A curated genealogy of Seiko's mechanical watch families, organized as a three-era visual model:
 
-- **Vintage Factory Era (1956–c. 1988)** — Suwa Seikosha and Daini Seikosha/Kameido as parallel in-house production centers, becoming Seiko Epson and Seiko Instruments in the 1983 corporate restructuring
+- **Vintage Factory Era (1956–c. 1988)** — Suwa Seikosha and Daini Seikosha/Kameido as parallel in-house production centers, reorganized into Seiko Epson (1985) and Seiko Instruments (1983)
 - **Legacy Transition (c. 1988–2001)** — the dormancy and revival period: 1988 GS quartz return, 1998 9S mechanical revival, 1999 7R68 Spring Drive, the 4S bridge family, 7002 and SKX divers
 - **Modern Collection Era (2001–2025)** — today's globally consolidated brand architecture: Grand Seiko (independent brand 2017), King Seiko (revived 2022), Prospex (2014), Presage (global 2016), and Seiko 5 Sports (rebooted 2019)
 
@@ -27,7 +27,7 @@ The diagram traces caliber lineages, platform families, market succession, desig
 
 ## What this isn't
 
-- Not a complete reference catalogue (sub-variants like 4520 VFA, 6155/6156 61GS Special are largely omitted for clarity)
+- Not a complete reference catalogue (many sub-variants are omitted for clarity)
 - Not a strict caliber genealogy — for that, see the companion [Seiko Caliber Family Tree](https://jaisper.github.io/seiko-calibers)
 - Not authoritative Seiko corporate history — editorial choices have been made about era boundaries, model groupings, and which relations count as direct lineage vs. design influence
 - Not an investment guide or pricing reference
@@ -38,21 +38,21 @@ The diagram traces caliber lineages, platform families, market succession, desig
 - **Interactive map** — zoom, pan, double-click to zoom toward a point; minimap with viewport indicator
 - **Click any node** to lock and trace its lineage (ancestors and descendants light up, others dim)
 - **Filter** by Diver / Chrono / Grand Seiko / King Seiko / Iconic / 10B Hi-Beat / SD Spring Drive
-- **Search** — freetext caliber/model search (searches names, eras, descriptions)
+- **Search** — freetext model/caliber search (searches names, eras, and descriptions)
 - **URL hash deep-linking** — `#node=62mas` opens with 62MAS locked and centred; `#tour=diver` starts the divers tour
 - **Hover edges** to see the specific historical claim being made
 - **Five guided tours** narrating curated journeys through the diagram:
   - Marvel to U.F.A. — 65 Years of Grand Seiko
   - Divers Through the Ages
   - Race for the First Auto-Chronograph (1969)
-  - Spring Drive — Twenty-Five Years of Pursuit
+  - Spring Drive — Twenty Years of Pursuit
   - Grammar of Design — Tanaka's Rules
-- **Tech badges** — 10B (36,000 vph Hi-Beat), 8B (28,800 vph), SD (Spring Drive)
+- **Tech badges** — 10B (36,000 vph Hi-Beat), 8B (28,800 vph), SD (Spring Drive), Q (Quartz)
 - **Iconic-model markers** (★) for landmark references
 - **Keyboard accessible** — Tab through nodes, Enter/Space to lock, Esc to clear
 - **Mobile-responsive** with pinch-to-zoom and touch tooltips
-- **Foldable intro** — short intro at the top, "Read more" for historical summary, separate "Methodology guide" button for axis conventions and line-weight legend
-- **Dev validator** — append `?debug=1` to the URL and open the browser console to see data-integrity warnings (missing edges, unknown ids, label/era year mismatches)
+- **Foldable intro** — short intro at the top, "Read more" for the historical summary, separate "Methodology guide" button for axis conventions and the line-weight legend
+- **Built-in validator** — data-integrity checks run on every load and print warnings to the browser console (append `?debug=1` for an extra summary line)
 
 ## How to use
 
@@ -81,8 +81,8 @@ The page is a single self-contained HTML file. Embed via iframe:
 
 **Two axes:**
 
-- **Horizontal (Chronology)** — time flows left to right through three eras (Vintage → Legacy Transition → Modern)
-- **Vertical (Structure)** — during Vintage, the grid splits Suwa Seikosha (upper) from Daini Seikosha (lower) to highlight the internal rivalry; in Modern, the vertical stack represents the five collection pillars
+- **Horizontal (Chronology)** — time flows left to right through three eras (Vintage → Legacy Transition → Modern). Within a family box, position indicates approximate release order rather than a strict year scale
+- **Vertical (Structure)** — during Vintage, the grid splits Suwa Seikosha (upper) from Daini Seikosha (lower) to highlight the internal rivalry; in Modern, the vertical stack represents the collection pillars. Within a family, a row is often one lineage branch or one technology track
 
 **Three edge weights:**
 
@@ -92,62 +92,64 @@ The page is a single self-contained HTML file. Embed via iframe:
 | Solid thin (medium) | Product succession, market continuation, or movement siblings |
 | Dashed (weak) | Design influence, heritage reinterpretation, or revival programme without continuous movement inheritance — e.g. `62mas → px_1965` |
 
-Hover any edge to see the specific historical claim being made.
-
-The in-app "Methodology guide" (opened via the dedicated button below the intro) covers this in more depth and lists methodological boundaries.
+Hover any edge to see the specific historical claim being made. The in-app "Methodology guide" (opened via the dedicated button below the intro) covers this in more depth.
 
 ## How the file is organized
 
-The whole project is one `index.html` file. Inside the `<script>` block at the bottom, the code is divided into nine clearly-marked sections — jump straight to the one you need to edit.
+The whole project is one `index.html` file. Inside the `<script>` block at the bottom, the code is divided into eight clearly-marked sections — jump straight to the one you need to edit.
 
 ```
-SECTION 1 · COLOUR PALETTE           — visual grouping colours
-SECTION 2 · TECH BADGES              — 10B/8B/SD badges on nodes
-SECTION 3 · COLLECTION OWNERSHIP     — personal "In Collection" markers
-SECTION 4 · WATCH DATA               — popupData (descriptions, eras, tags)
-SECTION 5 · LAYOUT                   — declarative grid; pixel x/y auto-computed
-SECTION 6 · RELATIONSHIPS            — edges (lines between nodes)
-SECTION 7 · FILTER TAGS              — nodeTags (for category filtering)
-SECTION 8 · GUIDED TOURS             — narrated walk-throughs
-SECTION 9 · RENDERING & INTERACTION  — the engine (usually no edits needed)
+SECTION 1 · COLOUR PALETTE            — the C palette; single source of truth,
+                                        pushed into CSS variables at startup
+SECTION 2 · WATCH DATA (`watches`)    — ONE entry per watch: name, era, node
+                                        label, popup text, icon flag, tech
+                                        badge, filter tags — all in one place
+SECTION 3 · COLLECTION OWNERSHIP      — personal "In Collection" markers
+SECTION 4 · LAYOUT                    — declarative grid; pixel x/y auto-computed
+SECTION 5 · RELATIONSHIPS             — edges (named-field objects)
+SECTION 6 · RENDERING & INTERACTION   — the engine (usually no edits needed)
+SECTION 7 · GUIDED TOURS              — narrated walk-throughs
+SECTION 8 · VALIDATOR & BOOT          — data-integrity checks (always on)
 ```
 
-Container boxes (factory boxes, family sub-boxes) are auto-generated by the engine from Section 5 — there's no separate "sections" array to maintain.
+The most important change from earlier versions: **everything about a watch now lives in one `watches` entry.** The old parallel maps (`popupData`, `nodeLabels`, `iconFlags`, `techMap`, `nodeTags`) are gone — they are now derived automatically from `watches` at startup. That means adding or fixing a watch is at most **two edits** instead of five, and a whole class of "the label says 1971 but the popup says 1970" bugs simply can't happen.
+
+Container boxes (era/factory boxes and family sub-boxes) are auto-generated by the engine from the `LAYOUT` — there is no separate "sections" array to maintain.
 
 ## How the layout works
 
-The diagram is laid out as a **grid** within each family. You don't compute pixel coordinates by hand — you place a watch at a `(row, column)` cell and the engine takes care of the rest.
+The diagram is laid out as a **grid** within each family. You don't compute pixel coordinates by hand — you place a watch at a `(row, column)` cell and the engine (`buildLayout()`, Section 6) computes every x/y and sizes the boxes.
 
-Each family looks like this:
+The structure has two levels:
+
+**Parents** (Section 4, `LAYOUT.parents`) are the big era/factory containers. Each declares how many grid columns it spans and how it is positioned relative to the others:
+
+```js
+{ key:"suwa",   label:"SUWA SEIKOSHA · …",  color:C.suwa,    columns:7 },
+{ key:"daini",  label:"DAINI SEIKOSHA · …", color:C.kameido, columns:7, stackAfter:"suwa"  },
+{ key:"legacy", label:"LEGACY TRANSITION …", color:C.modern,  columns:3, sideAfter:"suwa"   },
+{ key:"modern", label:"MODERN COLLECTION …", color:C.modern,  columns:6, sideAfter:"legacy" },
+```
+
+`stackAfter` places a parent below another; `sideAfter` places it to the right. Everything else (x, y, width, height) is derived.
+
+**Families** (Section 4, `LAYOUT.families`) are the sub-boxes inside a parent. Each is a grid of rows; `_` is an empty cell:
 
 ```js
 /* ─── KING SEIKO · DAINI ORIGIN ─── */
 {
   label: "KING SEIKO · DAINI ORIGIN",
+  parent: "daini",
   color: C.ks,
-  grid: "suwa7",                            // 7-column grid
-  sectionX: 15, sectionY: 1490, sectionW: 1135,
   rows: [
-    ["cronos",    "ks_1st",   "ks_hack",  "ks_chrono", "45ks"                              ],
-    ["cronos_sp", _,          _,          "44ks",      "44ks_sp",  "vanac",    "vanac_sp"],
-    ["cronos_sd", _,          _,          _,           _,          _,          "52ks"    ],
+    ["cronos",    "ks_1st", _,      "ks_44_9990",       "45ks",  _,        _         ],
+    ["cronos_sp", _,        "44ks", "ks_44_self_dater", _,       "vanac",  "vanac_sp"],
+    ["cronos_sd", _,        _,      "ks_44_chronometer",_,       _,        "52ks"    ],
   ]
 }
 ```
 
-Each row is a list of cell positions. `_` is the placeholder for an empty cell. The engine reads this and computes x/y for every watch, then sizes the section box automatically.
-
-Column grids used in the diagram (Vintage / Legacy / Modern regions):
-
-| Grid       | Used by                          | Columns |
-|------------|----------------------------------|---------|
-| `suwa7`    | Vintage Factory Era (Suwa+Daini) | 7 columns spanning x=15 to x=1082 |
-| `legacy2`  | Legacy Transition                | 2 columns spanning x=1090 to x=1498 |
-| `modern5`  | Modern Collection Era            | 5 columns spanning x=1506 to x=2416 |
-
-The three parent regions have 8px gaps between them for clear visual separation. All grids use a 65px row stride by default.
-
-The big outer container boxes (SUWA SEIKOSHA, DAINI SEIKOSHA, LEGACY TRANSITION, MODERN COLLECTION) are declared once in `LAYOUT.parents` — the engine renders them under the families.
+The engine reads the family's `parent`, uses that parent's column grid, computes x/y for every id, and sizes the family box to fit its rows. Row stride, padding, and inter-box gaps are tunable in `LAYOUT.canvas` but default to sensible values.
 
 ## Contributing
 
@@ -156,49 +158,50 @@ Contributions of all kinds are welcome — corrections, missing models, better w
 ### Quick edit recipes
 
 **Fix a typo or improve a watch description**
-- Go to Section 4 (`const popupData`)
-- Search for the watch's id (e.g. `62mas:`)
-- Edit the `d:"..."` text
+- Go to Section 2 (`const watches`)
+- Search for the watch's id (e.g. `"62mas":`)
+- Edit the `d:"..."` text. That's the only edit needed.
 
 **Correct a year on a node**
-- Section 4 — fix the `era:"..."` text in the popup
-- Section 5 (`nodeLabels`) — fix the visible label on the box (the `\n` is a line break)
-- If the year change shifts the intended column, also move the id to a new cell in the grid (Section 5)
+- Section 2 — fix `era:"..."` (the popup) **and** the `label:"..."` (the visible box text; `\n` is a line break). If you omit `label`, the node label auto-derives as name + era, so for simple cases fixing `era` alone is enough.
+- If the year change means the watch belongs in a different column, also move its id to a new cell in the family grid (Section 4).
 
-**Add a new watch**
+**Add a new watch** — just **two** edits:
 
-1. **Pick a unique id** — lowercase, snake_case (e.g. `ks_special_72`).
-2. **In Section 4**, add an entry to `popupData` in the right family group:
+1. **In Section 2**, add one entry to `watches` with a unique lowercase snake_case id:
    ```js
-   ks_special_72: {n:"KS Special 1972", era:"1972", d:"Brief history...", tags:["ks"]},
+   "ks_special_72": {
+     n: "KS Special 1972",              // popup name (required)
+     era: "1972",                        // popup year range (required)
+     label: "KS Special\n1972",          // node box text (optional; defaults to n + era)
+     d: "Brief history…",                // popup description (required)
+     tags: ["ks"],                       // popup badges: icon/diver/chrono/gs/ks/hb/sd
+     icon: 1,                            // optional: gold ★ border
+     tech: "beat8",                      // optional badge: beat10/beat8/springdrive/quartz
+     filters: ["ks"],                    // optional: category-filter membership
+   },
    ```
-3. **In Section 5**, add the visible label to `nodeLabels`:
-   ```js
-   ks_special_72: "KS Special\n1972",
-   ```
-   (Optionally set `iconFlags.ks_special_72 = 1` if it deserves a ★.)
-4. **In Section 5**, drop the id into a cell in the right family's grid.
-5. **In Section 6** (optional), add edges linking it to other watches:
-   ```js
-   ["44ks", "ks_special_72", "medium", "Special variant of the 44KS design"],
-   ```
-6. **In Section 7** (optional), add filter tags.
+2. **In Section 4**, drop the id into a cell in the right family's grid.
+
+Optionally add edges (Section 5).
 
 **Add a relationship between two watches**
 
-Go to Section 6 (`const edges`) and add a line:
+Go to Section 5 (`const edges`) and add an object:
 ```js
-["from_id", "to_id", "type", "Description shown on hover", "relation"]
+{ f:"from_id", t:"to_id", w:"strong", d:"Description shown on hover", r:"same_platform" },
 ```
-- `type`: `"strong"` (caliber/platform lineage), `"medium"` (product succession/siblings), or `"weak"` (design influence/heritage)
-- `relation`: optional refinement — see the comment in Section 6
+- `w` (weight): `"strong"` (caliber/platform lineage), `"medium"` (product succession/siblings), or `"weak"` (design influence/heritage)
+- `r` (relation): optional refinement — `direct_lineage`, `same_platform`, `market_successor`, `design_influence`, `heritage_reinterpretation`, `brand_revival`, `technology_branch`, `collection_structure`, `conceptual`
 
 **Validate your changes**
 
-Open the file with `?debug=1` in the URL (e.g. `file:///path/to/index.html?debug=1`) and check the browser console. The validator will warn about:
-- popupData ids not rendered in the LAYOUT
+The validator runs automatically on every load — just open the file and check the browser console. Append `?debug=1` for a summary line. It warns about:
+- `watches` entries not placed in the `LAYOUT` (and grid ids with no `watches` entry)
 - edge endpoints referencing unknown ids
-- techMap / nodeTags entries for non-existent nodes
+- duplicate edges (same from→to)
+- unknown edge fields (catches typos like `wieght:` or `desc:`)
+- guided-tour stops referencing unknown nodes
 - label/era year mismatches
 
 ### When to open an issue vs. a PR
@@ -209,20 +212,20 @@ Open the file with `?debug=1` in the URL (e.g. `file:///path/to/index.html?debug
 
 ## Sources and methodology
 
-The data is compiled from a wide range of primary corporate documentation, specialist enthusiast scholarship, and reference community sources. Where sources conflict, the more authoritative or the more recently verified account is used; ambiguities are flagged in individual node descriptions.
+The data is compiled from primary corporate documentation, specialist enthusiast scholarship, and reference community sources. Where sources conflict, the more authoritative or the more recently verified account is used; ambiguities are flagged in individual node descriptions.
 
 ### Primary corporate sources
 
-- **Seiko Watch Corporation, *"A Journey in Time"*** (John Goodall, 2003) — the 125th-anniversary book, authoritative for founding history, factory rivalry, and vintage production years (Marvel 1956–59, 62MAS 1965, 6215 1967, 44GS 1967, 45GS 1968, 56KS 1969, 1948 accuracy competitions)
-- **[grand-seiko.com](https://www.grand-seiko.com/global-en/history/)** — official history, timeline, and press releases (Spring Drive milestones, 7R88 as manual-wind, 9R65 as first automatic Spring Drive, 9RA5 5.0mm specification, Tentagraph)
+- **Seiko Watch Corporation, *"A Journey in Time"*** (John Goodall, 2003) — the 125th-anniversary book, authoritative for founding history, factory rivalry, and vintage production years
+- **[grand-seiko.com](https://www.grand-seiko.com/global-en/history/)** — official history, timeline, and press releases (Spring Drive milestones, 9R65 as first automatic Spring Drive, 9RA5 specification, 9SA5 Dual Impulse Escapement, Tentagraph 9SC5, 60th-anniversary collection reorganization)
 - **[Seiko Museum Ginza](https://museum.seiko.co.jp/en/knowledge/)** — caliber genealogy, especially Cal. 341/3180 first-GS lineage
 - **[Seiko Design 140 anniversary site](https://by.seiko-design.com/140th/en/)** — SUS 1995 launch, Vanac 1972–78, dress-caliber lineage
-- **[GS9 Club](https://grandseikogs9club.com/)** — modern Grand Seiko references (SLGC001 Tentagraph, SBGC201, SBGC240)
+- **[GS9 Club](https://grandseikogs9club.com/)** — modern Grand Seiko references
 
 ### Specialist enthusiast scholarship
 
-- **[TheSeikoGuy](https://www.theseikoguy.com/)** (Andrea Secco) — vintage Seiko wristwatch history, 62MAS designer attribution (Tanaka + Akabane), Cronos Waterproof, Slim Turtle guides
-- **[Plus9Time](https://www.plus9time.com/)** (Anthony Kable) — modern GS database, 44/45/56KS caliber genealogy, extensive Seiko catalog and press-release archives
+- **[TheSeikoGuy](https://www.theseikoguy.com/)** (Andrea Secco) — vintage Seiko wristwatch history, 62MAS designer attribution (Tanaka + Akabane), Cronos Special dating, Slim Turtle guides
+- **[Plus9Time](https://www.plus9time.com/)** (Anthony Kable) — modern GS database, 44/45/56KS caliber genealogy, extensive Seiko catalog and press-release archives, 56GS and 810 Cronos production years
 - **[SJX Watches](https://watchesbysjx.com/)** (Su Jia Xian) — modern GS releases, Spring Drive chronograph coverage, 8R46 Speedtimer differentiation
 - **[Wadokei](https://www.wadokei.me/)** — Taro Tanaka and Ren Tanaka biographical research (used to correct the widespread myth that Tanaka worked at Suwa; he led K. Hattori's central design department from 1959)
 - **[Grail Watch Reference](https://reference.grail-watch.com/)** — technical caliber specifications (4S15/25/35 base variants)
@@ -231,25 +234,26 @@ The data is compiled from a wide range of primary corporate documentation, speci
 
 ### Reference and community
 
-- Watch-and-Vintage and Frame Watch Works — 5606 Lord Matic day-date confirmation
-- Watchspot — Bell-Matic 4006A "dolphin caseback" variant analysis
-- Wikipedia and Grokipedia entries on Seikosha, Daini, Suwa, Morioka Seiko Kogyo — corporate restructuring dates (1928 Kameido, 1937 Daini formalization, 1970 Morioka, 1983 Seiko Instruments & Electronics, 1997 Seiko Instruments Inc.)
+- Watch-and-Vintage — 5606 Lord Matic day-date confirmation, vintage caliber technical notes
+- Wikipedia entries on Seikosha, Daini Seikosha, Suwa Seikosha, Morioka Seiko Kogyo — corporate restructuring dates (1937 Daini formalization, 1983 Seiko Instruments, 1985 Seiko Epson)
 - [WatchUseek](https://www.watchuseek.com/) Seiko/Citizen sub-forum (SCWF) — community catalogue verification
 - Chrono24 historical catalogues — vintage reference data
-- Fratello, aBlogtoWatch, Worn & Wound, Wristreview, Master Horologer — modern release coverage (8L55 SBEX001 Baselworld 2015, 6L35 SJE073 Baselworld 2018)
+- Fratello, aBlogtoWatch, Worn & Wound, Master Horologer — modern release coverage (8L55 SBEX001 2015, 6L35 SJE073 2018, 6R54 1968 GMT 2023, 8R48 Speedtimer 2023)
 
-For sensitive or contested claims (Antarctic expedition use of the 62MAS, the 1968 Tuna diver letter, individual model release years), the descriptions are kept appropriately tentative and primary-source-aware.
+For sensitive or contested claims (Antarctic expedition use of the 62MAS, the 1968 Tuna diver letter, individual model release years, the exact dating of the modern GS collection structure), the descriptions are kept appropriately tentative and primary-source-aware.
 
 ## Tech
 
 Single-file HTML/JS, no framework, no build step:
 
-- ~200 KB total (one file, includes everything)
+- One self-contained file (`index.html`), no external assets beyond web fonts
 - Vanilla JavaScript, no dependencies
 - Pure SVG for edges, HTML/CSS for nodes
-- Google Fonts: Noto Serif (intro prose, popups, methodology), IBM Plex Mono (UI labels, tech badges, node years)
-- Declarative grid layout — the `buildLayout()` engine (Section 9) converts `LAYOUT` into pixel coordinates at startup
-- Dev validator behind `?debug=1` for post-edit integrity checks
+- Google Fonts: Cormorant Garamond (title, popups), IBM Plex Mono (UI labels, tech badges, node years), Noto Serif (intro prose, methodology)
+- Single-source colour palette (`C`) pushed into CSS custom properties at startup, so a colour is edited in exactly one place
+- Declarative grid layout — the `buildLayout()` engine converts `LAYOUT` into pixel coordinates at startup
+- Edge hit-testing precomputes sampled points once per render, so hovering stays smooth even with ~180 edges
+- Always-on validator for post-edit integrity checks
 
 The whole thing is designed to load fast on a phone, run from GitHub Pages without any server, and be easy to fork and extend.
 
@@ -263,4 +267,4 @@ Watch and brand names are trademarks of their respective owners and used here fo
 
 This project is the work of an enthusiast, not a Seiko employee. It owes everything to the long tradition of Seiko collectors, archivists, and writers who have done the real research over decades — most directly Andrea Secco (TheSeikoGuy), Anthony Kable (Plus9Time), Su Jia Xian (SJX Watches), and the anonymous Wadokei author whose Tanaka research corrected long-standing myths in the enthusiast literature.
 
-Thanks also to the /r/Watches community, the WatchUseek SCWF forum, and Seiko's own design-history publications (particularly the 2003 anniversary book and the 140th anniversary site) which made much of this genealogy verifiable.
+Thanks also to the enthusiast community, the WatchUseek SCWF forum, and Seiko's own design-history publications (particularly the 2003 anniversary book and the 140th anniversary site) which made much of this genealogy verifiable.
