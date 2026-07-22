@@ -66,8 +66,8 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
 #canvas-wrap.dragging{cursor:grabbing}
 #canvas{position:absolute;transform-origin:0 0}
 .section-bg{position:absolute;border-radius:4px;pointer-events:none}
-.section-bg .label{position:absolute;top:-8px;left:10px;font-size:10px;letter-spacing:2px;font-weight:600;background:var(--bg);padding:0 6px;text-transform:uppercase}
-.section-bg.sub .label{font-size:7px;letter-spacing:1px;top:-6px;left:6px;font-weight:500}
+.section-bg .label{position:absolute;top:-8px;left:10px;font-size:10px;letter-spacing:2px;font-weight:600;background:var(--bg);padding:0 6px;text-transform:uppercase;white-space:nowrap}
+.section-bg.sub .label{font-size:7px;letter-spacing:1px;top:-6px;left:6px;font-weight:500;white-space:nowrap}
 .node{position:absolute;width:124px;min-height:42px;background:var(--paper);border-radius:3px;padding:5px 6px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:default;transition:opacity .2s,border-color .2s,box-shadow .2s;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .node:focus{outline:none;box-shadow:0 0 0 2px var(--icon),0 1px 2px rgba(0,0,0,.05)}
 .node:focus:not(:focus-visible){box-shadow:0 1px 2px rgba(0,0,0,.05)}
@@ -702,12 +702,12 @@ const popupData={
 
   gs_cont:{n:"GS Product Line Dormant",era:"mid-1970s–1998",d:"Mechanical Grand Seiko was phased out by the mid-1970s under the Quartz Crisis. The Grand Seiko name reappeared as a quartz-only line in 1988 (Cal. 9581/9F family precursors), while mechanical Grand Seiko returned in 1998 with the 9S caliber. The three-way Spring Drive / Hi-Beat / standard architecture that defines GS today was built in the years after this revival.",tags:["gs"]},
   gs_quartz_88:{n:"Grand Seiko 9F Quartz",era:"1993-",d:"Cal. 9F83. Twin-pulse control motor, instant date change. +/-10 sec/year. First GS quartz was 1988 (Cal. 95xx); the landmark 9F platform launched 1993.",tags:["gs"]},
+  "gs_9f":{n:"9F Quartz",era:"1993-",d:"Cal. 9F — the high-precision Grand Seiko quartz platform introduced in 1993. Twin-pulse control motor, thermocompensation, and other hand-adjustment mechanisms bring quartz precision to ±10 seconds/year. Still the flagship GS quartz movement today, differentiating GS from mass-market quartz through hand-assembly and heritage precision philosophy.",tags:["gs"]},
   gs_mech_98:{n:"GS 9S Mechanical Revival",era:"1998-",d:"Return of mechanical Grand Seiko after 23 years. Cal. 9S55 (with date) and 9S51 (no date) — the launch pair. Hand-assembled at Shizukuishi. 50-hour power reserve.",tags:["gs"]},
   gs_hibeat:{n:"GS 9S Hi-Beat 36000",era:"2009-",d:"Cal. 9S85. 36,000 bph automatic Grand Seiko. Smoother seconds hand, improved shock resistance at high frequency.",tags:["gs","hb"]},
   sd_concept:{n:"Spring Drive Concept",era:"1977-1997",d:"Yoshikazu Akahane's long-term vision for Spring Drive: a mainspring-powered movement with quartz-level accuracy. Roughly two decades of development from the late 1970s, hundreds of prototypes and a large patent portfolio, culminating in the tri-synchro regulator that synchronizes a free-running mainspring against a quartz reference.",tags:["sd"]},
   sd_7r68:{n:"7R68 Spring Drive",era:"1999",d:"The first production Spring Drive. Manual-winding, released in December 1999 in very limited quantities under both the Seiko and Credor brands — not yet Grand Seiko. Launched the year after lead engineer Yoshikazu Akahane's death. The culmination of roughly two decades of sustained R&D; proved the tri-synchro regulator concept commercially viable.",tags:["sd"]},
   sd_7r88:{n:"7R88 Credor Spring Drive",era:"2002",d:"A refined manual-wind Spring Drive released under Credor — Seiko's ultra-exclusive haute horlogerie brand — three years after the first production Spring Drive (7R68). The first automatic Spring Drive would be the 9R65 in Grand Seiko two years later. Platinum cases only. Positioned Spring Drive in the luxury tier before the 2004 Grand Seiko debut.",tags:["sd"]},
-  ks_dormant:{n:"King Seiko Product Line Dormant",era:"~1975-2022",d:"After ~1975, King Seiko as an active production line largely disappeared as Seiko's catalogue re-organized around quartz, later Kinetic, and — from 1998 — mechanical Grand Seiko. Not a complete 47-year silence though: the Historical Collection 2000 SCVN001 (Cal. 4S15) was an explicit King Seiko homage under the Seiko brand, and later 4S/6R-era JDM pieces occasionally cited late-1960s KS design cues. But KS did not return as a positioned Seiko brand until the 2022 revival.",tags:["ks"]},
   s4_family:{n:"4S Mechanical Platform",era:"1992-2000s",d:"Cal. 4S15/4S25/4S35. Higher-grade mechanical caliber re-engineered from the 1970s King Seiko 52xx (52KS) architecture — partly by retired Daini engineers — because much of Seiko's original mechanical production capacity had been dismantled during the Quartz Crisis and the 52xx was the only high-beat platform that could be quickly re-industrialized for the mid-1990s JDM market. Used in SUS, SCVF Alpinist, and other 4S-era JDM references, and later feeding into what became the Presage line. The 'bridge to modern mechanical' framing is retrospective — functionally accurate but not a planned Seiko strategy at the time.",tags:[]},
   seiko_sus:{n:"Seiko SUS",era:"1995-",d:"1990s mechanical revival line. Cal. 4S15 automatic, derived from the King Seiko 52xx architecture. Higher-grade 4S platform that demonstrated higher-grade Seiko mechanical watchmaking survived through the quartz-dominated period.",tags:[]},
   red_alpinist_scvf:{n:"Red Alpinist SCVF",era:"1995-2000",d:"The 'Red Alpinist' (SCVF001 and siblings) — a mid-1990s JDM Alpinist reference on Cal. 4S15 that became the iconic mechanical Alpinist of the quartz era. Sunburst red dial with cathedral hands and internal compass bezel — arguably the model that established the modern Alpinist visual identity later carried into the SARB017 and SPB series. A crucial transitional node between the 1959 Laurel Alpinist heritage and the modern Prospex Alpinist.",tags:["icon"]},
@@ -762,6 +762,8 @@ const popupData={
   px_alpinist:{n:"Modern Prospex Alpinist",era:"modern Prospex (heritage 1959)",d:"Heritage reinterpretation under the Prospex Land family — modern re-creations of the 1959 Laurel Alpinist (Seiko's first sports watch). The internal compass bezel became a later Alpinist signature, especially in the modern SARB/SPB lineage. The iconic event sits with the 1959 original, not with the modern reissues.",tags:[]},
   px_land:{n:"Land Mechanical",era:"2019-",d:"Field and compass watches under Prospex. Includes Alpinist-derived models. Designed for terrestrial exploration.",tags:[]},
   px_speedtimer:{n:"Prospex Speedtimer Mechanical",era:"2021-",d:"Mechanical chronograph under Prospex. Heritage connection to 1960s-70s Seiko chronograph legacy. Cal. 8R46 (2021, two registers); Cal. 8R48 (from 2023, three registers).",tags:["chrono"]},
+  "px_8l35":{n:"8L35 Professional Diver Caliber",era:"1990s-",d:"Cal. 8L35 — Seiko's professional diver-grade automatic caliber developed in the 1990s. Related to the Grand Seiko 9S architecture but adjusted for demanding professional dive conditions. Foundation of the Marine Master 300M (SBDX001) and subsequent high-end MM references. The technical bridge between vintage 6159 pro divers and the modern Prospex heritage pro line.",tags:["diver"]},
+  px_8l35: "8L35\nPro Diver Caliber\n1990s-",
   mm300:{n:"Marine Master 300M SBDX001",era:"2000-15",d:"The defining modern Marinemaster. JDM-exclusive at launch in 2000, internationalized in 2012. Cal. 8L35 (28,800 bph, derived from Grand Seiko Cal. 9S55), 44mm monobloc case, professional 300m water resistance, crown at 4 o'clock. Direct visual hommage to the 6215-7000 (1967) and 6159-7000 (1968) professional divers — sharing case shape, hand and index design, and monobloc construction. Lumibrite originally hand-applied. Succeeded by SBDX017 (2015) and SLA021 (2018, ceramic bezel + sapphire).",tags:["icon","diver"]},
 
   /* ─── MODERN · PRESAGE (MECHANICAL DRESS) ─── */
@@ -893,13 +895,13 @@ const nodeLabels = {
   k7017: "7017 Flyback\n1970-75",
   k7018: "7018 Flyback\n1971-75",
   gs_cont: "GS Mechanical\nProduct Line\nDormant mid-1970s–1998",
-  gs_quartz_88: "GS Quartz\n95GS 1988 / 9F 1993-",
+  gs_quartz_88: "GS Quartz\n95GS 1988",
+  gs_9f: "9F Quartz\nGS Precision Standard\n1993-",
   gs_mech_98: "GS 9S Mechanical\nRevival 1998-",
   gs_hibeat: "GS 9S Hi-Beat\n36000 2009-",
   sd_concept: "Spring Drive\nconcept/patents\n1977-1997",
   sd_7r68: "7R68 manual\nSpring Drive\n1999",
   sd_7r88: "7R88 Credor\nSpring Drive\n2002",
-  ks_dormant: "King Seiko\nProduct Line\nDormant ~1975-2022",
   s4_family: "4S Mechanical\nPlatform 1992-2000s",
   seiko_sus: "SUS / 4S15\n1995-",
   red_alpinist_scvf: "Red Alpinist\nSCVF / 4S15\n1995-2000",
@@ -939,6 +941,7 @@ const nodeLabels = {
   px_alpinist: "Alpinist\n1959 Laurel /\nmodern Prospex",
   px_land: "Land Mechanical\n2019-",
   px_speedtimer: "Prospex Speedtimer\nMechanical\n2021-",
+  px_8l35: "8L35\nPro Diver Caliber\n1990s-",
   mm300: "Marine Master\n300M SBDX001\n2000-",
   presage_node: "Presage\nJapan 2010 /\nglobal 2016-",
   prsg_cocktail: "Cocktail Time\n2016-",
@@ -1000,6 +1003,7 @@ const iconFlags = {
   gs_9s5: 1,
   ks_vanac_25: 1,
   px_lx: 1,
+  px_8l35: "8L35\nPro Diver Caliber\n1990s-",
   mm300: 1,
 };
 
@@ -1039,8 +1043,8 @@ const LAYOUT = {
   parents: [
     {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988", key:"suwa", x:5, y:10, w:1155, h:0, autoH:true, c:C.suwa},
     {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988", key:"daini", x:5, y:0, stackAfter:"suwa", w:1155, h:0, autoH:true, c:C.kameido},
-    {l:"LEGACY TRANSITION ERA · c. 1988–2001", key:"legacy", x:1210, y:10, w:330, h:0, autoH:true, c:C.modern},
-    {l:"MODERN COLLECTION ERA · 2001–2025", key:"modern", x:1590, y:10, w:880, h:0, autoH:true, c:C.modern},
+    {l:"LEGACY TRANSITION ERA · c. 1988–2001", key:"legacy", x:1210, y:10, w:660, h:0, autoH:true, c:C.modern},
+    {l:"MODERN COLLECTION ERA · 2001–2025", key:"modern", x:1900, y:10, w:880, h:0, autoH:true, c:C.modern},
   ],
 
   /* Families inside the parents. Each family is positioned by its
@@ -1253,13 +1257,73 @@ const LAYOUT = {
       ]
     },
 
+    /* ═══════════════════════════════════════════════════════════════════
+       LEGACY TRANSITION ERA · c. 1988–2001
+       Four thematic families showing how Seiko survived the quartz crisis
+       and rebuilt the mechanical/precision foundation
+       ═══════════════════════════════════════════════════════════════════ */
+
+    /* ─── QUARTZ · GS CONTINUITY ─── */
+    {
+      label: "QUARTZ · GS CONTINUITY",
+      parent: "legacy",
+      color: C.gs,
+      grid: "legacy4",
+      sectionW: 640,
+      rows: [
+        // Row 0: GS continuation → 95GS Quartz → 9F platform
+        ["gs_cont", "gs_quartz_88", "gs_9f"],
+      ]
+    },
+
+    /* ─── MECHANICAL · 4S PLATFORM ─── */
+    {
+      label: "MECHANICAL · 4S PLATFORM",
+      parent: "legacy",
+      color: C.suwa,
+      grid: "legacy4",
+      sectionW: 640,
+      rows: [
+        // Row 0: 4S platform → SUS revival → GS 9S mechanical revival
+        ["s4_family", "seiko_sus", "gs_mech_98"],
+        // Row 1: Alpinist mechanical continuity (Red SCVF → SARB017) + KS design heritage
+        ["red_alpinist_scvf", "sarb_alpinist", "hist_2000"],
+      ]
+    },
+
+    /* ─── SPRING DRIVE · GENESIS ─── */
+    {
+      label: "SPRING DRIVE · GENESIS",
+      parent: "legacy",
+      color: C.gs,
+      grid: "legacy4",
+      sectionW: 640,
+      rows: [
+        // Row 0: R&D concept → 7R68 first commercial (1999) → 7R88 Credor (2002)
+        ["sd_concept", "sd_7r68", "sd_7r88"],
+      ]
+    },
+
+    /* ─── DIVER · MECHANICAL CONTINUITY ─── */
+    {
+      label: "DIVER · MECHANICAL CONTINUITY",
+      parent: "legacy",
+      color: C.diver,
+      grid: "legacy4",
+      sectionW: 640,
+      rows: [
+        // Row 0: Mainstream diver line (7002 → SKX) + Pro line (8L35 → MM300)
+        ["7002_node", "skx", "px_8l35", "mm300"],
+      ]
+    },
+
     /* ─── GRAND SEIKO · MODERN ─── */
     {
       label: "GRAND SEIKO · MODERN",
       parent: "modern",
       color: C.gs,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 30, sectionW: 860,
+      sectionX: 1910, sectionY: 30, sectionW: 860,
       rows: [
         ["gs_sd_04", "gs_independence"],
         ["gs_hibeat", "gs_9s5"],
@@ -1274,7 +1338,7 @@ const LAYOUT = {
       parent: "modern",
       color: C.ks,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionW: 860,
+      sectionX: 1910, sectionW: 860,
       rows: [
         ["ks_revival", "ks_sje", "ks_vanac_25"],
       ]
@@ -1286,7 +1350,7 @@ const LAYOUT = {
       parent: "modern",
       color: C.prospex,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionW: 860,
+      sectionX: 1910, sectionW: 860,
       rows: [
         ["prospex", "px_mm", "px_lx"],
         ["px_1965", "px_1968_diver", "px_1968_gmt", "px_1970"],
@@ -1301,7 +1365,7 @@ const LAYOUT = {
       parent: "modern",
       color: C.presage,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionW: 860,
+      sectionX: 1910, sectionW: 860,
       rows: [
         ["presage_node", "prsg_cocktail", "prsg_starbar", "prsg_sharp", "prsg_style60"],
         ["prsg_craft", "prsg_garden", "prsg_classic"],
@@ -1314,7 +1378,7 @@ const LAYOUT = {
       parent: "modern",
       color: C.seiko5,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionW: 860,
+      sectionX: 1910, sectionW: 860,
       rows: [
         ["s5_modern", "s5_skx_mod", "s5_field_mod", "s5_street", "s5_snxs"],
       ]
@@ -1322,31 +1386,10 @@ const LAYOUT = {
   ],
 
   /* Standalone nodes inside Legacy Transition (no family sub-section). */
-  legacyNodes: [
-    {id:"gs_cont", x:1240, y:50, color:C.gs},
-    {id:"gs_quartz_88", x:1400, y:50, color:C.gs},
-    {id:"gs_mech_98", x:1400, y:115, color:C.gs},
-    {id:"sd_concept", x:1240, y:180, color:C.gs},
-    {id:"sd_7r68", x:1400, y:180, color:C.gs},
-    {id:"sd_7r88", x:1400, y:245, color:C.gs},
-    {id:"s4_family", x:1240, y:310, color:C.modern},
-    {id:"seiko_sus", x:1400, y:310, color:C.suwa},
-    {id:"ks_dormant", x:1240, y:375, color:C.ks},
-    {id:"7002_node", x:1240, y:440, color:C.diver},
-    {id:"skx", x:1400, y:440, color:C.diver},
-    {id:"hist_2000", x:1240, y:505, color:C.modern},
-    {id:"mm300", x:1400, y:505, color:C.diver},
-    {id:"red_alpinist_scvf", x:1240, y:570, color:C.suwa},
-    {id:"sarb_alpinist", x:1400, y:570, color:C.suwa},
-  ],
 
   /* Nested sub-sub-sections inside the Prospex box. These overlay the
      Prospex family — they don't contain any unique nodes. */
   prospexSubSubs: [
-    {l:"BRAND · FLAGSHIP", x:1610, y:460, w:840, h:60, c:C.prospex, sub:1},
-    {l:"HERITAGE DIVERS", x:1610, y:525, w:840, h:60, c:C.prospex, sub:1},
-    {l:"DIVER PLATFORMS", x:1610, y:590, w:840, h:60, c:C.prospex, sub:1},
-    {l:"LAND · CHRONO · ADVANCED TECH", x:1610, y:655, w:840, h:60, c:C.prospex, sub:1},
   ],
 };
 
@@ -1494,6 +1537,9 @@ const edges=[
 
   /* ── Within: LEGACY TRANSITION · 1988–2001 ── */
   ["7002_node","skx","strong","SKX007/009 succeeded the 7002 as Seiko\'s definitive affordable diver"],
+  ["6159_pro","px_8l35","medium","The 8L35 pro diver caliber (1990s) carried the professional diver capability heritage from the vintage 6159 pro divers into the modern Prospex era","heritage_source"],
+    ["px_8l35","mm300","strong","Marine Master 300M (SBDX001) was built on the 8L35 professional caliber — the technical bridge that carried Seiko's professional diver capability from the 1990s into the Prospex era"],
+  ["px_8l35","px_hb_8l55","strong","Cal. 8L55 Hi-Beat professional diver caliber (2015) was the direct next-generation successor to 8L35 — 36,000 vph for demanding professional dive requirements"],
   ["gs_mech_98","gs_hibeat","strong","GS Hi-Beat brought 36,000 bph back to Grand Seiko after decades"],
   ["s4_family","seiko_sus","strong","SUS was built on the higher-grade 4S mechanical platform"],
   ["gs_cont","gs_quartz_88","medium","GS revival began with quartz during the dormant mechanical period"],
@@ -1566,11 +1612,7 @@ const edges=[
   ["56gs_s","gs_cont","medium","Suwa 56GS production ended as Grand Seiko entered the dormant period"],
   ["56gs_k","gs_cont","medium","Kameido 56GS production ended as Grand Seiko entered the dormant period"],
   ["gs_mech_98","gs_9s5","strong","9SA5 is the next-gen evolution of the 9S mechanical platform"],
-  ["56ks","ks_dormant","medium","56KS was among the last King Seiko models before the line went dormant"],
-  ["52ks","ks_dormant","medium","52KS Special was Daini\'s final premium KS before the quartz transition"],
-  ["vanac","ks_dormant","medium","Vanac\'s end coincided with the broader KS product line dormancy"],
   ["lord_matic_56","56ks","medium","56KS shares Suwa\'s thin Cal. 56xx movement platform with Lord Matic 56"],
-  ["ks_dormant","ks_revival","weak","King Seiko revival reconnected with the dormant brand after decades","brand_revival"],
   ["52ks","s4_family","weak","4S platform traces heritage to the King Seiko 52xx movement family"],
   ["52ks","hist_2000","weak","52KS was among the vintage models reissued in the 2000 Historical Collection"],
   ["62mas","hist_2000","weak","62MAS diver was reissued as part of the 2000 historical collection"],
@@ -1703,11 +1745,11 @@ const nodeTags = {
   gs_quartz_88: ["gs","heritage"],
   gs_mech_98: ["gs","heritage"],
   gs_hibeat: ["gs","hb"],
-  ks_dormant: ["ks"],
   silverwave: ["diver"],
   selfdater_mas: ["diver"],
   "62mas_2": ["diver","heritage"],
   "6215_pro": ["diver","heritage"],
+  px_8l35: "8L35\nPro Diver Caliber\n1990s-",
   mm300: ["diver","flagship"],
   k7015: ["chrono"],
   k7016: ["chrono"],
@@ -1739,8 +1781,9 @@ function buildLayout(L) {
   // Column-grid x-positions used inside families.
   const GRID_XS = {
     suwa7:   [50, 210, 370, 530, 690, 850, 1010],   // 7 columns, 160 stride
-    modern5: [1620, 1780, 1940, 2100, 2260],         // 5 columns, 160 stride
+    modern5: [1930, 2090, 2250, 2410, 2570],         // 5 columns, 160 stride (shifted for Modern parent x=1900)
     legacy2: [1240, 1400]                            // 2 columns
+    ,legacy4: [1240, 1400, 1560, 1720]              // 4 columns
   };
 
   const nodes = [];
@@ -1965,12 +2008,16 @@ function buildLayout(L) {
   }
   
   // Standalone nodes (e.g. Legacy Transition has no family sub-boxes)
-  for (const n of L.legacyNodes) {
-    nodes.push([n.id, nodeLabels[n.id] || n.id, n.x, n.y, n.color, iconFlags[n.id] || 0]);
+  if (L.legacyNodes) {
+    for (const n of L.legacyNodes) {
+      nodes.push([n.id, nodeLabels[n.id] || n.id, n.x, n.y, n.color, iconFlags[n.id] || 0]);
+    }
   }
   
   // Nested sub-sub-sections (e.g. inside Prospex)
-  for (const s of L.prospexSubSubs) sections.push(s);
+  if (L.prospexSubSubs) {
+    for (const s of L.prospexSubSubs) sections.push(s);
+  }
   
   return {nodes, sections};
 }
@@ -2038,7 +2085,7 @@ function hidePopup(){
 }
 /* Node dimensions — synced from actual CSS size on resize (mobile uses 110×38) */
 let NW=124,NH=42;
-const CW=2490,CH=2700;
+const CW=2800,CH=2700;
 function syncNodeSize(){
   /* Pick NW/NH to match the CSS breakpoint. The mobile media query at
      max-width:768px shrinks .node to 110×38; otherwise it's 124×42.
@@ -2062,7 +2109,7 @@ function applyTransform(){
 }
 function fitView(){const cw=wrap.clientWidth;scale=(cw/CW)*.95;tx=(cw-CW*scale)/2;ty=10;applyTransform();}
 function view100(){scale=1;tx=0;ty=0;applyTransform();}
-sections.forEach(s=>{const d=document.createElement('div');d.className='section-bg'+(s.sub?' sub':'');d.style.cssText=`left:${s.x}px;top:${s.y}px;width:${s.w}px;height:${s.h}px;border:1px solid ${s.c}${s.sub?'18':'0e'};background:${s.c}${s.sub?'06':'04'}`;d.innerHTML=`<div class="label" style="color:${s.c}99">${s.l}</div>`;canvas.appendChild(d);});
+sections.forEach(s=>{const d=document.createElement('div');d.className='section-bg'+(s.sub?' sub':'');d.style.cssText=`left:${s.x}px;top:${s.y}px;width:${s.w}px;height:${s.h}px;border:1px solid ${s.c}${s.sub?'30':'0e'};background:${s.c}${s.sub?'06':'04'}`;d.innerHTML=`<div class="label" style="color:${s.c}99">${s.l}</div>`;canvas.appendChild(d);});
 const nodeEls={};
 nodes.forEach(n=>{const[id,label,x,y,color,isIcon]=n;const d=document.createElement('div');d.className='node'+(isIcon?' icon':'');d.style.cssText=`left:${x}px;top:${y}px;border:${isIcon?2:1}px solid ${isIcon?C.highlight+'88':color+'30'}`;d.dataset.id=id;d.setAttribute('role','button');d.setAttribute('tabindex','0');d.setAttribute('aria-label',label.replace(/\n/g,' '));let inner='';if(isIcon)inner+=`<div class="star-badge">★</div>`;if(inCollection.has(id))inner+=`<div class="coll-badge">In Collection</div>`;const tech=techMap[id];if(tech){const lb={beat10:'10B',beat8:'8B',springdrive:'SD',quartz:'Q'};inner+=`<div class="tech-badge ${tech}" title="${({beat10:'36,000 vph / 10-beat',beat8:'28,800 vph / 8-beat',springdrive:'Spring Drive',quartz:'Quartz'})[tech]||tech}">${lb[tech]}</div>`;}inner+=`<div class="text">${label}</div>`;d.innerHTML=inner;d.addEventListener('mouseenter',(e)=>{hovered=id;updateHL();showPopup(id,e);if(typeof edgeTipVisible!=='undefined'&&edgeTipVisible){document.getElementById('edge-tip').classList.remove('show');edgeTipVisible=false;}});d.addEventListener('mousemove',(e)=>{});d.addEventListener('click',(e)=>{e.stopPropagation();locked=(locked===id)?null:id;updateHL();});d.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();locked=(locked===id)?null:id;updateHL();}});d.addEventListener('focus',(e)=>{hovered=id;updateHL();showPopup(id,e);});d.addEventListener('blur',()=>{hovered=null;updateHL();hidePopup();});d.addEventListener('mouseleave',()=>{hovered=null;updateHL();hidePopup();});canvas.appendChild(d);nodeEls[id]=d;});
 /* Sync NW/NH to actual rendered node size (handles mobile breakpoints) */
