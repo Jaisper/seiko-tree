@@ -1039,8 +1039,8 @@ const LAYOUT = {
   parents: [
     {l:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988", key:"suwa", x:5, y:10, w:1155, h:0, autoH:true, c:C.suwa},
     {l:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988", key:"daini", x:5, y:0, stackAfter:"suwa", w:1155, h:0, autoH:true, c:C.kameido},
-    {l:"LEGACY TRANSITION ERA · c. 1988–2001", key:"legacy", x:1210, y:10, w:330, h:660, c:C.modern},
-    {l:"MODERN COLLECTION ERA · 2001–2025", key:"modern", x:1590, y:10, w:880, h:985, c:C.modern},
+    {l:"LEGACY TRANSITION ERA · c. 1988–2001", key:"legacy", x:1210, y:10, w:330, h:0, autoH:true, c:C.modern},
+    {l:"MODERN COLLECTION ERA · 2001–2025", key:"modern", x:1590, y:10, w:880, h:0, autoH:true, c:C.modern},
   ],
 
   /* Families inside the parents. Each family is positioned by its
@@ -1274,7 +1274,7 @@ const LAYOUT = {
       parent: "modern",
       color: C.ks,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 325, sectionW: 860,
+      sectionX: 1600, sectionW: 860,
       rows: [
         ["ks_revival", "ks_sje", "ks_vanac_25"],
       ]
@@ -1286,7 +1286,7 @@ const LAYOUT = {
       parent: "modern",
       color: C.prospex,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 425, sectionW: 860,
+      sectionX: 1600, sectionW: 860,
       rows: [
         ["prospex", "px_mm", "px_lx"],
         ["px_1965", "px_1968_diver", "px_1968_gmt", "px_1970"],
@@ -1301,7 +1301,7 @@ const LAYOUT = {
       parent: "modern",
       color: C.presage,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 720, sectionW: 860,
+      sectionX: 1600, sectionW: 860,
       rows: [
         ["presage_node", "prsg_cocktail", "prsg_starbar", "prsg_sharp", "prsg_style60"],
         ["prsg_craft", "prsg_garden", "prsg_classic"],
@@ -1314,7 +1314,7 @@ const LAYOUT = {
       parent: "modern",
       color: C.seiko5,
       grid: "modern5",                  // column grid identifier
-      sectionX: 1600, sectionY: 885, sectionW: 860,
+      sectionX: 1600, sectionW: 860,
       rows: [
         ["s5_modern", "s5_skx_mod", "s5_field_mod", "s5_street", "s5_snxs"],
       ]
@@ -1343,10 +1343,10 @@ const LAYOUT = {
   /* Nested sub-sub-sections inside the Prospex box. These overlay the
      Prospex family — they don't contain any unique nodes. */
   prospexSubSubs: [
-    {l:"BRAND · FLAGSHIP", x:1610, y:445, w:840, h:60, c:C.prospex, sub:1},
-    {l:"HERITAGE DIVERS", x:1610, y:510, w:840, h:60, c:C.prospex, sub:1},
-    {l:"DIVER PLATFORMS", x:1610, y:575, w:840, h:60, c:C.prospex, sub:1},
-    {l:"LAND · CHRONO · ADVANCED TECH", x:1610, y:640, w:840, h:60, c:C.prospex, sub:1},
+    {l:"BRAND · FLAGSHIP", x:1610, y:460, w:840, h:60, c:C.prospex, sub:1},
+    {l:"HERITAGE DIVERS", x:1610, y:525, w:840, h:60, c:C.prospex, sub:1},
+    {l:"DIVER PLATFORMS", x:1610, y:590, w:840, h:60, c:C.prospex, sub:1},
+    {l:"LAND · CHRONO · ADVANCED TECH", x:1610, y:655, w:840, h:60, c:C.prospex, sub:1},
   ],
 };
 
