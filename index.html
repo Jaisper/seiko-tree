@@ -1287,11 +1287,12 @@ const LAYOUT = {
       parent: "modern",
       color: C.presage,
       rows: [
-        // Anchor + collections left→right chronological.
-        //   Cocktail Time (2016/17) · Craftsmanship (2018) · Star Bar (2019) · Sharp Edged (2020) · Style60s (2021)
-        ["presage_node", "prsg_cocktail", "prsg_craft", "prsg_starbar", "prsg_sharp", "prsg_style60"],
-        //   Classic (2024) and its offshoot Japanese Garden (2022) kept adjacent for the lineage edge
-        ["prsg_classic", "prsg_garden"],
+        // Anchor + collections in strict chronological reading order (left→right,
+        // then wrapping to the next row — no back-steps on either axis).
+        //   Cocktail Time (2016/17) · Craftsmanship (2018) · Star Bar (2019) · Sharp Edged (2020)
+        ["presage_node", "prsg_cocktail", "prsg_craft", "prsg_starbar", "prsg_sharp"],
+        //   Style60s (2021) · Japanese Garden (2022) · Classic Series (2024)
+        [_, "prsg_style60", "prsg_garden", "prsg_classic"],
       ]
     },
 
