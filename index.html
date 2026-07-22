@@ -700,10 +700,9 @@ const popupData={
      moves from R&D to first product (1999). 4S caliber family bridges KS heritage into modern
      Seiko. 7002 and SKX keep the affordable mechanical diver line alive. */
 
-  "gs_cont":{n:"GS Product Line Dormant",era:"mid-1970s–1998",d:"Mechanical Grand Seiko was phased out by the mid-1970s under the Quartz Crisis. The Grand Seiko name reappeared as a quartz-only line in 1988 (Cal. 9581/9F family precursors), while mechanical Grand Seiko returned in 1998 with the 9S caliber. The three-way Spring Drive / Hi-Beat / standard architecture that defines GS today was built in the years after this revival.",tags:["gs"]},
   "gs_quartz_88":{n:"95GS Quartz",era:"1988",d:"Cal. 95xx family. The first Grand Seiko quartz revival, launched in 1988 during the dormant mechanical period. Positioned as the interim high-precision GS platform until the landmark 9F caliber launched in 1993. Represents Seiko Watch Corporation's decision to keep the Grand Seiko name alive through quartz precision when mechanical production was suspended.",tags:["gs"]},
   "gs_9f":{n:"9F Quartz",era:"1993-",d:"Cal. 9F — the high-precision Grand Seiko quartz platform introduced in 1993. Twin-pulse control motor, thermocompensation, and other hand-adjustment mechanisms bring quartz precision to ±10 seconds/year. Still the flagship GS quartz movement today, differentiating GS from mass-market quartz through hand-assembly and heritage precision philosophy.",tags:["gs"]},
-  "gs_mech_98":{n:"GS 9S Mechanical Revival",era:"1998-",d:"Return of mechanical Grand Seiko after 23 years. Cal. 9S55 (with date) and 9S51 (no date) — the launch pair. Hand-assembled at Shizukuishi. 50-hour power reserve.",tags:["gs"]},
+  "gs_mech_line":{n:"GS Mechanical Line",era:"mid-1970s dormant → 1998 revival",d:"The mechanical Grand Seiko story through the transition era. DORMANCY (mid-1970s–1998): Mechanical GS was phased out during the Quartz Crisis; the Grand Seiko name was kept alive only through the 95GS quartz (1988) and later 9F platform (1993). REVIVAL (1998-): Mechanical Grand Seiko returned after 23 years with Cal. 9S55 (with date) and 9S51 (no date), hand-assembled at Shizukuishi, 50-hour power reserve. The 9S revival established the three-pillar architecture (Spring Drive / Hi-Beat / standard mechanical) that defines Grand Seiko today.",tags:["gs"]},
   "gs_hibeat":{n:"GS 9S Hi-Beat 36000",era:"2009-",d:"Cal. 9S85. 36,000 bph automatic Grand Seiko. Smoother seconds hand, improved shock resistance at high frequency.",tags:["gs","hb"]},
   "sd_concept":{n:"Spring Drive Concept",era:"1977-1997",d:"Yoshikazu Akahane's long-term vision for Spring Drive: a mainspring-powered movement with quartz-level accuracy. Roughly two decades of development from the late 1970s, hundreds of prototypes and a large patent portfolio, culminating in the tri-synchro regulator that synchronizes a free-running mainspring against a quartz reference.",tags:["sd"]},
   "sd_7r68":{n:"7R68 Spring Drive",era:"1999",d:"The first production Spring Drive. Manual-winding, released in December 1999 in very limited quantities under both the Seiko and Credor brands — not yet Grand Seiko. Launched the year after lead engineer Yoshikazu Akahane's death. The culmination of roughly two decades of sustained R&D; proved the tri-synchro regulator concept commercially viable.",tags:["sd"]},
@@ -892,10 +891,9 @@ const nodeLabels = {
   "k7016": "7016 Flyback\n1972-75",
   "k7017": "7017 Flyback\n1970-75",
   "k7018": "7018 Flyback\n1971-75",
-  "gs_cont": "GS Mechanical\nProduct Line\nDormant mid-1970s–1998",
   "gs_quartz_88": "GS Quartz\n95GS 1988",
   "gs_9f": "9F Quartz\nGS Precision Standard\n1993-",
-  "gs_mech_98": "GS 9S Mechanical\nRevival 1998-",
+  "gs_mech_line": "GS Mechanical Line\nDormant mid-1970s→\nRevival 1998-",
   "gs_hibeat": "GS 9S Hi-Beat\n36000 2009-",
   "sd_concept": "Spring Drive\nconcept/patents\n1977-1997",
   "sd_7r68": "7R68 manual\nSpring Drive\n1999",
@@ -1252,9 +1250,9 @@ const LAYOUT = {
       parent: "legacy",
       color: C.gs,
       rows: [
-        // Row 0: Mechanical GS continuity (dormancy → 9S revival 1998)
-        ["gs_cont", "gs_mech_98"],
-        // Row 1: Quartz GS continuity (95GS 1988 first → 9F 1993 flagship)
+        // Row 0: Mechanical line — 9S revival (1998), positioned chronologically after quartz platforms
+        [_, _, "gs_mech_line"],
+        // Row 1: Quartz continuity for context (95GS 1988 → 9F 1993 flagship)
         ["gs_quartz_88", "gs_9f"],
       ]
     },
@@ -1291,8 +1289,8 @@ const LAYOUT = {
       rows: [
         // Row 0: Mainstream diver line (7002 → SKX workhorse)
         ["7002_node", "skx"],
-        // Row 1: Professional heritage (Marine Master 300M)
-        [_, "mm300"],
+        // Row 1: Professional heritage — Marine Master 300M (own dedicated row)
+        ["mm300"],
       ]
     },
 
@@ -1524,11 +1522,10 @@ const edges=[
 
   /* ── Within: LEGACY TRANSITION · 1988–2001 ── */
   ["7002_node","skx","strong","SKX007/009 succeeded the 7002 as Seiko\'s definitive affordable diver"],
-    ["gs_mech_98","gs_hibeat","strong","GS Hi-Beat brought 36,000 bph back to Grand Seiko after decades"],
+    ["gs_mech_line","gs_hibeat","strong","GS Hi-Beat brought 36,000 bph back to Grand Seiko after decades"],
   ["s4_family","seiko_sus","strong","SUS was built on the higher-grade 4S mechanical platform"],
-  ["gs_cont","gs_quartz_88","medium","GS revival began with quartz during the dormant mechanical period"],
+  ["gs_mech_line","gs_quartz_88","medium","GS revival began with quartz during the dormant mechanical period"],
   ["gs_quartz_88","gs_9f","strong","The 95GS quartz platform (1988) was superseded by the landmark Cal. 9F (1993) — the high-precision quartz architecture with twin-pulse motor and thermocompensation that became the GS quartz flagship still in use today","same_platform"],
-  ["gs_cont","gs_mech_98","medium","GS mechanical revival emerged from the dormant period in 1998"],
   ["sd_concept","sd_7r68","medium","20 years of R&D produced the first production Spring Drive in 1999"],
   ["sd_7r68","sd_7r88","medium","Credor Spring Drive proved the technology in a premium brand context"],
 
@@ -1594,9 +1591,9 @@ const edges=[
   ["6139_first","s5_speed","strong","Cal. 6139 automatic chronograph powered the 5 Sports Speed-Timer line","same_platform"],
   ["45ks","56ks","medium","56KS continued King Seiko at Suwa with thin automatic Cal. 5625/5626"],
   ["advan","vanac","weak","Vanac shared the bold mid-1970s design vocabulary that began with mass-market models like Advan, but was positioned as a premium King Seiko expression","design_influence"],
-  ["56gs_s","gs_cont","medium","Suwa 56GS production ended as Grand Seiko entered the dormant period"],
-  ["56gs_k","gs_cont","medium","Kameido 56GS production ended as Grand Seiko entered the dormant period"],
-  ["gs_mech_98","gs_9s5","strong","9SA5 is the next-gen evolution of the 9S mechanical platform"],
+  ["56gs_s","gs_mech_line","medium","Suwa 56GS production ended as Grand Seiko entered the dormant period"],
+  ["56gs_k","gs_mech_line","medium","Kameido 56GS production ended as Grand Seiko entered the dormant period"],
+  ["gs_mech_line","gs_9s5","strong","9SA5 is the next-gen evolution of the 9S mechanical platform"],
   ["lord_matic_56","56ks","medium","56KS shares Suwa\'s thin Cal. 56xx movement platform with Lord Matic 56"],
   ["52ks","s4_family","weak","4S platform traces heritage to the King Seiko 52xx movement family"],
   ["52ks","hist_2000","weak","52KS was among the vintage models reissued in the 2000 Historical Collection"],
@@ -1628,7 +1625,7 @@ const edges=[
   ["6159_pro","px_1968_diver","weak","Modern 1968 Heritage Diver revives the 6159 professional diver archetype"],
   ["6159_pro","px_1968_gmt","weak","Modern 1968 Heritage GMT draws on the 6159 professional diver heritage"],
   ["sd_7r88","gs_sd_04","strong","Grand Seiko adopted Spring Drive as a core movement technology in 2004","technology_branch"],
-  ["gs_cont","gs_independence","medium","Grand Seiko became an independent brand built on the revived legacy"],
+  ["gs_mech_line","gs_independence","medium","Grand Seiko became an independent brand built on the revived legacy"],
 ];
 
 
