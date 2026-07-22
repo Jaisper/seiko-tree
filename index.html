@@ -979,8 +979,8 @@ const LAYOUT = {
      Everything else (x, y, w, h) is auto-computed from families.
      ─────────────────────────────────────────────────────────────────── */
   parents: [
-    { key:"suwa",   label:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988",   color:C.suwa,    columns:7                     },
-    { key:"daini",  label:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988",  color:C.kameido, columns:7, stackAfter:"suwa"  },
+    { key:"suwa",   label:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988",   color:C.suwa,    columns:6                     },
+    { key:"daini",  label:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988",  color:C.kameido, columns:6, stackAfter:"suwa"  },
     { key:"legacy", label:"LEGACY TRANSITION ERA · c. 1988–2001",             color:C.modern,  columns:3, sideAfter:"suwa"   },
     { key:"modern", label:"MODERN COLLECTION ERA · 2001–2025",                color:C.modern,  columns:6, sideAfter:"legacy" },
   ],
@@ -1059,9 +1059,9 @@ const LAYOUT = {
       color: C.seiko5,
       rows: [
         // Foundation chain: Super → Sportsman → Sportsmatic → Sportsmatic 5 → Seiko 5 (central)
-        ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first"],
-        // Parallel Seiko 5 sub-lines: 5 Sports, 5 Actus, 5 DX (all branch from Seiko 5)
-        [_, _, _, _, _, "s5_sports", "s5_dx"],
+        ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first", "s5_sports"],
+        // Parallel Seiko 5 sub-lines: 5 DX (row 1) and 5 Actus (row 2) branch from Seiko 5
+        [_, _, _, _, _, "s5_dx"],
         [_, _, _, _, _, "s5_actus"],
       ]
     },
@@ -1129,9 +1129,9 @@ const LAYOUT = {
         // Row 0: main KS chronology + first 44 variant (44-9990 steel) top of stack
         ["cronos", "ks_1st", _, "ks_44_9990", "45ks", _, _],
         // Row 1: 44KS central + Self Dater (middle of stack)
-        ["cronos_sp", _, "44ks", "ks_44_self_dater", _, "vanac", "vanac_sp"],
+        ["cronos_sp", _, "44ks", "ks_44_self_dater", "vanac", "vanac_sp"],
         // Row 2: Chronometer (bottom of variant stack) + 52KS
-        ["cronos_sd", _, _, "ks_44_chronometer", _, _, "52ks"],
+        ["cronos_sd", _, _, "ks_44_chronometer", _, "52ks"],
       ]
     },
 
@@ -1275,7 +1275,7 @@ const LAYOUT = {
       color: C.prospex,
       rows: [
         ["prospex", "px_mm", "px_lx"],
-        ["px_1965", "px_1968_diver", "px_1968_gmt", "px_1970"],
+        ["px_1965", "px_1968_diver", "px_1970", "px_1968_gmt"],
         ["px_monster", "px_samurai", "px_sumo", "px_shogun"],
         ["px_sd_diver", "px_hb_8l55", "px_alpinist", "px_land", "px_speedtimer"],
       ]
