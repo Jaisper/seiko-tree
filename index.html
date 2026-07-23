@@ -1230,34 +1230,26 @@ const LAYOUT = {
       ]
     },
 
-    /* ─── GRAND SEIKO · MODERN (product lines + calibers) ─── */
+    /* ─── GRAND SEIKO · MODERN (calibers, brand milestone, collections) ─── */
     {
       label: "GRAND SEIKO · MODERN",
       parent: "modern",
       color: C.gs,
       rows: [
-        // Each row is one technology track, ordered left→right chronologically.
-        // Row 0 · Spring Drive: 9R65 platform (2004) → 9R family paraply (2004)
+        // Each row is one track. Rows 0-1 are movement technology, row 2 is the
+        // brand milestone, row 3 the curatorial collections that hang off it.
+        // Every row reads left→right chronologically.
+        // Row 0 · Spring Drive: 9R65 platform (2004) → 9R family umbrella (2004)
         //   → Chronograph 9R86 (2007) → 9R01 8-Day (2016) → 9RA/9RB Advanced (2020) → U.F.A. 9RB2 (2025)
         ["gs_sd_04", "gs_9r", "gs_sd_chrono", "gs_9r01", "gs_9ra", "gs_ufa"],
         // Row 1 · Mechanical: 9S Hi-Beat 36000 (2009) → 9SA5 next-gen (2020) → 9SC5 Tentagraph chrono (2023)
         ["gs_hibeat", "gs_9s5", "gs_tentagraph"],
-        // Row 2 · Brand milestone: independence (2017) — anchor of the curatorial collections below
+        // Row 2 · Brand milestone: independence (2017) — the anchor every collection below descends from
         ["gs_independence"],
-      ]
-    },
-
-    /* ─── GRAND SEIKO · CURATORIAL COLLECTIONS ─── */
-    {
-      label: "GRAND SEIKO · CURATORIAL COLLECTIONS",
-      parent: "modern",
-      color: C.gs,
-      rows: [
-        // Single row, left→right chronological. The five collections have no
-        // lineage between them (each descends only from gs_independence), so a
-        // pure time axis is unambiguous. Heritage/Elegance/Sport/Masterpiece
-        // were formalized around the 2020 60th-anniversary reorganization;
-        // Evolution 9 followed in 2021:
+        // Row 3 · Curatorial collections. No lineage between them (each descends
+        //   only from gs_independence directly above), so a pure time axis is
+        //   unambiguous. Heritage/Elegance/Sport/Masterpiece were formalized
+        //   around the 2020 60th-anniversary reorganization; Evolution 9 in 2021:
         //   2020 · 2020 · 2020 · 2020 · 2021
         ["gs_heritage", "gs_elegance", "gs_sport", "gs_masterpiece", "gs_evo9"],
       ]
