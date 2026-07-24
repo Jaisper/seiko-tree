@@ -1028,14 +1028,12 @@ const LAYOUT = {
       parent: "suwa",
       color: C.suwa,
       rows: [
-        // Row 0: Liner (manual dress) + Skyliner (automatic mid-range) blocks
-        ["liner", "liner_chr", "skyliner", "sky_cal", _, _],
-        // Row 1: 61 Skyliner platform (8-beat evolution of Skyliner)
-        [_, _, "61_skyliner", "61_skyliner_cal", _, _],
-        // Row 2: Lord Matic platform (5606) + Special variant
-        [_, _, _, _, "lord_matic", "lord_matic_sp"],
-        // Row 3: Lord Matic 56 (5626 next generation, shares platform with 56KS)
-        [_, _, _, _, "lord_matic_56", "56ks"],
+        // Row 0: Liner (manual dress) → Skyliner (mid-range) → Lord Matic
+        //   platform (5606) + its Special variant, all on one line
+        ["liner", "liner_chr", "skyliner", "sky_cal", "lord_matic", "lord_matic_sp"],
+        // Row 1: 61 Skyliner (8-beat evolution) + Lord Matic 56 (5626 next
+        //   generation, sharing the 56xx platform with the Suwa-built 56KS)
+        [_, _, "61_skyliner", "61_skyliner_cal", "lord_matic_56", "56ks"],
       ]
     },
 
@@ -1060,11 +1058,12 @@ const LAYOUT = {
       parent: "suwa",
       color: C.seiko5,
       rows: [
-        // Foundation chain: Super → Sportsman → Sportsmatic → Sportsmatic 5 → Seiko 5 (central)
-        ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first", "s5_sports"],
-        // Parallel Seiko 5 sub-lines: 5 DX (row 1) and 5 Actus (row 2) branch from Seiko 5
-        [_, _, _, _, _, "s5_dx"],
-        [_, _, _, _, _, "s5_actus"],
+        // Row 0 · foundation chain: Super (1960) → Sportsman → Sportsmatic →
+        //   Sportsmatic 5 → Seiko 5 (1963), with the premium 5 DX (1970) at the end
+        ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first", "s5_dx"],
+        // Row 1 · parallel sub-lines branching from Seiko 5 directly above:
+        //   5 Sports (1968) sits under its parent, 5 Actus (1970) beside it
+        [_, _, _, _, "s5_sports", "s5_actus"],
       ]
     },
 
