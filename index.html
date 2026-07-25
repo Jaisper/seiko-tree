@@ -308,6 +308,7 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
           <p style="margin:0 0 6px"><em>Reference and community</em></p>
           <ul style="margin:0 0 8px 20px; line-height:1.6; list-style-type: circle; color:#3f3d38">
             <li style="margin-bottom:4px">Watch-and-Vintage — 5606 Lord Matic day-date confirmation, vintage caliber technical notes.</li>
+            <li style="margin-bottom:4px"><a href="https://vintagewatchinc.com/seiko/" style="color:var(--ink);text-decoration:underline">Vintage Watch Inc</a> — 6138 and 6139 chronograph reference guides: model reference numbers and collector nicknames (Yachtman/UFO 6138-001X, Kakume 003X, Bullhead 004X, Baby Panda 6138-8000; Baby Jumbo 6139-7030/7070, Helmet 710X), and the May 1969 shop-availability evidence for the 6139. Strong on references and nicknames, weaker on production years.</li>
             <li style="margin-bottom:4px"><a href="https://www.watchuseek.com/" style="color:var(--ink);text-decoration:underline">WatchUseek</a> Seiko/Citizen sub-forum (SCWF) — community catalogue verification, 860 renumbering, Vanac production years.</li>
             <li style="margin-bottom:4px">Chrono24 historical catalogues — vintage reference data.</li>
             <li style="margin-bottom:4px">Wikipedia entries on Seikosha, Daini Seikosha, Suwa Seikosha, Morioka Seiko Kogyo — 1970/1983/1997 corporate restructuring dates.</li>
@@ -485,7 +486,7 @@ const watches={
   "lord_marvel":{n:"Lord Marvel",era:"late 1950s-75",label:"Lord Marvel\nlate 1950s-75",tags:[],
     d:"Premium manual-wind dress watch. Suwa's flagship line before Grand Seiko. Higher-grade finishing than standard Marvel."},
   "lord_marvel_36k":{n:"Lord Marvel 36000",era:"1967-late 70s",label:"Lord Marvel\n36000 1967-late 70s",icon:1,tech:"beat10",tags:["icon","hb"],
-    d:"Japan's first Hi-Beat 36,000 bph wristwatch. Suwa's response to the industry shift toward higher frequencies for improved accuracy and stability. Marked the moment Seiko demonstrated it could compete with Swiss precision technology — the hi-beat era that would later produce the 45GS and 61GS VFA started here."},
+    d:"Japan's first 36,000 bph Hi-Beat wristwatch (the landmark 5740C of 1967). Suwa's response to the industry shift toward higher frequencies for accuracy and stability, and the moment Seiko showed it could match Swiss precision — the Hi-Beat era that produced the 45GS and 61GS VFA starts here. The broader 'world's first' claim is contested: Girard-Perregaux's GP3080 reached the market in 1966, a few months earlier — so Seiko's claim is safest stated as Japan's first."},
   "crown":{n:"Seiko Crown",era:"1959-65",label:"Crown\n1959-65",tags:[],
     d:"Cal. 560. First Seiko chronometer-grade movement, with larger balance wheel, increased barrel torque and improved Diashock. Its architecture became the foundation for the first Grand Seiko Cal. 3180 a year later."},
   "crown_sd":{n:"Crown Self Dater",era:"1960-65",label:"Crown\nSelf Dater 1960-65",tags:[],
@@ -556,14 +557,14 @@ const watches={
     d:"Daini-produced precision-oriented automatic using Cal. 5106 (Daini's 33-jewel 51xx platform). Positioned as Daini's answer to Suwa's business-oriented Seikomatic-R; direct precursor to the Presmatic (1968) which continued the same 5106 platform under the new brand name. Signature feature of the 5106: a hexagonal push-button set into the centre of the crown that instantly advances the date — the same mechanism that gave the Presmatic its name."},
   "seikomatic_chr":{n:"Seikomatic Chronometer",era:"1966-67",label:"Seikomatic\n6245 Chronometer\n1966-67",filters:["gs"],tags:["gs"],
     d:"Cal. 6245/6246. Chronometer-grade automatic. Its movement directly became the basis for the 62GS - the first automatic Grand Seiko."},
-  "weekdater_6206":{n:"Weekdater 400/6206",era:"1965-67",label:"Weekdater\n400/6206 1965-67",tags:[],
-    d:"Day-date automatic. Cal. 6206. Evolution of Seikomatic Self Dater with added day display."},
+  "weekdater_6206":{n:"Weekdater 400/6206",era:"1963-67",label:"Weekdater\n400/6206 1963-67",tags:[],
+    d:"Seiko's first day-and-date wristwatch: the Seikomatic Weekdater debuted in 1963 on the 33-jewel Cal. 400, which was reworked into the 26-jewel Cal. 6206 in May 1964 under the new caliber-case naming scheme. An evolution of the Seikomatic Self Dater with an added day display; the 62-series platform it belongs to went on to power the first automatic Grand Seiko (62GS)."},
   "weekdater_6218":{n:"Weekdater 6216/6218",era:"1967-70",label:"Weekdater\n6216/6218 1967-70",tags:[],
     d:"Upgraded Weekdater family. Cal. 6218 with quickset date. Key platform that branched into Business and chronometer lines."},
   "business":{n:"Business",era:"1967-68",label:"Business\n6206 1967-68",tags:[],
     d:"Cal. 6206. Day-date automatic. Bridge between Weekdater and the premium Business-A line."},
-  "business_a":{n:"Business-A",era:"1967-72",label:"Business-A\n1967-72",tech:"beat8",tags:[],
-    d:"Suwa's 8-beat dress automatic. Cal. 8346 at 28,800 bph — an upmarket upgrade from the Business line. Day-date complication, refined case finishing. Positioned alongside Presmatic as part of Suwa's premium-but-below-GS tier. Later replaced by Lord Matic as Suwa's high-end automatic dress line."},
+  "business_a":{n:"Business-A",era:"1965-69",label:"Business-A\n1965-69",tags:[],
+    d:"Suwa's upper-mid-range dress automatic on Cal. 8306/8346. Contrary to a common listing error it is NOT a high-beat movement: it runs at 18,000 bph, with 30 jewels and both automatic and hand-winding, and was made for only about four years (from 1965). Day-date complication, refined case finishing, shared with the Seikomatic-R line. Positioned alongside the Daini Presmatic as part of Suwa's premium-but-below-GS tier; later effectively succeeded by Lord Matic as Suwa's high-end automatic dress line."},
   "presmatic":{n:"Presmatic",era:"1967-73",label:"Presmatic\n1967-73",tags:[],
     d:"Premium Daini automatic dress line built on the Daini-developed Cal. 5106 (33 jewels — unusually high count signaling top-tier platform finishing) and later Cal. 5146. Day-date complication. The name \"Presmatic\" comes from its party trick — a hexagonal push-button in the centre of the crown that you press for an instant quickset date change, with a synchronized midnight day/date snap. Positioned as Daini's upper mid-market business/dress automatic response to Suwa's Seikomatic-R, sitting below King Seiko/Grand Seiko in pricing."},
   "sea_lion":{n:"Sea Lion",era:"1966-70",label:"Sea Lion\n1966-70",tags:[],
