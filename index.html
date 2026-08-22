@@ -470,7 +470,6 @@ const techMap = {
 
   /* — Spring Drive — */
   "gs_sd_04": "springdrive",
-  "gs_9r": "springdrive",
   "gs_9ra": "springdrive",
   "gs_ufa": "springdrive",
   "gs_9r01": "springdrive",
@@ -721,7 +720,6 @@ const popupData={
 
   "gs_independence":{n:"Grand Seiko Independent Brand",era:"2017-",d:"Grand Seiko separated from the Seiko brand. Own logo at 12 o'clock. Global luxury positioning with independent identity.",tags:["gs"]},
   "gs_sd_04":{n:"Grand Seiko Spring Drive",era:"2004-",d:"Cal. 9R65. The first automatic Spring Drive, and the moment Spring Drive became a serious luxury movement. 72-hour power reserve, ±1 second per day, tri-synchro regulator (mainspring power, electromagnetic brake, quartz reference). The glide motion seconds hand became Grand Seiko's visual signature — unlike any other mechanical or quartz watch on the market.",tags:["gs","sd"]},
-  "gs_9r":{n:"9R Spring Drive Family",era:"2004-",d:"Spring Drive movement platform. 9R65 (automatic), 9R86 (chrono GMT), 9R31 (manual). Made at Shinshu Watch Studio.",tags:["gs","sd"]},
   "gs_9r01":{n:"GS Spring Drive 8 Days",era:"2016-",d:"Cal. 9R01 — Spring Drive's ultimate power-reserve achievement. Three mainspring barrels in series deliver 192-hour (8-day) reserve, one of the longest in any wristwatch. Platinum cases only, hand-assembled by the Micro Artist Studio in Shiojiri, Nagano. Represents one of Grand Seiko's highest expressions of Spring Drive craftsmanship.",tags:["gs","sd"]},
   "gs_sd_chrono":{n:"GS Spring Drive Chronograph",era:"2007-",d:"Cal. 9R86. The world's first Spring Drive chronograph with GMT function. 30-minute and 12-hour registers read against the silent glide-motion seconds hand — no ticking, chronograph sweep is smooth. 72-hour reserve. Combined the precision of Spring Drive with chronograph complication, unique in the luxury watch market.",tags:["gs","sd"]},
   "gs_9ra":{n:"9RA/9RB Advanced Spring Drive",era:"2020-",d:"The next evolution of Spring Drive: Cal. 9RA5 introduced in 2020 with a 5-day (120-hour) power reserve via twin barrels and ±10 sec/month accuracy — twice the precision of standard Spring Drive. Slimmer 5.0mm profile (down from 5.8mm) and a horizontally-arranged dual-barrel layout. The platform that enabled the GMT 9RA2 and the U.F.A. 9RB2 that followed.",tags:["icon","gs","sd"]},
@@ -907,7 +905,6 @@ const nodeLabels = {
   "hist_2000": "Historical\nCollection 2000",
   "gs_independence": "Grand Seiko\nIndependent Brand\n2017-",
   "gs_sd_04": "GS Spring Drive\n9R65 2004-",
-  "gs_9r": "9R Spring Drive\n2004-",
   "gs_9r01": "GS Spring Drive\n9R01 8 Days\n2016-",
   "gs_sd_chrono": "GS Spring Drive\nChrono 9R86\n2007-",
   "gs_9ra": "9RA/9RB\nAdvanced SD\n2020-",
@@ -1294,18 +1291,18 @@ const LAYOUT = {
       ]
     },
 
-    /* ─── GRAND SEIKO · MODERN (product lines + calibers) ─── */
+    /* ─── GRAND SEIKO · MODERN (semantic 3-row structure) ─── */
     {
       label: "GRAND SEIKO · MODERN",
       parent: "modern",
       color: C.gs,
       rows: [
-        // Row 0: Brand independence + next-gen Hi-Beat 9SA5 (2020)
-        ["gs_sd_04", "gs_independence"],
-        // Row 1: Hi-Beat 36000 (2009) + 9S5 platform
+        // Row 0: Brand milestone — Grand Seiko becomes independent brand (2017)
+        [_, "gs_independence"],
+        // Row 1: Mechanical evolution — 9S Hi-Beat (2009) → 9SA5 next-gen (2020)
         ["gs_hibeat", "gs_9s5"],
-        // Row 2: 9R Spring Drive family + Chrono + 9R01 8-day + Advanced SD + U.F.A.
-        ["gs_9r", "gs_sd_chrono", "gs_9r01", "gs_9ra", "gs_ufa"],
+        // Row 2: Spring Drive evolution (chronological): 9R65 first (2004) → 9R86 chrono (2007) → 9R01 8-day (2016) → 9RA advanced (2020) → 9RB2 U.F.A. (2025)
+        ["gs_sd_04", "gs_sd_chrono", "gs_9r01", "gs_9ra", "gs_ufa"],
       ]
     },
 
@@ -1535,11 +1532,10 @@ const edges=[
   ["gs_independence","gs_sport","medium","Sport Collection provides robust Grand Seiko for active use"],
   ["gs_independence","gs_evo9","medium","Evolution 9 represents the next-generation Grand Seiko design language"],
   ["gs_independence","gs_masterpiece","medium","Masterpiece Collection is Grand Seiko's ultra-high-end Micro Artist Studio tier"],
-  ["gs_sd_04","gs_9r","strong","9R caliber family defines the Grand Seiko Spring Drive platform"],
-  ["gs_9r","gs_9ra","strong","PLATFORM EVOLUTION: 9RA generation advanced Spring Drive with new thinner architecture and 5-day power reserve (9R01/9RA2/9RA5) — evolution of the Spring Drive platform to a new generation of GS calibers.","platform_evolution"],
   ["gs_9ra","gs_ufa","medium","NEXT GENERATION: U.F.A. (9RB2, 2025) is not simply a refined 9RA5 but a new architecture with revised quartz oscillator and temperature compensation, achieving ±20 seconds/year — Grand Seiko's most accurate mainspring-powered movement.","next_generation"],
   ["gs_sd_04","gs_sd_chrono","medium","Spring Drive Chronograph extended the GS SD platform in 2007"],
   ["gs_sd_04","gs_9r01","medium","9R01 8-Day achieved 192-hour reserve from the Micro Artist Studio"],
+  ["gs_sd_04","gs_9ra","medium","PLATFORM EVOLUTION: 9RA generation (2020) is the next major evolution of the Spring Drive automatic platform first established by 9R65 in 2004 — thinner architecture, 5-day power reserve, twin barrels.","platform_evolution"],
 
   /* ── Within: MODERN · KING SEIKO (REVIVAL 2022-) ── */
   ["ks_revival","ks_sje","strong","KS Modern SJE series implements the Grammar of Design in modern form"],
