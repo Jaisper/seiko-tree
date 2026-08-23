@@ -701,7 +701,7 @@ const popupData={
 
   "gs_quartz_88":{n:"95GS Quartz",era:"1988",d:"Cal. 95xx family. The first Grand Seiko quartz revival, launched in 1988 during the dormant mechanical period. Positioned as the interim high-precision GS platform until the landmark 9F caliber launched in 1993. Represents Seiko Watch Corporation's decision to keep the Grand Seiko name alive through quartz precision when mechanical production was suspended.",tags:["gs"]},
   "gs_9f":{n:"9F Quartz",era:"1993-",d:"Cal. 9F — the high-precision Grand Seiko quartz platform introduced in 1993. Twin-pulse control motor, thermocompensation, and other hand-adjustment mechanisms bring quartz precision to ±10 seconds/year. Still the flagship GS quartz movement today, differentiating GS from mass-market quartz through hand-assembly and heritage precision philosophy.",tags:["gs"]},
-  "gs_mech_line":{n:"GS Mechanical Line",era:"mid-1970s dormant → 1998 revival",d:"The mechanical Grand Seiko story through the transition era. DORMANCY (mid-1970s–1998): Mechanical GS was phased out during the Quartz Crisis; the Grand Seiko name was kept alive only through the 95GS quartz (1988) and later 9F platform (1993). REVIVAL (1998-): Mechanical Grand Seiko returned after 23 years with Cal. 9S55 (with date) and 9S51 (no date), hand-assembled at Shizukuishi, 50-hour power reserve. The 9S revival established the three-pillar architecture (Spring Drive / Hi-Beat / standard mechanical) that defines Grand Seiko today.",tags:["gs"]},
+  "gs_mech_line":{n:"9S Mechanical Revival",era:"mid-1970s dormant → 1998 revival",d:"The mechanical Grand Seiko story through the transition era. DORMANCY (mid-1970s–1998): Mechanical GS was phased out during the Quartz Crisis; the Grand Seiko name was kept alive only through the 95GS quartz (1988) and later 9F platform (1993). REVIVAL (1998-): Mechanical Grand Seiko returned after 23 years with Cal. 9S55 (with date) and 9S51 (no date), hand-assembled at Shizukuishi, 50-hour power reserve. The 9S revival established the three-pillar architecture (Spring Drive / Hi-Beat / standard mechanical) that defines Grand Seiko today.",tags:["gs"]},
   "gs_hibeat":{n:"GS 9S Hi-Beat 36000",era:"2009-",d:"Cal. 9S85. 36,000 bph automatic Grand Seiko. Smoother seconds hand, improved shock resistance at high frequency.",tags:["gs","hb"]},
   "sd_concept":{n:"Spring Drive Concept",era:"1977-1997",d:"Yoshikazu Akahane's long-term vision for Spring Drive: a mainspring-powered movement with quartz-level accuracy. Roughly two decades of development from the late 1970s, hundreds of prototypes and a large patent portfolio, culminating in the tri-synchro regulator that synchronizes a free-running mainspring against a quartz reference.",tags:["sd"]},
   "sd_7r68":{n:"7R68 Spring Drive",era:"1999",d:"The first production Spring Drive. Manual-winding, released in December 1999 in very limited quantities under both the Seiko and Credor brands — not yet Grand Seiko. Launched the year after lead engineer Yoshikazu Akahane's death. The culmination of roughly two decades of sustained R&D; proved the tri-synchro regulator concept commercially viable.",tags:["sd"]},
@@ -891,7 +891,7 @@ const nodeLabels = {
   "k7018": "7018 Flyback\n1971-75",
   "gs_quartz_88": "GS Quartz\n95GS 1988",
   "gs_9f": "9F Quartz\nGS Precision Standard\n1993-",
-  "gs_mech_line": "GS Mechanical Line\nDormant mid-1970s→\nRevival 1998-",
+  "gs_mech_line": "9S Mechanical Revival\nCal. 9S55/9S51\n1998-",
   "gs_hibeat": "GS 9S Hi-Beat\n36000 2009-",
   "sd_concept": "Spring Drive\nconcept/patents\n1977-1997",
   "sd_7r68": "7R68 manual\nSpring Drive\n1999",
@@ -1045,8 +1045,8 @@ const LAYOUT = {
      Everything else (x, y, w, h) is auto-computed from families.
      ─────────────────────────────────────────────────────────────────── */
   parents: [
-    { key:"suwa",   label:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988",   color:C.suwa,    columns:7                     },
-    { key:"daini",  label:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988",  color:C.kameido, columns:7, stackAfter:"suwa"  },
+    { key:"suwa",   label:"SUWA SEIKOSHA · VINTAGE FACTORY · 1956–c. 1988",   color:C.suwa,    columns:6                     },
+    { key:"daini",  label:"DAINI SEIKOSHA · KAMEIDO FACTORY · 1956–c. 1988",  color:C.kameido, columns:6, stackAfter:"suwa"  },
     { key:"legacy", label:"LEGACY TRANSITION ERA · c. 1988–2001",             color:C.modern,  columns:3, sideAfter:"suwa"   },
     { key:"modern", label:"MODERN COLLECTION ERA · 2001–2025",                color:C.modern,  columns:5, sideAfter:"legacy" },
   ],
@@ -1124,10 +1124,10 @@ const LAYOUT = {
       parent: "suwa",
       color: C.seiko5,
       rows: [
-        // Foundation chain: Super → Sportsman → Sportsmatic → Sportsmatic 5 → Seiko 5 (central)
-        ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first"],
-        // Parallel Seiko 5 sub-lines: 5 Sports, 5 Actus, 5 DX (all branch from Seiko 5)
-        [_, _, _, _, _, "s5_sports", "s5_dx"],
+        // Foundation chain: Super → Sportsman → Sportsmatic → Sportsmatic 5 → Seiko 5 → 5 Sports (central + sports branch)
+        ["super", "sportsman", "sportsmatic", "sportsmatic5", "s5_first", "s5_sports"],
+        // Parallel Seiko 5 sub-lines under 5 Sports
+        [_, _, _, _, _, "s5_dx"],
         [_, _, _, _, _, "s5_actus"],
       ]
     },
@@ -1193,11 +1193,11 @@ const LAYOUT = {
       color: C.ks,
       rows: [
         // Row 0: main KS chronology + first 44 variant (44-9990 steel) top of stack
-        ["cronos", "ks_1st", _, "ks_44_9990", "45ks", _, _],
-        // Row 1: 44KS central + Self Dater (middle of stack)
-        ["cronos_sp", _, "44ks", "ks_44_self_dater", _, "vanac", "vanac_sp"],
+        ["cronos", "ks_1st", _, "ks_44_9990", "45ks"],
+        // Row 1: 44KS central + Self Dater (middle of stack) + Vanac pair
+        ["cronos_sp", _, "44ks", "ks_44_self_dater", "vanac", "vanac_sp"],
         // Row 2: Chronometer (bottom of variant stack) + 52KS
-        ["cronos_sd", _, _, "ks_44_chronometer", _, _, "52ks"],
+        ["cronos_sd", _, _, "ks_44_chronometer", _, "52ks"],
       ]
     },
 
@@ -1241,16 +1241,27 @@ const LAYOUT = {
        and rebuilt the mechanical/precision foundation
        ═══════════════════════════════════════════════════════════════════ */
 
-    /* ─── GS · CONTINUITY (Mechanical top + Quartz below) ─── */
+    /* ─── GS · TRANSITION (Quartz kept the name alive; Mechanical returned in 1998) ─── */
     {
-      label: "GS · CONTINUITY",
+      label: "GS · TRANSITION",
       parent: "legacy",
       color: C.gs,
       rows: [
-        // Row 0: Mechanical line — 9S revival (1998), positioned chronologically after quartz platforms
+        // Row 0: Mechanical revival — Cal. 9S55/9S51 hand-assembled at Shizukuishi (1998, positioned chronologically after quartz platforms)
         [_, _, "gs_mech_line"],
-        // Row 1: Quartz continuity for context (95GS 1988 → 9F 1993 flagship)
+        // Row 1: Quartz continuity context — 95GS Quartz (1988) kept the GS name alive during dormancy → 9F platform (1993) became precision flagship
         ["gs_quartz_88", "gs_9f"],
+      ]
+    },
+
+    /* ─── SPRING DRIVE · GENESIS ─── */
+    {
+      label: "SPRING DRIVE · GENESIS",
+      parent: "legacy",
+      color: C.gs,
+      rows: [
+        // Row 0: R&D concept → 7R68 first commercial (1999) → 7R88 Credor (2002)
+        ["sd_concept", "sd_7r68", "sd_7r88"],
       ]
     },
 
@@ -1264,17 +1275,6 @@ const LAYOUT = {
         ["s4_family", "seiko_sus"],
         // Row 1: Alpinist mechanical continuity (Red SCVF → SARB017) + KS design heritage
         ["red_alpinist_scvf", "sarb_alpinist", "hist_2000"],
-      ]
-    },
-
-    /* ─── SPRING DRIVE · GENESIS ─── */
-    {
-      label: "SPRING DRIVE · GENESIS",
-      parent: "legacy",
-      color: C.gs,
-      rows: [
-        // Row 0: R&D concept → 7R68 first commercial (1999) → 7R88 Credor (2002)
-        ["sd_concept", "sd_7r68", "sd_7r88"],
       ]
     },
 
