@@ -1092,14 +1092,10 @@ const LAYOUT = {
       parent: "suwa",
       color: C.suwa,
       rows: [
-        // Row 0: Liner (manual dress) + Skyliner (automatic mid-range) blocks
-        ["liner", "liner_chr", "skyliner", "sky_cal", _, _],
-        // Row 1: 61 Skyliner platform (8-beat evolution of Skyliner)
-        [_, _, "61_skyliner", "61_skyliner_cal", _, _],
-        // Row 2: Lord Matic platform (5606) + Special variant
-        [_, _, _, _, "lord_matic", "lord_matic_sp"],
-        // Row 3: Lord Matic 56 (5626 next generation, shares platform with 56KS)
-        [_, _, _, _, "lord_matic_56", "56ks"],
+        // Row 0: Liner + Skyliner blocks (manual dress + automatic mid-range) + Lord Matic platform (5606)
+        ["liner", "liner_chr", "skyliner", "sky_cal", "lord_matic", "lord_matic_sp"],
+        // Row 1: 61 Skyliner platform (8-beat) + Lord Matic 56 (5626, shares platform with 56KS)
+        [_, _, "61_skyliner", "61_skyliner_cal", "lord_matic_56", "56ks"],
       ]
     },
 
