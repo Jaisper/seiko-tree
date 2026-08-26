@@ -2443,9 +2443,8 @@ function renderTourStop(){
   // Always update locked + highlight, even before zoom, so highlight follows tour
   locked=stop.n;
   updateHL();
-  console.log('[TOUR] step',tour.stop,'stop.n=',stop.n,'locked=',locked,'nodeMap has:',!!nodeMap[stop.n]);
   // Force re-render on next frame to defeat any competing state updates
-  requestAnimationFrame(()=>{locked=stop.n;updateHL();console.log('[TOUR rAF] locked=',locked);});
+  requestAnimationFrame(()=>{locked=stop.n;updateHL();});
   if(node){
     const ns=0.65,ww=wrap.clientWidth,wh=wrap.clientHeight;
     const targetX=node[2]+NW/2,targetY=node[3]+NH/2;
