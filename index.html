@@ -86,7 +86,6 @@ body{background:var(--bg);font-family:'IBM Plex Mono',monospace;color:var(--ink)
   0%,100%{box-shadow:0 0 0 4px rgba(184,148,46,.35),0 0 24px rgba(184,148,46,.55),0 4px 20px rgba(0,0,0,.15)}
   50%{box-shadow:0 0 0 7px rgba(184,148,46,.45),0 0 36px rgba(184,148,46,.75),0 6px 24px rgba(0,0,0,.2)}
 }
-50%{box-shadow:0 0 8px rgba(28,126,214,.5)}}
 #canvas.zoom-far .node .text{font-size:7px}
 #canvas.zoom-far .coll-badge{opacity:0}
 #canvas.zoom-far .star-badge{font-size:5px;padding:0 2px}
@@ -1358,7 +1357,7 @@ const LAYOUT = {
      description  — shown in tooltip on hover
      relation     — optional refinement of the relation type:
                     "direct_lineage", "same_platform", "market_successor",
-                    "design_influence", "heritage_reinterpretation",
+                    "design_influence", "heritage_reinterpretation"],
                     "brand_revival", "technology_branch", "collection_structure"
    
    GUIDELINE: Keep "strong" for actual caliber/platform lineage. Use "weak"
@@ -1379,15 +1378,11 @@ const edges=[
   ["gs_sd","57gs_cal","medium","57GS continued the manual-wind Grand Seiko calendar tradition"],
   ["gs_1st","62gs","strong","62GS brought automatic winding to Grand Seiko for the first time"],
   ["62gs","61gs","strong","61GS advanced Grand Seiko to Hi-Beat 36,000 bph automatic"],
+  ["62gs", "56gs_s", "medium", "PLATFORM CONTINUITY: 56GS (Cal. 5645/5646, ultra-thin automatic) succeeded 62GS as Suwa's mainstream automatic Grand Seiko, continuing the automatic GS lineage within the Suwa factory.", "same_platform"],
   ["61gs","61gs_vfa","strong","VFA pushed Grand Seiko to its ultimate mechanical precision standard"],
   ["61gs","61gs_sp","medium","61GS Special added chronometer-grade adjustment to the Hi-Beat platform"],
-  ["61gs_vfa","56gs_s","strong","56GS evolved GS into ultra-thin automatic while maintaining precision"],
-
   /* ── Within: SUWA · LINER, SKYLINER & LORD MATIC ── */
-  ["liner","liner_chr","strong","Liner Chronometer demonstrated Suwa precision at a mid-range price point"],
-  ["laurel","liner","weak","BRAND POSITIONING (early Suwa entry-level context): Laurel's presence in Suwa's entry-level segment preceded and provided market context for the Liner family — not a direct caliber or platform succession.","brand_heritage"],
-  ["laurel","skyliner","weak","BRAND HERITAGE / MARKET POSITION (not direct lineage): Laurel (1959-64) established Suwa's early sports/outdoor identity, while Skyliner (1961-69) became Suwa's mid-range hand-wound dress line — different product niches, brand heritage rather than technical or platform succession.","brand_heritage"],
-  ["skyliner","61_skyliner","strong","61 Skyliner upgraded the Skyliner platform to Hi-Beat movement"],
+  ["liner","liner_chr","strong","Liner Chronometer demonstrated Suwa precision at a mid-range price point"],  ["skyliner","61_skyliner","strong","61 Skyliner upgraded the Skyliner platform to Hi-Beat movement"],
   ["61_skyliner","61_skyliner_cal","strong","61 Skyliner Calendar added the date complication to the 61 Skyliner platform (8-beat)","same_platform"],
   ["skyliner","sky_cal","medium","Skyliner Calendar added date complication to the Skyliner family"],
   ["lord_matic","lord_matic_sp","strong","Lord Matic Special raised the platform to Hi-Beat with superior finishing"],
@@ -1425,7 +1420,7 @@ const edges=[
   ["62mas","62mas_2","strong","62MAS 8001 was an improved case variant of the original 62MAS"],
   ["62mas","6105_8000","medium","PRODUCT SUCCESSION (not movement lineage): 6105 succeeded 62MAS as Seiko's main 150m recreational diver. Different movement architecture (Cal. 6105 vs Cal. 6217) — the succession is product-line continuity within Suwa's diver programme rather than technical caliber derivation.","product_succession"],
   ["62mas_2","6105_8000","medium","PRODUCT SUCCESSION: 6105 replaced the 62MAS platform in Seiko's diver lineup. Different movement, same product-line role.","product_succession"],
-  ["62mas","6215_pro","strong","62MAS split into two lineages: the professional-diver branch (300m+ pieces) began with the 6215 Pro in 1967, taking the 62MAS concept toward true saturation-diver capability"],
+  ["62mas", "6215_pro", "medium", "PRODUCT SUCCESSION with technical upgrade: 6215 Pro (300m) advanced the professional diver with a new movement architecture, succeeding 62MAS as Suwa's flagship diver — not a direct caliber derivative.", "product_succession"],
   ["6215_pro","6159_pro","medium","PRODUCT SUCCESSION with technical upgrade: 6159 advanced the professional diver to Hi-Beat with improved depth rating. Different caliber (6215 vs 6159 Hi-Beat) — technical evolution within the pro-diver product line but not direct caliber descent.","product_succession"],
   ["6105_8000","6105_willard","strong","WITHIN-PLATFORM VARIANT: Willard (6105-8110) is the redesigned cushion-case variant of the 6105 line using the same Cal. 6105 movement — a design/case redesign within the same caliber platform.","variant"],
   ["6105_willard","6309","medium","PRODUCT SUCCESSION (not movement lineage): 6309 Turtle replaced the Willard as Seiko's mainstream 150m diver. Different movement (Cal. 6309 vs Cal. 6105) — product-line succession within Suwa's diver programme.","product_succession"],
@@ -1531,18 +1526,16 @@ const edges=[
 
   /* ── Cross-group: heritage reinterpretations, brand revivals, era bridges ── */
   /* These are the longer interpretive lines that span eras and families.    */
-  ["crown","gs_1st","strong","Crown provided the precision foundation for the first Grand Seiko","direct_lineage"],
-  ["seikomatic_chr","lord_matic","strong","The 6245 Chronometer platform architecture directly evolved into the Cal. 5606 that powered Lord Matic — this is the reel platform-lineage shift from Seikomatic to Lord Matic, marking the generation transition"],
-  ["seikomatic_chr","62gs","strong","The 6245 chronometer movement directly became the basis for the 62GS"],
+  ["crown","gs_1st","strong","Crown provided the precision foundation for the first Grand Seiko","direct_lineage"],  ["seikomatic_chr","62gs","strong","The 6245 chronometer movement directly became the basis for the 62GS"],
   ["business","lord_matic","weak","Business and Lord Matic both occupied the upper-mid Suwa segment across the Seikomatic-to-Lord Matic transition — market/positioning succession rather than direct platform lineage","conceptual"],
   ["business_a","lord_matic","weak","Business-A and Lord Matic represented consecutive Suwa upper-mid business-automatic positions — market/positioning succession rather than direct platform lineage","conceptual"],
   ["presmatic","lord_matic_sp","medium","Lord Matic Special succeeded Presmatic with Hi-Beat movement"],
   ["sportsmatic","seikomatic","medium","Sportsmatic and Seikomatic shared early Suwa automatic architecture"],
   ["6309","7002_node","medium","PRODUCT SUCCESSION (cross-factory): when Suwa discontinued the 6309 in 1988, Daini's 7002 took over the mainstream affordable diver role. Different movement architecture, different factory — product-line handover rather than caliber lineage.","product_succession"],
   ["6139_first","s5_speed","strong","Cal. 6139 automatic chronograph powered the 5 Sports Speed-Timer line","same_platform"],
-  ["45ks","56ks","medium","56KS continued King Seiko at Suwa with thin automatic Cal. 5625/5626"],
+  ["45ks", "56ks", "weak", "PARALLEL LINES: 45KS (Hi-Beat 36,000 bph) and 56KS (28,800 bph ultra-thin) were parallel King Seiko variants in the early 70s — different frequency targets, different design priorities, not a direct succession.", "parallel_development"],
   ["advan","vanac","weak","Vanac shared the bold mid-1970s design vocabulary that began with mass-market models like Advan, but was positioned as a premium King Seiko expression","design_influence"],
-  ["56gs_s","gs_mech_line","medium","Suwa 56GS production ended as Grand Seiko entered the dormant period"],
+  ["56gs_s", "gs_mech_line", "weak", "HERITAGE RECONNECTION (across quartz era): 1998 9S mechanical GS revival reconnects to the 56GS era after the 20+ year dormant period — brand heritage, not direct caliber lineage.", "heritage_reinterpretation"],
   ["56gs_k","gs_mech_line","medium","Kameido 56GS production ended as Grand Seiko entered the dormant period"],
   ["gs_mech_line","gs_9s5","strong","PLATFORM EVOLUTION: 9SA5 (2020, released for GS 60th anniversary) is the next-generation evolution of the 9S mechanical platform introduced in 1998 — new architecture with Dual Impulse Escapement, free-sprung balance, and horizontal gear train.","platform_evolution"],
   ["lord_matic_56","56ks","medium","56KS shares Suwa\'s thin Cal. 56xx movement platform with Lord Matic 56"],
@@ -1556,13 +1549,13 @@ const edges=[
   ["44ks","ks_44_chronometer","medium","44 Chronometer was a chronometer-grade parallel variant of the 44KS platform","same_platform"],
   ["44ks","ks_revival","weak","Modern KS revival draws on 1960s Daini design vocabulary that the 44KS helped establish","brand_revival"],
   ["skx","prospex","weak","The SKX occupied the affordable mechanical-diver space that was later reorganized under the Prospex umbrella — a category/brand transition rather than direct lineage"],
-  ["skx","px_monster","medium","Monster emerged from the same Seiko diver ecosystem as SKX"],
-  ["skx","px_samurai","medium","Samurai developed alongside SKX in Seiko\'s pre-Prospex diver range"],
-  ["skx","px_sumo","medium","Sumo launched in the SKX era as a higher-spec mid-size diver"],
-  ["skx","px_shogun","medium","Shogun emerged as a titanium diver in the late SKX-era lineup"],
+  ["skx", "px_monster", "weak", "DESIGN HERITAGE: Monster is a modern Prospex diver that draws on the SKX design vocabulary (crown at 4, day-date, affordable workhorse diver aesthetic) — not a direct caliber or platform lineage.", "design_influence"],
+  ["skx", "px_samurai", "weak", "DESIGN HERITAGE: Samurai is a modern Prospex diver that draws on the SKX design vocabulary (crown at 4, day-date, affordable workhorse diver aesthetic) — not a direct caliber or platform lineage.", "design_influence"],
+  ["skx", "px_sumo", "weak", "DESIGN HERITAGE: Sumo is a modern Prospex diver that draws on the SKX design vocabulary (crown at 4, day-date, affordable workhorse diver aesthetic) — not a direct caliber or platform lineage.", "design_influence"],
+  ["skx", "px_shogun", "weak", "DESIGN HERITAGE: Shogun is a modern Prospex diver that draws on the SKX design vocabulary (crown at 4, day-date, affordable workhorse diver aesthetic) — not a direct caliber or platform lineage.", "design_influence"],
   ["6159_tuna","mm300","medium","Marine Master 300M SBDX001 continues the 6159 Tuna professional diver heritage with modern Cal. 8L35"],
   ["crown_chrono","prsg_style60","weak","Presage Style60s is a modern reinterpretation of the 1964 Crown Chronograph"],
-  ["laurel","red_alpinist_scvf","strong","The Red Alpinist SCVF (1995) revived the 1959 Laurel Alpinist concept as a mid-1990s JDM mechanical Alpinist on the new 4S15 platform — establishing the visual identity (compass bezel, sunburst dial, cathedral hands) that shaped every later Alpinist","heritage_source"],
+  ["laurel", "red_alpinist_scvf", "weak", "HERITAGE REINTERPRETATION: SCVF Red Alpinist is a modern reinterpretation of the Laurel's sports-outdoor identity, not a direct caliber or platform descendant.", "heritage_reinterpretation"],
   ["red_alpinist_scvf","sarb_alpinist","strong","SARB017 (2006) continued the Red Alpinist DNA on the new 6R15 caliber — same compass bezel and dress-sport format, in green"],
   ["sarb_alpinist","px_alpinist","strong","The 2020 Prospex Alpinist SPB series succeeded the SARB017 when Seiko consolidated Alpinist under the global Prospex brand — same design language, updated construction","heritage_reinterpretation"],
   ["laurel","px_alpinist","weak","The modern Prospex Alpinist ultimately traces heritage to the 1959 Laurel Alpinist, though via the SCVF → SARB → SPB chain rather than as a direct continuation","conceptual"],
@@ -1571,7 +1564,7 @@ const edges=[
   ["6139_first","px_speedtimer","weak","Modern Speedtimer revives Seiko\'s 1969 automatic chronograph heritage"],
   ["skx","s5_skx_mod","weak","SKX Heritage models in Seiko 5 draw on SKX007/009 design DNA"],  ["6159_pro","px_1968_diver","weak","Modern 1968 Heritage Diver revives the 6159 professional diver archetype"],
   ["6159_pro","px_1968_gmt","weak","Modern 1968 Heritage GMT draws on the 6159 professional diver heritage"],
-  ["sd_7r88","gs_sd_04","strong","Grand Seiko adopted Spring Drive as a core movement technology in 2004","technology_branch"],
+  ["sd_7r88", "gs_sd_04", "medium", "PARALLEL DEVELOPMENT: GS Spring Drive Cal. 9R65 (2004) developed alongside Credor's refined 7R88 (2002) — Spring Drive platform maturation branching into GS-grade implementation, not direct caliber lineage.", "parallel_development"],
   ["gs_mech_line","gs_independence","medium","Grand Seiko became an independent brand built on the revived legacy"],
 ];
 
@@ -2302,7 +2295,7 @@ wrap.addEventListener('touchend',e=>{
     hideEdgeTip();
   }
 },{passive:false});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&locked){locked=null;updateHL();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(tour.active){exitTour();}else if(locked){locked=null;updateHL();}}});
 
 
 
@@ -2444,6 +2437,9 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{
   if(!tour.active)return;
+  // Don't hijack arrow keys when user is typing in search or other input
+  const t=e.target;
+  if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;
   if(e.key==='ArrowRight'){document.getElementById('tp-next').click();}
   else if(e.key==='ArrowLeft'){document.getElementById('tp-prev').click();}
 });
